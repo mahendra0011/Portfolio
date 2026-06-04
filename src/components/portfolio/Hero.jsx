@@ -1,113 +1,168 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Download, Mail, FolderGit2, Github, Linkedin } from "lucide-react";
+import { Code2, Download, FolderGit2, Github, Linkedin, Mail, MapPin, Rocket, Sparkles } from "lucide-react";
 import { SiLeetcode } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import profileImg from "@/assets/profile.jpg";
+
 const roles = [
-    "Software Developer",
-    "Full Stack Developer",
-    "React Enthusiast",
-    "Electronics & Communication Student",
+  "Software Developer",
+  "Full Stack Developer",
+  "React Developer",
+  "MERN Stack Builder",
 ];
+
 const Typewriter = () => {
-    const [text, setText] = useState("");
-    const [i, setI] = useState(0);
-    const [del, setDel] = useState(false);
-    useEffect(() => {
-        const current = roles[i % roles.length];
-        const t = setTimeout(() => {
-            if (!del) {
-                setText(current.slice(0, text.length + 1));
-                if (text === current)
-                    setTimeout(() => setDel(true), 1500);
-            }
-            else {
-                setText(current.slice(0, text.length - 1));
-                if (text === "") {
-                    setDel(false);
-                    setI(i + 1);
-                }
-            }
-        }, del ? 50 : 90);
-        return () => clearTimeout(t);
-    }, [text, del, i]);
-    return (<span className="gradient-text">
+  const [text, setText] = useState("");
+  const [index, setIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = roles[index % roles.length];
+    const timer = setTimeout(() => {
+      if (!deleting) {
+        setText(current.slice(0, text.length + 1));
+        if (text === current) setTimeout(() => setDeleting(true), 1300);
+      } else {
+        setText(current.slice(0, text.length - 1));
+        if (text === "") {
+          setDeleting(false);
+          setIndex(index + 1);
+        }
+      }
+    }, deleting ? 45 : 85);
+
+    return () => clearTimeout(timer);
+  }, [text, deleting, index]);
+
+  return (
+    <span className="gradient-text">
       {text}
-      <span className="inline-block w-[3px] h-[1em] bg-primary ml-1 align-middle animate-blink"/>
-    </span>);
+      <span className="ml-1 inline-block h-[1em] w-[3px] animate-blink bg-primary align-middle" />
+    </span>
+  );
 };
-const Hero = () => {
-    return (<section id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
-      {/* Animated blobs */}
-      <div className="absolute top-20 -left-20 w-72 h-72 rounded-full bg-primary/30 blur-3xl animate-blob"/>
-      <div className="absolute bottom-10 -right-10 w-96 h-96 rounded-full bg-accent/30 blur-3xl animate-blob" style={{ animationDelay: "3s" }}/>
 
-      <div className="container grid lg:grid-cols-2 gap-12 items-center relative z-10 py-12">
-        <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="space-y-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"/>
-            Available for opportunities
-          </motion.div>
+const statItems = [
+  { Icon: Code2, value: "5+", label: "MERN Projects" },
+  { Icon: Rocket, value: "400+", label: "GitHub Commits" },
+  { Icon: Sparkles, value: "16+", label: "Tech Stack" },
+];
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]">
-            Hi, I'm <span className="gradient-text">Mahendra</span>
-            <br />
-            <span className="text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-semibold">
+const socialLinks = [
+  { Icon: Github, href: "https://github.com/mahendra0011", label: "GitHub" },
+  { Icon: Linkedin, href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b", label: "LinkedIn" },
+  { Icon: SiLeetcode, href: "https://leetcode.com/u/mahendra_0011/", label: "LeetCode" },
+  { Icon: Mail, href: "mailto:mahendrapra0077@gmail.com", label: "Email" },
+];
+
+const Hero = () => (
+  <section id="home" className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16">
+    <div className="absolute inset-0 hero-bg pointer-events-none" />
+    <div className="absolute inset-x-0 top-16 h-px bg-border/70" />
+
+    <div className="container relative z-10 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(280px,380px)] lg:gap-14">
+      <div className="max-w-3xl space-y-7">
+        <div className="inline-flex items-center gap-2 rounded-lg border border-primary/20 bg-card/80 px-4 py-2 text-xs font-semibold text-primary shadow-sm">
+          <span className="h-2 w-2 rounded-full bg-primary" />
+          Available for internships and full-stack work
+        </div>
+
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold leading-[1.05] tracking-normal text-foreground sm:text-5xl lg:text-7xl">
+            Hi, I'm <span className="gradient-text">Mahendra Prajapati</span>
+            <span className="mt-3 block text-2xl font-semibold text-foreground/75 sm:text-3xl lg:text-5xl">
               I'm a <Typewriter />
             </span>
           </h1>
 
-          <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-            B.Tech Electronics & Communication student from Jabalpur (M.P.) passionate about building
-            real-world full-stack applications. I craft scalable MERN experiences using React, Node.js,
-            Express and MongoDB.
+          <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            B.Tech Electronics & Communication student from Jabalpur, building production-style MERN projects with
+            React, Redux, Tailwind CSS, shadcn/ui and clean backend APIs.
           </p>
+        </div>
 
-          <div className="flex flex-wrap gap-3">
-            <Button size="lg" asChild className="gradient-bg shadow-glow hover:scale-105 transition-transform">
-              <a href="#projects"><FolderGit2 className="mr-2 h-4 w-4"/> View Projects</a>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="hover:scale-105 transition-transform">
-              <a href="#contact"><Mail className="mr-2 h-4 w-4"/> Contact Me</a>
-            </Button>
-            <Button size="lg" variant="secondary" asChild className="hover:scale-105 transition-transform">
-              <a href="/Mahendra_Resume.pdf" download><Download className="mr-2 h-4 w-4"/> Resume</a>
-            </Button>
-          </div>
+        <div className="grid gap-3 sm:flex sm:flex-wrap">
+          <Button size="lg" asChild className="w-full gradient-bg shadow-glow transition-transform hover:scale-[1.02] sm:w-auto">
+            <a href="#projects">
+              <FolderGit2 className="mr-2 h-4 w-4" />
+              View Projects
+            </a>
+          </Button>
+          <Button size="lg" variant="outline" asChild className="w-full bg-card/80 transition-transform hover:scale-[1.02] sm:w-auto">
+            <a href="#contact">
+              <Mail className="mr-2 h-4 w-4" />
+              Contact Me
+            </a>
+          </Button>
+          <Button size="lg" variant="secondary" asChild className="w-full transition-transform hover:scale-[1.02] sm:w-auto">
+            <a href="/Mahendra_Resume.pdf" download>
+              <Download className="mr-2 h-4 w-4" />
+              Resume
+            </a>
+          </Button>
+        </div>
 
-          <div className="flex items-center gap-4 pt-4">
-            {[
-            { Icon: Github, href: "https://github.com/mahendra0011" },
-            { Icon: Linkedin, href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
-            { Icon: SiLeetcode, href: "https://leetcode.com/u/mahendra_0011/" },
-            { Icon: Mail, href: "mailto:mahendrapra0077@gmail.com" },
-        ].map(({ Icon, href }, idx) => (<motion.a key={idx} href={href} target="_blank" rel="noreferrer" whileHover={{ y: -4, scale: 1.1 }} className="w-10 h-10 rounded-full glass flex items-center justify-center hover:text-primary transition-colors">
-                <Icon className="w-5 h-5"/>
-              </motion.a>))}
-          </div>
-        </motion.div>
+        <div className="flex flex-wrap gap-2">
+          {["HTML", "CSS", "JavaScript", "Tailwind", "React", "Redux"].map((tech) => (
+            <span key={tech} className="rounded-lg border border-border/70 bg-card/75 px-3 py-1.5 text-sm font-medium text-muted-foreground">
+              {tech}
+            </span>
+          ))}
+        </div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:justify-end">
-          <div className="relative">
-            <div className="absolute -inset-4 gradient-bg rounded-full blur-3xl opacity-40 animate-pulse"/>
-            <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden glass shadow-glow animate-float">
-              <div className="absolute inset-0 gradient-bg opacity-10"/>
-              <img src={profileImg} alt="Mahendra Prajapati portrait" className="relative w-full h-full object-cover object-top"/>
+        <div className="grid max-w-xl gap-3 sm:grid-cols-3">
+          {statItems.map(({ Icon, value, label }) => (
+            <div key={label} className="glass rounded-lg px-4 py-3">
+              <Icon className="mb-2 h-4 w-4 text-primary" />
+              <div className="text-xl font-bold">{value}</div>
+              <div className="text-xs text-muted-foreground">{label}</div>
             </div>
-            {/* Floating badges */}
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute top-10 -left-6 glass rounded-2xl px-4 py-2 shadow-elegant">
-              <span className="text-2xl">⚛️</span>
-            </motion.div>
-            <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-20 -right-4 glass rounded-2xl px-4 py-2 shadow-elegant">
-              <span className="text-2xl">🚀</span>
-            </motion.div>
-            <motion.div animate={{ x: [0, 8, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute top-1/2 right-0 lg:-right-4 glass rounded-2xl px-3 py-2 shadow-elegant text-xs font-semibold">
-              MERN
-            </motion.div>
-          </div>
-        </motion.div>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-3">
+          {socialLinks.map(({ Icon, href, label }) => (
+            <motion.a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={label}
+              whileHover={{ y: -3, scale: 1.05 }}
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/70 bg-card/80 text-muted-foreground transition-colors hover:text-primary"
+            >
+              <Icon className="h-5 w-5" />
+            </motion.a>
+          ))}
+        </div>
       </div>
-    </section>);
-};
+
+      <div className="flex justify-center md:justify-end">
+        <div className="w-full max-w-[330px]">
+          <div className="glass rounded-lg p-3 shadow-elegant">
+            <div className="relative aspect-[9/16] overflow-hidden rounded-lg bg-secondary/55">
+              <img src={profileImg} alt="Mahendra Prajapati portrait" className="h-full w-full object-contain object-center" />
+            </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <div className="rounded-lg border border-border/70 bg-card/85 p-3">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">Focus</p>
+              <p className="font-semibold">MERN Stack</p>
+            </div>
+            <div className="rounded-lg border border-border/70 bg-card/85 p-3">
+              <p className="flex items-center gap-1 text-xs uppercase tracking-wider text-muted-foreground">
+                <MapPin className="h-3 w-3" />
+                Based in
+              </p>
+              <p className="font-semibold">Jabalpur</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 export default Hero;

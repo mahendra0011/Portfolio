@@ -1,52 +1,64 @@
 import { motion } from "framer-motion";
-import { GraduationCap, School, Award } from "lucide-react";
+import { Award, GraduationCap, School } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+
 const items = [
-    {
-        icon: GraduationCap,
-        period: "2023 — 2027",
-        title: "B.Tech — Electronics & Communication Engineering",
-        place: "Shri Ram Institute of Technology, Jabalpur (M.P.)",
-        description: "Currently pursuing with CGPA 7.0/10 while building real-world full-stack MERN projects.",
-    },
-    {
-        icon: School,
-        period: "2022 — 2023",
-        title: "Class XII — Higher Secondary (MP Board)",
-        place: "Saraswati Shiksha Mandir, Jabalpur (M.P.)",
-        description: "Completed higher secondary education with 61%.",
-    },
-    {
-        icon: Award,
-        period: "2020 — 2021",
-        title: "Class X — Secondary (MP Board)",
-        place: "Saraswati Shiksha Mandir, Jabalpur (M.P.)",
-        description: "Completed secondary education with 81%.",
-    },
+  {
+    icon: GraduationCap,
+    period: "2023 - 2027",
+    title: "B.Tech - Electronics & Communication Engineering",
+    place: "Shri Ram Institute of Technology, Jabalpur (M.P.)",
+    description: "Currently pursuing with CGPA 7.0/10 while building real-world full-stack MERN projects.",
+  },
+  {
+    icon: School,
+    period: "2022 - 2023",
+    title: "Class XII - Higher Secondary (MP Board)",
+    place: "Saraswati Shiksha Mandir, Jabalpur (M.P.)",
+    description: "Completed higher secondary education with 61%.",
+  },
+  {
+    icon: Award,
+    period: "2020 - 2021",
+    title: "Class X - Secondary (MP Board)",
+    place: "Saraswati Shiksha Mandir, Jabalpur (M.P.)",
+    description: "Completed secondary education with 81%.",
+  },
 ];
-const Education = () => {
-    return (<section id="education" className="py-24 bg-muted/30">
-      <div className="container">
-        <SectionHeading eyebrow="Journey" title="Education & Experience"/>
 
-        <div className="relative max-w-3xl mx-auto">
-          {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 gradient-bg md:-translate-x-1/2"/>
+const Education = () => (
+  <section id="education" className="section-band py-20 sm:py-24">
+    <div className="container">
+      <SectionHeading eyebrow="Journey" title="Education & Experience" description="Academic path and practical development work." />
 
-          {items.map((item, i) => (<motion.div key={item.title} initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className={`relative mb-10 md:w-1/2 ${i % 2 === 0 ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"} pl-12 md:pl-0`}>
-              {/* Dot */}
-              <div className={`absolute top-4 w-8 h-8 rounded-full gradient-bg shadow-glow flex items-center justify-center ${i % 2 === 0 ? "left-0 md:left-auto md:-right-4" : "left-0 md:-left-4"}`}>
-                <item.icon className="w-4 h-4 text-primary-foreground"/>
+      <div className="mx-auto max-w-4xl">
+        <div className="grid gap-4">
+          {items.map((item, index) => (
+            <motion.article
+              key={item.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="glass rounded-lg p-5 shadow-sm transition-shadow hover:shadow-glow"
+            >
+              <div className="grid gap-4 sm:grid-cols-[3.5rem_1fr]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <item.icon className="h-6 w-6" />
+                </div>
+                <div>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-primary">{item.period}</span>
+                  <h3 className="mt-1 text-lg font-bold">{item.title}</h3>
+                  <p className="mt-1 text-sm font-medium text-muted-foreground">{item.place}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                </div>
               </div>
-              <div className="glass rounded-2xl p-6 hover:shadow-glow transition-shadow">
-                <span className="text-xs font-semibold gradient-text uppercase tracking-wider">{item.period}</span>
-                <h3 className="text-lg font-bold mt-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground font-medium mb-2">{item.place}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-              </div>
-            </motion.div>))}
+            </motion.article>
+          ))}
         </div>
       </div>
-    </section>);
-};
+    </div>
+  </section>
+);
+
 export default Education;

@@ -9,7 +9,7 @@ import Resume from "@/components/portfolio/Resume";
 import Education from "@/components/portfolio/Education";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
-const Index = () => (<div className="min-h-screen bg-background text-foreground">
+const Index = () => (<div className="min-h-screen text-foreground">
     <Navbar />
     <main>
       <Hero />
