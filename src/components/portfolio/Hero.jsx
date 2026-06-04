@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Download, Mail, FolderGit2, Github, Linkedin } from "lucide-react";
 import { SiLeetcode } from "react-icons/si";
 import { Button } from "@/components/ui/button";
-import profileImg from "@/assets/profile.png";
+import profileImg from "@/assets/profile.jpg";
 const roles = [
     "Software Developer",
     "Full Stack Developer",
@@ -93,7 +93,7 @@ const Hero = () => {
             <div className="absolute -inset-4 gradient-bg rounded-full blur-3xl opacity-40 animate-pulse"/>
             <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden glass shadow-glow animate-float">
               <div className="absolute inset-0 gradient-bg opacity-10"/>
-              <img src={profileImg} alt="Developer portrait" className="relative w-full h-full object-contain object-bottom"/>
+              <img src={profileImg} alt="Mahendra Prajapati portrait" className="relative w-full h-full object-cover object-top"/>
             </div>
             {/* Floating badges */}
             <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute top-10 -left-6 glass rounded-2xl px-4 py-2 shadow-elegant">
