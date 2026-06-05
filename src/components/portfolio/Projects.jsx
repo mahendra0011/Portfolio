@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { Button } from "@/components/ui/button";
+import MagneticButton from "@/components/reactbits/MagneticButton";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 
 const projects = [
@@ -105,10 +106,6 @@ const projects = [
 
 const isExternal = (href) => /^https?:\/\//.test(href);
 const INITIAL_PROJECT_COUNT = 4;
-const projectMetrics = [
-  { label: "Production-style builds", value: "8" },
-  { label: "Core stack", value: "MERN" },
-];
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -123,19 +120,6 @@ const Projects = () => {
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        ".project-metric",
-        { autoAlpha: 0, y: 22 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.65,
-          ease: "power3.out",
-          stagger: 0.09,
-          scrollTrigger: { trigger: ".project-metrics", start: "top 84%" },
-        },
-      );
-
-      gsap.fromTo(
         ".project-card",
         { autoAlpha: 0, y: 70, rotateX: 8, transformPerspective: 900 },
         {
@@ -149,33 +133,6 @@ const Projects = () => {
         },
       );
 
-      gsap.fromTo(
-        ".project-accent-line",
-        { scaleX: 0, transformOrigin: "left center" },
-        {
-          scaleX: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.1,
-          scrollTrigger: { trigger: ".project-grid", start: "top 78%" },
-        },
-      );
-
-      gsap.utils.toArray(".project-card").forEach((card) => {
-        const image = card.querySelector(".project-image");
-        if (!image) return;
-
-        gsap.to(image, {
-          yPercent: -7,
-          ease: "none",
-          scrollTrigger: {
-            trigger: card,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -184,17 +141,8 @@ const Projects = () => {
   return (
     <section id="projects" ref={sectionRef} className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(hsl(var(--foreground))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--foreground))_1px,transparent_1px)] [background-size:44px_44px] pointer-events-none" />
-      <div className="container relative">
+        <div className="container relative">
         <SectionHeading eyebrow="Projects" title="Featured Work" description="A selection of things I've built recently" />
-
-        <div className="project-metrics mx-auto mb-8 grid max-w-2xl gap-3 sm:grid-cols-2">
-          {projectMetrics.map((metric) => (
-            <div key={metric.label} className="project-metric glass rounded-xl px-4 py-3 text-center">
-              <div className="text-xl font-bold gradient-text">{metric.value}</div>
-              <div className="text-xs font-medium text-muted-foreground">{metric.label}</div>
-            </div>
-          ))}
-        </div>
 
         <motion.div layout className="project-grid grid md:grid-cols-2 gap-6 max-w-6xl mx-auto [perspective:1200px]">
           <AnimatePresence mode="popLayout">
@@ -210,23 +158,18 @@ const Projects = () => {
                 whileHover={{ y: -10, rotateX: 1.5 }}
                 className="project-card relative glass rounded-xl p-5 group hover:shadow-glow transition-all overflow-hidden flex flex-col min-h-[390px] will-change-transform"
               >
-                <div className="project-accent-line absolute left-0 top-0 h-1 w-full gradient-bg" />
                 <div className="absolute -inset-px gradient-bg opacity-0 group-hover:opacity-10 transition-opacity rounded-xl pointer-events-none" />
                 {project.image && (
-                  <div className="relative mb-5 aspect-[1.9/1] overflow-hidden rounded-lg border border-border/60 bg-muted/40 shadow-inner">
+                  <div className="relative mb-5 aspect-[1.9/1] overflow-hidden rounded-lg border border-border/60 bg-background/80 shadow-inner">
                     <img
                       src={project.image}
                       alt={project.imageAlt}
                       loading="lazy"
                       decoding="async"
                       draggable="false"
-                      className="project-image absolute inset-0 h-[112%] w-full select-none object-cover object-top transition-transform duration-700 group-hover:scale-[1.05]"
+                      className="project-image absolute inset-0 h-full w-full select-none object-contain object-center p-1"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1 text-[11px] font-semibold shadow-sm backdrop-blur">
-                      <Sparkles className="h-3 w-3 text-primary" />
-                      Case study
-                    </div>
                   </div>
                 )}
                 <div className="flex items-start justify-between gap-4 mb-5">
@@ -255,22 +198,26 @@ const Projects = () => {
 
                 <div className="mt-auto flex flex-wrap gap-2">
                   {project.github && (
-                    <Button size="sm" variant="outline" asChild>
-                      <a href={project.github} target="_blank" rel="noreferrer">
-                        <Github className="w-4 h-4 mr-1.5" /> Code
-                      </a>
-                    </Button>
+                    <MagneticButton strength={0.16}>
+                      <Button size="sm" variant="outline" asChild className="group">
+                        <a href={project.github} target="_blank" rel="noreferrer">
+                          <Github className="w-4 h-4 mr-1.5 transition-transform group-hover:-rotate-6" /> Code
+                        </a>
+                      </Button>
+                    </MagneticButton>
                   )}
                   {project.demo && (
-                    <Button size="sm" asChild className="gradient-bg">
-                      <a
-                        href={project.demo}
-                        target={isExternal(project.demo) ? "_blank" : undefined}
-                        rel={isExternal(project.demo) ? "noreferrer" : undefined}
-                      >
-                        <ExternalLink className="w-4 h-4 mr-1.5" /> {isExternal(project.demo) ? "Live" : "Preview"}
-                      </a>
-                    </Button>
+                    <MagneticButton strength={0.16}>
+                      <Button size="sm" asChild className="group gradient-bg">
+                        <a
+                          href={project.demo}
+                          target={isExternal(project.demo) ? "_blank" : undefined}
+                          rel={isExternal(project.demo) ? "noreferrer" : undefined}
+                        >
+                          <ExternalLink className="w-4 h-4 mr-1.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /> {isExternal(project.demo) ? "Live" : "Preview"}
+                        </a>
+                      </Button>
+                    </MagneticButton>
                   )}
                 </div>
               </SpotlightCard>
@@ -280,9 +227,11 @@ const Projects = () => {
 
         {hasMoreProjects && (
           <div className="mt-10 flex justify-center">
-            <Button size="lg" onClick={() => setShowAll(true)} className="gradient-bg shadow-glow hover:scale-105 transition-transform">
-              See More
-            </Button>
+            <MagneticButton>
+              <Button size="lg" onClick={() => setShowAll(true)} className="group gradient-bg shadow-glow">
+                See More <Sparkles className="ml-1 h-4 w-4 transition-transform group-hover:rotate-12" />
+              </Button>
+            </MagneticButton>
           </div>
         )}
       </div>

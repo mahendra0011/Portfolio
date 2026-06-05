@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { Download, Mail, FolderGit2 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
+import MagneticButton from "@/components/reactbits/MagneticButton";
 
 const roles = [
   "React developer",
@@ -67,21 +69,42 @@ const Typewriter = () => {
 };
 
 const Hero = () => {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const element = heroRef.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    const ctx = gsap.context(() => {
+      const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      timeline
+        .fromTo(".hero-kicker", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55 })
+        .fromTo(".hero-title-line", { autoAlpha: 0, y: 34, rotateX: 9 }, { autoAlpha: 1, y: 0, rotateX: 0, duration: 0.72, stagger: 0.08 }, "-=0.2")
+        .fromTo(".hero-copy", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.58 }, "-=0.28")
+        .fromTo(".hero-action", { autoAlpha: 0, y: 20, scale: 0.96 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.48, stagger: 0.08 }, "-=0.26")
+        .fromTo(".hero-social", { autoAlpha: 0, x: -16 }, { autoAlpha: 1, x: 0, duration: 0.38, stagger: 0.055 }, "-=0.5");
+    }, element);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
+    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
         {socialLinks.map(({ Icon, label, href }) => (
-          <a
-            key={label}
-            href={href}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={label}
-            title={label}
-            className="w-11 h-11 rounded-full glass flex items-center justify-center hover:text-primary hover:scale-110 transition-all shadow-elegant"
-          >
-            <Icon className="w-5 h-5" />
-          </a>
+          <MagneticButton key={label} strength={0.12}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={label}
+              title={label}
+              className="hero-social w-11 h-11 rounded-full glass flex items-center justify-center hover:text-primary transition-all shadow-elegant"
+            >
+              <Icon className="w-5 h-5" />
+            </a>
+          </MagneticButton>
         ))}
       </div>
 
@@ -90,41 +113,47 @@ const Hero = () => {
 
       <div className="container grid lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 gap-12 items-center relative z-10 py-12 lg:pb-0 xl:pl-24">
         <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="space-y-3 -translate-y-24 lg:-translate-y-60 xl:-translate-y-72">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             Available for opportunities
           </motion.div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]">
-            Hi, I'm <span className="block sm:inline gradient-text">Mahendra</span>
+            <span className="hero-title-line block">Hi, I'm <span className="block sm:inline gradient-text">Mahendra</span></span>
             <br />
-            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-semibold">
+            <span className="hero-title-line block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-semibold">
               I'm a <Typewriter />
             </span>
           </h1>
 
-          <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
+          <p className="hero-copy text-lg text-muted-foreground max-w-xl leading-relaxed">
             B.Tech Electronics & Communication student from Jabalpur (M.P.) passionate about building
             real-world full-stack applications. I craft scalable MERN experiences using React, Node.js,
             Express and MongoDB.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button size="lg" asChild className="w-full gradient-bg shadow-glow hover:scale-105 transition-transform sm:w-auto">
-              <a href="#projects">
-                <FolderGit2 className="mr-2 h-4 w-4" /> View Projects
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="w-full hover:scale-105 transition-transform sm:w-auto">
-              <a href="#contact">
-                <Mail className="mr-2 h-4 w-4" /> Contact Me
-              </a>
-            </Button>
-            <Button size="lg" variant="secondary" asChild className="w-full hover:scale-105 transition-transform sm:w-auto">
-              <a href="/Mahendra_Resume.pdf" download>
-                <Download className="mr-2 h-4 w-4" /> Resume
-              </a>
-            </Button>
+            <MagneticButton className="hero-action w-full sm:w-auto">
+              <Button size="lg" asChild className="group w-full gradient-bg shadow-glow transition-transform sm:w-auto">
+                <a href="#projects">
+                  <FolderGit2 className="mr-2 h-4 w-4 transition-transform group-hover:-rotate-6" /> View Projects
+                </a>
+              </Button>
+            </MagneticButton>
+            <MagneticButton className="hero-action w-full sm:w-auto">
+              <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden transition-transform sm:w-auto">
+                <a href="#contact">
+                  <Mail className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> Contact Me
+                </a>
+              </Button>
+            </MagneticButton>
+            <MagneticButton className="hero-action w-full sm:w-auto">
+              <Button size="lg" variant="secondary" asChild className="group w-full transition-transform sm:w-auto">
+                <a href="/Mahendra_Resume.pdf" download>
+                  <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" /> Resume
+                </a>
+              </Button>
+            </MagneticButton>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-2 lg:hidden">

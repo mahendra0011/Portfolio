@@ -168,7 +168,9 @@ All colors MUST be HSL.
   .reactbits-spotlight {
     --spotlight-x: 50%;
     --spotlight-y: 50%;
+    position: relative;
     isolation: isolate;
+    overflow: hidden;
   }
   .reactbits-spotlight::before {
     content: "";
@@ -191,5 +193,12 @@ All colors MUST be HSL.
   .reactbits-spotlight > * {
     position: relative;
     z-index: 1;
+  }
+  .reactbits-magnetic {
+    transform: translate3d(0, 0, 0);
+    transform-origin: center;
+  }
+  .reactbits-magnetic > * {
+    transform: translateZ(0);
   }
 }

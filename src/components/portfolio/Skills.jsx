@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Cloud, Code2, FileSpreadsheet, FileText, Globe, Mail, Map, Monitor, Package, Plug, Search, ServerCog, Workflow } from "lucide-react";
 import {
   SiAxios,
@@ -37,6 +40,7 @@ import {
   SiTailwindcss,
   SiWebrtc,
 } from "react-icons/si";
+import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import SectionHeading from "./SectionHeading";
 
 const groups = [
@@ -113,9 +117,48 @@ const groups = [
   },
 ];
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Skills = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    if (!sectionRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".skill-group-title",
+        { autoAlpha: 0, x: -22 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.55,
+          ease: "power3.out",
+          stagger: 0.08,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 72%" },
+        },
+      );
+
+      gsap.fromTo(
+        ".skill-chip",
+        { autoAlpha: 0, y: 22, scale: 0.94 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.42,
+          ease: "back.out(1.6)",
+          stagger: 0.018,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 70%" },
+        },
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="skills" className="py-24 bg-muted/30 relative overflow-hidden">
+    <section ref={sectionRef} id="skills" className="py-24 bg-muted/30 relative overflow-hidden">
       <div className="container relative">
         <SectionHeading eyebrow="Skills" title="Tools & Technologies" description="The stack I use to bring ideas to life" />
 
@@ -128,24 +171,25 @@ const Skills = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: groupIndex * 0.06 }}
             >
-              <h3 className="mb-4 text-xl font-bold text-muted-foreground md:text-2xl">{group.title}</h3>
+              <h3 className="skill-group-title mb-4 text-xl font-bold text-muted-foreground md:text-2xl">{group.title}</h3>
               <div className="flex flex-wrap gap-3 md:gap-4">
                 {group.items.map(({ name, Icon, color }, index) => (
-                  <motion.div
+                  <SpotlightCard
                     key={`${group.title}-${name}`}
+                    as={motion.div}
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.24, delay: index * 0.018 }}
                     whileHover={{ y: -4 }}
-                    className="group inline-flex h-16 min-w-[126px] items-center gap-3 rounded-xl border border-border/70 bg-background/70 px-4 shadow-sm transition-all hover:border-primary/40 hover:bg-background hover:shadow-elegant sm:min-w-[136px]"
+                    className="skill-chip group inline-flex h-16 min-w-[126px] items-center gap-3 rounded-lg border border-border/70 bg-background/70 px-4 shadow-sm transition-all hover:border-primary/40 hover:bg-background hover:shadow-elegant sm:min-w-[136px]"
                   >
                     <Icon
                       className="h-6 w-6 shrink-0 text-muted-foreground transition-transform group-hover:scale-110"
                       style={{ color }}
                     />
                     <span className="text-[15px] font-bold text-foreground">{name}</span>
-                  </motion.div>
+                  </SpotlightCard>
                 ))}
               </div>
             </motion.div>
