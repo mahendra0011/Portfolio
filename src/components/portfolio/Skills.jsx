@@ -10,7 +10,9 @@ const groups = [
       "HTML",
       "CSS",
       "Tailwind CSS",
+      "Framer Motion",
       "JavaScript",
+      "FlexSearch",
       "React",
       "React Router",
       "React Charts",
@@ -29,6 +31,7 @@ const groups = [
       "Express.js",
       "REST API",
       "GraphQL",
+      "Multer",
       "WebRTC",
       "JWT",
       "Axios",
@@ -54,7 +57,7 @@ const groups = [
     ],
   },
   {
-    title: "DevOps, Cloud & Tools",
+    title: "Deployment & Tools",
     Icon: Wrench,
     items: [
       "Git",
