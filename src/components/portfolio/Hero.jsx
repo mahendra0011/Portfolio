@@ -5,6 +5,7 @@ import { Download, Mail, FolderGit2 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/reactbits/MagneticButton";
+import HeroScene from "./HeroScene";
 
 const roles = [
   "React developer",
@@ -91,6 +92,7 @@ const Hero = () => {
 
   return (
     <section ref={heroRef} id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
+      <HeroScene />
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
         {socialLinks.map(({ Icon, label, href }) => (
           <MagneticButton key={label} strength={0.12}>
