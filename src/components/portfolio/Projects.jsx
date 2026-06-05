@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CalendarCheck,
+  BookOpen,
   ExternalLink,
+  Film,
   Github,
   HeartPulse,
+  Home,
   Hospital,
-  MonitorSmartphone,
+  MessageCircle,
   Search,
   Star,
 } from "lucide-react";
@@ -20,8 +23,8 @@ const projects = [
   {
     title: "MediCore - Hospital Management System",
     description:
-      "Scalable full-stack hospital management system with multi-role workflows, OTP verification, optimized REST APIs, middleware layers and modular architecture.",
-    tech: ["React", "Node.js", "Express", "MongoDB", "shadcn/ui", "Multer", "Cloudinary"],
+      "Full-stack hospital management system with patient, doctor and admin portals, OTP auth, appointments, records, lab services, billing, emergency cases, reports, notifications and PDF documents.",
+    tech: ["React", "Node.js", "Express.js", "MongoDB", "JWT", "Multer", "Cloudinary", "PDFKit"],
     github: "https://github.com/mahendra0011/mediCore.git",
     demo: "https://medicore-main-1.onrender.com",
     category: "Full Stack",
@@ -33,8 +36,8 @@ const projects = [
   {
     title: "EventO - Event Booking Platform",
     description:
-      "Full-stack event booking platform with secure authentication, OTP verification, role-based access control and a polished event discovery flow.",
-    tech: ["React", "Tailwind CSS", "Node.js", "Express", "MongoDB", "ReactBits"],
+      "Event booking platform for public discovery, ticket booking with OTP verification, host dashboards, attendee messaging, support tickets, admin controls, reports and Render-ready deployment.",
+    tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "OTP", "Reports"],
     github: "https://github.com/mahendra0011/EventO",
     demo: "https://enento.onrender.com",
     category: "Full Stack",
@@ -45,32 +48,65 @@ const projects = [
   {
     title: "MindSupport - Mental Wellness Platform",
     description:
-      "Mental wellness and counselling platform with user, counsellor and admin dashboards for session booking, chat, payments and wellness tracking.",
-    tech: ["React", "Tailwind CSS", "Node.js", "Express", "MongoDB", "shadcn/ui"],
-    github: "https://github.com/mahendra0011",
+      "JavaScript-only, MongoDB-only counselling platform with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
+    tech: ["JavaScript", "React", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Payments"],
     category: "Full Stack",
     Icon: HeartPulse,
+    image: "/projects/mindsupport.png",
+    imageAlt: "MindSupport mental wellness platform landing page screenshot",
   },
   {
-    title: "LostAndFound",
+    title: "MoviX - Movie Ticket Booking Platform",
     description:
-      "MERN application that streamlines reporting and recovery of lost items with secure authentication and a clean Material UI experience.",
-    tech: ["React", "Tailwind CSS", "Node.js", "Express", "MongoDB", "Material UI"],
+      "Full-stack movie ticket booking platform for browsing movies, coming-soon releases, seat selection, ticket booking, theater management and admin or owner workflows.",
+    tech: ["React", "Node.js", "Express.js", "MongoDB", "Cloudinary", "JWT"],
+    category: "Full Stack",
+    Icon: Film,
+    image: "/projects/movix.png",
+    imageAlt: "MoviX movie ticket booking platform landing page screenshot",
+  },
+  {
+    title: "RentPE - Room Rental Marketplace",
+    description:
+      "Room rental marketplace for students, interns, job seekers and movers. Seekers compare PGs, hostels, flats and rooms while owners publish listings using city, area, landmark, title, amenities, rules and descriptions.",
+    tech: ["React", "Node.js", "Express.js", "MongoDB", "Search", "Marketplace"],
+    category: "Full Stack",
+    Icon: Home,
+    image: "/projects/rentpe.png",
+    imageAlt: "RentPE room rental marketplace landing page screenshot",
+  },
+  {
+    title: "TempTalk - Anonymous Chat Platform",
+    description:
+      "Privacy-focused anonymous chat platform with encrypted messaging, real-time Socket.IO rooms, media sharing, temporary chat rooms, PWA and Android support, deep links and QR invites.",
+    tech: ["React", "Express.js", "Socket.IO", "MongoDB", "PWA", "Android"],
+    demo: "https://temptalk-1.onrender.com",
+    category: "Full Stack",
+    Icon: MessageCircle,
+    image: "/projects/temptalk.png",
+    imageAlt: "TempTalk anonymous chat platform landing page screenshot",
+  },
+  {
+    title: "StudyBuddy - AI Study Platform",
+    description:
+      "AI-powered study platform using Gemini AI to generate structured notes, summarize PDFs and YouTube lectures, manage study tasks and organize personalized content libraries with secure authentication.",
+    tech: ["React", "Node.js", "Express.js", "MongoDB", "Gemini AI", "PDF", "YouTube"],
+    category: "Full Stack",
+    Icon: BookOpen,
+    image: "/projects/studybuddy.png",
+    imageAlt: "StudyBuddy AI study platform landing page screenshot",
+  },
+  {
+    title: "LostAndFound - Recovery Platform",
+    description:
+      "Full-stack MERN application for reporting, searching and recovering lost items with JWT authentication, image uploads, advanced search and filtering, item status management and responsive recovery workflows.",
+    tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "Image Uploads"],
     github: "https://github.com/mahendra0011/Lost-and-Found-Website.git",
     demo: "https://lost-and-found-xlvq.onrender.com/",
     category: "Full Stack",
     Icon: Search,
     image: "/projects/lost-and-found.png",
     imageAlt: "LostAndFound platform landing page screenshot",
-  },
-  {
-    title: "Portfolio Showcase",
-    description:
-      "Responsive developer portfolio built with HTML, CSS, JavaScript, React, Redux, Tailwind CSS, shadcn/ui and ReactBits-style interactions.",
-    tech: ["HTML", "CSS", "JavaScript", "React", "Redux", "Tailwind CSS", "shadcn/ui", "ReactBits"],
-    demo: "#home",
-    category: "Frontend",
-    Icon: MonitorSmartphone,
   },
 ];
 
