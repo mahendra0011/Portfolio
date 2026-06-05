@@ -111,6 +111,12 @@ All colors MUST be HSL.
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    cursor: url("/cursor-arrow.svg") 8 5, auto !important;
+  }
+
   * {
     @apply border-border;
   }
