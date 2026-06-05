@@ -1,6 +1,7 @@
-import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   CalendarCheck,
   BookOpen,
@@ -13,11 +14,11 @@ import {
   MessageCircle,
   Search,
   Star,
+  Sparkles,
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { Button } from "@/components/ui/button";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
-import { selectProjectFilter, setProjectFilter } from "@/store/portfolioStore";
 
 const projects = [
   {
@@ -27,7 +28,6 @@ const projects = [
     tech: ["React", "Node.js", "Express.js", "MongoDB", "JWT", "Multer", "Cloudinary", "PDFKit"],
     github: "https://github.com/mahendra0011/mediCore.git",
     demo: "https://medicore-main-1.onrender.com",
-    category: "Full Stack",
     featured: true,
     Icon: Hospital,
     image: "/projects/medicore.png",
@@ -40,7 +40,6 @@ const projects = [
     tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "OTP", "Reports"],
     github: "https://github.com/mahendra0011/EventO",
     demo: "https://enento.onrender.com",
-    category: "Full Stack",
     Icon: CalendarCheck,
     image: "/projects/evento.png",
     imageAlt: "EventO event booking platform landing page screenshot",
@@ -50,7 +49,6 @@ const projects = [
     description:
       "JavaScript-only, MongoDB-only counselling platform with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
     tech: ["JavaScript", "React", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Payments"],
-    category: "Full Stack",
     Icon: HeartPulse,
     image: "/projects/mindsupport.png",
     imageAlt: "MindSupport mental wellness platform landing page screenshot",
@@ -60,7 +58,6 @@ const projects = [
     description:
       "Full-stack movie ticket booking platform for browsing movies, coming-soon releases, seat selection, ticket booking, theater management and admin or owner workflows.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Cloudinary", "JWT"],
-    category: "Full Stack",
     Icon: Film,
     image: "/projects/movix.png",
     imageAlt: "MoviX movie ticket booking platform landing page screenshot",
@@ -70,7 +67,6 @@ const projects = [
     description:
       "Room rental marketplace for students, interns, job seekers and movers. Seekers compare PGs, hostels, flats and rooms while owners publish listings using city, area, landmark, title, amenities, rules and descriptions.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Search", "Marketplace"],
-    category: "Full Stack",
     Icon: Home,
     image: "/projects/rentpe.png",
     imageAlt: "RentPE room rental marketplace landing page screenshot",
@@ -81,7 +77,6 @@ const projects = [
       "Privacy-focused anonymous chat platform with encrypted messaging, real-time Socket.IO rooms, media sharing, temporary chat rooms, PWA and Android support, deep links and QR invites.",
     tech: ["React", "Express.js", "Socket.IO", "MongoDB", "PWA", "Android"],
     demo: "https://temptalk-1.onrender.com",
-    category: "Full Stack",
     Icon: MessageCircle,
     image: "/projects/temptalk.png",
     imageAlt: "TempTalk anonymous chat platform landing page screenshot",
@@ -91,7 +86,6 @@ const projects = [
     description:
       "AI-powered study platform using Gemini AI to generate structured notes, summarize PDFs and YouTube lectures, manage study tasks and organize personalized content libraries with secure authentication.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Gemini AI", "PDF", "YouTube"],
-    category: "Full Stack",
     Icon: BookOpen,
     image: "/projects/studybuddy.png",
     imageAlt: "StudyBuddy AI study platform landing page screenshot",
@@ -103,47 +97,108 @@ const projects = [
     tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "Image Uploads"],
     github: "https://github.com/mahendra0011/Lost-and-Found-Website.git",
     demo: "https://lost-and-found-xlvq.onrender.com/",
-    category: "Full Stack",
     Icon: Search,
     image: "/projects/lost-and-found.png",
     imageAlt: "LostAndFound platform landing page screenshot",
   },
 ];
 
-const filters = ["All", ...Array.from(new Set(projects.map((project) => project.category)))];
 const isExternal = (href) => /^https?:\/\//.test(href);
+const INITIAL_PROJECT_COUNT = 4;
+const projectMetrics = [
+  { label: "Production-style builds", value: "8" },
+  { label: "Core stack", value: "MERN" },
+];
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
-  const dispatch = useDispatch();
-  const filter = useSelector(selectProjectFilter);
-  const filtered = useMemo(
-    () => (filter === "All" ? projects : projects.filter((project) => project.category === filter)),
-    [filter],
-  );
+  const [showAll, setShowAll] = useState(false);
+  const sectionRef = useRef(null);
+  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECT_COUNT);
+  const hasMoreProjects = projects.length > visibleProjects.length;
+
+  useEffect(() => {
+    if (!sectionRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".project-metric",
+        { autoAlpha: 0, y: 22 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.65,
+          ease: "power3.out",
+          stagger: 0.09,
+          scrollTrigger: { trigger: ".project-metrics", start: "top 84%" },
+        },
+      );
+
+      gsap.fromTo(
+        ".project-card",
+        { autoAlpha: 0, y: 70, rotateX: 8, transformPerspective: 900 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 0.85,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: { trigger: ".project-grid", start: "top 78%" },
+        },
+      );
+
+      gsap.fromTo(
+        ".project-accent-line",
+        { scaleX: 0, transformOrigin: "left center" },
+        {
+          scaleX: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.1,
+          scrollTrigger: { trigger: ".project-grid", start: "top 78%" },
+        },
+      );
+
+      gsap.utils.toArray(".project-card").forEach((card) => {
+        const image = card.querySelector(".project-image");
+        if (!image) return;
+
+        gsap.to(image, {
+          yPercent: -7,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [showAll, visibleProjects.length]);
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="container">
+    <section id="projects" ref={sectionRef} className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(hsl(var(--foreground))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--foreground))_1px,transparent_1px)] [background-size:44px_44px] pointer-events-none" />
+      <div className="container relative">
         <SectionHeading eyebrow="Projects" title="Featured Work" description="A selection of things I've built recently" />
 
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {filters.map((item) => (
-            <Button
-              key={item}
-              variant={filter === item ? "default" : "outline"}
-              size="sm"
-              aria-pressed={filter === item}
-              onClick={() => dispatch(setProjectFilter(item))}
-              className={filter === item ? "gradient-bg shadow-glow" : ""}
-            >
-              {item}
-            </Button>
+        <div className="project-metrics mx-auto mb-8 grid max-w-2xl gap-3 sm:grid-cols-2">
+          {projectMetrics.map((metric) => (
+            <div key={metric.label} className="project-metric glass rounded-xl px-4 py-3 text-center">
+              <div className="text-xl font-bold gradient-text">{metric.value}</div>
+              <div className="text-xs font-medium text-muted-foreground">{metric.label}</div>
+            </div>
           ))}
         </div>
 
-        <motion.div layout className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <motion.div layout className="project-grid grid md:grid-cols-2 gap-6 max-w-6xl mx-auto [perspective:1200px]">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, index) => (
+            {visibleProjects.map((project, index) => (
               <SpotlightCard
                 key={project.title}
                 as={motion.article}
@@ -152,9 +207,10 @@ const Projects = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
-                whileHover={{ y: -6 }}
-                className="relative glass rounded-xl p-6 group hover:shadow-glow transition-all overflow-hidden flex flex-col min-h-[360px]"
+                whileHover={{ y: -10, rotateX: 1.5 }}
+                className="project-card relative glass rounded-xl p-5 group hover:shadow-glow transition-all overflow-hidden flex flex-col min-h-[390px] will-change-transform"
               >
+                <div className="project-accent-line absolute left-0 top-0 h-1 w-full gradient-bg" />
                 <div className="absolute -inset-px gradient-bg opacity-0 group-hover:opacity-10 transition-opacity rounded-xl pointer-events-none" />
                 {project.image && (
                   <div className="relative mb-5 aspect-video overflow-hidden rounded-lg border border-border/60 bg-muted/30">
@@ -162,9 +218,13 @@ const Projects = () => {
                       src={project.image}
                       alt={project.imageAlt}
                       loading="lazy"
-                      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="project-image h-[112%] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.05]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/85 px-3 py-1 text-[11px] font-semibold backdrop-blur">
+                      <Sparkles className="h-3 w-3 text-primary" />
+                      Case study
+                    </div>
                   </div>
                 )}
                 <div className="flex items-start justify-between gap-4 mb-5">
@@ -172,9 +232,6 @@ const Projects = () => {
                     <project.Icon className="w-6 h-6 text-primary-foreground" />
                   </div>
                   <div className="flex flex-wrap justify-end gap-2">
-                    <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                      {project.category}
-                    </span>
                     {project.featured && (
                       <span className="inline-flex items-center gap-1 rounded-full gradient-bg px-3 py-1 text-xs font-semibold text-primary-foreground">
                         <Star className="w-3 h-3 fill-current" /> Featured
@@ -218,6 +275,14 @@ const Projects = () => {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {hasMoreProjects && (
+          <div className="mt-10 flex justify-center">
+            <Button size="lg" onClick={() => setShowAll(true)} className="gradient-bg shadow-glow hover:scale-105 transition-transform">
+              See More
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

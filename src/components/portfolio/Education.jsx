@@ -27,7 +27,7 @@ const items = [
 const Education = () => {
     return (<section id="education" className="py-24 bg-muted/30 overflow-hidden">
       <div className="container">
-        <SectionHeading eyebrow="Journey" title="Education & Experience"/>
+        <SectionHeading eyebrow="Journey" title="Education"/>
 
         <div className="relative max-w-3xl mx-auto">
           {/* Timeline line */}
