@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import { Mail, Github, Linkedin, Send } from "lucide-react";
-import { SiLeetcode } from "react-icons/si";
+import { Mail, Send } from "lucide-react";
+import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import SectionHeading from "./SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,9 +16,12 @@ const schema = z.object({
 });
 const socials = [
     { Icon: Mail, label: "Gmail", value: "mahendrapra0077@gmail.com", href: "mailto:mahendrapra0077@gmail.com" },
-    { Icon: Linkedin, label: "LinkedIn", value: "/in/mahendra-prajapati-73163930b", href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
-    { Icon: Github, label: "GitHub", value: "@mahendra0011", href: "https://github.com/mahendra0011" },
-    { Icon: SiLeetcode, label: "LeetCode", value: "@mahendra_0011", href: "https://leetcode.com/u/mahendra_0011/" },
+    { Icon: FaLinkedin, label: "LinkedIn", value: "/in/mahendra-prajapati-73163930b", href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
+    { Icon: FaGithub, label: "GitHub", value: "@mahendra0011", href: "https://github.com/mahendra0011" },
+    { Icon: FaXTwitter, label: "X / Twitter", value: "@mahendra0011", href: "https://x.com/mahendra0011" },
+    { Icon: FaYoutube, label: "YouTube", value: "@mahendra0011", href: "https://www.youtube.com/@mahendra0011" },
+    { Icon: FaTelegram, label: "Telegram", value: "@mahendra0011", href: "https://t.me/mahendra0011" },
+    { Icon: FaInstagram, label: "Instagram", value: "@mahendra0011", href: "https://www.instagram.com/mahendra0011" },
 ];
 const Contact = () => {
     const [form, setForm] = useState({ name: "", email: "", message: "" });

@@ -105,7 +105,7 @@ const Projects = () => {
           ))}
         </div>
 
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div layout className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, index) => (
               <SpotlightCard
@@ -117,9 +117,7 @@ const Projects = () => {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
                 whileHover={{ y: -6 }}
-                className={`relative glass rounded-xl p-6 group hover:shadow-glow transition-all overflow-hidden flex flex-col min-h-[330px] ${
-                  project.featured ? "lg:col-span-2" : ""
-                }`}
+                className="relative glass rounded-xl p-6 group hover:shadow-glow transition-all overflow-hidden flex flex-col min-h-[360px]"
               >
                 <div className="absolute -inset-px gradient-bg opacity-0 group-hover:opacity-10 transition-opacity rounded-xl pointer-events-none" />
                 {project.image && (
