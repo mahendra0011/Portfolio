@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { Download, Mail, FolderGit2, Code2, Rocket } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Download, Mail, FolderGit2 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import profileImg from "@/assets/profile.png";
+import profileImg from "@/assets/profile-yes2.png";
 
 const roles = [
   "Software Developer",
@@ -74,6 +74,19 @@ const Typewriter = () => {
 };
 
 const Hero = () => {
+  const [photoZoomed, setPhotoZoomed] = useState(false);
+  const photoTimer = useRef(null);
+
+  useEffect(() => {
+    return () => window.clearTimeout(photoTimer.current);
+  }, []);
+
+  const handlePhotoClick = () => {
+    window.clearTimeout(photoTimer.current);
+    setPhotoZoomed(true);
+    photoTimer.current = window.setTimeout(() => setPhotoZoomed(false), 520);
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
@@ -161,28 +174,28 @@ const Hero = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-[440px]">
-            <div className="absolute inset-x-10 top-14 h-72 rounded-[999px] bg-primary/25 blur-3xl opacity-50" />
-            <div className="relative mx-auto h-[500px] w-[300px] sm:h-[540px] sm:w-[340px] lg:h-[590px] lg:w-[390px] animate-float">
-              <div className="absolute inset-x-3 bottom-5 top-12 overflow-hidden rounded-[2.25rem] border border-primary/20 bg-[linear-gradient(180deg,hsl(43_86%_94%),hsl(39_78%_89%)_58%,hsl(186_50%_86%))] shadow-[0_30px_90px_-42px_rgba(8,47,73,0.7)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.75),transparent_36%),linear-gradient(135deg,rgba(255,255,255,0.36),transparent_55%)]" />
-                <div className="absolute inset-x-10 bottom-0 h-24 rounded-t-full bg-primary/20 blur-2xl" />
-              </div>
+          <div className="relative w-full max-w-[470px] min-h-[540px] sm:min-h-[610px]">
+            <div className="absolute inset-y-4 left-0 right-2 opacity-40 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.12)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.08)_1px,transparent_1px)] [background-size:38px_38px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_72%)]" />
+            <div className="absolute left-8 top-24 h-44 w-48 opacity-35 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
+            <div className="absolute bottom-28 right-4 h-36 w-44 opacity-25 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
+            <div className="relative mx-auto flex h-[520px] w-[310px] items-end justify-center sm:h-[590px] sm:w-[370px] lg:h-[630px] lg:w-[410px]">
+              <motion.button
+                type="button"
+                aria-label="Zoom Mahendra photo"
+                onClick={handlePhotoClick}
+                animate={{ scale: photoZoomed ? 1.07 : 1 }}
+                whileHover={{ scale: 1.035 }}
+                whileTap={{ scale: 1.09 }}
+                transition={{ type: "spring", stiffness: 280, damping: 18 }}
+                className="relative h-full w-full cursor-pointer bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+              >
               <img
                 src={profileImg}
                 alt="Mahendra Prajapati portrait"
-                className="absolute inset-0 z-10 h-full w-full object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.45)]"
+                className="h-full w-full object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
               />
+              </motion.button>
             </div>
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute left-5 top-24 rounded-2xl border border-primary/20 bg-background/85 px-4 py-2 shadow-elegant backdrop-blur-xl">
-              <Code2 className="w-5 h-5 text-primary" />
-            </motion.div>
-            <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-24 right-3 rounded-2xl border border-primary/20 bg-background/85 px-4 py-2 shadow-elegant backdrop-blur-xl">
-              <Rocket className="w-5 h-5 text-primary" />
-            </motion.div>
-            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute bottom-10 left-1/2 -translate-x-1/2 rounded-2xl border border-primary/20 bg-background/90 px-4 py-2 text-xs font-semibold shadow-elegant backdrop-blur-xl">
-              MERN Stack
-            </motion.div>
           </div>
         </motion.div>
       </div>
