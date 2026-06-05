@@ -10,6 +10,7 @@ const certs = [
     issuer: "Udemy",
     date: "April 2026",
     image: certUdemyHtml,
+    imageSize: { width: 595, height: 800 },
     href: "https://ude.my/UC-d02ea3c0-c70a-48cc-b289-9766706fdaf5",
   },
   {
@@ -17,6 +18,7 @@ const certs = [
     issuer: "IBM SkillsBuild",
     date: "April 2025",
     image: certIbm,
+    imageSize: { width: 1286, height: 908 },
     href: "#",
   },
   {
@@ -50,15 +52,20 @@ const Certifications = () => (
             whileHover={{ y: -8 }}
             className="glass rounded-2xl overflow-hidden hover:shadow-glow transition-all group flex flex-col"
           >
-            <div className="aspect-video bg-muted relative overflow-hidden">
+            <div className="relative aspect-[4/3] overflow-hidden bg-white p-3">
               {c.image ? (
                 <img
                   src={c.image}
                   alt={`${c.title} certificate`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  width={c.imageSize.width}
+                  height={c.imageSize.height}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  className="h-full w-full select-none rounded-lg object-contain transition-transform duration-500 group-hover:scale-[1.025]"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center gradient-bg">
+                <div className="w-full h-full flex items-center justify-center rounded-lg gradient-bg">
                   <BadgeCheck className="w-16 h-16 text-primary-foreground" />
                 </div>
               )}

@@ -213,15 +213,17 @@ const Projects = () => {
                 <div className="project-accent-line absolute left-0 top-0 h-1 w-full gradient-bg" />
                 <div className="absolute -inset-px gradient-bg opacity-0 group-hover:opacity-10 transition-opacity rounded-xl pointer-events-none" />
                 {project.image && (
-                  <div className="relative mb-5 aspect-video overflow-hidden rounded-lg border border-border/60 bg-muted/30">
+                  <div className="relative mb-5 aspect-[1.9/1] overflow-hidden rounded-lg border border-border/60 bg-muted/40 shadow-inner">
                     <img
                       src={project.image}
                       alt={project.imageAlt}
                       loading="lazy"
-                      className="project-image h-[112%] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.05]"
+                      decoding="async"
+                      draggable="false"
+                      className="project-image absolute inset-0 h-[112%] w-full select-none object-cover object-top transition-transform duration-700 group-hover:scale-[1.05]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
-                    <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/85 px-3 py-1 text-[11px] font-semibold backdrop-blur">
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1 text-[11px] font-semibold shadow-sm backdrop-blur">
                       <Sparkles className="h-3 w-3 text-primary" />
                       Case study
                     </div>

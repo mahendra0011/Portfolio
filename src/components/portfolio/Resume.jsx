@@ -116,7 +116,12 @@ const Resume = () => (
               <img
                 src={RESUME_PREVIEW_URL}
                 alt="Mahendra Prajapati resume preview"
-                className="block h-full w-full object-contain"
+                width="1530"
+                height="1980"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                className="block h-full w-full select-none object-contain"
                 draggable="false"
               />
               {resumeLinks.map((link) => (
