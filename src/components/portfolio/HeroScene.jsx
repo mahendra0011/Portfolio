@@ -63,37 +63,37 @@ const HeroScene = () => {
 
     scene.add(group);
 
-    const ribbonMaterial = new THREE.MeshBasicMaterial({
+    const lineMaterial = new THREE.LineBasicMaterial({
       color: palette.accent,
       transparent: true,
-      opacity: 0.07,
+      opacity: 0.09,
       depthWrite: false,
     });
 
-    const ribbons = [
+    const lineGroups = [
       [
         new THREE.Vector3(-5.6, -1.4, -2.6),
-        new THREE.Vector3(-2.4, 0.65, -2.2),
-        new THREE.Vector3(0.9, -0.28, -1.9),
-        new THREE.Vector3(2.35, -0.78, -2.2),
+        new THREE.Vector3(-2.8, -0.35, -2.2),
+        new THREE.Vector3(0.8, -0.85, -2.1),
+        new THREE.Vector3(3.6, 0.25, -2.4),
       ],
       [
-        new THREE.Vector3(-4.8, 2.4, -3.2),
-        new THREE.Vector3(-1.8, 1.2, -2.4),
-        new THREE.Vector3(0.6, 1.45, -2.8),
-        new THREE.Vector3(2.15, 1.95, -2.9),
+        new THREE.Vector3(-4.8, 2.2, -3.2),
+        new THREE.Vector3(-1.2, 1.5, -2.7),
+        new THREE.Vector3(1.6, 1.85, -2.9),
+        new THREE.Vector3(4.2, 0.9, -3.1),
       ],
       [
-        new THREE.Vector3(1.8, -2.05, -3.1),
-        new THREE.Vector3(3.4, -1.0, -2.7),
-        new THREE.Vector3(5.2, -1.25, -3.0),
-        new THREE.Vector3(6.0, 0.45, -3.4),
+        new THREE.Vector3(0.6, -2.3, -3.1),
+        new THREE.Vector3(2.6, -1.6, -2.8),
+        new THREE.Vector3(4.8, -1.95, -3.0),
+        new THREE.Vector3(6.0, -0.75, -3.4),
       ],
     ].map((points) => {
-      const curve = new THREE.CatmullRomCurve3(points);
-      const ribbon = new THREE.Mesh(new THREE.TubeGeometry(curve, 80, 0.018, 8, false), ribbonMaterial);
-      group.add(ribbon);
-      return ribbon;
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      const line = new THREE.Line(geometry, lineMaterial);
+      group.add(line);
+      return line;
     });
 
     const particleCount = window.innerWidth < 768 ? 120 : 230;
@@ -140,8 +140,8 @@ const HeroScene = () => {
 
       group.rotation.y = pointer.x * 0.04;
       group.rotation.x = pointer.y * 0.045;
-      ribbons.forEach((ribbon, index) => {
-        ribbon.rotation.z = Math.sin(elapsed * 0.2 + index) * 0.035;
+      lineGroups.forEach((line, index) => {
+        line.rotation.z = Math.sin(elapsed * 0.2 + index) * 0.018;
       });
       particles.rotation.y = -elapsed * 0.018;
 

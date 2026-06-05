@@ -110,9 +110,6 @@ const Hero = () => {
         ))}
       </div>
 
-      <div className="absolute top-20 -left-20 w-72 h-72 rounded-full bg-primary/30 blur-3xl animate-blob" />
-      <div className="absolute bottom-10 -right-10 w-96 h-96 rounded-full bg-accent/30 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
-
       <div className="container grid lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 gap-12 items-center relative z-10 py-12 lg:pb-0 xl:pl-24">
         <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="space-y-2 -translate-y-12 lg:translate-y-0 lg:self-start lg:pt-[5.5rem] xl:pt-[6.5rem]">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
