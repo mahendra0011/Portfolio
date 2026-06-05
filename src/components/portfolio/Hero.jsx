@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Download, Mail, FolderGit2, Code2, Rocket } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import profileImg from "@/assets/profile.jpg";
+import profileImg from "@/assets/profile.png";
 
 const roles = [
   "Software Developer",
@@ -148,10 +148,15 @@ const Hero = () => {
 
         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:justify-end">
           <div className="relative">
-            <div className="absolute -inset-4 gradient-bg rounded-[2rem] blur-3xl opacity-35 animate-pulse" />
-            <div className="relative w-72 md:w-80 lg:w-96 aspect-[9/16] rounded-[2rem] overflow-hidden glass shadow-glow animate-float">
-              <div className="absolute inset-0 gradient-bg opacity-10" />
-              <img src={profileImg} alt="Mahendra Prajapati portrait" className="relative w-full h-full object-cover object-center" />
+            <div className="absolute -inset-8 gradient-bg rounded-full blur-3xl opacity-30 animate-pulse" />
+            <div className="relative w-72 md:w-80 lg:w-96 aspect-[9/16] animate-float">
+              <div className="absolute inset-x-8 top-16 bottom-6 rounded-[2rem] glass shadow-glow" />
+              <div className="absolute inset-x-12 bottom-2 h-28 rounded-full gradient-bg opacity-20 blur-2xl" />
+              <img
+                src={profileImg}
+                alt="Mahendra Prajapati portrait"
+                className="relative z-10 w-full h-full object-contain object-bottom drop-shadow-[0_28px_45px_rgba(0,0,0,0.38)]"
+              />
             </div>
             <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute top-10 -left-6 glass rounded-2xl px-4 py-2 shadow-elegant">
               <Code2 className="w-5 h-5 text-primary" />
