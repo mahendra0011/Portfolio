@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import profileImg from "@/assets/profile-yes2.png";
 
 const roles = [
+  "React developer",
   "Software Developer",
   "Full Stack Developer",
-  "React Enthusiast",
   "Electronics & Communication Student",
 ];
 
@@ -108,7 +108,7 @@ const Hero = () => {
       <div className="absolute top-20 -left-20 w-72 h-72 rounded-full bg-primary/30 blur-3xl animate-blob" />
       <div className="absolute bottom-10 -right-10 w-96 h-96 rounded-full bg-accent/30 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
 
-      <div className="container grid lg:grid-cols-2 gap-12 items-center relative z-10 py-12 xl:pl-24">
+      <div className="container grid lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 gap-12 items-center relative z-10 py-12 lg:pb-0 xl:pl-24">
         <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="space-y-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -173,12 +173,12 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-[470px] min-h-[540px] sm:min-h-[610px]">
-            <div className="absolute inset-y-4 left-0 right-2 opacity-40 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.12)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.08)_1px,transparent_1px)] [background-size:38px_38px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_72%)]" />
-            <div className="absolute left-8 top-24 h-44 w-48 opacity-35 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
-            <div className="absolute bottom-28 right-4 h-36 w-44 opacity-25 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
-            <div className="relative mx-auto flex h-[520px] w-[310px] items-end justify-center sm:h-[590px] sm:w-[370px] lg:h-[630px] lg:w-[410px]">
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:h-full lg:self-end lg:justify-end lg:items-end">
+          <div className="relative w-full max-w-[470px] min-h-[540px] sm:min-h-[610px] lg:min-h-[calc(100vh-5rem)]">
+            <div className="absolute inset-y-0 left-0 right-2 opacity-40 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.12)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.08)_1px,transparent_1px)] [background-size:38px_38px] [mask-image:radial-gradient(ellipse_at_center,black_16%,transparent_78%)]" />
+            <div className="absolute left-8 top-[24%] h-44 w-48 opacity-35 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
+            <div className="absolute bottom-20 right-4 h-48 w-52 opacity-25 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
+            <div className="relative mx-auto flex h-[520px] w-[310px] items-end justify-center sm:h-[590px] sm:w-[370px] lg:absolute lg:bottom-0 lg:right-0 lg:h-[calc(100vh-6rem)] lg:max-h-[760px] lg:w-[470px]">
               <motion.button
                 type="button"
                 aria-label="Zoom Mahendra photo"
@@ -189,11 +189,11 @@ const Hero = () => {
                 transition={{ type: "spring", stiffness: 280, damping: 18 }}
                 className="relative h-full w-full cursor-pointer bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
               >
-              <img
-                src={profileImg}
-                alt="Mahendra Prajapati portrait"
-                className="h-full w-full object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
-              />
+                <img
+                  src={profileImg}
+                  alt="Mahendra Prajapati portrait"
+                  className="h-full w-full object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
+                />
               </motion.button>
             </div>
           </div>
