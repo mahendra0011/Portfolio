@@ -153,9 +153,6 @@ All colors MUST be HSL.
   .gradient-bg {
     background-image: var(--gradient-primary);
   }
-  .hero-bg {
-    background-image: var(--gradient-hero);
-  }
   .glass {
     @apply backdrop-blur-xl bg-background/60 border border-border/50;
   }

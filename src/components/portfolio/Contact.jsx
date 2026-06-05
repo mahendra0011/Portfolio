@@ -45,7 +45,6 @@ const Contact = () => {
         }, 800);
     };
     return (<section id="contact" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 hero-bg pointer-events-none"/>
       <div className="container relative">
         <SectionHeading eyebrow="Contact" title="Let's Build Together" description="Have a project in mind or want to chat? Drop a message."/>
 

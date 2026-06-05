@@ -140,7 +140,6 @@ const Projects = () => {
 
   return (
     <section id="projects" ref={sectionRef} className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(hsl(var(--foreground))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--foreground))_1px,transparent_1px)] [background-size:44px_44px] pointer-events-none" />
         <div className="container relative">
         <SectionHeading eyebrow="Projects" title="Featured Work" description="A selection of things I've built recently" />
 

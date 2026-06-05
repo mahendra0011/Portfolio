@@ -5,7 +5,6 @@ import { Download, Mail, FolderGit2 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/reactbits/MagneticButton";
-import HeroScene from "./HeroScene";
 
 const roles = [
   "React developer",
@@ -91,8 +90,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
-      <HeroScene />
+    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center bg-background overflow-hidden pt-20">
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
         {socialLinks.map(({ Icon, label, href }) => (
           <MagneticButton key={label} strength={0.12}>
@@ -173,9 +171,6 @@ const Hero = () => {
 
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:h-full lg:self-end lg:justify-end lg:items-end">
           <div className="relative w-full max-w-[470px] min-h-[540px] sm:min-h-[610px] lg:min-h-[calc(100vh-5rem)]">
-            <div className="absolute inset-y-0 left-0 right-2 opacity-40 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.12)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.08)_1px,transparent_1px)] [background-size:38px_38px] [mask-image:radial-gradient(ellipse_at_center,black_16%,transparent_78%)]" />
-            <div className="absolute left-8 top-[24%] h-44 w-48 opacity-35 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
-            <div className="absolute bottom-20 right-4 h-48 w-52 opacity-25 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
             <div
               id="hero-photo-anchor"
               aria-hidden="true"

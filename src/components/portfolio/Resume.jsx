@@ -65,7 +65,6 @@ const Resume = () => (
   <div className="min-h-screen bg-background text-foreground">
     <Navbar />
     <main className="relative overflow-hidden pt-24 pb-20">
-      <div className="absolute inset-0 hero-bg pointer-events-none" />
       <div className="container relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
