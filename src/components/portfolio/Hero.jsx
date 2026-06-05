@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Download, Mail, FolderGit2 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import profileImg from "@/assets/profile-yes2.png";
 
 const roles = [
   "React developer",
@@ -20,12 +19,6 @@ const socialLinks = [
   { Icon: FaTelegram, label: "Telegram", href: "https://t.me/mahendra0011" },
   { Icon: Mail, label: "Mail", href: "mailto:mahendrapra0077@gmail.com" },
   { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/mahendra0011" },
-];
-
-const heroStats = [
-  { label: "Projects Built", value: "10+" },
-  { label: "GitHub Commits", value: "900+" },
-  { label: "Core Tech", value: "50+" },
 ];
 
 const Typewriter = () => {
@@ -74,19 +67,6 @@ const Typewriter = () => {
 };
 
 const Hero = () => {
-  const [photoZoomed, setPhotoZoomed] = useState(false);
-  const photoTimer = useRef(null);
-
-  useEffect(() => {
-    return () => window.clearTimeout(photoTimer.current);
-  }, []);
-
-  const handlePhotoClick = () => {
-    window.clearTimeout(photoTimer.current);
-    setPhotoZoomed(true);
-    photoTimer.current = window.setTimeout(() => setPhotoZoomed(false), 520);
-  };
-
   return (
     <section id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
@@ -109,7 +89,7 @@ const Hero = () => {
       <div className="absolute bottom-10 -right-10 w-96 h-96 rounded-full bg-accent/30 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
 
       <div className="container grid lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 gap-12 items-center relative z-10 py-12 lg:pb-0 xl:pl-24">
-        <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="space-y-6">
+        <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="space-y-6 -translate-y-8 lg:-translate-y-16">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             Available for opportunities
@@ -128,15 +108,6 @@ const Hero = () => {
             real-world full-stack applications. I craft scalable MERN experiences using React, Node.js,
             Express and MongoDB.
           </p>
-
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-xl">
-            {heroStats.map((item) => (
-              <div key={item.label} className="glass rounded-2xl px-3 py-3 sm:px-4">
-                <div className="text-xl sm:text-2xl font-bold gradient-text">{item.value}</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground">{item.label}</div>
-              </div>
-            ))}
-          </div>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button size="lg" asChild className="w-full gradient-bg shadow-glow hover:scale-105 transition-transform sm:w-auto">
@@ -178,24 +149,11 @@ const Hero = () => {
             <div className="absolute inset-y-0 left-0 right-2 opacity-40 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.12)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.08)_1px,transparent_1px)] [background-size:38px_38px] [mask-image:radial-gradient(ellipse_at_center,black_16%,transparent_78%)]" />
             <div className="absolute left-8 top-[24%] h-44 w-48 opacity-35 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
             <div className="absolute bottom-20 right-4 h-48 w-52 opacity-25 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.7)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
-            <div className="relative mx-auto flex h-[520px] w-[310px] items-end justify-center sm:h-[590px] sm:w-[370px] lg:absolute lg:bottom-0 lg:right-0 lg:h-[calc(100vh-6rem)] lg:max-h-[760px] lg:w-[470px]">
-              <motion.button
-                type="button"
-                aria-label="Zoom Mahendra photo"
-                onClick={handlePhotoClick}
-                animate={{ scale: photoZoomed ? 1.07 : 1 }}
-                whileHover={{ scale: 1.035 }}
-                whileTap={{ scale: 1.09 }}
-                transition={{ type: "spring", stiffness: 280, damping: 18 }}
-                className="relative h-full w-full cursor-pointer bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
-              >
-                <img
-                  src={profileImg}
-                  alt="Mahendra Prajapati portrait"
-                  className="h-full w-full object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
-                />
-              </motion.button>
-            </div>
+            <div
+              id="hero-photo-anchor"
+              aria-hidden="true"
+              className="invisible relative mx-auto h-[520px] w-[310px] sm:h-[590px] sm:w-[370px] lg:absolute lg:bottom-0 lg:right-0 lg:h-[calc(100vh-6rem)] lg:max-h-[760px] lg:w-[470px]"
+            />
           </div>
         </motion.div>
       </div>

@@ -117,6 +117,18 @@ All colors MUST be HSL.
     cursor: url("/cursor-arrow.svg") 4 2, auto !important;
   }
 
+  a,
+  button,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  select,
+  summary,
+  .cursor-pointer {
+    cursor: pointer !important;
+  }
+
   * {
     @apply border-border;
   }
