@@ -88,10 +88,10 @@ const Hero = () => {
             Available for opportunities
           </motion.div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]">
-            Hi, I'm <span className="gradient-text">Mahendra</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]">
+            Hi, I'm <span className="block sm:inline gradient-text">Mahendra</span>
             <br />
-            <span className="text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-semibold">
+            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-semibold">
               I'm a <Typewriter />
             </span>
           </h1>
@@ -102,27 +102,27 @@ const Hero = () => {
             Express and MongoDB.
           </p>
 
-          <div className="grid grid-cols-3 gap-3 max-w-xl">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-xl">
             {heroStats.map((item) => (
-              <div key={item.label} className="glass rounded-2xl px-4 py-3">
-                <div className="text-2xl font-bold gradient-text">{item.value}</div>
-                <div className="text-xs text-muted-foreground">{item.label}</div>
+              <div key={item.label} className="glass rounded-2xl px-3 py-3 sm:px-4">
+                <div className="text-xl sm:text-2xl font-bold gradient-text">{item.value}</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground">{item.label}</div>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3">
-            <Button size="lg" asChild className="gradient-bg shadow-glow hover:scale-105 transition-transform">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button size="lg" asChild className="w-full gradient-bg shadow-glow hover:scale-105 transition-transform sm:w-auto">
               <a href="#projects">
                 <FolderGit2 className="mr-2 h-4 w-4" /> View Projects
               </a>
             </Button>
-            <Button size="lg" variant="outline" asChild className="hover:scale-105 transition-transform">
+            <Button size="lg" variant="outline" asChild className="w-full hover:scale-105 transition-transform sm:w-auto">
               <a href="#contact">
                 <Mail className="mr-2 h-4 w-4" /> Contact Me
               </a>
             </Button>
-            <Button size="lg" variant="secondary" asChild className="hover:scale-105 transition-transform">
+            <Button size="lg" variant="secondary" asChild className="w-full hover:scale-105 transition-transform sm:w-auto">
               <a href="/Mahendra_Resume.pdf" download>
                 <Download className="mr-2 h-4 w-4" /> Resume
               </a>
@@ -146,26 +146,28 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:justify-end">
-          <div className="relative">
-            <div className="absolute -inset-8 gradient-bg rounded-full blur-3xl opacity-30 animate-pulse" />
-            <div className="relative w-72 md:w-80 lg:w-96 aspect-[9/16] animate-float">
-              <div className="absolute inset-x-8 top-16 bottom-6 rounded-[2rem] glass shadow-glow" />
-              <div className="absolute inset-x-12 bottom-2 h-28 rounded-full gradient-bg opacity-20 blur-2xl" />
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:justify-end">
+          <div className="relative w-full max-w-[440px]">
+            <div className="absolute inset-x-10 top-14 h-72 rounded-[999px] bg-primary/25 blur-3xl opacity-50" />
+            <div className="relative mx-auto h-[500px] w-[300px] sm:h-[540px] sm:w-[340px] lg:h-[590px] lg:w-[390px] animate-float">
+              <div className="absolute inset-x-3 bottom-5 top-12 overflow-hidden rounded-[2.25rem] border border-primary/20 bg-[linear-gradient(180deg,hsl(43_86%_94%),hsl(39_78%_89%)_58%,hsl(186_50%_86%))] shadow-[0_30px_90px_-42px_rgba(8,47,73,0.7)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.75),transparent_36%),linear-gradient(135deg,rgba(255,255,255,0.36),transparent_55%)]" />
+                <div className="absolute inset-x-10 bottom-0 h-24 rounded-t-full bg-primary/20 blur-2xl" />
+              </div>
               <img
                 src={profileImg}
                 alt="Mahendra Prajapati portrait"
-                className="relative z-10 w-full h-full object-contain object-bottom drop-shadow-[0_28px_45px_rgba(0,0,0,0.38)]"
+                className="absolute inset-0 z-10 h-full w-full object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.45)]"
               />
             </div>
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute top-10 -left-6 glass rounded-2xl px-4 py-2 shadow-elegant">
+            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute left-5 top-24 rounded-2xl border border-primary/20 bg-background/85 px-4 py-2 shadow-elegant backdrop-blur-xl">
               <Code2 className="w-5 h-5 text-primary" />
             </motion.div>
-            <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-20 -right-4 glass rounded-2xl px-4 py-2 shadow-elegant">
+            <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-24 right-3 rounded-2xl border border-primary/20 bg-background/85 px-4 py-2 shadow-elegant backdrop-blur-xl">
               <Rocket className="w-5 h-5 text-primary" />
             </motion.div>
-            <motion.div animate={{ x: [0, 8, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute top-1/2 right-0 lg:-right-4 glass rounded-2xl px-3 py-2 shadow-elegant text-xs font-semibold">
-              MERN
+            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute bottom-10 left-1/2 -translate-x-1/2 rounded-2xl border border-primary/20 bg-background/90 px-4 py-2 text-xs font-semibold shadow-elegant backdrop-blur-xl">
+              MERN Stack
             </motion.div>
           </div>
         </motion.div>

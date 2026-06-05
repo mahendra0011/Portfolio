@@ -25,7 +25,7 @@ const items = [
     },
 ];
 const Education = () => {
-    return (<section id="education" className="py-24 bg-muted/30">
+    return (<section id="education" className="py-24 bg-muted/30 overflow-hidden">
       <div className="container">
         <SectionHeading eyebrow="Journey" title="Education & Experience"/>
 
