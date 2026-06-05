@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   CalendarCheck,
   ExternalLink,
@@ -11,10 +11,10 @@ import {
   Search,
   Star,
 } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 import { Button } from "@/components/ui/button";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import { selectProjectFilter, setProjectFilter } from "@/store/portfolioStore";
-import SectionHeading from "./SectionHeading";
 
 const projects = [
   {
@@ -86,11 +86,11 @@ const Projects = () => {
   );
 
   return (
-    <section id="projects" className="py-20 sm:py-24">
+    <section id="projects" className="py-24 relative">
       <div className="container">
-        <SectionHeading eyebrow="Projects" title="Featured Work" description="Selected full-stack and frontend projects with live demos." />
+        <SectionHeading eyebrow="Projects" title="Featured Work" description="A selection of things I've built recently" />
 
-        <div className="mb-9 flex flex-wrap justify-center gap-2">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {filters.map((item) => (
             <Button
               key={item}
@@ -98,67 +98,63 @@ const Projects = () => {
               size="sm"
               aria-pressed={filter === item}
               onClick={() => dispatch(setProjectFilter(item))}
-              className={filter === item ? "gradient-bg shadow-glow" : "bg-card/80"}
+              className={filter === item ? "gradient-bg shadow-glow" : ""}
             >
               {item}
             </Button>
           ))}
         </div>
 
-        <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, index) => (
               <SpotlightCard
                 key={project.title}
                 as={motion.article}
                 layout
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
-                whileHover={{ y: -5 }}
-                className={`group relative flex min-h-[360px] flex-col overflow-hidden rounded-lg border border-border/65 bg-card/90 p-4 shadow-sm transition-all hover:shadow-elegant ${
-                  project.featured && filter === "All" ? "lg:col-span-2" : ""
+                whileHover={{ y: -6 }}
+                className={`relative glass rounded-xl p-6 group hover:shadow-glow transition-all overflow-hidden flex flex-col min-h-[330px] ${
+                  project.featured ? "lg:col-span-2" : ""
                 }`}
               >
-                {project.image ? (
-                  <div className="mb-5 aspect-video overflow-hidden rounded-lg border border-border/60 bg-secondary/45">
+                <div className="absolute -inset-px gradient-bg opacity-0 group-hover:opacity-10 transition-opacity rounded-xl pointer-events-none" />
+                {project.image && (
+                  <div className="relative mb-5 aspect-video overflow-hidden rounded-lg border border-border/60 bg-muted/30">
                     <img
                       src={project.image}
                       alt={project.imageAlt}
                       loading="lazy"
                       className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                     />
-                  </div>
-                ) : (
-                  <div className="mb-5 flex aspect-video items-center justify-center rounded-lg border border-border/60 bg-secondary/45">
-                    <project.Icon className="h-12 w-12 text-primary" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
                   </div>
                 )}
-
-                <div className="mb-4 flex items-start justify-between gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <project.Icon className="h-5 w-5" />
+                <div className="flex items-start justify-between gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center shadow-glow">
+                    <project.Icon className="w-6 h-6 text-primary-foreground" />
                   </div>
                   <div className="flex flex-wrap justify-end gap-2">
-                    <span className="rounded-lg bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+                    <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
                       {project.category}
                     </span>
                     {project.featured && (
-                      <span className="inline-flex items-center gap-1 rounded-lg bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                        <Star className="h-3 w-3 fill-current" />
-                        Featured
+                      <span className="inline-flex items-center gap-1 rounded-full gradient-bg px-3 py-1 text-xs font-semibold text-primary-foreground">
+                        <Star className="w-3 h-3 fill-current" /> Featured
                       </span>
                     )}
                   </div>
                 </div>
 
-                <h3 className="mb-3 text-xl font-bold leading-tight">{project.title}</h3>
-                <p className="mb-5 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+                <h3 className="text-xl font-bold mb-3 group-hover:gradient-text transition-colors">{project.title}</h3>
+                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{project.description}</p>
 
-                <div className="mb-6 flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((tech) => (
-                    <span key={tech} className="rounded-lg border border-border/60 bg-background/65 px-2.5 py-1 text-xs font-medium text-muted-foreground">
+                    <span key={tech} className="text-xs px-2.5 py-1 rounded-full bg-secondary/80 text-secondary-foreground font-medium">
                       {tech}
                     </span>
                   ))}
@@ -166,10 +162,9 @@ const Projects = () => {
 
                 <div className="mt-auto flex flex-wrap gap-2">
                   {project.github && (
-                    <Button size="sm" variant="outline" asChild className="bg-card/80">
+                    <Button size="sm" variant="outline" asChild>
                       <a href={project.github} target="_blank" rel="noreferrer">
-                        <Github className="mr-1.5 h-4 w-4" />
-                        Code
+                        <Github className="w-4 h-4 mr-1.5" /> Code
                       </a>
                     </Button>
                   )}
@@ -180,8 +175,7 @@ const Projects = () => {
                         target={isExternal(project.demo) ? "_blank" : undefined}
                         rel={isExternal(project.demo) ? "noreferrer" : undefined}
                       >
-                        <ExternalLink className="mr-1.5 h-4 w-4" />
-                        {isExternal(project.demo) ? "Live" : "Preview"}
+                        <ExternalLink className="w-4 h-4 mr-1.5" /> {isExternal(project.demo) ? "Live" : "Preview"}
                       </a>
                     </Button>
                   )}

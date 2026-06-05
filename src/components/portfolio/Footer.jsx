@@ -1,37 +1,20 @@
-import { Github, Heart, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Heart } from "lucide-react";
 import { SiLeetcode } from "react-icons/si";
-
-const links = [
-  { Icon: Github, href: "https://github.com/mahendra0011", label: "GitHub" },
-  { Icon: Linkedin, href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b", label: "LinkedIn" },
-  { Icon: SiLeetcode, href: "https://leetcode.com/u/mahendra_0011/", label: "LeetCode" },
-  { Icon: Mail, href: "mailto:mahendrapra0077@gmail.com", label: "Email" },
-];
-
-const Footer = () => (
-  <footer className="border-t border-border/60 bg-card/80 py-8">
-    <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-      <p className="flex items-center gap-1.5 text-center text-sm text-muted-foreground">
-        Copyright {new Date().getFullYear()} Mahendra Prajapati. Built with
-        <Heart className="h-3.5 w-3.5 fill-current text-destructive" />
-        React.
+const Footer = () => (<footer className="border-t border-border/50 py-8 bg-background">
+    <div className="container flex flex-col md:flex-row items-center justify-between gap-4">
+      <p className="text-sm text-muted-foreground flex items-center gap-1.5">
+        © {new Date().getFullYear()} Mahendra Prajapati. Built with <Heart className="w-3.5 h-3.5 text-destructive fill-current"/> & React.
       </p>
       <div className="flex items-center gap-3">
-        {links.map(({ Icon, href, label }) => (
-          <a
-            key={label}
-            href={href}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={label}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/65 bg-card/80 text-muted-foreground transition-all hover:scale-105 hover:text-primary"
-          >
-            <Icon className="h-4 w-4" />
-          </a>
-        ))}
+        {[
+        { Icon: Github, href: "https://github.com/mahendra0011" },
+        { Icon: Linkedin, href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
+        { Icon: SiLeetcode, href: "https://leetcode.com/u/mahendra_0011/" },
+        { Icon: Mail, href: "mailto:mahendrapra0077@gmail.com" },
+    ].map(({ Icon, href }, i) => (<a key={i} href={href} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full glass flex items-center justify-center hover:text-primary hover:scale-110 transition-all">
+            <Icon className="w-4 h-4"/>
+          </a>))}
       </div>
     </div>
-  </footer>
-);
-
+  </footer>);
 export default Footer;

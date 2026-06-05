@@ -2,83 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Portfolio design tokens. All colors are HSL. */
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
 
 @layer base {
-  :root,
-  .dark {
-    --background: 42 70% 97%;
-    --foreground: 224 35% 14%;
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
-    --card: 44 75% 99%;
-    --card-foreground: 224 35% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 44 75% 99%;
-    --popover-foreground: 224 35% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 173 62% 32%;
-    --primary-foreground: 44 75% 99%;
-    --primary-glow: 176 55% 46%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 187 92% 55%;
 
-    --secondary: 205 50% 93%;
-    --secondary-foreground: 224 35% 18%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 42 45% 91%;
-    --muted-foreground: 218 17% 43%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 222 72% 52%;
-    --accent-foreground: 44 75% 99%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 76% 52%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 38 32% 80%;
-    --input: 38 32% 80%;
-    --ring: 173 62% 32%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 199 89% 48%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(173 62% 32%), hsl(222 72% 52%));
-    --gradient-accent: linear-gradient(135deg, hsl(222 72% 52%), hsl(36 86% 52%));
-    --gradient-hero: linear-gradient(145deg, hsl(44 75% 99%) 0%, hsl(42 70% 96%) 46%, hsl(205 50% 94%) 100%);
-    --shadow-glow: 0 18px 45px -20px hsl(173 62% 32% / 0.42);
-    --shadow-elegant: 0 22px 55px -30px hsl(224 35% 14% / 0.28);
+    --gradient-primary: linear-gradient(135deg, hsl(199 89% 48%), hsl(187 92% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(262 83% 58%), hsl(199 89% 48%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(199 89% 48% / 0.15), transparent 60%), radial-gradient(ellipse at bottom, hsl(262 83% 58% / 0.12), transparent 60%);
+    --shadow-glow: 0 10px 40px -10px hsl(199 89% 48% / 0.4);
+    --shadow-elegant: 0 20px 50px -20px hsl(222 47% 11% / 0.15);
     --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 44 75% 99%;
-    --sidebar-foreground: 224 35% 14%;
-    --sidebar-primary: 173 62% 32%;
-    --sidebar-primary-foreground: 44 75% 99%;
-    --sidebar-accent: 205 50% 93%;
-    --sidebar-accent-foreground: 224 35% 18%;
-    --sidebar-border: 38 32% 80%;
-    --sidebar-ring: 173 62% 32%;
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  .dark {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 187 92% 55%;
+    --primary-foreground: 222 47% 5%;
+    --primary-glow: 199 89% 60%;
+
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 262 83% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 187 92% 55%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(187 92% 55%), hsl(199 89% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(262 83% 65%), hsl(187 92% 55%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(187 92% 55% / 0.18), transparent 60%), radial-gradient(ellipse at bottom, hsl(262 83% 65% / 0.15), transparent 60%);
+    --shadow-glow: 0 10px 50px -10px hsl(187 92% 55% / 0.5);
+    --shadow-elegant: 0 20px 50px -20px hsl(0 0% 0% / 0.5);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
   * {
     @apply border-border;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  html,
-  body,
-  #root {
-    min-width: 0;
-    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "cv11";
-    background-image: var(--gradient-hero);
-    background-attachment: fixed;
   }
 
-  section {
-    scroll-margin-top: 4.5rem;
+  html {
+    scroll-behavior: smooth;
   }
 }
 
@@ -87,37 +130,26 @@
     @apply bg-clip-text text-transparent;
     background-image: var(--gradient-primary);
   }
-
   .gradient-bg {
     background-image: var(--gradient-primary);
   }
-
   .hero-bg {
     background-image: var(--gradient-hero);
   }
-
   .glass {
-    @apply backdrop-blur-xl bg-card/90 border border-border/60;
+    @apply backdrop-blur-xl bg-background/60 border border-border/50;
   }
-
-  .section-band {
-    @apply bg-secondary/35 border-y border-border/50;
-  }
-
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
-
   .shadow-elegant {
     box-shadow: var(--shadow-elegant);
   }
-
   .reactbits-spotlight {
     --spotlight-x: 50%;
     --spotlight-y: 50%;
     isolation: isolate;
   }
-
   .reactbits-spotlight::before {
     content: "";
     position: absolute;
@@ -125,19 +157,17 @@
     z-index: 0;
     border-radius: inherit;
     background: radial-gradient(
-      360px circle at var(--spotlight-x) var(--spotlight-y),
-      hsl(var(--primary) / 0.14),
-      transparent 52%
+      420px circle at var(--spotlight-x) var(--spotlight-y),
+      hsl(var(--primary) / 0.2),
+      transparent 48%
     );
     opacity: 0;
     pointer-events: none;
     transition: opacity 220ms ease;
   }
-
   .reactbits-spotlight:hover::before {
     opacity: 1;
   }
-
   .reactbits-spotlight > * {
     position: relative;
     z-index: 1;
