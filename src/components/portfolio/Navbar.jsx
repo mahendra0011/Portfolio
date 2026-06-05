@@ -6,19 +6,20 @@ import { Button } from "@/components/ui/button";
 const links = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
-    { name: "Experience", href: "#experience" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
-    { name: "Achievements", href: "#achievements" },
-    { name: "Certifications", href: "#certifications" },
-    { name: "Resume", href: "#resume" },
+    { name: "Experience", href: "#experience" },
     { name: "Education", href: "#education" },
+    { name: "Achievements", href: "#achievements" },
     { name: "Contact", href: "#contact" },
+    { name: "Resume", href: "/resume", button: true },
 ];
 const Navbar = () => {
     const { theme, toggle } = useTheme();
     const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
+    const isHomePage = typeof window === "undefined" || window.location.pathname === "/";
+    const resolveHref = (href) => href.startsWith("#") && !isHomePage ? `/${href}` : href;
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 30);
         window.addEventListener("scroll", onScroll);
@@ -26,12 +27,12 @@ const Navbar = () => {
     }, []);
     return (<motion.header initial={{ y: -80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "glass shadow-elegant" : "bg-transparent"}`}>
       <nav className="container flex items-center justify-between h-16">
-        <a href="#home" className="text-xl font-bold gradient-text">&lt;Mahendra /&gt;</a>
+        <a href={isHomePage ? "#home" : "/"} className="text-xl font-bold gradient-text">&lt;Mahendra /&gt;</a>
         <ul className="hidden lg:flex items-center gap-6">
           {links.map((l) => (<li key={l.name}>
-              <a href={l.href} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group">
+              <a href={resolveHref(l.href)} className={`text-sm font-medium transition-colors relative group ${l.button ? "rounded-md gradient-bg px-3 py-2 text-primary-foreground shadow-glow hover:scale-105" : "text-muted-foreground hover:text-foreground"}`}>
                 {l.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 gradient-bg group-hover:w-full transition-all duration-300"/>
+                {!l.button && <span className="absolute -bottom-1 left-0 w-0 h-0.5 gradient-bg group-hover:w-full transition-all duration-300"/>}
               </a>
             </li>))}
         </ul>
@@ -46,7 +47,7 @@ const Navbar = () => {
       </nav>
       {open && (<motion.ul initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="lg:hidden glass border-t border-border/50 px-6 py-4 space-y-3">
           {links.map((l) => (<li key={l.name}>
-              <a href={l.href} onClick={() => setOpen(false)} className="block py-2 text-sm font-medium">
+              <a href={resolveHref(l.href)} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium ${l.button ? "rounded-md gradient-bg px-3 text-center text-primary-foreground shadow-glow" : ""}`}>
                 {l.name}
               </a>
             </li>))}

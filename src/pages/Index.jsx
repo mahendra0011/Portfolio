@@ -7,7 +7,6 @@ import Projects from "@/components/portfolio/Projects";
 import Experience from "@/components/portfolio/Experience";
 import Education from "@/components/portfolio/Education";
 import Achievements from "@/components/portfolio/Achievements";
-import Certifications from "@/components/portfolio/Certifications";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
 const Index = () => (<div className="min-h-screen bg-background text-foreground">
@@ -21,7 +20,6 @@ const Index = () => (<div className="min-h-screen bg-background text-foreground"
       <Experience />
       <Education />
       <Achievements />
-      <Certifications />
       <Contact />
     </main>
     <Footer />
