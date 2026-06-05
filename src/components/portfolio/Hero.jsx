@@ -30,31 +30,45 @@ const heroStats = [
 
 const Typewriter = () => {
   const [text, setText] = useState("");
-  const [i, setI] = useState(0);
-  const [del, setDel] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [phase, setPhase] = useState("typing");
 
   useEffect(() => {
-    const current = roles[i % roles.length];
+    const current = roles[roleIndex];
+    const isTyping = phase === "typing";
+    const isDeleting = phase === "deleting";
+    const delay = isTyping ? 85 : isDeleting ? 42 : 1200;
+
     const timer = setTimeout(() => {
-      if (!del) {
-        setText(current.slice(0, text.length + 1));
-        if (text === current) setTimeout(() => setDel(true), 1500);
-      } else {
-        setText(current.slice(0, text.length - 1));
-        if (text === "") {
-          setDel(false);
-          setI(i + 1);
+      if (isTyping) {
+        if (text.length < current.length) {
+          setText(current.slice(0, text.length + 1));
+        } else {
+          setPhase("holding");
         }
+        return;
       }
-    }, del ? 50 : 90);
+
+      if (isDeleting) {
+        if (text.length > 0) {
+          setText(current.slice(0, text.length - 1));
+        } else {
+          setRoleIndex((index) => (index + 1) % roles.length);
+          setPhase("typing");
+        }
+        return;
+      }
+
+      setPhase("deleting");
+    }, delay);
 
     return () => clearTimeout(timer);
-  }, [text, del, i]);
+  }, [text, phase, roleIndex]);
 
   return (
-    <span className="gradient-text">
-      {text}
-      <span className="inline-block w-[3px] h-[1em] bg-primary ml-1 align-middle animate-blink" />
+    <span className="inline-block max-w-full align-baseline gradient-text">
+      <span className="break-words">{text}</span>
+      <span aria-hidden="true" className="inline-block h-[1em] w-[3px] bg-primary ml-1 align-middle animate-blink" />
     </span>
   );
 };
