@@ -114,7 +114,7 @@ All colors MUST be HSL.
   *,
   *::before,
   *::after {
-    cursor: url("/cursor-arrow.svg") 8 5, auto !important;
+    cursor: url("/cursor-arrow.svg") 5 3, auto !important;
   }
 
   * {
