@@ -121,6 +121,8 @@ All colors MUST be HSL.
   button,
   [role="button"],
   input[type="button"],
+  input[type="checkbox"],
+  input[type="radio"],
   input[type="submit"],
   input[type="reset"],
   select,
