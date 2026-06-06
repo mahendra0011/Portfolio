@@ -66,7 +66,7 @@ const About = () => {
               <p>
                 I'm <span className="text-foreground font-semibold">Mahendra Prajapati</span>, currently pursuing
                 <span className="text-foreground font-semibold"> B.Tech in Electronics & Communication Engineering</span> at
-                Shri Ram Institute of Technology, Jabalpur (M.P.) - CGPA 7.0/10.
+                Shri Ram Institute of Technology, Jabalpur (M.P.) - CGPA 7.1/10.
               </p>
               <p>
                 I'm a passionate <span className="gradient-text font-semibold">Full Stack Developer</span> who loves building

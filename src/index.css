@@ -212,9 +212,21 @@ All colors MUST be HSL.
     transform-origin: top center;
     box-shadow: 0 0 24px hsl(var(--primary) / 0.24);
   }
+  :root:not(.dark) .education-timeline-line {
+    background-image: none;
+    background-color: hsl(0 0% 0%);
+    box-shadow: 0 0 18px hsl(0 0% 0% / 0.22);
+  }
   .education-timeline-dot {
     isolation: isolate;
     transform-origin: center;
+  }
+  :root:not(.dark) .education-timeline-dot {
+    background-image: none;
+    background-color: hsl(0 0% 0%);
+  }
+  :root:not(.dark) .education-timeline-dot svg {
+    color: hsl(0 0% 100%);
   }
   .education-timeline-dot::before {
     content: "";
@@ -225,6 +237,9 @@ All colors MUST be HSL.
     border: 1px solid hsl(var(--primary) / 0.34);
     opacity: 0.72;
     animation: education-dot-pulse 2.4s ease-out infinite;
+  }
+  :root:not(.dark) .education-timeline-dot::before {
+    border-color: hsl(0 0% 0% / 0.28);
   }
   .glass {
     @apply border border-white/70 backdrop-blur-2xl;

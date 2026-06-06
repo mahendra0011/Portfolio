@@ -10,7 +10,7 @@ const items = [
         period: "2023 — 2027",
         title: "B.Tech — Electronics & Communication Engineering",
         place: "Shri Ram Institute of Technology, Jabalpur (M.P.)",
-        description: "Currently pursuing with CGPA 7.0/10 while building real-world full-stack MERN projects.",
+        description: "Currently pursuing with CGPA 7.1/10 while building real-world full-stack MERN projects.",
     },
     {
         icon: School,
