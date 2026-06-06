@@ -17,11 +17,11 @@ const roles = [
 const socialLinks = [
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/mahendra0011" },
   { Icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
-  { Icon: FaXTwitter, label: "X", href: "https://x.com/mahendra0011" },
-  { Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@mahendra0011" },
-  { Icon: FaTelegram, label: "Telegram", href: "https://t.me/mahendra0011" },
   { Icon: Mail, label: "Mail", href: "mailto:mahendrapra0077@gmail.com" },
-  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/mahendra0011" },
+  { Icon: FaTelegram, label: "Telegram", href: "https://t.me/Mahi00776" },
+  { Icon: FaXTwitter, label: "X", href: "https://x.com/mahendra0011" },
+  { Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@Mahendraprajapati-bt1bd" },
+  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/_mahendra._07?utm_source=qr&igsh=c2dpamNndnR6bDQ4" },
 ];
 
 const Typewriter = () => {
