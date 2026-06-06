@@ -177,7 +177,7 @@ const Skills = () => {
   return (
     <section ref={sectionRef} id="skills" className="section-grid section-grid-soft py-24 bg-muted/30 relative overflow-hidden">
       <div className="container relative z-10">
-        <SectionHeading eyebrow="Skills" title="Tools & Technologies" description="The stack I use to bring ideas to life" />
+        <SectionHeading eyebrow="Skills" title="Technologies I work with" description="The stack I use to bring ideas to life" />
 
         <div className="mx-auto max-w-7xl space-y-12">
           {groups.map((group, groupIndex) => (

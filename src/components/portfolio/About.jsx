@@ -5,7 +5,7 @@ import SectionHeading from "./SectionHeading";
 
 const stats = [
   { icon: Code2, value: 10, label: "Projects Built", suffix: "+" },
-  { icon: Rocket, value: 900, label: "GitHub Commits", suffix: "+" },
+  { icon: Rocket, value: 1000, label: "GitHub Commits", suffix: "+" },
   { icon: Coffee, value: 50, label: "Technologies", suffix: "+" },
 ];
 
@@ -77,7 +77,7 @@ const About = () => {
               </p>
               <p>
                 I led my team in the <span className="text-foreground font-semibold">Smart India Hackathon</span> internal round,
-                have solved 100+ DSA problems in C++, and have shipped 900+ GitHub commits while learning modern web and cloud tools.
+                have solved 100+ DSA problems in C++, and have shipped 1000+ GitHub commits while learning modern web and cloud tools.
               </p>
             </div>
 

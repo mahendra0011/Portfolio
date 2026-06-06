@@ -20,7 +20,7 @@ const items = [
   },
   {
     Icon: GitBranch,
-    title: "900+ GitHub Commits",
+    title: "1000+ GitHub Commits",
     description: "Consistently shipping code across personal and full-stack project repositories.",
   },
 ];
