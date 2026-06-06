@@ -9,11 +9,11 @@ const Footer = () => (<footer className="border-t border-border/50 py-8 bg-backg
         {[
         { Icon: FaGithub, href: "https://github.com/mahendra0011" },
         { Icon: FaLinkedin, href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
-        { Icon: FaXTwitter, href: "https://x.com/mahendra0011" },
-        { Icon: FaYoutube, href: "https://www.youtube.com/@mahendra0011" },
-        { Icon: FaTelegram, href: "https://t.me/mahendra0011" },
         { Icon: Mail, href: "mailto:mahendrapra0077@gmail.com" },
-        { Icon: FaInstagram, href: "https://www.instagram.com/mahendra0011" },
+        { Icon: FaTelegram, href: "https://t.me/Mahi00776" },
+        { Icon: FaXTwitter, href: "https://x.com/mahendra0011" },
+        { Icon: FaYoutube, href: "https://www.youtube.com/@Mahendraprajapati-bt1bd" },
+        { Icon: FaInstagram, href: "https://www.instagram.com/_mahendra._07?utm_source=qr&igsh=c2dpamNndnR6bDQ4" },
     ].map(({ Icon, href }, i) => (<a key={i} href={href} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full glass flex items-center justify-center hover:text-primary hover:scale-110 transition-all">
             <Icon className="w-4 h-4"/>
           </a>))}
