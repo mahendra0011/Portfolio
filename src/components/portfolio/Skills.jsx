@@ -49,6 +49,7 @@ import {
   SiReactrouter,
   SiRecoil,
   SiRedis,
+  SiRender,
   SiRedux,
   SiSendgrid,
   SiServerless,
@@ -56,6 +57,7 @@ import {
   SiSocketdotio,
   SiSupabase,
   SiTailwindcss,
+  SiVercel,
   SiWebrtc,
 } from "react-icons/si";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
@@ -122,6 +124,8 @@ const groups = [
       { name: "GitHub Actions", Icon: SiGithubactions, color: "#2088FF" },
       { name: "Docker", Icon: SiDocker, color: "#2496ED" },
       { name: "Nginx", Icon: SiNginx, color: "#009639" },
+      { name: "Vercel", Icon: SiVercel, color: "currentColor" },
+      { name: "Render", Icon: SiRender, color: "#46E3B7" },
       { name: "AWS", Icon: CloudCog, color: "#FF9900" },
       { name: "Google Cloud", Icon: SiGooglecloud, color: "#4285F4" },
       { name: "VPS", Icon: Server, color: "#64748B" },
