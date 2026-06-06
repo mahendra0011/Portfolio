@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import { Mail, Send } from "lucide-react";
-import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { BriefcaseBusiness, Clock3, Mail, MapPin, Send } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,15 +13,14 @@ const schema = z.object({
     email: z.string().trim().email("Invalid email").max(255),
     message: z.string().trim().min(10, "Message must be at least 10 characters").max(1000),
 });
-const socials = [
-    { Icon: Mail, label: "Gmail", value: "mahendrapra0077@gmail.com", href: "mailto:mahendrapra0077@gmail.com" },
-    { Icon: FaLinkedin, label: "LinkedIn", value: "/in/mahendra-prajapati-73163930b", href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
-    { Icon: FaGithub, label: "GitHub", value: "@mahendra0011", href: "https://github.com/mahendra0011" },
-    { Icon: FaXTwitter, label: "X / Twitter", value: "@mahendra0011", href: "https://x.com/mahendra0011" },
-    { Icon: FaYoutube, label: "YouTube", value: "@mahendra0011", href: "https://www.youtube.com/@mahendra0011" },
-    { Icon: FaTelegram, label: "Telegram", value: "@mahendra0011", href: "https://t.me/mahendra0011" },
-    { Icon: FaInstagram, label: "Instagram", value: "@mahendra0011", href: "https://www.instagram.com/mahendra0011" },
+
+const contactDetails = [
+    { Icon: Mail, label: "Email", value: "mahendrapra0077@gmail.com" },
+    { Icon: MapPin, label: "Location", value: "Jabalpur, Madhya Pradesh" },
+    { Icon: BriefcaseBusiness, label: "Open to", value: "Internships, freelance work, and MERN projects" },
+    { Icon: Clock3, label: "Response", value: "Usually within 24-48 hours" },
 ];
+
 const Contact = () => {
     const [form, setForm] = useState({ name: "", email: "", message: "" });
     const [errors, setErrors] = useState({});
@@ -44,25 +42,49 @@ const Contact = () => {
             setLoading(false);
         }, 800);
     };
-    return (<section id="contact" className="py-24 relative overflow-hidden">
-      <div className="container relative">
-        <SectionHeading eyebrow="Contact" title="Let's Build Together" description="Have a project in mind or want to chat? Drop a message."/>
+    return (<section id="contact" className="section-grid section-grid-soft py-24 relative overflow-hidden">
+      <div className="container relative z-10">
+        <SectionHeading eyebrow="Contact" title="Professional Inquiries" description="For project work, internships, or collaboration, send a concise message with the key details."/>
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-3">
-            <h3 className="text-2xl font-bold mb-4">Get in touch</h3>
-            {socials.map((s, i) => (<motion.a key={s.label} href={s.href} target="_blank" rel="noreferrer" whileHover={{ x: 6 }} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="flex items-center gap-4 glass rounded-2xl p-4 hover:shadow-glow transition-all group">
-                <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <s.Icon className="w-5 h-5 text-primary-foreground"/>
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">{s.label}</div>
-                  <div className="font-semibold">{s.value}</div>
-                </div>
-              </motion.a>))}
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="glass rounded-2xl p-6 md:p-8">
+            <div className="mb-7">
+              <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+                Available for selected opportunities
+              </span>
+              <h3 className="mt-4 text-2xl font-bold">Start a focused conversation</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Share the project goal, expected timeline, and the support you need. I will review it and reply by email.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {contactDetails.map(({ Icon, label, value }, index) => (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: index * 0.06 }}
+                  className="flex gap-4 border-t border-border/60 pt-4 first:border-t-0 first:pt-0"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl gradient-bg shadow-glow">
+                    <Icon className="h-5 w-5 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
+                    <div className="mt-1 font-semibold text-foreground">{value}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
           <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="glass rounded-2xl p-6 space-y-4">
+            <div>
+              <h3 className="text-2xl font-bold">Send a message</h3>
+              <p className="mt-2 text-sm text-muted-foreground">A brief, clear note helps me respond with the right next step.</p>
+            </div>
             <div>
               <Label htmlFor="name">Name</Label>
               <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" maxLength={100}/>

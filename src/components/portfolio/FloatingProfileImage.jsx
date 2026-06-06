@@ -162,7 +162,7 @@ const FloatingProfileImage = () => {
           src={profileImg}
           alt="Mahendra Prajapati portrait"
           decoding="async"
-          fetchPriority="high"
+          fetchpriority="high"
           draggable="false"
           className="h-full w-full select-none object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
         />

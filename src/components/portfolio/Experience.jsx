@@ -22,8 +22,8 @@ const points = [
 ];
 
 const Experience = () => (
-  <section id="experience" className="py-24 bg-muted/30 relative">
-    <div className="container">
+  <section id="experience" className="section-grid section-grid-soft py-24 bg-muted/30 relative overflow-hidden">
+    <div className="container relative z-10">
       <SectionHeading eyebrow="Experience" title="Professional Exposure" description="Hands-on learning from railway communication and telecom operations." />
 
       <motion.article

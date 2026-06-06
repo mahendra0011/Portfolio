@@ -5,6 +5,7 @@ import { Download, Mail, FolderGit2 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/reactbits/MagneticButton";
+import { handleHashLinkClick } from "@/lib/scrollToHash";
 
 const roles = [
   "React developer",
@@ -90,7 +91,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center bg-background overflow-hidden pt-20">
+    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
         {socialLinks.map(({ Icon, label, href }) => (
           <MagneticButton key={label} strength={0.12}>
@@ -106,6 +107,13 @@ const Hero = () => {
             </a>
           </MagneticButton>
         ))}
+      </div>
+
+      <div data-scroll-parallax="-90" data-scroll-trigger="#home" className="absolute top-20 -left-20 h-72 w-72 will-change-transform">
+        <div className="h-full w-full rounded-full bg-primary/30 blur-3xl animate-blob" />
+      </div>
+      <div data-scroll-parallax="70" data-scroll-trigger="#home" className="absolute bottom-10 -right-10 h-96 w-96 will-change-transform">
+        <div className="h-full w-full rounded-full bg-accent/30 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
       </div>
 
       <div className="container grid lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 gap-12 items-center relative z-10 py-12 lg:pb-0 xl:pl-24">
@@ -131,14 +139,14 @@ const Hero = () => {
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <MagneticButton className="hero-action w-full sm:w-auto">
               <Button size="lg" asChild className="group w-full gradient-bg shadow-glow transition-transform sm:w-auto">
-                <a href="#projects">
+                <a href="#projects" onClick={(event) => handleHashLinkClick(event, "#projects")}>
                   <FolderGit2 className="mr-2 h-4 w-4 transition-transform group-hover:-rotate-6" /> View Projects
                 </a>
               </Button>
             </MagneticButton>
             <MagneticButton className="hero-action w-full sm:w-auto">
               <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden transition-transform sm:w-auto">
-                <a href="#contact">
+                <a href="#contact" onClick={(event) => handleHashLinkClick(event, "#contact")}>
                   <Mail className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> Contact Me
                 </a>
               </Button>
@@ -171,6 +179,9 @@ const Hero = () => {
 
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:h-full lg:self-end lg:justify-end lg:items-end">
           <div className="relative w-full max-w-[470px] min-h-[540px] sm:min-h-[610px] lg:min-h-[calc(100vh-5rem)]">
+            <div className="absolute inset-y-0 left-0 right-2 opacity-60 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.18)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.13)_1px,transparent_1px)] [background-size:34px_34px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
+            <div className="absolute left-8 top-[24%] h-44 w-48 opacity-45 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.76)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
+            <div className="absolute bottom-20 right-4 h-48 w-52 opacity-35 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.76)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
             <div
               id="hero-photo-anchor"
               aria-hidden="true"

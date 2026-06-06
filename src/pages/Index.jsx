@@ -9,7 +9,14 @@ import Education from "@/components/portfolio/Education";
 import Achievements from "@/components/portfolio/Achievements";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
-const Index = () => (<div className="min-h-screen bg-background text-foreground">
+import ScrollProgress from "@/components/portfolio/ScrollProgress";
+import { useScrollAnimations } from "@/hooks/useScrollAnimations";
+
+const Index = () => {
+  useScrollAnimations();
+
+  return (<div className="min-h-screen bg-background text-foreground">
+    <ScrollProgress />
     <Navbar />
     <FloatingProfileImage />
     <main>
@@ -24,4 +31,6 @@ const Index = () => (<div className="min-h-screen bg-background text-foreground"
     </main>
     <Footer />
   </div>);
+};
+
 export default Index;

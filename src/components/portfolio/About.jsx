@@ -40,7 +40,7 @@ const Counter = ({ to, suffix }) => {
 
 const About = () => {
   return (
-    <section id="about" className="py-24 relative overflow-hidden lg:min-h-[92vh]">
+    <section id="about" className="section-grid section-grid-soft py-24 relative overflow-hidden lg:min-h-[92vh]">
       <div className="container">
         <SectionHeading eyebrow="About Me" title="Crafting Digital Experiences" />
 
