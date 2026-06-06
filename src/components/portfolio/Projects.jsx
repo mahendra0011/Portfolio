@@ -32,7 +32,7 @@ const projects = [
       "Event booking platform for public discovery, ticket booking with OTP verification, host dashboards, attendee messaging, support tickets, admin controls, reports and Render-ready deployment.",
     tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "OTP", "Reports"],
     github: "https://github.com/mahendra0011/EventO",
-    demo: "https://enento.onrender.com",
+    demo: "http://evento-1645479696.us-east-2.elb.amazonaws.com/",
     image: "/projects/evento.png",
     icon: "/projects/icons/evento.png",
     imageAlt: "EventO event booking platform landing page screenshot",
@@ -42,6 +42,8 @@ const projects = [
     description:
       "Smart India Hackathon 2025 mental wellness solution with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
     tech: ["JavaScript", "React", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Payments"],
+    github: "https://github.com/mahendra0011/mindSupport",
+    demo: "https://mindsupport-1.onrender.com/",
     event: "Smart India Hackathon 2025",
     image: "/projects/mindsupport.png",
     icon: "/projects/icons/mindsupport.png",
@@ -52,6 +54,8 @@ const projects = [
     description:
       "Full-stack movie ticket booking platform for browsing movies, coming-soon releases, seat selection, ticket booking, theater management and admin or owner workflows.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Cloudinary", "JWT"],
+    github: "https://github.com/mahendra0011/movix",
+    demo: "https://movix-p8ez.onrender.com",
     image: "/projects/movix.png",
     icon: "/projects/icons/movix.png",
     imageAlt: "MoviX movie ticket booking platform landing page screenshot",
@@ -61,6 +65,8 @@ const projects = [
     description:
       "Room rental marketplace for students, interns, job seekers and movers. Seekers compare PGs, hostels, flats and rooms while owners publish listings using city, area, landmark, title, amenities, rules and descriptions.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Search", "Marketplace"],
+    github: "https://github.com/mahendra0011/RentPE",
+    demo: "https://rentpe-j7bq.onrender.com",
     image: "/projects/rentpe.png",
     icon: "/projects/icons/rentpe.png",
     imageAlt: "RentPE room rental marketplace landing page screenshot",
@@ -70,6 +76,7 @@ const projects = [
     description:
       "Privacy-focused anonymous chat platform with encrypted messaging, real-time Socket.IO rooms, media sharing, temporary chat rooms, PWA and Android support, deep links and QR invites.",
     tech: ["React", "Express.js", "Socket.IO", "MongoDB", "PWA", "Android"],
+    github: "https://github.com/mahendra0011/TempTalk",
     demo: "https://temptalk-1.onrender.com",
     image: "/projects/temptalk.png",
     icon: "/projects/icons/temptalk.png",
@@ -80,6 +87,8 @@ const projects = [
     description:
       "AI-powered study platform using Gemini AI to generate structured notes, summarize PDFs and YouTube lectures, manage study tasks and organize personalized content libraries with secure authentication.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Gemini AI", "PDF", "YouTube"],
+    github: "https://github.com/mahendra0011/StudyBuddy",
+    demo: "https://studybuddy-86s2.onrender.com",
     image: "/projects/studybuddy.png",
     icon: "/projects/icons/studybuddy.png",
     imageAlt: "StudyBuddy AI study platform landing page screenshot",
