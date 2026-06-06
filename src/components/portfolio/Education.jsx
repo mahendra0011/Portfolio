@@ -25,8 +25,8 @@ const items = [
     },
 ];
 const Education = () => {
-    return (<section id="education" className="py-24 bg-muted/30 overflow-hidden">
-      <div className="container">
+    return (<section id="education" className="section-grid relative py-24 bg-muted/30 overflow-hidden">
+      <div className="container relative z-10">
         <SectionHeading eyebrow="Journey" title="Education"/>
 
         <div className="relative max-w-3xl mx-auto">

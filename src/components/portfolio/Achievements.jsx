@@ -26,8 +26,8 @@ const items = [
 ];
 
 const Achievements = () => (
-  <section id="achievements" className="py-24 relative">
-    <div className="container">
+  <section id="achievements" className="section-grid py-24 relative overflow-hidden">
+    <div className="container relative z-10">
       <SectionHeading eyebrow="Achievements" title="Milestones & Recognition" description="Highlights from my journey so far" />
       <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {items.map((item, i) => (

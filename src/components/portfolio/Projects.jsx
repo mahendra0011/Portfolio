@@ -139,7 +139,7 @@ const Projects = () => {
   }, [showAll, visibleProjects.length]);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-24 relative overflow-hidden">
+    <section id="projects" ref={sectionRef} className="section-grid py-24 relative overflow-hidden">
         <div className="container relative">
         <SectionHeading eyebrow="Projects" title="Featured Work" description="A selection of things I've built recently" />
 

@@ -31,8 +31,8 @@ const certs = [
 ];
 
 const Certifications = () => (
-  <section id="certifications" className="py-24 bg-muted/30 relative">
-    <div className="container">
+  <section id="certifications" className="section-grid py-24 bg-muted/30 relative overflow-hidden">
+    <div className="container relative z-10">
       <SectionHeading
         eyebrow="Certifications"
         title="Learning & Credentials"
