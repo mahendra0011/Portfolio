@@ -153,6 +153,167 @@ All colors MUST be HSL.
   }
 }
 
+@layer components {
+  .portfolio-page {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
+    background: transparent;
+  }
+
+  .about-luca-background {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+    background: transparent;
+  }
+
+  .about-luca-background iframe,
+  .about-luca-background canvas {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100svh;
+  }
+
+  .about-luca-background canvas {
+    background: hsl(var(--background));
+  }
+
+  .about-luca-background iframe {
+    border: 0;
+    opacity: 1;
+    filter: invert(26%) sepia(88%) saturate(2800%) hue-rotate(226deg) brightness(86%) contrast(126%)
+      drop-shadow(0 0 2.5px hsl(244 86% 58% / 0.34));
+  }
+
+  .dark .about-luca-background iframe {
+    opacity: 1;
+    filter: brightness(1.16) contrast(1.18) saturate(1.02);
+  }
+
+  .portfolio-surface-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    min-height: 100%;
+    pointer-events: none;
+    background-image:
+      linear-gradient(60deg, hsl(220 18% 16% / 0.04) 1px, transparent 1px),
+      linear-gradient(120deg, hsl(220 18% 16% / 0.035) 1px, transparent 1px),
+      linear-gradient(0deg, hsl(220 18% 16% / 0.022) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(var(--background) / 0.52), hsl(var(--background) / 0.38) 42%, hsl(var(--background) / 0.58));
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+    background-size:
+      44px 76px,
+      44px 76px,
+      44px 76px,
+      auto;
+  }
+
+  .portfolio-surface-overlay::before,
+  .portfolio-surface-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .portfolio-surface-overlay::before {
+    background:
+      repeating-linear-gradient(
+        180deg,
+        transparent 0,
+        transparent 620px,
+        hsl(var(--background) / 0.36) 760px,
+        transparent 1040px
+      );
+    opacity: 0.58;
+  }
+
+  .portfolio-surface-overlay::after {
+    background:
+      linear-gradient(90deg, transparent 0%, hsl(14 92% 58% / 0.055) 50%, transparent 100%),
+      repeating-linear-gradient(
+        180deg,
+        transparent 0,
+        transparent 900px,
+        hsl(14 92% 58% / 0.035) 901px,
+        transparent 1040px
+      );
+    opacity: 0.52;
+  }
+
+  .dark .portfolio-surface-overlay {
+    background-image:
+      linear-gradient(60deg, hsl(0 0% 100% / 0.045) 1px, transparent 1px),
+      linear-gradient(120deg, hsl(0 0% 100% / 0.038) 1px, transparent 1px),
+      linear-gradient(0deg, hsl(0 0% 100% / 0.022) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(var(--background) / 0.34), hsl(var(--background) / 0.24) 46%, hsl(var(--background) / 0.38));
+  }
+
+  .dark .portfolio-surface-overlay::before {
+    background:
+      repeating-linear-gradient(
+        180deg,
+        transparent 0,
+        transparent 620px,
+        hsl(var(--background) / 0.4) 760px,
+        transparent 1040px
+      );
+    opacity: 0.72;
+  }
+
+  .dark .portfolio-surface-overlay::after {
+    background:
+      linear-gradient(90deg, transparent 0%, hsl(244 86% 72% / 0.07) 50%, transparent 100%),
+      repeating-linear-gradient(
+        180deg,
+        transparent 0,
+        transparent 900px,
+        hsl(244 86% 72% / 0.045) 901px,
+        transparent 1040px
+      );
+    opacity: 0.55;
+  }
+
+  .portfolio-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .portfolio-page #home.hero-bg,
+  .portfolio-page section.bg-muted\/30,
+  .portfolio-page .portfolio-footer {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  .portfolio-page .section-grid::before,
+  .portfolio-page #home [data-scroll-parallax] {
+    display: none !important;
+  }
+
+  .portfolio-page .glass {
+    border-color: hsl(0 0% 100% / 0.7);
+    background-color: hsl(0 0% 100% / 0.58);
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.72), 0 18px 48px -32px hsl(217 96% 55% / 0.36);
+  }
+
+  .dark .portfolio-page .glass {
+    border-color: hsl(0 0% 100% / 0.14);
+    background-color: hsl(222 47% 6% / 0.48);
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 20px 56px -28px hsl(0 0% 0% / 0.68);
+  }
+}
+
 @layer utilities {
   .gradient-text {
     @apply bg-clip-text text-transparent;

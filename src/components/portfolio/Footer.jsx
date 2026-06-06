@@ -1,6 +1,6 @@
 import { Mail, Heart } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
-const Footer = () => (<footer className="border-t border-border/50 py-8 bg-background">
+const Footer = () => (<footer className="portfolio-footer border-t border-border/50 py-8 bg-background">
     <div className="container flex flex-col md:flex-row items-center justify-between gap-4">
       <p className="text-sm text-muted-foreground flex items-center gap-1.5">
         © {new Date().getFullYear()} Mahendra Prajapati. Built with <Heart className="w-3.5 h-3.5 text-destructive fill-current"/> & React.

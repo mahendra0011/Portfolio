@@ -9,25 +9,30 @@ import Education from "@/components/portfolio/Education";
 import Achievements from "@/components/portfolio/Achievements";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
+import AboutLucaBackground from "@/components/portfolio/AboutLucaBackground";
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 
 const Index = () => {
   useScrollAnimations();
 
-  return (<div className="min-h-screen bg-background text-foreground">
-    <Navbar />
-    <FloatingProfileImage />
-    <main>
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Education />
-      <Achievements />
-      <Contact />
-    </main>
-    <Footer />
+  return (<div className="portfolio-page min-h-screen text-foreground">
+    <AboutLucaBackground />
+    <div className="portfolio-surface-overlay" aria-hidden="true" />
+    <div className="portfolio-content">
+      <Navbar />
+      <FloatingProfileImage />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Education />
+        <Achievements />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   </div>);
 };
 
