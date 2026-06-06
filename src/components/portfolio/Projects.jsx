@@ -40,8 +40,9 @@ const projects = [
   {
     title: "MindSupport - Mental Wellness Platform",
     description:
-      "JavaScript-only, MongoDB-only counselling platform with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
+      "Smart India Hackathon 2025 mental wellness solution with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
     tech: ["JavaScript", "React", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Payments"],
+    event: "Smart India Hackathon 2025",
     image: "/projects/mindsupport.png",
     icon: "/projects/icons/mindsupport.png",
     imageAlt: "MindSupport mental wellness platform landing page screenshot",
@@ -178,6 +179,11 @@ const Projects = () => {
                     {project.featured && (
                       <span className="inline-flex items-center gap-1 rounded-full gradient-bg px-3 py-1 text-xs font-semibold text-primary-foreground">
                         <Star className="w-3 h-3 fill-current" /> Featured
+                      </span>
+                    )}
+                    {project.event && (
+                      <span className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                        <Sparkles className="w-3 h-3" /> {project.event}
                       </span>
                     )}
                   </div>
