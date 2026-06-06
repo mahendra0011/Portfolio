@@ -3,16 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  CalendarCheck,
-  BookOpen,
   ExternalLink,
-  Film,
   Github,
-  HeartPulse,
-  Home,
-  Hospital,
-  MessageCircle,
-  Search,
   Star,
   Sparkles,
 } from "lucide-react";
@@ -30,8 +22,8 @@ const projects = [
     github: "https://github.com/mahendra0011/mediCore.git",
     demo: "https://medicore-main-1.onrender.com",
     featured: true,
-    Icon: Hospital,
     image: "/projects/medicore.png",
+    icon: "/projects/icons/medicore.png",
     imageAlt: "MediCore healthcare landing page screenshot",
   },
   {
@@ -41,8 +33,8 @@ const projects = [
     tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "OTP", "Reports"],
     github: "https://github.com/mahendra0011/EventO",
     demo: "https://enento.onrender.com",
-    Icon: CalendarCheck,
     image: "/projects/evento.png",
+    icon: "/projects/icons/evento.png",
     imageAlt: "EventO event booking platform landing page screenshot",
   },
   {
@@ -50,8 +42,8 @@ const projects = [
     description:
       "JavaScript-only, MongoDB-only counselling platform with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
     tech: ["JavaScript", "React", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Payments"],
-    Icon: HeartPulse,
     image: "/projects/mindsupport.png",
+    icon: "/projects/icons/mindsupport.png",
     imageAlt: "MindSupport mental wellness platform landing page screenshot",
   },
   {
@@ -59,8 +51,8 @@ const projects = [
     description:
       "Full-stack movie ticket booking platform for browsing movies, coming-soon releases, seat selection, ticket booking, theater management and admin or owner workflows.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Cloudinary", "JWT"],
-    Icon: Film,
     image: "/projects/movix.png",
+    icon: "/projects/icons/movix.png",
     imageAlt: "MoviX movie ticket booking platform landing page screenshot",
   },
   {
@@ -68,8 +60,8 @@ const projects = [
     description:
       "Room rental marketplace for students, interns, job seekers and movers. Seekers compare PGs, hostels, flats and rooms while owners publish listings using city, area, landmark, title, amenities, rules and descriptions.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Search", "Marketplace"],
-    Icon: Home,
     image: "/projects/rentpe.png",
+    icon: "/projects/icons/rentpe.png",
     imageAlt: "RentPE room rental marketplace landing page screenshot",
   },
   {
@@ -78,8 +70,8 @@ const projects = [
       "Privacy-focused anonymous chat platform with encrypted messaging, real-time Socket.IO rooms, media sharing, temporary chat rooms, PWA and Android support, deep links and QR invites.",
     tech: ["React", "Express.js", "Socket.IO", "MongoDB", "PWA", "Android"],
     demo: "https://temptalk-1.onrender.com",
-    Icon: MessageCircle,
     image: "/projects/temptalk.png",
+    icon: "/projects/icons/temptalk.png",
     imageAlt: "TempTalk anonymous chat platform landing page screenshot",
   },
   {
@@ -87,8 +79,8 @@ const projects = [
     description:
       "AI-powered study platform using Gemini AI to generate structured notes, summarize PDFs and YouTube lectures, manage study tasks and organize personalized content libraries with secure authentication.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Gemini AI", "PDF", "YouTube"],
-    Icon: BookOpen,
     image: "/projects/studybuddy.png",
+    icon: "/projects/icons/studybuddy.png",
     imageAlt: "StudyBuddy AI study platform landing page screenshot",
   },
   {
@@ -98,8 +90,8 @@ const projects = [
     tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "Image Uploads"],
     github: "https://github.com/mahendra0011/Lost-and-Found-Website.git",
     demo: "https://lost-and-found-xlvq.onrender.com/",
-    Icon: Search,
     image: "/projects/lost-and-found.png",
+    icon: "/projects/icons/lost-and-found.png",
     imageAlt: "LostAndFound platform landing page screenshot",
   },
 ];
@@ -141,7 +133,7 @@ const Projects = () => {
   return (
     <section id="projects" ref={sectionRef} className="section-grid py-24 relative overflow-hidden">
         <div className="container relative">
-        <SectionHeading eyebrow="Projects" title="Featured Work" description="A selection of things I've built recently" />
+        <SectionHeading eyebrow="Projects" title="Things I've Built" description="A selection of things I've built recently" />
 
         <motion.div layout className="project-grid grid md:grid-cols-2 gap-6 max-w-6xl mx-auto [perspective:1200px]">
           <AnimatePresence mode="popLayout">
@@ -172,8 +164,15 @@ const Projects = () => {
                   </div>
                 )}
                 <div className="flex items-start justify-between gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center shadow-glow">
-                    <project.Icon className="w-6 h-6 text-primary-foreground" />
+                  <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg border border-border/70 bg-background shadow-glow">
+                    <img
+                      src={project.icon}
+                      alt={`${project.title} icon`}
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false"
+                      className="h-full w-full select-none object-cover"
+                    />
                   </div>
                   <div className="flex flex-wrap justify-end gap-2">
                     {project.featured && (
