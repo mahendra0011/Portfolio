@@ -207,6 +207,25 @@ All colors MUST be HSL.
     background-color: hsl(var(--success));
     box-shadow: 0 0 0 4px hsl(var(--success) / 0.14), 0 0 18px hsl(var(--success) / 0.45);
   }
+  .education-timeline-line {
+    transform: scaleY(0);
+    transform-origin: top center;
+    box-shadow: 0 0 24px hsl(var(--primary) / 0.24);
+  }
+  .education-timeline-dot {
+    isolation: isolate;
+    transform-origin: center;
+  }
+  .education-timeline-dot::before {
+    content: "";
+    position: absolute;
+    inset: -0.55rem;
+    z-index: -1;
+    border-radius: inherit;
+    border: 1px solid hsl(var(--primary) / 0.34);
+    opacity: 0.72;
+    animation: education-dot-pulse 2.4s ease-out infinite;
+  }
   .glass {
     @apply border border-white/70 backdrop-blur-2xl;
     background-color: hsl(0 0% 100% / 0.58);
@@ -426,6 +445,18 @@ All colors MUST be HSL.
     }
   }
 
+  @keyframes education-dot-pulse {
+    0% {
+      opacity: 0.72;
+      transform: scale(0.72);
+    }
+    75%,
+    100% {
+      opacity: 0;
+      transform: scale(1.45);
+    }
+  }
+
   @media (max-width: 1024px) {
     .portfolio-loader-name {
       column-gap: 1rem;
@@ -458,6 +489,13 @@ All colors MUST be HSL.
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .education-timeline-line {
+      transform: scaleY(1);
+    }
+    .education-timeline-dot::before {
+      animation: none;
+      opacity: 0;
+    }
     .portfolio-loader,
     .portfolio-loader::before,
     .portfolio-loader::after,
