@@ -22,7 +22,7 @@ const points = [
 ];
 
 const Experience = () => (
-  <section id="experience" className="section-grid section-grid-soft py-24 bg-muted/30 relative overflow-hidden">
+  <section id="experience" className="section-grid section-grid-soft relative overflow-hidden bg-muted/30 py-20 sm:py-24">
     <div className="container relative z-10">
       <SectionHeading eyebrow="Experience" title="Professional Exposure" description="Hands-on learning from railway communication and telecom operations." />
 
@@ -39,7 +39,7 @@ const Experience = () => (
               <Building2 className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
-              <h3 className="text-2xl font-bold">Indian Railways - Signal & Telecommunication (S&T) Intern</h3>
+              <h3 className="text-xl font-bold sm:text-2xl">Indian Railways - Signal & Telecommunication (S&T) Intern</h3>
               <p className="text-muted-foreground mt-1">RailNet, IP telephony, signalling and telecom systems exposure</p>
             </div>
           </div>

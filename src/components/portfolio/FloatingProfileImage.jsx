@@ -21,6 +21,22 @@ const FloatingProfileImage = () => {
 
     let startRect = null;
     let endRect = null;
+    let resizeTimer = 0;
+    let scrollFrame = 0;
+    const visualViewport = window.visualViewport;
+
+    const hasUsableRect = (rect) => rect && rect.width > 0 && rect.height > 0;
+
+    const getAboutPageTop = () => aboutSection.getBoundingClientRect().top + window.scrollY;
+
+    const getManualProgress = () => {
+      const aboutTop = getAboutPageTop();
+      const start = aboutTop - window.innerHeight;
+      const end = aboutTop;
+
+      if (end <= start) return 1;
+      return gsap.utils.clamp(0, 1, (window.scrollY - start) / (end - start));
+    };
 
     const captureRects = () => {
       const scrollY = window.scrollY;
@@ -40,9 +56,13 @@ const FloatingProfileImage = () => {
         width: aboutRect.width,
         height: aboutRect.height,
       };
+
+      return hasUsableRect(startRect) && hasUsableRect(endRect);
     };
 
     const placeAt = (rect) => {
+      if (!hasUsableRect(rect)) return;
+
       gsap.set(frame, {
         position: "fixed",
         left: rect.left,
@@ -50,16 +70,19 @@ const FloatingProfileImage = () => {
         width: rect.width,
         height: rect.height,
         opacity: 1,
+        x: 0,
+        y: 0,
       });
     };
 
-    const moveImage = (progress) => {
-      captureRects();
+    const moveImage = (progress = 0) => {
+      if (!captureRects()) return;
 
-      const left = startRect.left + (endRect.left - startRect.left) * progress;
-      const top = startRect.top + (endRect.top - startRect.top) * progress;
-      const width = startRect.width + (endRect.width - startRect.width) * progress;
-      const height = startRect.height + (endRect.height - startRect.height) * progress;
+      const safeProgress = gsap.utils.clamp(0, 1, progress);
+      const left = startRect.left + (endRect.left - startRect.left) * safeProgress;
+      const top = startRect.top + (endRect.top - startRect.top) * safeProgress;
+      const width = startRect.width + (endRect.width - startRect.width) * safeProgress;
+      const height = startRect.height + (endRect.height - startRect.height) * safeProgress;
 
       gsap.set(frame, {
         left,
@@ -70,7 +93,7 @@ const FloatingProfileImage = () => {
       });
     };
 
-    captureRects();
+    if (!captureRects()) return undefined;
     placeAt(startRect);
 
     const trigger = ScrollTrigger.create({
@@ -117,16 +140,49 @@ const FloatingProfileImage = () => {
     });
 
     const handleResize = () => {
-      captureRects();
-      moveImage(trigger.progress);
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        moveImage(getManualProgress());
+        ScrollTrigger.refresh();
+      }, 80);
+    };
+
+    const syncToScroll = () => {
+      scrollFrame = 0;
+
+      if (window.scrollY > getAboutPageTop() + aboutSection.offsetHeight) {
+        gsap.set(frame, { opacity: 0 });
+        return;
+      }
+
+      moveImage(getManualProgress());
+    };
+
+    const handleScroll = () => {
+      if (scrollFrame) return;
+      scrollFrame = window.requestAnimationFrame(syncToScroll);
     };
 
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("orientationchange", handleResize);
+    visualViewport?.addEventListener("resize", handleResize);
+
+    const image = frame.querySelector("img");
+    image?.addEventListener("load", handleResize, { once: true });
+    document.fonts?.ready?.then(handleResize).catch(() => {});
+
     const refreshId = window.requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
       window.cancelAnimationFrame(refreshId);
+      if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
+      window.clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("orientationchange", handleResize);
+      visualViewport?.removeEventListener("resize", handleResize);
+      image?.removeEventListener("load", handleResize);
       trigger.kill();
       settleTrigger.kill();
     };
@@ -145,7 +201,7 @@ const FloatingProfileImage = () => {
   return (
     <div
       ref={frameRef}
-      className="pointer-events-none fixed left-0 top-0 z-20 overflow-visible opacity-0"
+      className="floating-profile-frame pointer-events-none fixed left-0 top-0 z-20 overflow-visible opacity-0"
       aria-hidden="false"
     >
       <motion.button

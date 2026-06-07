@@ -40,18 +40,18 @@ const Counter = ({ to, suffix }) => {
 
 const About = () => {
   return (
-    <section id="about" className="section-grid section-grid-soft py-24 relative overflow-hidden lg:min-h-[92vh]">
+    <section id="about" className="section-grid section-grid-soft relative overflow-hidden py-20 sm:py-24 lg:min-h-[92vh]">
       <div className="container">
         <SectionHeading eyebrow="About Me" title="Crafting Digital Experiences" />
 
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-12">
           <div
-            className="relative mx-auto flex min-h-[460px] w-full max-w-[430px] items-end justify-center lg:mx-0 lg:min-h-[600px]"
+            className="about-photo-stage relative mx-auto flex w-full max-w-[430px] items-end justify-center lg:mx-0"
           >
             <div
               id="about-photo-anchor"
               aria-hidden="true"
-              className="invisible h-[520px] w-full lg:h-[620px]"
+              className="floating-photo-anchor floating-photo-anchor--about invisible"
             />
           </div>
 

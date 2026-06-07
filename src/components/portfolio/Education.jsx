@@ -74,7 +74,7 @@ const Education = () => {
         return () => ctx.revert();
     }, []);
 
-    return (<section ref={sectionRef} id="education" className="section-grid relative py-24 bg-muted/30 overflow-hidden">
+    return (<section ref={sectionRef} id="education" className="section-grid relative overflow-hidden bg-muted/30 py-20 sm:py-24">
       <div className="container relative z-10">
         <SectionHeading eyebrow="Journey" title="Education"/>
 

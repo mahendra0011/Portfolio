@@ -76,22 +76,32 @@ const Hero = () => {
     const element = heroRef.current;
     if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
 
+    let fallbackId = 0;
     const ctx = gsap.context(() => {
       const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       timeline
-        .fromTo(".hero-kicker", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55 })
-        .fromTo(".hero-title-line", { autoAlpha: 0, y: 34, rotateX: 9 }, { autoAlpha: 1, y: 0, rotateX: 0, duration: 0.72, stagger: 0.08 }, "-=0.2")
-        .fromTo(".hero-copy", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.58 }, "-=0.28")
-        .fromTo(".hero-action", { autoAlpha: 0, y: 20, scale: 0.96 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.48, stagger: 0.08 }, "-=0.26")
-        .fromTo(".hero-social", { autoAlpha: 0, x: -16 }, { autoAlpha: 1, x: 0, duration: 0.38, stagger: 0.055 }, "-=0.5");
+        .fromTo(".hero-kicker", { y: 16 }, { y: 0, duration: 0.55 })
+        .fromTo(".hero-title-line", { y: 34, rotateX: 9 }, { y: 0, rotateX: 0, duration: 0.72, stagger: 0.08 }, "-=0.2")
+        .fromTo(".hero-copy", { y: 20 }, { y: 0, duration: 0.58 }, "-=0.28")
+        .fromTo(".hero-action", { y: 20, scale: 0.96 }, { y: 0, scale: 1, duration: 0.48, stagger: 0.08 }, "-=0.26")
+        .fromTo(".hero-social", { x: -16 }, { x: 0, duration: 0.38, stagger: 0.055 }, "-=0.5");
+
+      fallbackId = window.setTimeout(() => {
+        gsap.set(".hero-kicker, .hero-title-line, .hero-copy, .hero-action, .hero-social", {
+          clearProps: "transform,opacity,visibility",
+        });
+      }, 1600);
     }, element);
 
-    return () => ctx.revert();
+    return () => {
+      window.clearTimeout(fallbackId);
+      ctx.revert();
+    };
   }, []);
 
   return (
-    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center hero-bg overflow-hidden pt-20">
+    <section ref={heroRef} id="home" className="relative flex min-h-[100svh] items-center overflow-hidden hero-bg pt-20 sm:pt-24 lg:min-h-screen">
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
         {socialLinks.map(({ Icon, label, href }) => (
           <MagneticButton key={label} strength={0.12}>
@@ -116,12 +126,12 @@ const Hero = () => {
         <div className="h-full w-full rounded-full bg-accent/30 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
       </div>
 
-      <div className="container grid lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 gap-12 items-center relative z-10 py-12 lg:pb-0 xl:pl-24">
-        <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="space-y-2 -translate-y-12 lg:translate-y-0 lg:self-start lg:pt-[5.5rem] xl:pt-[6.5rem]">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
+      <div className="container relative z-10 grid min-h-[calc(100svh-5rem)] items-center gap-8 py-8 sm:gap-10 sm:py-10 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 lg:gap-12 lg:pb-0 xl:pl-24">
+        <div className="mx-auto max-w-2xl space-y-4 text-center lg:mx-0 lg:max-w-none lg:self-start lg:pt-[5.5rem] lg:text-left xl:pt-[6.5rem]">
+          <div className="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             Available for opportunities
-          </motion.div>
+          </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]">
             <span className="hero-title-line block">Hi, I'm <span className="block sm:inline gradient-text">Mahendra</span></span>
@@ -130,29 +140,29 @@ const Hero = () => {
             </span>
           </h1>
 
-          <p className="hero-copy text-lg text-muted-foreground max-w-xl leading-relaxed">
+          <p className="hero-copy mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0">
             B.Tech Electronics & Communication student from Jabalpur (M.P.) passionate about building
             real-world full-stack applications. I craft scalable MERN experiences using React, Node.js,
             Express and MongoDB.
           </p>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <MagneticButton className="hero-action w-full sm:w-auto">
-              <Button size="lg" asChild className="group w-full gradient-bg shadow-glow transition-transform sm:w-auto">
+          <div className="flex flex-row flex-wrap justify-center gap-3 lg:justify-start">
+            <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
+              <Button size="lg" asChild className="group w-full px-4 gradient-bg shadow-glow transition-transform sm:w-auto sm:px-8">
                 <a href="#projects" onClick={(event) => handleHashLinkClick(event, "#projects")}>
                   <FolderGit2 className="mr-2 h-4 w-4 transition-transform group-hover:-rotate-6" /> View Projects
                 </a>
               </Button>
             </MagneticButton>
-            <MagneticButton className="hero-action w-full sm:w-auto">
-              <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden transition-transform sm:w-auto">
+            <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
+              <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden px-4 transition-transform sm:w-auto sm:px-8">
                 <a href="#contact" onClick={(event) => handleHashLinkClick(event, "#contact")}>
                   <Mail className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> Contact Me
                 </a>
               </Button>
             </MagneticButton>
-            <MagneticButton className="hero-action w-full sm:w-auto">
-              <Button size="lg" variant="secondary" asChild className="group w-full transition-transform sm:w-auto">
+            <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
+              <Button size="lg" variant="secondary" asChild className="group w-full px-4 transition-transform sm:w-auto sm:px-8">
                 <a href="/Mahendra_Resume.pdf" download>
                   <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" /> Resume
                 </a>
@@ -160,7 +170,7 @@ const Hero = () => {
             </MagneticButton>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 pt-2 lg:hidden">
+          <div className="hidden flex-wrap items-center justify-center gap-3 pt-2 sm:flex lg:justify-start lg:hidden">
             {socialLinks.map(({ Icon, label, href }) => (
               <motion.a
                 key={label}
@@ -175,20 +185,20 @@ const Hero = () => {
               </motion.a>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:h-full lg:self-end lg:justify-end lg:items-end">
-          <div className="relative w-full max-w-[470px] min-h-[540px] sm:min-h-[610px] lg:min-h-[calc(100vh-5rem)]">
+        <div className="relative flex justify-center lg:h-full lg:self-end lg:items-end lg:justify-end">
+          <div className="hero-photo-stage relative w-full max-w-[470px]">
             <div className="absolute inset-y-0 left-0 right-2 opacity-60 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.18)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.13)_1px,transparent_1px)] [background-size:34px_34px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
             <div className="absolute left-8 top-[24%] h-44 w-48 opacity-45 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.76)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
             <div className="absolute bottom-20 right-4 h-48 w-52 opacity-35 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.76)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
             <div
               id="hero-photo-anchor"
               aria-hidden="true"
-              className="invisible relative mx-auto h-[520px] w-[310px] sm:h-[590px] sm:w-[370px] lg:absolute lg:bottom-0 lg:right-0 lg:h-[calc(100vh-6rem)] lg:max-h-[760px] lg:w-[470px]"
+              className="floating-photo-anchor floating-photo-anchor--hero invisible relative mx-auto lg:absolute lg:bottom-0 lg:right-0"
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

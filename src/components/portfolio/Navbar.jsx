@@ -31,9 +31,9 @@ const Navbar = () => {
         window.addEventListener("scroll", onScroll);
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
-    return (<motion.header initial={{ y: -80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className="pointer-events-none fixed inset-x-0 top-4 z-50 px-4 transition-all duration-300">
-      <nav className={`pointer-events-auto mx-auto flex h-16 w-full max-w-[358px] items-center justify-between rounded-full px-6 glass sm:max-w-6xl ${scrolled ? "shadow-elegant" : ""}`}>
-        <a href={isHomePage ? "#home" : "/"} onClick={(event) => handleLinkClick(event, "#home")} className="text-xl font-bold text-foreground">&lt;Mahendra /&gt;</a>
+    return (<motion.header initial={{ y: -80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 transition-all duration-300 sm:top-4 sm:px-4">
+      <nav className={`pointer-events-auto mx-auto flex h-14 w-full max-w-[calc(100vw-1.5rem)] items-center justify-between rounded-full px-4 glass sm:h-16 sm:max-w-6xl sm:px-6 ${scrolled ? "shadow-elegant" : ""}`}>
+        <a href={isHomePage ? "#home" : "/"} onClick={(event) => handleLinkClick(event, "#home")} className="text-base font-bold text-foreground sm:text-xl">&lt;Mahendra /&gt;</a>
         <ul className="hidden lg:flex items-center gap-6">
           {links.map((l) => (<li key={l.name}>
               <a href={resolveHref(l.href)} onClick={(event) => handleLinkClick(event, l.href)} className={`text-sm font-medium transition-colors relative group ${l.button ? "rounded-md gradient-bg px-3 py-2 text-foreground shadow-glow hover:scale-105" : "text-muted-foreground hover:text-foreground"}`}>
@@ -51,7 +51,7 @@ const Navbar = () => {
           </Button>
         </div>
       </nav>
-      {open && (<motion.ul initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="pointer-events-auto mx-auto mt-2 w-full max-w-[358px] space-y-3 rounded-2xl px-6 py-4 glass sm:max-w-6xl lg:hidden">
+      {open && (<motion.ul initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="pointer-events-auto mx-auto mt-2 max-h-[calc(100svh-6rem)] w-full max-w-[calc(100vw-1.5rem)] space-y-3 overflow-y-auto rounded-2xl px-5 py-4 glass sm:max-w-6xl sm:px-6 lg:hidden">
           {links.map((l) => (<li key={l.name}>
               <a href={resolveHref(l.href)} onClick={(event) => {
                 handleLinkClick(event, l.href);

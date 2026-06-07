@@ -182,7 +182,7 @@ const Skills = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="skills" className="section-grid section-grid-soft py-24 bg-muted/30 relative overflow-hidden">
+    <section ref={sectionRef} id="skills" className="section-grid section-grid-soft relative overflow-hidden bg-muted/30 py-20 sm:py-24">
       <div className="container relative z-10">
         <SectionHeading eyebrow="Skills" title="Technologies I work with" description="The stack I use to bring ideas to life" />
 

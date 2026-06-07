@@ -26,7 +26,7 @@ const items = [
 ];
 
 const Achievements = () => (
-  <section id="achievements" className="section-grid py-24 relative overflow-hidden">
+  <section id="achievements" className="section-grid relative overflow-hidden py-20 sm:py-24">
     <div className="container relative z-10">
       <SectionHeading eyebrow="Achievements" title="Milestones & Recognition" description="Highlights from my journey so far" />
       <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">

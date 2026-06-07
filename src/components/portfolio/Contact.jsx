@@ -42,7 +42,7 @@ const Contact = () => {
             setLoading(false);
         }, 800);
     };
-    return (<section id="contact" className="section-grid section-grid-soft py-24 relative overflow-hidden">
+    return (<section id="contact" className="section-grid section-grid-soft relative overflow-hidden py-20 sm:py-24">
       <div className="container relative z-10">
         <SectionHeading eyebrow="Contact" title="Professional Inquiries" description="For project work, internships, or collaboration, send a concise message with the key details."/>
 
@@ -73,7 +73,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
-                    <div className="mt-1 font-semibold text-foreground">{value}</div>
+                    <div className="mt-1 break-words font-semibold text-foreground">{value}</div>
                   </div>
                 </motion.div>
               ))}
