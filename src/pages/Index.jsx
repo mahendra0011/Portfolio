@@ -2,6 +2,7 @@ import Navbar from "@/components/portfolio/Navbar";
 import Hero from "@/components/portfolio/Hero";
 import About from "@/components/portfolio/About";
 import FloatingProfileImage from "@/components/portfolio/FloatingProfileImage";
+import Services from "@/components/portfolio/Services";
 import Skills from "@/components/portfolio/Skills";
 import Projects from "@/components/portfolio/Projects";
 import Experience from "@/components/portfolio/Experience";
@@ -24,6 +25,7 @@ const Index = () => {
       <main>
         <Hero />
         <About />
+        <Services />
         <Skills />
         <Projects />
         <Experience />

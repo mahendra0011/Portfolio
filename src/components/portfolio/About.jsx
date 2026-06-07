@@ -4,7 +4,7 @@ import { Code2, Rocket, Coffee } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
 const stats = [
-  { icon: Code2, value: 10, label: "Projects Built", suffix: "+" },
+  { icon: Code2, value: 15, label: "Projects Built", suffix: "+" },
   { icon: Rocket, value: 1000, label: "GitHub Commits", suffix: "+" },
   { icon: Coffee, value: 50, label: "Technologies", suffix: "+" },
 ];
@@ -70,7 +70,7 @@ const About = () => {
               </p>
               <p>
                 I'm a passionate <span className="gradient-text font-semibold">Full Stack Developer</span> who loves building
-                real-world applications. I have built 10+ projects including <span className="text-foreground font-semibold">MediCore</span>,
+                real-world applications. I have built 15+ projects including <span className="text-foreground font-semibold">MediCore</span>,
                 <span className="text-foreground font-semibold"> EventO</span>, <span className="text-foreground font-semibold">MindSupport</span> and
                 <span className="text-foreground font-semibold"> LostAndFound</span>, covering authentication, OTP verification,
                 role-based dashboards, payments and production-style APIs.

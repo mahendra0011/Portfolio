@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Trophy, Lightbulb, Code2, GitBranch } from "lucide-react";
+import { Trophy, Linkedin, Code2, GitBranch } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
 const items = [
@@ -9,14 +9,14 @@ const items = [
     description: "Led a team in the Smart India Hackathon internal round, successfully qualifying among 100+ competing teams.",
   },
   {
-    Icon: Lightbulb,
-    title: "SRIT Project Expo - Fuel Theft Detection System",
-    description: "Presented an innovative IoT-based Fuel Theft Detection System demonstrating real-world problem solving.",
+    Icon: Linkedin,
+    title: "1000+ LinkedIn Followers",
+    description: "Built a growing professional network on LinkedIn by sharing development work, project updates and learning milestones.",
   },
   {
     Icon: Code2,
-    title: "100+ DSA Problems Solved",
-    description: "Solved 100+ problems in C++ on platforms like CodeHelp and other competitive coding sites.",
+    title: "Built 10+ Projects",
+    description: "Built 10+ practical web projects across full-stack applications, dashboards, booking systems, marketplaces and real-world MERN solutions.",
   },
   {
     Icon: GitBranch,
