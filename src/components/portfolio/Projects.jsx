@@ -107,7 +107,7 @@ const projects = [
 ];
 
 const isExternal = (href) => /^https?:\/\//.test(href);
-const INITIAL_PROJECT_COUNT = 4;
+const INITIAL_PROJECT_COUNT = 6;
 
 gsap.registerPlugin(ScrollTrigger);
 
