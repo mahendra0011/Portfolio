@@ -141,9 +141,8 @@ const Hero = () => {
           </h1>
 
           <p className="hero-copy mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0">
-            B.Tech Electronics & Communication student from Jabalpur (M.P.) passionate about building
-            real-world full-stack applications. I craft scalable MERN experiences using React, Node.js,
-            Express and MongoDB.
+            I can build scalable, secure, and high-performance web applications. Turning ideas into
+            impactful, production-ready digital products with modern technologies.
           </p>
 
           <div className="flex flex-row flex-wrap justify-center gap-3 lg:justify-start">
