@@ -42,7 +42,7 @@ const About = () => {
   return (
     <section id="about" className="section-grid section-grid-soft relative overflow-hidden py-20 sm:py-24 lg:min-h-[92vh]">
       <div className="container">
-        <SectionHeading eyebrow="About Me" title="Crafting Digital Experiences" />
+        <SectionHeading eyebrow="About Me" title="Building Impactful Digital Products" />
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-12">
           <div
@@ -64,20 +64,27 @@ const About = () => {
           >
             <div className="space-y-5">
               <p>
-                I'm <span className="text-foreground font-semibold">Mahendra Prajapati</span>, currently pursuing
-                <span className="text-foreground font-semibold"> B.Tech in Electronics & Communication Engineering</span> at
-                Shri Ram Institute of Technology, Jabalpur (M.P.) - CGPA 7.1/10.
+                I'm <span className="text-foreground font-semibold">Mahendra Prajapati</span>, a passionate{" "}
+                <span className="gradient-text font-semibold">Full Stack Developer</span> who builds reliable,
+                scalable, secure, user-focused, and high-performance web applications using modern web
+                technologies that power impactful digital products.
               </p>
               <p>
-                I'm a passionate <span className="gradient-text font-semibold">Full Stack Developer</span> who loves building
-                real-world applications. I have built 15+ projects including <span className="text-foreground font-semibold">MediCore</span>,
-                <span className="text-foreground font-semibold"> EventO</span>, <span className="text-foreground font-semibold">MindSupport</span> and
-                <span className="text-foreground font-semibold"> LostAndFound</span>, covering authentication, OTP verification,
-                role-based dashboards, payments and production-style APIs.
+                I specialize in building scalable, high-performance web applications with{" "}
+                <span className="text-foreground font-semibold">
+                  React.js, REST APIs, Node.js, Express.js, MongoDB, Docker, AWS
+                </span>
+                , and more. My focus is on creating clean user experiences, secure backend systems,
+                and production-ready applications that solve real-world problems.
               </p>
               <p>
-                I led my team in the <span className="text-foreground font-semibold">Smart India Hackathon</span> internal round,
-                have solved 100+ DSA problems in C++, and have shipped 1000+ GitHub commits while learning modern web and cloud tools.
+                I've built multiple full-stack projects, including business platforms, booking systems,
+                dashboards, and management solutions. My goal is to build impactful projects that work
+                efficiently and deliver meaningful value to the people who use them.
+              </p>
+              <p>
+                Currently, I'm seeking opportunities where I can contribute, learn from experienced
+                teams, and deliver impactful digital solutions.
               </p>
             </div>
 
