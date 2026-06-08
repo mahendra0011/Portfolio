@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
 import { BriefcaseBusiness, Clock3, Mail, MapPin, Send } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import SectionHeading from "./SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +17,7 @@ const schema = z.object({
 
 const contactDetails = [
     { Icon: Mail, label: "Email", value: "mahendrapra0077@gmail.com" },
+    { Icon: FaWhatsapp, label: "WhatsApp", value: "+91 7724822660", href: "https://wa.me/917724822660" },
     { Icon: MapPin, label: "Location", value: "Jabalpur, Madhya Pradesh" },
     { Icon: BriefcaseBusiness, label: "Open to", value: "Internships, freelance work, and MERN projects" },
     { Icon: Clock3, label: "Response", value: "Usually within 24-48 hours" },
@@ -59,7 +61,7 @@ const Contact = () => {
             </div>
 
             <div className="space-y-4">
-              {contactDetails.map(({ Icon, label, value }, index) => (
+              {contactDetails.map(({ Icon, label, value, href }, index) => (
                 <motion.div
                   key={label}
                   initial={{ opacity: 0, y: 14 }}
@@ -73,7 +75,18 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
-                    <div className="mt-1 break-words font-semibold text-foreground">{value}</div>
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-1 block break-words font-semibold text-foreground transition-colors hover:text-primary"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <div className="mt-1 break-words font-semibold text-foreground">{value}</div>
+                    )}
                   </div>
                 </motion.div>
               ))}
