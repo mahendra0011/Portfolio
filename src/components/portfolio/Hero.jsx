@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Download, Mail, FolderGit2 } from "lucide-react";
-import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/reactbits/MagneticButton";
 import { handleHashLinkClick } from "@/lib/scrollToHash";
@@ -18,6 +18,7 @@ const socialLinks = [
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/mahendra0011" },
   { Icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
   { Icon: Mail, label: "Mail", href: "mailto:mahendrapra0077@gmail.com" },
+  { Icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/917724822660" },
   { Icon: FaTelegram, label: "Telegram", href: "https://t.me/Mahi00776" },
   { Icon: FaXTwitter, label: "X", href: "https://x.com/mahendra0011" },
   { Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@Mahendraprajapati-bt1bd" },
