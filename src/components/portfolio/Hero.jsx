@@ -15,13 +15,13 @@ const roles = [
 ];
 
 const socialLinks = [
-  { Icon: FaGithub, label: "GitHub", href: "https://github.com/mahendra0011", color: "#8B5CF6" },
-  { Icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b", color: "#0A66C2" },
-  { Icon: Mail, label: "Mail", href: "mailto:mahendrapra0077@gmail.com", color: "#EA4335" },
-  { Icon: FaTelegram, label: "Telegram", href: "https://t.me/Mahi00776", color: "#26A5E4" },
-  { Icon: FaXTwitter, label: "X", href: "https://x.com/mahendra0011", color: "#38BDF8" },
-  { Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@Mahendraprajapati-bt1bd", color: "#FF0000" },
-  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/_mahendra._07?utm_source=qr&igsh=c2dpamNndnR6bDQ4", color: "#E4405F" },
+  { Icon: FaGithub, label: "GitHub", href: "https://github.com/mahendra0011" },
+  { Icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
+  { Icon: Mail, label: "Mail", href: "mailto:mahendrapra0077@gmail.com" },
+  { Icon: FaTelegram, label: "Telegram", href: "https://t.me/Mahi00776" },
+  { Icon: FaXTwitter, label: "X", href: "https://x.com/mahendra0011" },
+  { Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@Mahendraprajapati-bt1bd" },
+  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/_mahendra._07?utm_source=qr&igsh=c2dpamNndnR6bDQ4" },
 ];
 
 const Typewriter = () => {
@@ -103,7 +103,7 @@ const Hero = () => {
   return (
     <section ref={heroRef} id="home" className="relative flex min-h-[100svh] items-center overflow-hidden hero-bg pt-20 sm:pt-24 lg:min-h-screen">
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
-        {socialLinks.map(({ Icon, label, href, color }) => (
+        {socialLinks.map(({ Icon, label, href }) => (
           <MagneticButton key={label} strength={0.12}>
             <a
               href={href}
@@ -111,12 +111,7 @@ const Hero = () => {
               rel="noreferrer"
               aria-label={label}
               title={label}
-              style={{
-                color,
-                borderColor: `${color}55`,
-                background: `color-mix(in srgb, ${color} 14%, transparent)`,
-              }}
-              className="hero-social w-11 h-11 rounded-full glass flex items-center justify-center border transition-all shadow-elegant hover:scale-110"
+              className="hero-social w-11 h-11 rounded-full glass flex items-center justify-center hover:text-primary transition-all shadow-elegant"
             >
               <Icon className="w-5 h-5" />
             </a>
@@ -175,7 +170,7 @@ const Hero = () => {
           </div>
 
           <div className="hidden flex-wrap items-center justify-center gap-3 pt-2 sm:flex lg:justify-start lg:hidden">
-            {socialLinks.map(({ Icon, label, href, color }) => (
+            {socialLinks.map(({ Icon, label, href }) => (
               <motion.a
                 key={label}
                 href={href}
@@ -183,12 +178,7 @@ const Hero = () => {
                 rel="noreferrer"
                 aria-label={label}
                 whileHover={{ y: -4, scale: 1.1 }}
-                style={{
-                  color,
-                  borderColor: `${color}55`,
-                  background: `color-mix(in srgb, ${color} 14%, transparent)`,
-                }}
-                className="w-10 h-10 rounded-full glass flex items-center justify-center border transition-colors"
+                className="w-10 h-10 rounded-full glass flex items-center justify-center hover:text-primary transition-colors"
               >
                 <Icon className="w-5 h-5" />
               </motion.a>
