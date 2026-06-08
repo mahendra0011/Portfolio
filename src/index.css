@@ -130,7 +130,7 @@ All colors MUST be HSL.
   select,
   summary,
   .cursor-pointer {
-    cursor: url("/cursor-hand.svg") 14 4, pointer !important;
+    cursor: pointer !important;
   }
 
   * {
