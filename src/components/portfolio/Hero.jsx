@@ -175,7 +175,7 @@ const Hero = () => {
           </div>
 
           <div className="hidden flex-wrap items-center justify-center gap-3 pt-2 sm:flex lg:justify-start lg:hidden">
-            {socialLinks.map(({ Icon, label, href }) => (
+            {socialLinks.map(({ Icon, label, href, color }) => (
               <motion.a
                 key={label}
                 href={href}
@@ -183,7 +183,12 @@ const Hero = () => {
                 rel="noreferrer"
                 aria-label={label}
                 whileHover={{ y: -4, scale: 1.1 }}
-                className="w-10 h-10 rounded-full glass flex items-center justify-center hover:text-primary transition-colors"
+                style={{
+                  color,
+                  borderColor: `${color}55`,
+                  background: `color-mix(in srgb, ${color} 14%, transparent)`,
+                }}
+                className="w-10 h-10 rounded-full glass flex items-center justify-center border transition-colors"
               >
                 <Icon className="w-5 h-5" />
               </motion.a>
