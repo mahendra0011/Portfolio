@@ -6,6 +6,7 @@ import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp, FaXTwitter, 
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/reactbits/MagneticButton";
 import { handleHashLinkClick } from "@/lib/scrollToHash";
+import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
 
 const roles = [
   "React developer",
@@ -16,13 +17,13 @@ const roles = [
 
 const socialLinks = [
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/mahendra0011" },
-  { Icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b" },
+  { Icon: FaLinkedin, label: "LinkedIn", ...socialAppLinks.linkedin },
   { Icon: Mail, label: "Mail", href: "mailto:mahendrapra0077@gmail.com" },
   { Icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/917724822660" },
   { Icon: FaTelegram, label: "Telegram", href: "https://t.me/Mahi00776" },
   { Icon: FaXTwitter, label: "X", href: "https://x.com/mahendra0011" },
   { Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@Mahendraprajapati-bt1bd" },
-  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/_mahendra._07?utm_source=qr&igsh=c2dpamNndnR6bDQ4" },
+  { Icon: FaInstagram, label: "Instagram", ...socialAppLinks.instagram },
 ];
 
 const Typewriter = () => {
@@ -104,7 +105,7 @@ const Hero = () => {
   return (
     <section ref={heroRef} id="home" className="relative flex min-h-[100svh] items-center overflow-hidden hero-bg pt-20 sm:pt-24 lg:min-h-screen">
       <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
-        {socialLinks.map(({ Icon, label, href }) => (
+        {socialLinks.map(({ Icon, label, href, appUrl }) => (
           <MagneticButton key={label} strength={0.12}>
             <a
               href={href}
@@ -112,6 +113,7 @@ const Hero = () => {
               rel="noreferrer"
               aria-label={label}
               title={label}
+              onClick={(event) => openInstalledApp(event, appUrl, href)}
               className="hero-social w-11 h-11 rounded-full glass flex items-center justify-center hover:text-primary transition-all shadow-elegant"
             >
               <Icon className="w-5 h-5" />
@@ -170,18 +172,19 @@ const Hero = () => {
             </MagneticButton>
           </div>
 
-          <div className="hidden flex-wrap items-center justify-center gap-3 pt-2 sm:flex lg:justify-start lg:hidden">
-            {socialLinks.map(({ Icon, label, href }) => (
+          <div className="flex flex-nowrap items-center justify-center gap-1 pt-1.5 sm:gap-3 sm:pt-2 lg:justify-start lg:hidden">
+            {socialLinks.map(({ Icon, label, href, appUrl }) => (
               <motion.a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
+                onClick={(event) => openInstalledApp(event, appUrl, href)}
                 whileHover={{ y: -4, scale: 1.1 }}
-                className="w-10 h-10 rounded-full glass flex items-center justify-center hover:text-primary transition-colors"
+                className="h-8 w-8 shrink-0 rounded-full glass flex items-center justify-center hover:text-primary transition-colors sm:h-10 sm:w-10"
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </motion.a>
             ))}
           </div>

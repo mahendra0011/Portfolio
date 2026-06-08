@@ -3,6 +3,7 @@ import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
 
 const RESUME_URL = "/Mahendra_Resume.pdf";
 const RESUME_PREVIEW_URL = "/resume-preview.png";
@@ -19,7 +20,8 @@ const resumeLinks = [
   },
   {
     label: "Open LinkedIn profile",
-    href: "https://www.linkedin.com/in/mahendra-prajapati-73163930b",
+    href: socialAppLinks.linkedin.href,
+    appUrl: socialAppLinks.linkedin.appUrl,
     rect: { left: 60.699, top: 7.326, width: 8.436, height: 1.634 },
     external: true,
   },
@@ -130,6 +132,7 @@ const Resume = () => (
                   aria-label={link.label}
                   target={link.external ? "_blank" : undefined}
                   rel={link.external ? "noreferrer" : undefined}
+                  onClick={(event) => openInstalledApp(event, link.appUrl, link.href)}
                   className="absolute rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
                   style={{
                     left: `${link.rect.left}%`,
