@@ -97,15 +97,15 @@ const About = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   whileHover={{ y: -5 }}
-                  className="glass group rounded-2xl p-5 text-center transition-shadow hover:shadow-glow"
+                  className="glass group rounded-xl p-4 text-center transition-shadow hover:shadow-glow sm:p-3.5"
                 >
-                  <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl gradient-bg transition-transform group-hover:scale-110">
-                    <s.icon className="h-5 w-5 text-primary-foreground" />
+                  <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg gradient-bg transition-transform group-hover:scale-110">
+                    <s.icon className="h-4 w-4 text-primary-foreground" />
                   </div>
-                  <div className="text-3xl font-bold gradient-text">
+                  <div className="text-2xl font-bold gradient-text">
                     <Counter to={s.value} suffix={s.suffix} />
                   </div>
-                  <div className="mt-1 text-xs text-muted-foreground sm:text-sm">{s.label}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
                 </motion.div>
               ))}
             </div>
