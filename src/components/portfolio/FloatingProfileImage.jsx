@@ -214,14 +214,14 @@ const FloatingProfileImage = () => {
         transition={{ type: "spring", stiffness: 280, damping: 18 }}
         className="pointer-events-auto h-full w-full cursor-pointer bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
       >
-        <img
-          src={profileImg}
-          alt="Mahendra Prajapati portrait"
-          decoding="async"
-          fetchpriority="high"
-          draggable="false"
-          className="h-full w-full select-none object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
-        />
+<img
+           src={profileImg}
+           alt="Mahendra Prajapati portrait"
+           decoding="async"
+           fetchpriority="high"
+           draggable="false"
+           className="h-full w-full select-none object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
+         />
       </motion.button>
     </div>
   );
