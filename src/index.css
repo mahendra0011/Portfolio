@@ -195,7 +195,7 @@ All colors MUST be HSL.
     background: transparent;
   }
 
-  .about-luca-background {
+  .three-d-background {
     position: fixed;
     inset: 0;
     z-index: 1;
@@ -204,29 +204,13 @@ All colors MUST be HSL.
     background: transparent;
   }
 
-  .about-luca-background iframe,
-  .about-luca-background canvas {
+  .three-d-background iframe {
     display: block;
     position: absolute;
     inset: 0;
     width: 100vw;
     height: 100svh;
-  }
-
-  .about-luca-background canvas {
-    background: hsl(var(--background));
-  }
-
-  .about-luca-background iframe {
     border: 0;
-    opacity: 1;
-    filter: invert(26%) sepia(88%) saturate(2800%) hue-rotate(226deg) brightness(86%) contrast(126%)
-      drop-shadow(0 0 2.5px hsl(244 86% 58% / 0.34));
-  }
-
-  .dark .about-luca-background iframe {
-    opacity: 1;
-    filter: brightness(1.16) contrast(1.18) saturate(1.02);
   }
 
   .portfolio-surface-overlay {
