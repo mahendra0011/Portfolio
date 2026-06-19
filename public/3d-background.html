@@ -45,24 +45,14 @@
     <div class="vignette"></div>
 
     <script>
-        // Read theme from URL parameter (?theme=light or ?theme=dark)
+        // Theme support
         const urlParams = new URLSearchParams(window.location.search);
         const isLight = urlParams.get('theme') === 'light';
-
-        // Theme-based colors
         const bgColor = isLight ? '#0a0a2e' : '#030712';
-        const terrainColor = isLight ? '#1a1a5e' : '#030712';
-        const wireColor = isLight ? '#8888ff' : '#ffffff';
-        const wireOpacity = isLight ? 0.2 : 0.12;
-        const particleColor = isLight ? '#aaaaff' : '#ffffff';
-        const particleOpacity = isLight ? 0.5 : 0.4;
-        const ambientClr = isLight ? '#5555cc' : '#030712';
-        const ambientInt = isLight ? 2.0 : 2.0;
-
         document.documentElement.style.setProperty('--bg-color', bgColor);
 
         // ==========================================
-        // 1. THREE.JS PROFESSIONAL SETUP
+        // 1. THREE.JS SETUP
         // ==========================================
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(bgColor);
@@ -79,7 +69,7 @@
         // ==========================================
         // 2. LIGHTING
         // ==========================================
-        scene.add(new THREE.AmbientLight(ambientClr, ambientInt));
+        scene.add(new THREE.AmbientLight(bgColor, 2));
 
         const dirLight = new THREE.DirectionalLight('#ffffff', 2);
         dirLight.position.set(20, 40, 20);
@@ -112,17 +102,17 @@
         }
 
         const terrainMaterial = new THREE.MeshStandardMaterial({
-            color: terrainColor,
+            color: bgColor,
             roughness: 0.9,
             metalness: 0.1,
             flatShading: true
         });
 
         const wireMaterial = new THREE.MeshBasicMaterial({
-            color: wireColor,
+            color: '#ffffff',
             wireframe: true,
             transparent: true,
-            opacity: wireOpacity
+            opacity: 0.12
         });
 
         const terrain = new THREE.Mesh(geometry, terrainMaterial);
@@ -134,7 +124,7 @@
         scene.add(terrain);
 
         // ==========================================
-        // 4. SNOW / ASH PARTICLES
+        // 4. PARTICLES
         // ==========================================
         const pGeo = new THREE.BufferGeometry();
         const pCount = 600;
@@ -149,9 +139,9 @@
         pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
         const pMat = new THREE.PointsMaterial({
             size: 0.1,
-            color: particleColor,
+            color: '#ffffff',
             transparent: true,
-            opacity: particleOpacity,
+            opacity: 0.4,
             blending: THREE.AdditiveBlending,
             depthWrite: false
         });
