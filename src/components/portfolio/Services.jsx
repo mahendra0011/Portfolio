@@ -70,7 +70,7 @@ const Services = () => (
             viewport={{ once: true }}
             transition={{ duration: 0.42, delay: index * 0.055 }}
             whileHover={{ y: -6 }}
-            className="group flex h-full min-h-[360px] flex-col rounded-lg border border-border/70 bg-background/70 p-5 shadow-sm transition-all hover:border-primary/40 hover:bg-background hover:shadow-glow glass"
+            className="group flex h-full min-h-[360px] flex-col rounded-lg border-2 border-[#4A82E8] bg-background/70 p-5 shadow-sm transition-all hover:border-primary/40 hover:bg-background hover:shadow-glow glass"
           >
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg gradient-bg shadow-glow transition-transform group-hover:scale-105">
               <Icon className="h-6 w-6 text-primary-foreground" />

@@ -1,42 +1,5 @@
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { Code2, Rocket, Coffee } from "lucide-react";
+import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-
-const stats = [
-  { icon: Code2, value: 15, label: "Projects Built", suffix: "+" },
-  { icon: Rocket, value: 1000, label: "GitHub Commits", suffix: "+" },
-  { icon: Coffee, value: 50, label: "Technologies", suffix: "+" },
-];
-
-const Counter = ({ to, suffix }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  const [n, setN] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-
-    let start = 0;
-    const duration = 1500;
-    const stepTime = 16;
-    const steps = duration / stepTime;
-    const inc = to / steps;
-    const id = setInterval(() => {
-      start += inc;
-      if (start >= to) {
-        setN(to);
-        clearInterval(id);
-      } else {
-        setN(Math.floor(start));
-      }
-    }, stepTime);
-
-    return () => clearInterval(id);
-  }, [inView, to]);
-
-  return <span ref={ref}>{n}{suffix}</span>;
-};
 
 const About = () => {
   return (
@@ -86,28 +49,6 @@ const About = () => {
                 Currently, I'm seeking opportunities where I can contribute, learn from experienced
                 teams, and deliver impactful digital solutions.
               </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className="glass group rounded-xl p-4 text-center transition-shadow hover:shadow-glow sm:p-3.5"
-                >
-                  <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg gradient-bg transition-transform group-hover:scale-110">
-                    <s.icon className="h-4 w-4 text-primary-foreground" />
-                  </div>
-                  <div className="text-2xl font-bold gradient-text">
-                    <Counter to={s.value} suffix={s.suffix} />
-                  </div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
-                </motion.div>
-              ))}
             </div>
           </motion.div>
         </div>

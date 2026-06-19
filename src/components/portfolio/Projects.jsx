@@ -193,7 +193,7 @@ const Projects = () => {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
                 whileHover={{ y: -10, rotateX: 1.5 }}
-                className="project-card group relative flex min-h-[390px] flex-col overflow-hidden rounded-xl p-4 transition-all will-change-transform hover:shadow-glow glass sm:p-5"
+                className="project-card group relative flex min-h-[390px] flex-col overflow-hidden rounded-xl border-2 border-[#4A82E8] p-4 transition-all will-change-transform hover:shadow-glow glass sm:p-5"
               >
                 <div className="absolute -inset-px gradient-bg opacity-0 group-hover:opacity-10 transition-opacity rounded-xl pointer-events-none" />
                 {project.image && (
