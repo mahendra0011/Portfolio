@@ -3,7 +3,7 @@ const SectionHeading = ({ eyebrow, title, description }) => (<motion.div initial
     <span className="inline-block px-4 py-1 rounded-full glass text-xs font-semibold gradient-text mb-4 uppercase tracking-wider">
       {eyebrow}
     </span>
-    <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl">{title}</h2>
-    {description && <p className="text-base text-muted-foreground sm:text-lg">{description}</p>}
+    <h2 className="section-title mb-4 text-3xl font-bold sm:text-4xl md:text-5xl">{title}</h2>
+    {description && <p className="text-base section-desc sm:text-lg">{description}</p>}
   </motion.div>);
 export default SectionHeading;

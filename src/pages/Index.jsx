@@ -10,6 +10,7 @@ import Education from "@/components/portfolio/Education";
 import Achievements from "@/components/portfolio/Achievements";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
+import StatsSection from "@/components/portfolio/StatsSection";
 import ThreeDBackground from "@/components/portfolio/ThreeDBackground";
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 
@@ -25,6 +26,7 @@ const Index = () => {
       <main>
         <Hero />
         <About />
+        <StatsSection />
         <Services />
         <Skills />
         <Projects />
