@@ -73,11 +73,11 @@ const Services = () => (
           >
             <SpotlightCard
               as={motion.article}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px 0px" }}
-              transition={{ duration: 0.35, delay: index * 0.05 }}
-              whileHover={{ y: -6 }}
+              viewport={{ once: true, margin: "-260px 0px" }}
+              transition={{ duration: 0.12, delay: index * 0.01 }}
+              whileHover={{ y: -3 }}
               className="group flex h-full min-h-[360px] flex-col rounded-lg glass bg-background/70 p-5 shadow-elegant transition-all hover:bg-background hover:shadow-glow"
             >
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg gradient-bg shadow-glow transition-transform group-hover:scale-105">
