@@ -32,10 +32,10 @@ const Experience = () => (
           ancestor clips overflow, the border gets cut off and looks "missing". */}
       <div className="mx-auto max-w-5xl overflow-visible">
 <motion.div
-           initial={{ opacity: 0, y: 30 }}
+           initial={{ opacity: 0, y: 10 }}
            whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px 0px" }}
-           transition={{ duration: 0.3 }}
+           viewport={{ once: true, margin: "-260px 0px" }}
+           transition={{ duration: 0.12 }}
            className="overflow-visible"
          >
           <ElectricBorder
@@ -65,10 +65,10 @@ const Experience = () => (
                 {points.map(({ Icon, text }, index) => (
 <motion.div
                      key={text}
-                     initial={{ opacity: 0, y: 16 }}
+                     initial={{ opacity: 0, y: 8 }}
                      whileInView={{ opacity: 1, y: 0 }}
-                     viewport={{ once: true, margin: "-80px 0px" }}
-                     transition={{ duration: 0.3, delay: index * 0.06 }}
+                     viewport={{ once: true, margin: "-220px 0px" }}
+                     transition={{ duration: 0.12, delay: index * 0.01 }}
                      className="rounded-xl bg-background/70 border border-border/60 p-4 flex gap-3"
                  >
                     <Icon className="w-5 h-5 text-primary shrink-0 mt-0.5" />

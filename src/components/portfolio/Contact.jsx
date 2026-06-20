@@ -51,10 +51,10 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
 <motion.div
-             initial={{ opacity: 0, x: -30 }}
+             initial={{ opacity: 0, x: 12 }}
              whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true, margin: "-100px 0px" }}
-             transition={{ duration: 0.3 }}
+             viewport={{ once: true, margin: "-260px 0px" }}
+             transition={{ duration: 0.12 }}
              className="overflow-visible"
            >
             <ElectricBorder
@@ -79,10 +79,10 @@ const Contact = () => {
                   {contactDetails.map(({ Icon, label, value, href }, index) => (
 <motion.div
                        key={label}
-                       initial={{ opacity: 0, y: 14 }}
+                       initial={{ opacity: 0, y: 8 }}
                        whileInView={{ opacity: 1, y: 0 }}
-                       viewport={{ once: true, margin: "-80px 0px" }}
-                       transition={{ duration: 0.25, delay: index * 0.05 }}
+                       viewport={{ once: true, margin: "-220px 0px" }}
+                       transition={{ duration: 0.12, delay: index * 0.01 }}
                        className="flex gap-4 border-t border-border/60 pt-4 first:border-t-0 first:pt-0"
                      >
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl gradient-bg shadow-glow">
@@ -112,10 +112,10 @@ const Contact = () => {
 
 <motion.form
              onSubmit={handleSubmit}
-             initial={{ opacity: 0, x: 30 }}
+             initial={{ opacity: 0, x: 12 }}
              whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true, margin: "-100px 0px" }}
-             transition={{ duration: 0.3 }}
+             viewport={{ once: true, margin: "-260px 0px" }}
+             transition={{ duration: 0.12 }}
              className="overflow-visible"
            >
             <ElectricBorder
