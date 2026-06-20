@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Code2, Rocket, ServerCog, ShieldCheck, Smartphone, Wrench } from "lucide-react";
 import MagneticButton from "@/components/reactbits/MagneticButton";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
+import ElectricBorder from "@/components/reactbits/ElectricBorder";
 import { Button } from "@/components/ui/button";
 import { handleHashLinkClick } from "@/lib/scrollToHash";
 import SectionHeading from "./SectionHeading";
@@ -62,16 +63,23 @@ const Services = () => (
 
       <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {services.map(({ Icon, title, description, highlights }, index) => (
-          <SpotlightCard
+          <ElectricBorder
             key={title}
-            as={motion.article}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.42, delay: index * 0.055 }}
-            whileHover={{ y: -6 }}
-            className="group flex h-full min-h-[360px] flex-col rounded-lg glass bg-background/70 p-5 shadow-sm transition-all hover:bg-background hover:shadow-glow"
+            color="#4A82E8"
+            speed={1}
+            chaos={0.12}
+            borderRadius={16}
+            borderOffset={20}
           >
+            <SpotlightCard
+              as={motion.article}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.42, delay: index * 0.055 }}
+              whileHover={{ y: -6 }}
+              className="group flex h-full min-h-[360px] flex-col rounded-lg glass bg-background/70 p-5 shadow-elegant transition-all hover:bg-background hover:shadow-glow"
+            >
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg gradient-bg shadow-glow transition-transform group-hover:scale-105">
               <Icon className="h-6 w-6 text-primary-foreground" />
             </div>
@@ -84,7 +92,8 @@ const Services = () => (
                 </span>
               ))}
             </div>
-          </SpotlightCard>
+            </SpotlightCard>
+          </ElectricBorder>
         ))}
       </div>
 
