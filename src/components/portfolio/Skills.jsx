@@ -6,7 +6,6 @@ import {
   BadgeIndianRupee,
   Braces,
   ChartNoAxesCombined,
-  CloudCog,
   FileCode2,
   FileSpreadsheet,
   FileText,
@@ -42,6 +41,7 @@ import {
   SiMysql,
   SiNginx,
   SiNodedotjs,
+  SiPostgresql,
   SiPostman,
   SiRazorpay,
   SiReact,
@@ -83,6 +83,11 @@ const groups = [
       { name: "MUI", Icon: SiMui, color: "#007FFF" },
       { name: "shadcn/ui", Icon: SiShadcnui, color: "currentColor" },
       { name: "ReactBits", Icon: FileCode2, color: "#7C3AED" },
+      {
+        name: "Lightwind UI",
+        Icon: ({ className, style }) => <img src="https://camo.githubusercontent.com/c824ce4a5883445f6823b066d241e5b64d28568ce78ec61c6e8351a24af9808c/68747470733a2f2f636f6465776974686d7568696c616e2e636f6d2f45787472612d4173736574732f6c6967687477696e642d6c6f676f2e706e67" alt="Lightwind UI" className={`${className} object-contain`} style={style} />,
+        color: "#36B7F0",
+      },
     ],
   },
   {
@@ -113,6 +118,7 @@ const groups = [
       { name: "Brevo", Icon: SiBrevo, color: "#0B996E" },
       { name: "SendGrid", Icon: SiSendgrid, color: "#1A82E2" },
       { name: "Razorpay", Icon: SiRazorpay, color: "#0C2451" },
+      { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
       { name: "Cashfree", Icon: BadgeIndianRupee, color: "#00B386" },
     ],
   },
@@ -126,7 +132,11 @@ const groups = [
       { name: "Nginx", Icon: SiNginx, color: "#009639" },
       { name: "Vercel", Icon: SiVercel, color: "currentColor" },
       { name: "Render", Icon: SiRender, color: "#46E3B7" },
-      { name: "AWS", Icon: CloudCog, color: "#FF9900" },
+      {
+        name: "AWS",
+        Icon: ({ className, style }) => <img src="https://img.icons8.com/color/1200/amazon-web-services.jpg" alt="AWS" className={`${className} object-contain`} style={style} />,
+        color: "#FF9900",
+      },
       { name: "Google Cloud", Icon: SiGooglecloud, color: "#4285F4" },
       { name: "VPS", Icon: Server, color: "#64748B" },
       { name: "Serverless", Icon: SiServerless, color: "#FD5750" },
@@ -151,28 +161,28 @@ const Skills = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".skill-group-title",
-        { autoAlpha: 0, x: -22 },
+        { autoAlpha: 0, x: 8 },
         {
           autoAlpha: 1,
           x: 0,
-          duration: 0.4,
-          ease: "power3.out",
-          stagger: 0.06,
-          scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
+          duration: 0.12,
+          ease: "power1.out",
+          stagger: 0.008,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 88%" },
         },
       );
 
       gsap.fromTo(
         ".skill-chip",
-        { autoAlpha: 0, y: 22, scale: 0.94 },
+        { autoAlpha: 0, y: 8, scale: 0.985 },
         {
           autoAlpha: 1,
           y: 0,
           scale: 1,
-          duration: 0.32,
-          ease: "back.out(1.6)",
-          stagger: 0.012,
-          scrollTrigger: { trigger: sectionRef.current, start: "top 76%" },
+          duration: 0.12,
+          ease: "power1.out",
+          stagger: 0.004,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 86%" },
         },
       );
     }, sectionRef);
@@ -186,17 +196,17 @@ const Skills = () => {
         <SectionHeading eyebrow="Skills" title="Technologies I work with" description="The stack I use to bring ideas to life" />
 
         <div className="mx-auto max-w-7xl space-y-12">
-          {groups.map((group, groupIndex) => (
+          {groups.map((group) => (
             <div
               key={group.title}
             >
               <h3 className="skill-group-title mb-4 text-xl font-bold text-muted-foreground md:text-2xl">{group.title}</h3>
               <div className="flex flex-wrap gap-3 md:gap-4">
-                {group.items.map(({ name, Icon, color }, index) => (
+                {group.items.map(({ name, Icon, color }) => (
 <SpotlightCard
                       key={`${group.title}-${name}`}
                       as={motion.div}
-                      whileHover={{ y: -4 }}
+                      whileHover={{ y: -2 }}
                       className="skill-chip group inline-flex h-16 min-w-[126px] items-center gap-3 rounded-lg border border-border/70 bg-background/70 px-4 shadow-sm transition-all hover:border-primary/40 hover:bg-background hover:shadow-elegant sm:min-w-[136px]"
                     >
                     <Icon
