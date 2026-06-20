@@ -83,11 +83,11 @@ const Hero = () => {
       const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       timeline
-        .fromTo(".hero-kicker", { y: 16 }, { y: 0, duration: 0.32 })
-        .fromTo(".hero-title-line", { y: 34, rotateX: 9 }, { y: 0, rotateX: 0, duration: 0.42, stagger: 0.04 }, "-=0.12")
-        .fromTo(".hero-copy", { y: 20 }, { y: 0, duration: 0.36 }, "-=0.18")
-        .fromTo(".hero-action", { y: 20, scale: 0.96 }, { y: 0, scale: 1, duration: 0.3, stagger: 0.04 }, "-=0.18")
-        .fromTo(".hero-social", { x: -16 }, { x: 0, duration: 0.24, stagger: 0.035 }, "-=0.3");
+        .fromTo(".hero-kicker", { y: 8 }, { y: 0, duration: 0.16 })
+        .fromTo(".hero-title-line", { y: 8 }, { y: 0, duration: 0.18, stagger: 0.015 }, "-=0.08")
+        .fromTo(".hero-copy", { y: 8 }, { y: 0, duration: 0.16 }, "-=0.08")
+        .fromTo(".hero-action", { y: 8, scale: 0.99 }, { y: 0, scale: 1, duration: 0.16, stagger: 0.012 }, "-=0.08")
+        .fromTo(".hero-social", { x: -8 }, { x: 0, duration: 0.12, stagger: 0.01 }, "-=0.08");
 
       fallbackId = window.setTimeout(() => {
         gsap.set(".hero-kicker, .hero-title-line, .hero-copy, .hero-action, .hero-social", {
@@ -122,11 +122,11 @@ const Hero = () => {
         ))}
       </div>
 
-      <div data-scroll-parallax="-90" data-scroll-trigger="#home" className="absolute top-20 -left-20 h-72 w-72 will-change-transform">
-        <div className="h-full w-full rounded-full bg-primary/30 blur-3xl animate-blob" />
+      <div data-scroll-parallax="-6" data-scroll-trigger="#home" className="absolute top-20 -left-20 h-72 w-72 will-change-transform">
+        <div className="h-full w-full rounded-full bg-primary/30 blur-2xl animate-blob" />
       </div>
-      <div data-scroll-parallax="70" data-scroll-trigger="#home" className="absolute bottom-10 -right-10 h-96 w-96 will-change-transform">
-        <div className="h-full w-full rounded-full bg-accent/30 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
+      <div data-scroll-parallax="6" data-scroll-trigger="#home" className="absolute bottom-10 -right-10 h-96 w-96 will-change-transform">
+        <div className="h-full w-full rounded-full bg-accent/30 blur-2xl animate-blob" style={{ animationDelay: "3s" }} />
       </div>
 
       <div className="container relative z-10 grid min-h-[calc(100svh-5rem)] items-center gap-8 py-8 sm:gap-10 sm:py-10 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 lg:gap-12 lg:pb-0 xl:pl-24">
@@ -181,7 +181,7 @@ const Hero = () => {
                 rel="noreferrer"
                 aria-label={label}
                 onClick={(event) => openInstalledApp(event, appUrl, href)}
-                whileHover={{ y: -4, scale: 1.1 }}
+                whileHover={{ y: -2, scale: 1.03 }}
                 className="h-8 w-8 shrink-0 rounded-full glass flex items-center justify-center hover:text-primary transition-colors sm:h-10 sm:w-10"
               >
                 <Icon className="h-4 w-4 sm:h-5 sm:w-5" />

@@ -49,7 +49,7 @@ const Navbar = () => {
           {links.map((l) => (<li key={l.name}>
               <a href={resolveHref(l.href)} onClick={(event) => handleLinkClick(event, l.href)} className={`text-sm font-medium transition-colors relative group ${l.button ? "rounded-md gradient-bg px-3 py-2 text-foreground shadow-glow hover:scale-105" : "text-muted-foreground hover:text-foreground"}`}>
                 {l.name}
-                {!l.button && <span className="absolute -bottom-1 left-0 w-0 h-0.5 gradient-bg group-hover:w-full transition-all duration-300"/>}
+                {!l.button && <span className="absolute -bottom-1 left-0 w-0 h-0.5 gradient-bg group-hover:w-full transition-all duration-180"/>}
               </a>
             </li>))}
         </ul>
@@ -62,7 +62,7 @@ const Navbar = () => {
           </Button>
         </div>
       </nav>
-      {open && (<motion.ul initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="pointer-events-auto mx-auto mt-2 max-h-[calc(100svh-6rem)] w-full max-w-[calc(100vw-1.5rem)] space-y-3 overflow-y-auto rounded-2xl px-5 py-4 glass sm:max-w-6xl sm:px-6 xl:hidden">
+      {open && (<motion.ul initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} className="pointer-events-auto mx-auto mt-2 max-h-[calc(100svh-6rem)] w-full max-w-[calc(100vw-1.5rem)] space-y-3 overflow-y-auto rounded-2xl px-5 py-4 glass sm:max-w-6xl sm:px-6 xl:hidden">
           {links.map((l) => (<li key={l.name}>
               <a href={resolveHref(l.href)} onClick={(event) => {
                 handleLinkClick(event, l.href);
