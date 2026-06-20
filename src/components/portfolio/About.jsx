@@ -26,10 +26,10 @@ const About = () => {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 12 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-180px 0px" }}
-            transition={{ duration: 0.4 }}
+            viewport={{ once: true, margin: "-260px 0px" }}
+            transition={{ duration: 0.12 }}
             className="space-y-6 text-muted-foreground leading-relaxed"
           >
             <div className="space-y-5">
