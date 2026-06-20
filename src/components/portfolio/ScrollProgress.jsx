@@ -4,9 +4,9 @@ const ScrollProgress = () => {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: reduceMotion ? 500 : 90,
-    damping: reduceMotion ? 80 : 18,
-    mass: 0.24,
+    stiffness: reduceMotion ? 320 : 180,
+    damping: reduceMotion ? 60 : 24,
+    mass: 0.2,
     restDelta: 0.001,
   });
 
