@@ -18,7 +18,7 @@ export const useScrollAnimations = () => {
 
     const ctx = gsap.context(() => {
       gsap.utils.toArray("[data-scroll-parallax]").forEach((element) => {
-        const distance = numberFromDataset(element.dataset.scrollParallax, -72);
+        const distance = numberFromDataset(element.dataset.scrollParallax, -32);
         const trigger = element.dataset.scrollTrigger
           ? document.querySelector(element.dataset.scrollTrigger)
           : element.parentElement || element;

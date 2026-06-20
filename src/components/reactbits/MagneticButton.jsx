@@ -2,7 +2,7 @@ import { useCallback, useRef } from "react";
 import { gsap } from "gsap";
 import { cn } from "@/lib/utils";
 
-const MagneticButton = ({ children, className, strength = 0.22 }) => {
+const MagneticButton = ({ children, className, strength = 0.14 }) => {
   const ref = useRef(null);
 
   const handlePointerMove = useCallback((event) => {
@@ -17,8 +17,8 @@ const MagneticButton = ({ children, className, strength = 0.22 }) => {
       x,
       y,
       scale: 1.035,
-      duration: 0.38,
-      ease: "power3.out",
+      duration: 0.18,
+      ease: "power2.out",
       overwrite: "auto",
     });
   }, [strength]);
@@ -31,8 +31,8 @@ const MagneticButton = ({ children, className, strength = 0.22 }) => {
       x: 0,
       y: 0,
       scale: 1,
-      duration: 0.55,
-      ease: "elastic.out(1, 0.42)",
+      duration: 0.22,
+      ease: "power2.out",
       overwrite: "auto",
     });
   }, []);

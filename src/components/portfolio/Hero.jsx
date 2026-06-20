@@ -93,7 +93,7 @@ const Hero = () => {
         gsap.set(".hero-kicker, .hero-title-line, .hero-copy, .hero-action, .hero-social", {
           clearProps: "transform,opacity,visibility",
         });
-      }, 1600);
+      }, 900);
     }, element);
 
     return () => {
