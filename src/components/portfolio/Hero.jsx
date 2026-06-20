@@ -35,7 +35,7 @@ const Typewriter = () => {
     const current = roles[roleIndex];
     const isTyping = phase === "typing";
     const isDeleting = phase === "deleting";
-    const delay = isTyping ? 85 : isDeleting ? 42 : 1200;
+    const delay = isTyping ? 55 : isDeleting ? 28 : 900;
 
     const timer = setTimeout(() => {
       if (isTyping) {
@@ -83,11 +83,11 @@ const Hero = () => {
       const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       timeline
-        .fromTo(".hero-kicker", { y: 16 }, { y: 0, duration: 0.55 })
-        .fromTo(".hero-title-line", { y: 34, rotateX: 9 }, { y: 0, rotateX: 0, duration: 0.72, stagger: 0.08 }, "-=0.2")
-        .fromTo(".hero-copy", { y: 20 }, { y: 0, duration: 0.58 }, "-=0.28")
-        .fromTo(".hero-action", { y: 20, scale: 0.96 }, { y: 0, scale: 1, duration: 0.48, stagger: 0.08 }, "-=0.26")
-        .fromTo(".hero-social", { x: -16 }, { x: 0, duration: 0.38, stagger: 0.055 }, "-=0.5");
+        .fromTo(".hero-kicker", { y: 16 }, { y: 0, duration: 0.32 })
+        .fromTo(".hero-title-line", { y: 34, rotateX: 9 }, { y: 0, rotateX: 0, duration: 0.42, stagger: 0.04 }, "-=0.12")
+        .fromTo(".hero-copy", { y: 20 }, { y: 0, duration: 0.36 }, "-=0.18")
+        .fromTo(".hero-action", { y: 20, scale: 0.96 }, { y: 0, scale: 1, duration: 0.3, stagger: 0.04 }, "-=0.18")
+        .fromTo(".hero-social", { x: -16 }, { x: 0, duration: 0.24, stagger: 0.035 }, "-=0.3");
 
       fallbackId = window.setTimeout(() => {
         gsap.set(".hero-kicker, .hero-title-line, .hero-copy, .hero-action, .hero-social", {

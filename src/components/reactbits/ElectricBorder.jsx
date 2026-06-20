@@ -139,20 +139,20 @@ const ElectricBorder = forwardRef(({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const octaves = 10;
-    const lacunarity = 1.6;
-    const gain = 0.7;
+    const octaves = 5;
+    const lacunarity = 1.55;
+    const gain = 0.68;
     const amplitude = chaos;
     const frequency = 10;
     const baseFlatness = 0;
-    const displacement = 25;
+    const displacement = 18;
 
     const updateSize = () => {
       const rect = container.getBoundingClientRect();
       const width = rect.width + borderOffset * 2;
       const height = rect.height + borderOffset * 2;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
@@ -168,12 +168,17 @@ const ElectricBorder = forwardRef(({
     const drawElectricBorder = currentTime => {
       if (!canvas || !ctx) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
       if (dpr !== lastDpr) {
         lastDpr = dpr;
         const newSize = updateSize();
         width = newSize.width;
         height = newSize.height;
+      }
+
+      if (currentTime - lastFrameTimeRef.current < 33) {
+        animationRef.current = requestAnimationFrame(drawElectricBorder);
+        return;
       }
 
       const deltaTime = (currentTime - lastFrameTimeRef.current) / 1000;
@@ -199,7 +204,7 @@ const ElectricBorder = forwardRef(({
       const radius = Math.min(borderRadius, maxRadius);
 
       const approximatePerimeter = 2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
-      const sampleCount = Math.floor(approximatePerimeter / 2);
+      const sampleCount = Math.max(80, Math.floor(approximatePerimeter / 8));
 
       ctx.beginPath();
 

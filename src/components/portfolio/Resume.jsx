@@ -71,7 +71,7 @@ const Resume = () => (
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: 0.35 }}
           className="mx-auto mb-10 max-w-3xl text-center"
         >
           <span className="inline-block px-4 py-1 rounded-full glass text-xs font-semibold gradient-text mb-4 uppercase tracking-wider">
@@ -109,7 +109,7 @@ const Resume = () => (
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.35, delay: 0.08 }}
           className="mx-auto max-w-5xl"
         >
           <div className="glass rounded-2xl p-2 shadow-glow overflow-hidden sm:p-3">

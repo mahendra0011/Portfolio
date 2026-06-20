@@ -4,26 +4,32 @@ import StatsSection from "./StatsSection";
 
 const About = () => {
   return (
-    <section id="about" className="section-grid section-grid-soft relative overflow-hidden py-20 sm:py-24 lg:min-h-[92vh]">
+    <section
+      id="about"
+      className="section-grid section-grid-soft relative overflow-hidden py-20 sm:py-24 lg:min-h-[92vh]"
+    >
       <div className="container">
         <SectionHeading eyebrow="About Me" title="Building Impactful Digital Products" />
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-12">
-          <div
-            className="about-photo-stage relative mx-auto flex w-full max-w-[430px] items-end justify-center lg:mx-0"
-          >
+
+          {/* LEFT COLUMN — anchor for floating image to land here */}
+          <div className="about-photo-stage relative mx-auto flex w-full max-w-[430px] items-end justify-center lg:mx-0">
+            {/* FIXED: explicit size so getBoundingClientRect() returns usable rect */}
             <div
               id="about-photo-anchor"
               aria-hidden="true"
-              className="floating-photo-anchor floating-photo-anchor--about invisible"
+              className="floating-photo-anchor floating-photo-anchor--about
+                         w-full h-[320px] sm:h-[380px] lg:h-[440px]
+                         pointer-events-none select-none"
             />
           </div>
 
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px 0px" }}
+            transition={{ duration: 0.4 }}
             className="space-y-6 text-muted-foreground leading-relaxed"
           >
             <div className="space-y-5">
@@ -53,6 +59,7 @@ const About = () => {
             </div>
           </motion.div>
         </div>
+
         <StatsSection />
       </div>
     </section>

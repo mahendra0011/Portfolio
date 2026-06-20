@@ -5,20 +5,22 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+const easeOutCubic = (t) => 1 - Math.pow(1 - t, 2.4);
 
 export const useSmoothScroll = () => {
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (window.deviceMemory && window.deviceMemory <= 4) return undefined;
 
     const lenis = new Lenis({
       autoRaf: false,
-      duration: 1.15,
+      duration: 0.42,
       easing: easeOutCubic,
       smoothWheel: true,
-      wheelMultiplier: 0.86,
-      touchMultiplier: 1.08,
+      wheelMultiplier: 1.08,
+      touchMultiplier: 1.12,
+      infinite: false,
     });
     window.__portfolioLenis = lenis;
 

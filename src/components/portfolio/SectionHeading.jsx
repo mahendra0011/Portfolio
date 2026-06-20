@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-const SectionHeading = ({ eyebrow, title, description }) => (<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mx-auto mb-10 max-w-2xl text-center sm:mb-16">
+const SectionHeading = ({ eyebrow, title, description }) => (<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-120px 0px" }} transition={{ duration: 0.4 }} className="mx-auto mb-10 max-w-2xl text-center sm:mb-16">
     <span className="inline-block px-4 py-1 rounded-full glass text-xs font-semibold gradient-text mb-4 uppercase tracking-wider">
       {eyebrow}
     </span>

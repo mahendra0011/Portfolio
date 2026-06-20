@@ -31,13 +31,13 @@ const Experience = () => (
           OUTSIDE the card edges (controlled by borderOffset). If any
           ancestor clips overflow, the border gets cut off and looks "missing". */}
       <div className="mx-auto max-w-5xl overflow-visible">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="overflow-visible"
-        >
+<motion.div
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true, margin: "-100px 0px" }}
+           transition={{ duration: 0.3 }}
+           className="overflow-visible"
+         >
           <ElectricBorder
             color="#4A82E8"
             speed={1}
@@ -63,14 +63,14 @@ const Experience = () => (
 
               <div className="grid md:grid-cols-2 gap-4">
                 {points.map(({ Icon, text }, index) => (
-                  <motion.div
-                    key={text}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    className="rounded-xl bg-background/70 border border-border/60 p-4 flex gap-3"
-                  >
+<motion.div
+                     key={text}
+                     initial={{ opacity: 0, y: 16 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     viewport={{ once: true, margin: "-80px 0px" }}
+                     transition={{ duration: 0.3, delay: index * 0.06 }}
+                     className="rounded-xl bg-background/70 border border-border/60 p-4 flex gap-3"
+                 >
                     <Icon className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
                   </motion.div>

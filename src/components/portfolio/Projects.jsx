@@ -132,10 +132,10 @@ const Projects = () => {
           autoAlpha: 1,
           y: 0,
           rotateX: 0,
-          duration: 0.85,
+          duration: 0.35,
           ease: "power3.out",
-          stagger: 0.12,
-          scrollTrigger: { trigger: ".project-grid", start: "top 78%" },
+          stagger: 0.05,
+          scrollTrigger: { trigger: ".project-grid", start: "top 80%" },
         },
       );
 
@@ -191,12 +191,17 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.35, delay: index * 0.04 }}
+                transition={{ duration: 0.22, delay: index * 0.03 }}
                 whileHover={{ y: -10, rotateX: 1.5 }}
                 className="project-card group relative flex min-h-[390px] flex-col overflow-visible rounded-xl glass shadow-elegant transition-all will-change-transform hover:shadow-glow"
               >
                 <ElectricBorder
                   as="div"
+                  color="#4A82E8"
+                  speed={1}
+                  chaos={0.12}
+                  borderRadius={12}
+                  borderOffset={20}
                   className="relative h-full w-full"
                 >
                   <SpotlightCard

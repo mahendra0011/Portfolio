@@ -31,7 +31,7 @@ export const useScrollAnimations = () => {
             trigger,
             start: "top bottom",
             end: "bottom top",
-            scrub: 0.75,
+            scrub: 0.2,
           },
         });
       });

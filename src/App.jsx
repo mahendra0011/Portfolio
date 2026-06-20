@@ -76,7 +76,7 @@ const App = () => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    const minDuration = 1800;
+    const minDuration = 500;
     const startTime = performance.now();
     let fallbackId;
     let hideId;
@@ -91,7 +91,7 @@ const App = () => {
       hideLoader();
     } else {
       window.addEventListener("load", hideLoader, { once: true });
-      fallbackId = window.setTimeout(hideLoader, 2600);
+      fallbackId = window.setTimeout(hideLoader, 1200);
     }
 
     return () => {

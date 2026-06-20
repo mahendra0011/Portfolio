@@ -75,8 +75,8 @@ const Services = () => (
               as={motion.article}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.42, delay: index * 0.055 }}
+              viewport={{ once: true, margin: "-100px 0px" }}
+              transition={{ duration: 0.35, delay: index * 0.05 }}
               whileHover={{ y: -6 }}
               className="group flex h-full min-h-[360px] flex-col rounded-lg glass bg-background/70 p-5 shadow-elegant transition-all hover:bg-background hover:shadow-glow"
             >

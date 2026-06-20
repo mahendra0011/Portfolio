@@ -4,6 +4,7 @@ import { z } from "zod";
 import { BriefcaseBusiness, Clock3, Mail, MapPin, Send } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import SectionHeading from "./SectionHeading";
+import ElectricBorder from "../reactbits/ElectricBorder";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -49,73 +50,106 @@ const Contact = () => {
         <SectionHeading eyebrow="Contact" title="Professional Inquiries" description="For project work, internships, or collaboration, send a concise message with the key details."/>
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="glass rounded-2xl p-6 md:p-8 transition-all hover:shadow-glow">
-            <div className="mb-7">
-              <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-                Available for selected opportunities
-              </span>
-              <h3 className="mt-4 text-2xl font-bold">Start a focused conversation</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Share the project goal, expected timeline, and the support you need. I will review it and reply by email.
-              </p>
-            </div>
+<motion.div
+             initial={{ opacity: 0, x: -30 }}
+             whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: true, margin: "-100px 0px" }}
+             transition={{ duration: 0.3 }}
+             className="overflow-visible"
+           >
+            <ElectricBorder
+              color="#4A82E8"
+              speed={1}
+              chaos={0.12}
+              borderRadius={16}
+              borderOffset={20}
+            >
+              <div className="glass rounded-2xl p-6 md:p-8 transition-all hover:shadow-glow h-full overflow-visible">
+                <div className="mb-7">
+                  <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+                    Available for selected opportunities
+                  </span>
+                  <h3 className="mt-4 text-2xl font-bold">Start a focused conversation</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    Share the project goal, expected timeline, and the support you need. I will review it and reply by email.
+                  </p>
+                </div>
 
-            <div className="space-y-4">
-              {contactDetails.map(({ Icon, label, value, href }, index) => (
-                <motion.div
-                  key={label}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: index * 0.06 }}
-                  className="flex gap-4 border-t border-border/60 pt-4 first:border-t-0 first:pt-0"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl gradient-bg shadow-glow">
-                    <Icon className="h-5 w-5 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
-                    {href ? (
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-1 block break-words font-semibold text-foreground transition-colors hover:text-primary"
-                      >
-                        {value}
-                      </a>
-                    ) : (
-                      <div className="mt-1 break-words font-semibold text-foreground">{value}</div>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                <div className="space-y-4">
+                  {contactDetails.map(({ Icon, label, value, href }, index) => (
+<motion.div
+                       key={label}
+                       initial={{ opacity: 0, y: 14 }}
+                       whileInView={{ opacity: 1, y: 0 }}
+                       viewport={{ once: true, margin: "-80px 0px" }}
+                       transition={{ duration: 0.25, delay: index * 0.05 }}
+                       className="flex gap-4 border-t border-border/60 pt-4 first:border-t-0 first:pt-0"
+                     >
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl gradient-bg shadow-glow">
+                        <Icon className="h-5 w-5 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
+                        {href ? (
+                          <a
+                            href={href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-1 block break-words font-semibold text-foreground transition-colors hover:text-primary"
+                          >
+                            {value}
+                          </a>
+                        ) : (
+                          <div className="mt-1 break-words font-semibold text-foreground">{value}</div>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </ElectricBorder>
           </motion.div>
 
-          <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="glass rounded-2xl p-6 space-y-4 transition-all hover:shadow-glow">
-            <div>
-              <h3 className="text-2xl font-bold">Send a message</h3>
-              <p className="mt-2 text-sm text-muted-foreground">A brief, clear note helps me respond with the right next step.</p>
-            </div>
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" maxLength={100}/>
-              {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
-            </div>
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" maxLength={255}/>
-              {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
-            </div>
-            <div>
-              <Label htmlFor="message">Message</Label>
-              <Textarea id="message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell me about your project..." maxLength={1000}/>
-              {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
-            </div>
-            <Button type="submit" disabled={loading} size="lg" className="w-full gradient-bg shadow-glow">
-              {loading ? "Sending..." : <>Send Message <Send className="ml-2 w-4 h-4"/></>}
-            </Button>
+<motion.form
+             onSubmit={handleSubmit}
+             initial={{ opacity: 0, x: 30 }}
+             whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: true, margin: "-100px 0px" }}
+             transition={{ duration: 0.3 }}
+             className="overflow-visible"
+           >
+            <ElectricBorder
+              color="#4A82E8"
+              speed={1}
+              chaos={0.12}
+              borderRadius={16}
+              borderOffset={20}
+            >
+              <div className="glass rounded-2xl p-6 space-y-4 transition-all hover:shadow-glow h-full overflow-visible">
+                <div>
+                  <h3 className="text-2xl font-bold">Send a message</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">A brief, clear note helps me respond with the right next step.</p>
+                </div>
+                <div>
+                  <Label htmlFor="name">Name</Label>
+                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" maxLength={100}/>
+                  {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
+                </div>
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" maxLength={255}/>
+                  {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
+                </div>
+                <div>
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea id="message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell me about your project..." maxLength={1000}/>
+                  {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
+                </div>
+                <Button type="submit" disabled={loading} size="lg" className="w-full gradient-bg shadow-glow">
+                  {loading ? "Sending..." : <>Send Message <Send className="ml-2 w-4 h-4"/></>}
+                </Button>
+              </div>
+            </ElectricBorder>
           </motion.form>
         </div>
       </div>

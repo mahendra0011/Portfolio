@@ -309,6 +309,11 @@ All colors MUST be HSL.
     z-index: 2;
   }
 
+  .portfolio-content main > section:not(#home) {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
+  }
+
 .hero-photo-stage {
      min-height: clamp(390px, 64svh, 540px);
    }
@@ -458,8 +463,8 @@ All colors MUST be HSL.
   }
 
   .liquid-marble-fill {
-    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/011/534/389/small/abstract-blue-shiny-texture-background-free-photo.jpg');
-    background-size: cover;
+    background-image: var(--gradient-accent);
+    background-size: 180% 180%;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -565,7 +570,7 @@ All colors MUST be HSL.
     border-color: hsl(0 0% 0% / 0.28);
   }
 .glass {
-     @apply backdrop-blur-2xl;
+     @apply backdrop-blur-md;
      background-color: hsl(0 0% 100% / 0.58);
      box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.72), 0 18px 48px -32px hsl(217 96% 55% / 0.36);
      border: 2px solid #4A82E8;

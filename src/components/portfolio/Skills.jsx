@@ -155,10 +155,10 @@ const Skills = () => {
         {
           autoAlpha: 1,
           x: 0,
-          duration: 0.55,
+          duration: 0.4,
           ease: "power3.out",
-          stagger: 0.08,
-          scrollTrigger: { trigger: sectionRef.current, start: "top 72%" },
+          stagger: 0.06,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
         },
       );
 
@@ -169,10 +169,10 @@ const Skills = () => {
           autoAlpha: 1,
           y: 0,
           scale: 1,
-          duration: 0.42,
+          duration: 0.32,
           ease: "back.out(1.6)",
-          stagger: 0.018,
-          scrollTrigger: { trigger: sectionRef.current, start: "top 70%" },
+          stagger: 0.012,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 76%" },
         },
       );
     }, sectionRef);
@@ -187,26 +187,18 @@ const Skills = () => {
 
         <div className="mx-auto max-w-7xl space-y-12">
           {groups.map((group, groupIndex) => (
-            <motion.div
+            <div
               key={group.title}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: groupIndex * 0.06 }}
             >
               <h3 className="skill-group-title mb-4 text-xl font-bold text-muted-foreground md:text-2xl">{group.title}</h3>
               <div className="flex flex-wrap gap-3 md:gap-4">
                 {group.items.map(({ name, Icon, color }, index) => (
-                  <SpotlightCard
-                    key={`${group.title}-${name}`}
-                    as={motion.div}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.24, delay: index * 0.018 }}
-                    whileHover={{ y: -4 }}
-                    className="skill-chip group inline-flex h-16 min-w-[126px] items-center gap-3 rounded-lg border border-border/70 bg-background/70 px-4 shadow-sm transition-all hover:border-primary/40 hover:bg-background hover:shadow-elegant sm:min-w-[136px]"
-                  >
+<SpotlightCard
+                      key={`${group.title}-${name}`}
+                      as={motion.div}
+                      whileHover={{ y: -4 }}
+                      className="skill-chip group inline-flex h-16 min-w-[126px] items-center gap-3 rounded-lg border border-border/70 bg-background/70 px-4 shadow-sm transition-all hover:border-primary/40 hover:bg-background hover:shadow-elegant sm:min-w-[136px]"
+                    >
                     <Icon
                       className="h-6 w-6 shrink-0 text-muted-foreground transition-transform group-hover:scale-110"
                       style={{ color }}
@@ -215,7 +207,7 @@ const Skills = () => {
                   </SpotlightCard>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

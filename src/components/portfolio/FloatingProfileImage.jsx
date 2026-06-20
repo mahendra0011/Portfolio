@@ -17,31 +17,16 @@ const FloatingProfileImage = () => {
     const aboutAnchor = document.getElementById("about-photo-anchor");
     const aboutSection = document.getElementById("about");
 
-    if (!frame || !heroAnchor || !aboutAnchor || !aboutSection) return undefined;
+    if (!frame || !heroAnchor || !aboutAnchor || !aboutSection) return;
 
     let startRect = null;
     let endRect = null;
-    let resizeTimer = 0;
-    let scrollFrame = 0;
-    const visualViewport = window.visualViewport;
-
-    const hasUsableRect = (rect) => rect && rect.width > 0 && rect.height > 0;
-
-    const getAboutPageTop = () => aboutSection.getBoundingClientRect().top + window.scrollY;
-
-    const getManualProgress = () => {
-      const aboutTop = getAboutPageTop();
-      const start = aboutTop - window.innerHeight;
-      const end = aboutTop;
-
-      if (end <= start) return 1;
-      return gsap.utils.clamp(0, 1, (window.scrollY - start) / (end - start));
-    };
+    let rafId = 0;
 
     const captureRects = () => {
-      const scrollY = window.scrollY;
       const heroRect = heroAnchor.getBoundingClientRect();
       const aboutRect = aboutAnchor.getBoundingClientRect();
+      const scrollY = window.scrollY;
 
       startRect = {
         left: heroRect.left,
@@ -56,13 +41,10 @@ const FloatingProfileImage = () => {
         width: aboutRect.width,
         height: aboutRect.height,
       };
-
-      return hasUsableRect(startRect) && hasUsableRect(endRect);
     };
 
     const placeAt = (rect) => {
-      if (!hasUsableRect(rect)) return;
-
+      if (!rect || rect.width === 0) return;
       gsap.set(frame, {
         position: "fixed",
         left: rect.left,
@@ -75,26 +57,23 @@ const FloatingProfileImage = () => {
       });
     };
 
-    const moveImage = (progress = 0) => {
-      if (!captureRects()) return;
-
-      const safeProgress = gsap.utils.clamp(0, 1, progress);
-      const left = startRect.left + (endRect.left - startRect.left) * safeProgress;
-      const top = startRect.top + (endRect.top - startRect.top) * safeProgress;
-      const width = startRect.width + (endRect.width - startRect.width) * safeProgress;
-      const height = startRect.height + (endRect.height - startRect.height) * safeProgress;
-
+    const moveImage = (progress) => {
+      if (!startRect || !endRect) return;
+      const p = gsap.utils.clamp(0, 1, progress);
       gsap.set(frame, {
-        left,
-        top: top - window.scrollY,
-        width,
-        height,
+        left: startRect.left + (endRect.left - startRect.left) * p,
+        top: (startRect.top + (endRect.top - startRect.top) * p) - window.scrollY,
+        width: startRect.width + (endRect.width - startRect.width) * p,
+        height: startRect.height + (endRect.height - startRect.height) * p,
         opacity: 1,
       });
     };
 
-    if (!captureRects()) return undefined;
-    placeAt(startRect);
+    const init = () => {
+      captureRects();
+      placeAt(startRect);
+      ScrollTrigger.refresh();
+    };
 
     const trigger = ScrollTrigger.create({
       trigger: aboutSection,
@@ -103,105 +82,73 @@ const FloatingProfileImage = () => {
       scrub: true,
       invalidateOnRefresh: true,
       onUpdate: (self) => moveImage(self.progress),
-      onLeave: () => {
+      onLeave: () => placeAt(endRect),
+      onLeaveBack: () => placeAt(startRect),
+      onRefresh: (self) => {
         captureRects();
-        placeAt(endRect);
+        moveImage(self.progress);
       },
-      onLeaveBack: () => {
-        captureRects();
-        placeAt(startRect);
-      },
-      onRefresh: (self) => moveImage(self.progress),
     });
 
     const settleTrigger = ScrollTrigger.create({
       trigger: aboutSection,
       start: "top top",
       end: "bottom top",
-      onEnter: () => {
-        captureRects();
-        placeAt(endRect);
-      },
+      onEnter: () => placeAt(endRect),
       onUpdate: () => {
-        captureRects();
-        placeAt(endRect);
+        if (endRect) {
+          gsap.set(frame, { top: endRect.top - window.scrollY });
+        }
       },
-      onEnterBack: () => {
-        captureRects();
-        placeAt(endRect);
-      },
-      onLeave: () => {
-        gsap.set(frame, { opacity: 0 });
-      },
-      onLeaveBack: () => {
-        captureRects();
-        placeAt(endRect);
-      },
+      onEnterBack: () => placeAt(endRect),
+      onLeave: () => gsap.set(frame, { opacity: 0 }),
+      onLeaveBack: () => placeAt(endRect),
     });
 
+    let resizeTimer = 0;
     const handleResize = () => {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(() => {
-        moveImage(getManualProgress());
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        captureRects();
         ScrollTrigger.refresh();
       }, 80);
     };
 
-    const syncToScroll = () => {
-      scrollFrame = 0;
-
-      if (window.scrollY > getAboutPageTop() + aboutSection.offsetHeight) {
-        gsap.set(frame, { opacity: 0 });
-        return;
-      }
-
-      moveImage(getManualProgress());
-    };
-
-    const handleScroll = () => {
-      if (scrollFrame) return;
-      scrollFrame = window.requestAnimationFrame(syncToScroll);
-    };
-
     window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.visualViewport?.addEventListener("resize", handleResize);
     window.addEventListener("orientationchange", handleResize);
-    visualViewport?.addEventListener("resize", handleResize);
 
-    const image = frame.querySelector("img");
-    image?.addEventListener("load", handleResize, { once: true });
-    document.fonts?.ready?.then(handleResize).catch(() => {});
+    const img = frame.querySelector("img");
+    img?.addEventListener("load", init, { once: true });
+    document.fonts?.ready?.then(init).catch(init);
 
-    const refreshId = window.requestAnimationFrame(() => ScrollTrigger.refresh());
+    rafId = requestAnimationFrame(init);
 
     return () => {
-      window.cancelAnimationFrame(refreshId);
-      if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
-      window.clearTimeout(resizeTimer);
+      cancelAnimationFrame(rafId);
+      clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
+      window.visualViewport?.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
-      visualViewport?.removeEventListener("resize", handleResize);
-      image?.removeEventListener("load", handleResize);
+      img?.removeEventListener("load", init);
       trigger.kill();
       settleTrigger.kill();
     };
   }, []);
 
-  useEffect(() => {
-    return () => window.clearTimeout(zoomTimer.current);
-  }, []);
+  useEffect(() => () => clearTimeout(zoomTimer.current), []);
 
   const handlePhotoClick = () => {
-    window.clearTimeout(zoomTimer.current);
+    clearTimeout(zoomTimer.current);
     setZoomed(true);
-    zoomTimer.current = window.setTimeout(() => setZoomed(false), 520);
+    zoomTimer.current = setTimeout(() => setZoomed(false), 520);
   };
 
   return (
     <div
       ref={frameRef}
-      className="floating-profile-frame pointer-events-none fixed left-0 top-0 z-20 overflow-visible opacity-0"
+      className="pointer-events-none fixed left-0 top-0 z-20 overflow-visible"
+      style={{ opacity: 0 }}
       aria-hidden="false"
     >
       <motion.button
@@ -214,14 +161,14 @@ const FloatingProfileImage = () => {
         transition={{ type: "spring", stiffness: 280, damping: 18 }}
         className="pointer-events-auto h-full w-full cursor-pointer bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
       >
-<img
-           src={profileImg}
-           alt="Mahendra Prajapati portrait"
-           decoding="async"
-           fetchpriority="high"
-           draggable="false"
-           className="h-full w-full select-none object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
-         />
+        <img
+          src={profileImg}
+          alt="Mahendra Prajapati portrait"
+          decoding="async"
+          fetchpriority="high"
+          draggable="false"
+          className="h-full w-full select-none object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
+        />
       </motion.button>
     </div>
   );

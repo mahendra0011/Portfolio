@@ -28,11 +28,21 @@ const Navbar = () => {
         }
     };
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 30);
-        window.addEventListener("scroll", onScroll);
-        return () => window.removeEventListener("scroll", onScroll);
+        let frame = 0;
+        const onScroll = () => {
+            if (frame) return;
+            frame = window.requestAnimationFrame(() => {
+                setScrolled(window.scrollY > 30);
+                frame = 0;
+            });
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            if (frame) window.cancelAnimationFrame(frame);
+        };
     }, []);
-    return (<motion.header initial={{ y: -80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 transition-all duration-300 sm:top-4 sm:px-4">
+    return (<motion.header initial={{ y: -80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.28 }} className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 transition-all duration-200 sm:top-4 sm:px-4">
       <nav className={`pointer-events-auto mx-auto flex h-14 w-full max-w-[calc(100vw-1.5rem)] items-center justify-between rounded-full px-4 glass sm:h-16 sm:max-w-6xl sm:px-6 ${scrolled ? "shadow-elegant" : ""}`}>
         <a href={isHomePage ? "#home" : "/"} onClick={(event) => handleLinkClick(event, "#home")} className="text-base font-bold text-foreground sm:text-xl">&lt;Mahendra /&gt;</a>
         <ul className="hidden items-center gap-4 xl:flex 2xl:gap-6">

@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GraduationCap, School, Award } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import ElectricBorder from "../reactbits/ElectricBorder";
 const items = [
     {
         icon: GraduationCap,
@@ -59,9 +60,9 @@ const Education = () => {
                     autoAlpha: 1,
                     scale: 1,
                     rotate: 0,
-                    duration: 0.58,
-                    ease: "back.out(2.4)",
-                    stagger: 0.18,
+                    duration: 0.32,
+                    ease: "back.out(1.8)",
+                    stagger: 0.08,
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: "top 62%",
@@ -82,18 +83,35 @@ const Education = () => {
           {/* Timeline line */}
           <div className="education-timeline-line absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 gradient-bg md:-translate-x-1/2"/>
 
-          {items.map((item, i) => (<motion.div key={item.title} initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className={`relative mb-10 md:w-1/2 ${i % 2 === 0 ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"} pl-12 md:pl-0`}>
+          {items.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-120px 0px" }}
+              transition={{ duration: 0.3 }}
+              className={`relative mb-10 md:w-1/2 ${i % 2 === 0 ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"} pl-12 md:pl-0 overflow-visible`}
+            >
               {/* Dot */}
               <div className={`education-timeline-dot absolute top-4 w-8 h-8 rounded-full gradient-bg shadow-glow flex items-center justify-center ${i % 2 === 0 ? "left-0 md:left-auto md:-right-4" : "left-0 md:-left-4"}`}>
                 <item.icon className="w-4 h-4 text-primary-foreground"/>
               </div>
-              <div className="education-timeline-card glass rounded-2xl p-6 hover:shadow-glow transition-all">
-                <span className="text-xs font-semibold gradient-text uppercase tracking-wider">{item.period}</span>
-                <h3 className="text-lg font-bold mt-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground font-medium mb-2">{item.place}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-              </div>
-            </motion.div>))}
+              <ElectricBorder
+                color="#4A82E8"
+                speed={1}
+                chaos={0.12}
+                borderRadius={16}
+                borderOffset={20}
+              >
+                <div className="education-timeline-card glass rounded-2xl p-6 hover:shadow-glow transition-all h-full overflow-visible">
+                  <span className="text-xs font-semibold gradient-text uppercase tracking-wider">{item.period}</span>
+                  <h3 className="text-lg font-bold mt-1">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground font-medium mb-2">{item.place}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                </div>
+              </ElectricBorder>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>);

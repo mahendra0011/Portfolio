@@ -4,136 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Background</title>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
     <style>
         :root {
             --bg-color: #030712;
         }
-
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            width: 100%; 
-            height: 100%; 
-            overflow: hidden; 
-            background-color: var(--bg-color); 
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-color);
         }
-        
-        #webgl-canvas { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100vh; 
-            z-index: 0; 
+        #webgl-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
         }
-        
         .vignette {
-            position: absolute; 
+            position: absolute;
             inset: 0;
             background: radial-gradient(circle at center, transparent 20%, var(--bg-color) 120%);
-            z-index: 1; 
+            z-index: 1;
             pointer-events: none;
         }
     </style>
 </head>
 <body>
-
     <div id="webgl-canvas"></div>
     <div class="vignette"></div>
-
     <script>
-        // Theme support
         const urlParams = new URLSearchParams(window.location.search);
         const isLight = urlParams.get('theme') === 'light';
         const bgColor = isLight ? '#0a0a2e' : '#030712';
         document.documentElement.style.setProperty('--bg-color', bgColor);
 
-        // ==========================================
-        // 1. THREE.JS SETUP
-        // ==========================================
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(bgColor);
-        scene.fog = new THREE.FogExp2(bgColor, 0.015);
+        scene.fog = new THREE.FogExp2(bgColor, 0.012);
 
         const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.set(0, 10, 45);
 
-        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'low-power' });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
         document.getElementById('webgl-canvas').appendChild(renderer.domElement);
 
-        // ==========================================
-        // 2. LIGHTING
-        // ==========================================
-        scene.add(new THREE.AmbientLight(bgColor, 2));
-
-        const dirLight = new THREE.DirectionalLight('#ffffff', 2);
-        dirLight.position.set(20, 40, 20);
-        scene.add(dirLight);
-
-        // ==========================================
-        // 3. RIDGE NOISE TERRAIN
-        // ==========================================
-        function getRidgeNoise(x, z) {
-            let y = 0;
-            let amplitude = 4.0;
-            let frequency = 0.05;
-            
-            let noise1 = Math.sin(x * frequency) * Math.cos(z * frequency);
-            y += Math.abs(noise1) * amplitude;
-
-            let noise2 = Math.sin(x * frequency * 2.5 + z * frequency * 2) * 0.5;
-            y += Math.abs(noise2) * (amplitude * 0.5);
-            
-            return -y + 6; 
-        }
-
-        const geometry = new THREE.PlaneGeometry(160, 160, 100, 100);
-        geometry.rotateX(-Math.PI / 2);
-
-        const posAttribute = geometry.attributes.position;
-        const vertexData = [];
-        for (let i = 0; i < posAttribute.count; i++) {
-            vertexData.push({ x: posAttribute.getX(i), z: posAttribute.getZ(i) });
-        }
-
-        const terrainMaterial = new THREE.MeshStandardMaterial({
+        const terrainMaterial = new THREE.MeshBasicMaterial({
             color: bgColor,
-            roughness: 0.9,
-            metalness: 0.1,
-            flatShading: true
-        });
-
-        const wireMaterial = new THREE.MeshBasicMaterial({
-            color: '#ffffff',
             wireframe: true,
             transparent: true,
             opacity: 0.12
         });
 
+        const geometry = new THREE.PlaneGeometry(160, 160, 42, 42);
+        geometry.rotateX(-Math.PI / 2);
+        const posAttribute = geometry.attributes.position;
+        const baseVertices = [];
+
+        for (let i = 0; i < posAttribute.count; i++) {
+            baseVertices.push({ x: posAttribute.getX(i), z: posAttribute.getZ(i) });
+        }
+
         const terrain = new THREE.Mesh(geometry, terrainMaterial);
-        const wireframe = new THREE.Mesh(geometry, wireMaterial);
-        wireframe.position.y = 0.05; 
-        terrain.add(wireframe);
-        
         terrain.rotation.x = 0.1;
         scene.add(terrain);
 
-        // ==========================================
-        // 4. PARTICLES
-        // ==========================================
         const pGeo = new THREE.BufferGeometry();
-        const pCount = 600;
+        const pCount = 220;
         const pPos = new Float32Array(pCount * 3);
 
-        for(let i = 0; i < pCount * 3; i+=3) {
+        for (let i = 0; i < pCount * 3; i += 3) {
             pPos[i] = (Math.random() - 0.5) * 100;
-            pPos[i+1] = Math.random() * 30;
-            pPos[i+2] = (Math.random() - 0.5) * 100;
+            pPos[i + 1] = Math.random() * 30;
+            pPos[i + 2] = (Math.random() - 0.5) * 100;
         }
 
         pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
@@ -141,63 +90,69 @@
             size: 0.1,
             color: '#ffffff',
             transparent: true,
-            opacity: 0.4,
+            opacity: 0.32,
             blending: THREE.AdditiveBlending,
             depthWrite: false
         });
         const particles = new THREE.Points(pGeo, pMat);
         scene.add(particles);
 
-        // ==========================================
-        // 5. RENDER LOOP & PARALLAX
-        // ==========================================
         const clock = new THREE.Clock();
-        let mouseX = 0, mouseY = 0;
-        let targetX = 0, targetY = 0;
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        let lastFrame = 0;
 
         window.addEventListener('mousemove', (e) => {
-            targetX = (e.clientX - window.innerWidth / 2) * 0.0002;
-            targetY = (e.clientY - window.innerHeight / 2) * 0.0002;
-        });
+            targetX = (e.clientX - window.innerWidth / 2) * 0.00018;
+            targetY = (e.clientY - window.innerHeight / 2) * 0.00018;
+        }, { passive: true });
 
-        function animate() {
-            requestAnimationFrame(animate);
-            const time = clock.getElapsedTime();
+        const ridgeNoise = (x, z) => {
+            const n1 = Math.sin(x * 0.05) * Math.cos(z * 0.05);
+            const n2 = Math.sin(x * 0.125 + z * 0.1) * 0.5;
+            return (Math.abs(n1) * 4 + Math.abs(n2) * 2) * -1 + 6;
+        };
 
+        function renderFrame(time) {
+            requestAnimationFrame(renderFrame);
+
+            if (time - lastFrame < 50) return;
+            lastFrame = time;
+
+            const elapsed = clock.getElapsedTime();
             mouseX += (targetX - mouseX) * 0.04;
             mouseY += (targetY - mouseY) * 0.04;
-            camera.position.x = mouseX * 15;
-            camera.position.y = 10 - mouseY * 15;
-            camera.lookAt(0, 2, 0);
 
-            for (let i = 0; i < posAttribute.count; i++) {
-                const data = vertexData[i];
-                const zOffset = data.z - (time * 4);
-                
-                let y = getRidgeNoise(data.x, zOffset);
-                
-                const dist = Math.sqrt(data.x*data.x + data.z*data.z);
-                if (dist < 15) {
-                    y *= dist / 15; 
+            if (!reduceMotion) {
+                camera.position.x = mouseX * 12;
+                camera.position.y = 10 - mouseY * 12;
+                camera.lookAt(0, 2, 0);
+
+                for (let i = 0; i < posAttribute.count; i += 1) {
+                    const data = baseVertices[i];
+                    const zOffset = data.z - elapsed * 2.4;
+                    const dist = Math.sqrt(data.x * data.x + data.z * data.z);
+                    let y = ridgeNoise(data.x, zOffset);
+                    if (dist < 15) y *= dist / 15;
+                    posAttribute.setY(i, y);
                 }
-
-                posAttribute.setY(i, y);
+                posAttribute.needsUpdate = true;
+                particles.position.y = Math.sin(elapsed * 0.2) * 2;
+                particles.rotation.y = elapsed * 0.018;
             }
-            posAttribute.needsUpdate = true;
-            geometry.computeVertexNormals();
-
-            particles.position.y = Math.sin(time * 0.2) * 2;
-            particles.rotation.y = time * 0.03;
 
             renderer.render(scene, camera);
         }
-        animate();
+
+        requestAnimationFrame(renderFrame);
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+        }, { passive: true });
     </script>
 </body>
 </html>

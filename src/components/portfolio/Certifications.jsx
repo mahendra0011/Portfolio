@@ -40,18 +40,18 @@ const Certifications = () => (
       />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {certs.map((c, i) => (
-          <motion.a
-            key={c.title}
-            href={c.href}
-            target="_blank"
-            rel="noreferrer"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            whileHover={{ y: -8 }}
-            className="glass rounded-2xl overflow-hidden hover:shadow-glow transition-all group flex flex-col"
-          >
+<motion.a
+             key={c.title}
+             href={c.href}
+             target="_blank"
+             rel="noreferrer"
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true, margin: "-100px 0px" }}
+             transition={{ duration: 0.35, delay: i * 0.08 }}
+             whileHover={{ y: -8 }}
+             className="glass rounded-2xl overflow-hidden hover:shadow-glow transition-all group flex flex-col"
+           >
             <div className="relative aspect-[4/3] overflow-hidden bg-white p-3">
               {c.image ? (
                 <img

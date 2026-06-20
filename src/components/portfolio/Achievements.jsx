@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Trophy, Linkedin, Code2, GitBranch } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import ElectricBorder from "../reactbits/ElectricBorder";
 
 const items = [
   {
@@ -29,24 +30,33 @@ const Achievements = () => (
   <section id="achievements" className="section-grid relative overflow-hidden py-20 sm:py-24">
     <div className="container relative z-10">
       <SectionHeading eyebrow="Achievements" title="Milestones & Recognition" description="Highlights from my journey so far" />
-      <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto overflow-visible">
         {items.map((item, i) => (
-          <motion.div
-            key={item.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            whileHover={{ y: -6 }}
-            className="glass rounded-2xl p-6 flex gap-4 hover:shadow-glow transition-all group"
-          >
-            <div className="w-12 h-12 shrink-0 rounded-xl gradient-bg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <item.Icon className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h3 className="font-bold mb-1">{item.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-            </div>
+<motion.div
+             key={item.title}
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true, margin: "-100px 0px" }}
+             transition={{ duration: 0.3, delay: i * 0.08 }}
+             className="overflow-visible"
+         >
+            <ElectricBorder
+              color="#4A82E8"
+              speed={1}
+              chaos={0.12}
+              borderRadius={16}
+              borderOffset={20}
+            >
+              <div className="glass rounded-2xl p-6 flex gap-4 hover:shadow-glow transition-all group h-full overflow-visible">
+                <div className="w-12 h-12 shrink-0 rounded-xl gradient-bg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <item.Icon className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-bold mb-1">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+            </ElectricBorder>
           </motion.div>
         ))}
       </div>
