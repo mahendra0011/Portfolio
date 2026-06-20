@@ -45,11 +45,11 @@ const Certifications = () => (
              href={c.href}
              target="_blank"
              rel="noreferrer"
-             initial={{ opacity: 0, y: 30 }}
+             initial={{ opacity: 0, y: 10 }}
              whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true, margin: "-100px 0px" }}
-             transition={{ duration: 0.35, delay: i * 0.08 }}
-             whileHover={{ y: -8 }}
+             viewport={{ once: true, margin: "-260px 0px" }}
+             transition={{ duration: 0.12, delay: i * 0.015 }}
+             whileHover={{ y: -3 }}
              className="glass rounded-2xl overflow-hidden hover:shadow-glow transition-all group flex flex-col"
            >
             <div className="relative aspect-[4/3] overflow-hidden bg-white p-3">
@@ -62,7 +62,7 @@ const Certifications = () => (
                   loading="lazy"
                   decoding="async"
                   draggable="false"
-                  className="h-full w-full select-none rounded-lg object-contain transition-transform duration-500 group-hover:scale-[1.025]"
+                  className="h-full w-full select-none rounded-lg object-contain transition-transform duration-120 group-hover:scale-[1.01]"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center rounded-lg gradient-bg">

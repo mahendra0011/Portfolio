@@ -46,26 +46,26 @@ const Education = () => {
                     ease: "none",
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: "top 68%",
-                        end: "bottom 58%",
-                        scrub: 0.75,
+                        start: "top 86%",
+                        end: "bottom 64%",
+                        scrub: 0.05,
                     },
                 },
             );
 
             gsap.fromTo(
                 ".education-timeline-dot",
-                { autoAlpha: 0, scale: 0.25, rotate: -28 },
+                { autoAlpha: 0, scale: 0.82, rotate: 0 },
                 {
                     autoAlpha: 1,
                     scale: 1,
                     rotate: 0,
-                    duration: 0.32,
-                    ease: "back.out(1.8)",
-                    stagger: 0.08,
+                    duration: 0.12,
+                    ease: "power1.out",
+                    stagger: 0.01,
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: "top 62%",
+                        start: "top 86%",
                     },
                 },
             );
@@ -86,10 +86,10 @@ const Education = () => {
           {items.map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -10 : 10 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-180px 0px" }}
-              transition={{ duration: 0.3 }}
+              viewport={{ once: true, margin: "-260px 0px" }}
+              transition={{ duration: 0.12 }}
               className={`relative mb-10 md:w-1/2 ${i % 2 === 0 ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"} pl-12 md:pl-0 overflow-visible`}
             >
               {/* Dot */}
