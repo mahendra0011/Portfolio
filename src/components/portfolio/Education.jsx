@@ -87,7 +87,7 @@ const Education = () => {
               <div className={`education-timeline-dot absolute top-4 w-8 h-8 rounded-full gradient-bg shadow-glow flex items-center justify-center ${i % 2 === 0 ? "left-0 md:left-auto md:-right-4" : "left-0 md:-left-4"}`}>
                 <item.icon className="w-4 h-4 text-primary-foreground"/>
               </div>
-              <div className="education-timeline-card glass rounded-2xl p-6 hover:shadow-glow transition-shadow">
+              <div className="education-timeline-card glass rounded-2xl p-6 hover:shadow-glow transition-all">
                 <span className="text-xs font-semibold gradient-text uppercase tracking-wider">{item.period}</span>
                 <h3 className="text-lg font-bold mt-1">{item.title}</h3>
                 <p className="text-sm text-muted-foreground font-medium mb-2">{item.place}</p>

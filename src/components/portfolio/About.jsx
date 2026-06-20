@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
+import StatsSection from "./StatsSection";
 
 const About = () => {
   return (
@@ -52,6 +53,7 @@ const About = () => {
             </div>
           </motion.div>
         </div>
+        <StatsSection />
       </div>
     </section>
   );

@@ -418,17 +418,15 @@ All colors MUST be HSL.
     display: none !important;
   }
 
-  .portfolio-page .glass {
-    border-color: hsl(0 0% 100% / 0.7);
-    background-color: hsl(0 0% 100% / 0.58);
-    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.72), 0 18px 48px -32px hsl(217 96% 55% / 0.36);
-  }
+.portfolio-page .glass {
+     background-color: hsl(0 0% 100% / 0.58);
+     box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.72), 0 18px 48px -32px hsl(217 96% 55% / 0.36);
+   }
 
-  .dark .portfolio-page .glass {
-    border-color: hsl(0 0% 100% / 0.14);
-    background-color: hsl(222 47% 6% / 0.48);
-    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 20px 56px -28px hsl(0 0% 0% / 0.68);
-  }
+   .dark .portfolio-page .glass {
+     background-color: hsl(222 47% 6% / 0.48);
+     box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 20px 56px -28px hsl(0 0% 0% / 0.68);
+   }
 }
 
 @layer utilities {
@@ -445,32 +443,40 @@ All colors MUST be HSL.
   }
   /* Card Setup and Liquid Marble Effect */
   .exact-match-card {
-    width: 250px;
-    height: 250px;
-    border-radius: 60px;
-    border: 2px solid #4A82E8;
-
-    background: hsl(0 0% 100% / 0.58);
-
-    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.72), 0 18px 48px -32px hsl(217 96% 55% / 0.36), 0 0 60px -15px rgba(74, 130, 232, 0.45);
-    backdrop-filter: blur(16px);
-    transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.3s ease;
+    width: 250px; 
+    height: 250px; 
+    border-radius: 40px; 
+    border: 2.5px solid transparent;
+    background: 
+        linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box,
+        linear-gradient(110deg, #8fb8ff, #4A82E8, #c1b8fc, #4A82E8) border-box;
+    background-size: 200% auto;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1);
   }
 
   .exact-match-card:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 75px -5px rgba(74, 130, 232, 0.65);
   }
 
   .liquid-marble-fill {
-    background-image: url('https://www.shutterstock.com/shutterstock/videos/1023983276/thumb/1.jpg?ip=x480');
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/011/534/389/small/abstract-blue-shiny-texture-background-free-photo.jpg');
     background-size: cover;
-    background-position: center;
-    -webkit-background-clip: text;
     background-clip: text;
+    -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
     display: inline-block;
+  }
+
+  .page-background {
+    background-color: #0b0c10;
+    background: radial-gradient(circle at center, #161b22 0%, #0b0c10 70%);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .radial-glow-bg {
+    background: radial-gradient(circle at 100% 100%, rgba(74, 130, 232, 0.08) 0%, transparent 60%);
   }
 
   .gradient-text {
@@ -560,16 +566,21 @@ All colors MUST be HSL.
   :root:not(.dark) .education-timeline-dot::before {
     border-color: hsl(0 0% 0% / 0.28);
   }
-  .glass {
-    @apply border border-white/70 backdrop-blur-2xl;
-    background-color: hsl(0 0% 100% / 0.58);
-    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.72), 0 18px 48px -32px hsl(217 96% 55% / 0.36);
-  }
-  .dark .glass {
-    @apply border-white/10;
-    background-color: hsl(var(--background) / 0.58);
-    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 20px 52px -24px hsl(0 0% 0% / 0.58);
-  }
+.glass {
+     @apply backdrop-blur-2xl;
+     background-color: hsl(0 0% 100% / 0.58);
+     box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.72), 0 18px 48px -32px hsl(217 96% 55% / 0.36);
+     border: 2px solid #4A82E8;
+   }
+   .dark .glass {
+     background-color: hsl(var(--background) / 0.58);
+     box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 20px 52px -24px hsl(0 0% 0% / 0.58);
+     border: 2px solid #4A82E8;
+   }
+
+   .glass:hover {
+     border-color: hsl(var(--primary) / 0.4);
+   }
 
   .stat-card-glass {
     border-color: hsl(0 0% 100% / 0.12);

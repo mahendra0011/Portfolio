@@ -49,7 +49,7 @@ const Contact = () => {
         <SectionHeading eyebrow="Contact" title="Professional Inquiries" description="For project work, internships, or collaboration, send a concise message with the key details."/>
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="glass rounded-2xl p-6 md:p-8">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="glass rounded-2xl p-6 md:p-8 transition-all hover:shadow-glow">
             <div className="mb-7">
               <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
                 Available for selected opportunities
@@ -93,7 +93,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="glass rounded-2xl p-6 space-y-4">
+          <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="glass rounded-2xl p-6 space-y-4 transition-all hover:shadow-glow">
             <div>
               <h3 className="text-2xl font-bold">Send a message</h3>
               <p className="mt-2 text-sm text-muted-foreground">A brief, clear note helps me respond with the right next step.</p>
