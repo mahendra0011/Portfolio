@@ -80,18 +80,18 @@ const Services = () => (
               whileHover={{ y: -6 }}
               className="group flex h-full min-h-[360px] flex-col rounded-lg glass bg-background/70 p-5 shadow-elegant transition-all hover:bg-background hover:shadow-glow"
             >
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg gradient-bg shadow-glow transition-transform group-hover:scale-105">
-              <Icon className="h-6 w-6 text-primary-foreground" />
-            </div>
-            <h3 className="text-lg font-bold">{title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {highlights.map((highlight) => (
-                <span key={highlight} className="rounded-full bg-secondary/80 px-2.5 py-1 text-xs font-semibold text-secondary-foreground">
-                  {highlight}
-                </span>
-              ))}
-            </div>
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg gradient-bg shadow-glow transition-transform group-hover:scale-105">
+                <Icon className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <h3 className="text-lg font-bold">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {highlights.map((highlight) => (
+                  <span key={highlight} className="rounded-full bg-secondary/80 px-2.5 py-1 text-xs font-semibold text-secondary-foreground">
+                    {highlight}
+                  </span>
+                ))}
+              </div>
             </SpotlightCard>
           </ElectricBorder>
         ))}

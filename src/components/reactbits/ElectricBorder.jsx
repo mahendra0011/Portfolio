@@ -1,7 +1,7 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef, forwardRef } from 'react';
 import './ElectricBorder.css';
 
-const ElectricBorder = ({
+const ElectricBorder = forwardRef(({
   children,
   color = '#5227FF',
   speed = 1,
@@ -9,10 +9,13 @@ const ElectricBorder = ({
   borderRadius = 24,
   borderOffset = 15,
   className,
-  style
-}) => {
+  style,
+  as: Component = 'div',
+  ...props
+}, forwardedRef) => {
   const canvasRef = useRef(null);
-  const containerRef = useRef(null);
+  const fallbackContainerRef = useRef(null);
+  const containerRef = forwardedRef ?? fallbackContainerRef;
   const animationRef = useRef(null);
   const timeRef = useRef(0);
   const lastFrameTimeRef = useRef(0);
@@ -260,7 +263,7 @@ const ElectricBorder = ({
       }
       resizeObserver.disconnect();
     };
-  }, [color, speed, chaos, borderRadius, borderOffset, octavedNoise, getRoundedRectPoint]);
+  }, [color, speed, chaos, borderRadius, borderOffset, octavedNoise, getRoundedRectPoint, containerRef]);
 
   const vars = {
     '--electric-border-color': color,
@@ -269,7 +272,7 @@ const ElectricBorder = ({
   };
 
   return (
-    <div ref={containerRef} className={`electric-border ${className ?? ''}`} style={{ ...vars, ...style }}>
+    <Component ref={containerRef} {...props} className={`electric-border ${className ?? ''}`} style={{ ...vars, ...style }}>
       <div className="eb-canvas-container">
         <canvas ref={canvasRef} className="eb-canvas" />
       </div>
@@ -279,8 +282,8 @@ const ElectricBorder = ({
         <div className="eb-background-glow" />
       </div>
       <div className="eb-content">{children}</div>
-    </div>
+    </Component>
   );
-};
+});
 
 export default ElectricBorder;

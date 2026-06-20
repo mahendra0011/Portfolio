@@ -12,6 +12,7 @@ import SectionHeading from "./SectionHeading";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/reactbits/MagneticButton";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
+import ElectricBorder from "@/components/reactbits/ElectricBorder";
 
 const projects = [
   {
@@ -184,92 +185,101 @@ const Projects = () => {
         <motion.div layout className="project-grid mx-auto grid max-w-6xl gap-5 [perspective:1200px] md:grid-cols-2 md:gap-6">
           <AnimatePresence mode="popLayout">
             {visibleProjects.map((project, index) => (
-              <SpotlightCard
+              <motion.article
                 key={project.title}
-                as={motion.article}
                 layout
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
                 whileHover={{ y: -10, rotateX: 1.5 }}
-                className="project-card group relative flex min-h-[390px] flex-col overflow-hidden rounded-xl glass p-4 transition-all will-change-transform hover:shadow-glow sm:p-5"
+                className="project-card group relative flex min-h-[390px] flex-col overflow-visible rounded-xl glass shadow-elegant transition-all will-change-transform hover:shadow-glow"
               >
-                <div className="absolute -inset-px gradient-bg opacity-0 group-hover:opacity-10 transition-opacity rounded-xl pointer-events-none" />
-                {project.image && (
-                  <div className="project-media relative mb-5 aspect-[1.55/1] overflow-hidden rounded-lg border border-border/60 bg-background/80 shadow-inner sm:aspect-[1.9/1]">
-                    <img
-                      src={project.image}
-                      alt={project.imageAlt}
-                      loading="lazy"
-                      decoding="async"
-                      draggable="false"
-                      className="project-image absolute inset-0 h-full w-full origin-center select-none object-contain object-center p-1 will-change-transform"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent pointer-events-none" />
-                  </div>
-                )}
-                <div className="flex items-start justify-between gap-4 mb-5">
-                  <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg border border-border/70 bg-background shadow-glow">
-                    <img
-                      src={project.icon}
-                      alt={`${project.title} icon`}
-                      loading="lazy"
-                      decoding="async"
-                      draggable="false"
-                      className="h-full w-full select-none object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-wrap justify-end gap-2">
-                    {project.featured && (
-                      <span className="inline-flex max-w-full items-center gap-1 rounded-full gradient-bg px-3 py-1 text-xs font-semibold text-primary-foreground">
-                        <Star className="w-3 h-3 fill-current" /> Featured
-                      </span>
-                    )}
-                    {project.event && (
-                      <span className="inline-flex max-w-full items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                        <Sparkles className="w-3 h-3" /> {project.event}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <h3 className="mb-3 text-lg font-bold transition-colors group-hover:gradient-text sm:text-xl">{project.title}</h3>
-                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech) => (
-                    <span key={tech} className="text-xs px-2.5 py-1 rounded-full bg-secondary/80 text-secondary-foreground font-medium">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-auto flex flex-wrap gap-2">
-                  {project.github && (
-                    <MagneticButton strength={0.16}>
-                      <Button size="sm" variant="outline" asChild className="group">
-                        <a href={project.github} target="_blank" rel="noreferrer">
-                          <Github className="w-4 h-4 mr-1.5 transition-transform group-hover:-rotate-6" /> Code
-                        </a>
-                      </Button>
-                    </MagneticButton>
+                <ElectricBorder
+                  as="div"
+                  className="relative h-full w-full"
+                >
+                  <SpotlightCard
+                    as="div"
+                    className="relative h-full w-full overflow-hidden rounded-xl p-4 sm:p-5"
+                  >
+                  <div className="absolute -inset-px gradient-bg opacity-0 group-hover:opacity-10 transition-opacity rounded-xl pointer-events-none" />
+                  {project.image && (
+                    <div className="project-media relative mb-5 aspect-[1.55/1] overflow-hidden rounded-lg border border-border/60 bg-background/80 shadow-inner sm:aspect-[1.9/1]">
+                      <img
+                        src={project.image}
+                        alt={project.imageAlt}
+                        loading="lazy"
+                        decoding="async"
+                        draggable="false"
+                        className="project-image absolute inset-0 h-full w-full origin-center select-none object-contain object-center p-1 will-change-transform"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent pointer-events-none" />
+                    </div>
                   )}
-                  {project.demo && (
-                    <MagneticButton strength={0.16}>
-                      <Button size="sm" asChild className="group gradient-bg">
-                        <a
-                          href={project.demo}
-                          target={isExternal(project.demo) ? "_blank" : undefined}
-                          rel={isExternal(project.demo) ? "noreferrer" : undefined}
-                        >
-                          <ExternalLink className="w-4 h-4 mr-1.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /> {isExternal(project.demo) ? "Live" : "Preview"}
-                        </a>
-                      </Button>
-                    </MagneticButton>
-                  )}
-                </div>
-              </SpotlightCard>
+                  <div className="flex items-start justify-between gap-4 mb-5">
+                    <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg border border-border/70 bg-background shadow-glow">
+                      <img
+                        src={project.icon}
+                        alt={`${project.title} icon`}
+                        loading="lazy"
+                        decoding="async"
+                        draggable="false"
+                        className="h-full w-full select-none object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-wrap justify-end gap-2">
+                      {project.featured && (
+                        <span className="inline-flex max-w-full items-center gap-1 rounded-full gradient-bg px-3 py-1 text-xs font-semibold text-primary-foreground">
+                          <Star className="w-3 h-3 fill-current" /> Featured
+                        </span>
+                      )}
+                      {project.event && (
+                        <span className="inline-flex max-w-full items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                          <Sparkles className="w-3 h-3" /> {project.event}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <h3 className="mb-3 text-lg font-bold transition-colors group-hover:gradient-text sm:text-xl">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{project.description}</p>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="text-xs px-2.5 py-1 rounded-full bg-secondary/80 text-secondary-foreground font-medium">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    {project.github && (
+                      <MagneticButton strength={0.16}>
+                        <Button size="sm" variant="outline" asChild className="group">
+                          <a href={project.github} target="_blank" rel="noreferrer">
+                            <Github className="w-4 h-4 mr-1.5 transition-transform group-hover:-rotate-6" /> Code
+                          </a>
+                        </Button>
+                      </MagneticButton>
+                    )}
+                    {project.demo && (
+                      <MagneticButton strength={0.16}>
+                        <Button size="sm" asChild className="group gradient-bg">
+                          <a
+                            href={project.demo}
+                            target={isExternal(project.demo) ? "_blank" : undefined}
+                            rel={isExternal(project.demo) ? "noreferrer" : undefined}
+                          >
+                            <ExternalLink className="w-4 h-4 mr-1.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /> {isExternal(project.demo) ? "Live" : "Preview"}
+                          </a>
+                        </Button>
+                      </MagneticButton>
+                    )}
+                  </div>
+                </SpotlightCard>
+              </ElectricBorder>
+              </motion.article>
             ))}
           </AnimatePresence>
         </motion.div>
