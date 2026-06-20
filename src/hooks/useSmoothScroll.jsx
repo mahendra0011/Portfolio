@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,7 +15,7 @@ export const useSmoothScroll = () => {
 
     const lenis = new Lenis({
       autoRaf: true,
-      duration: 0.42,
+      duration: 0.28,
       easing: easeOutCubic,
       smoothWheel: true,
       wheelMultiplier: 1.08,

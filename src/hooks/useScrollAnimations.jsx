@@ -18,7 +18,7 @@ export const useScrollAnimations = () => {
 
     const ctx = gsap.context(() => {
       gsap.utils.toArray("[data-scroll-parallax]").forEach((element) => {
-        const distance = numberFromDataset(element.dataset.scrollParallax, -32);
+        const distance = numberFromDataset(element.dataset.scrollParallax, -6);
         const trigger = element.dataset.scrollTrigger
           ? document.querySelector(element.dataset.scrollTrigger)
           : element.parentElement || element;
@@ -31,7 +31,7 @@ export const useScrollAnimations = () => {
             trigger,
             start: "top bottom",
             end: "bottom top",
-            scrub: 0.2,
+            scrub: 0.03,
           },
         });
       });
