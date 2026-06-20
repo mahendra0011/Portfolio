@@ -34,10 +34,10 @@ const Achievements = () => (
         {items.map((item, i) => (
 <motion.div
              key={item.title}
-             initial={{ opacity: 0, y: 30 }}
+             initial={{ opacity: 0, y: 10 }}
              whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true, margin: "-100px 0px" }}
-             transition={{ duration: 0.3, delay: i * 0.08 }}
+             viewport={{ once: true, margin: "-260px 0px" }}
+             transition={{ duration: 0.12, delay: i * 0.015 }}
              className="overflow-visible"
          >
             <ElectricBorder

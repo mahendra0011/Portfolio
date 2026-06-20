@@ -18,6 +18,8 @@ const FloatingProfileImage = () => {
     const aboutSection = document.getElementById("about");
 
     if (!frame || !heroAnchor || !aboutAnchor || !aboutSection) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if ((window.deviceMemory && window.deviceMemory <= 4) || window.matchMedia("(max-width: 899px)").matches) return;
 
     let startRect = null;
     let endRect = null;
@@ -77,9 +79,9 @@ const FloatingProfileImage = () => {
 
     const trigger = ScrollTrigger.create({
       trigger: aboutSection,
-      start: "top bottom",
+      start: "top 76%",
       end: "top top",
-      scrub: true,
+      scrub: 0.02,
       invalidateOnRefresh: true,
       onUpdate: (self) => moveImage(self.progress),
       onLeave: () => placeAt(endRect),
@@ -88,21 +90,6 @@ const FloatingProfileImage = () => {
         captureRects();
         moveImage(self.progress);
       },
-    });
-
-    const settleTrigger = ScrollTrigger.create({
-      trigger: aboutSection,
-      start: "top top",
-      end: "bottom top",
-      onEnter: () => placeAt(endRect),
-      onUpdate: () => {
-        if (endRect) {
-          gsap.set(frame, { top: endRect.top - window.scrollY });
-        }
-      },
-      onEnterBack: () => placeAt(endRect),
-      onLeave: () => gsap.set(frame, { opacity: 0 }),
-      onLeaveBack: () => placeAt(endRect),
     });
 
     let resizeTimer = 0;
@@ -132,7 +119,6 @@ const FloatingProfileImage = () => {
       window.removeEventListener("orientationchange", handleResize);
       img?.removeEventListener("load", init);
       trigger.kill();
-      settleTrigger.kill();
     };
   }, []);
 
@@ -164,8 +150,9 @@ const FloatingProfileImage = () => {
         <img
           src={profileImg}
           alt="Mahendra Prajapati portrait"
+          loading="eager"
           decoding="async"
-          fetchpriority="high"
+          fetchPriority="high"
           draggable="false"
           className="h-full w-full select-none object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
         />
