@@ -1,5 +1,5 @@
 const HEADER_OFFSET = 80;
-const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+const easeOutCubic = (t) => 1 - Math.pow(1 - t, 2.4);
 
 export const scrollToHash = (hash, { updateHash = true } = {}) => {
   if (typeof window === "undefined" || !hash?.startsWith("#")) return false;
@@ -15,7 +15,7 @@ export const scrollToHash = (hash, { updateHash = true } = {}) => {
 
   if (window.__portfolioLenis?.scrollTo) {
     window.__portfolioLenis.scrollTo(top, {
-      duration: 1.05,
+      duration: 0.25,
       easing: easeOutCubic,
     });
   } else {
