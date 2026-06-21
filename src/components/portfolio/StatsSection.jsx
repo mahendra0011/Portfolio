@@ -69,9 +69,6 @@ const StatsSection = () => {
 
     {/* Tech Stack Marquee */}
     <div className="relative mt-16 sm:mt-20">
-      <h3 className="mb-6 text-center text-2xl font-bold sm:text-3xl md:text-4xl">
-        <span className="gradient-text">Building Impactful Digital Products</span>
-      </h3>
       <SlidingLogoMarquee
         items={[
           { id: "javascript", name: "JavaScript", content: <SiJavascript className="h-full w-full" style={{ color: "#F7DF1E" }} />, href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
