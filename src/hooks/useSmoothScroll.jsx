@@ -13,7 +13,6 @@ export const useSmoothScroll = () => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
     if (window.deviceMemory && window.deviceMemory <= 4) return undefined;
 
-    // Lenis v1.3 ke liye sahi API
     const lenis = new Lenis({
       autoRaf: true,
       duration: 1.2,
@@ -25,12 +24,17 @@ export const useSmoothScroll = () => {
     });
     window.__portfolioLenis = lenis;
 
-    // CRITICAL: Lenis ko GSAP ScrollTrigger ke saath sync karo
-    // Yeh batata hai ki scroll position lenis se aayegi, browser native se nahi
+    // CRITICAL: scrollerProxy ko BOTH getter aur setter chahiye!
+    // GSAP pin element ko scroll position SET karta hai, isliye setter zaroori hai
+    // Sirf getter dene se pinning visually break ho jayegi - cards normally scroll karenge
     ScrollTrigger.scrollerProxy(window, {
-      scrollTop() {
-        const top = lenis.scroll ?? window.scrollY;
-        return top;
+      scrollTop(value) {
+        if (arguments.length) {
+          // SETTER — GSAP pin karne ke liye scroll position set karta hai
+          lenis.scrollTo(value, { immediate: true });
+        }
+        // GETTER — GSAP current scroll position padhta hai
+        return lenis.scroll ?? window.scrollY;
       },
       getBoundingClientRect() {
         return {
@@ -43,10 +47,6 @@ export const useSmoothScroll = () => {
       pinType: "transform",
     });
 
-    // IMPORTANT: normalizeScroll Lenis ke saath use mat karo.
-    // Sirf lenis.on("scroll", ScrollTrigger.update) kaafi hai.
-
-    // Yeh batata hai ki saare ScrollTrigger window ko scroller maane
     ScrollTrigger.defaults({ scroller: window });
 
     lenis.on("scroll", ScrollTrigger.update);
