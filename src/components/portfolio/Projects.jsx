@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 import SectionHeading from './SectionHeading';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,7 +13,6 @@ const projects = [
         tags: ["React", "Node.js", "Express.js", "MongoDB", "JWT", "Multer", "Cloudinary", "PDFKit"],
         links: ["GitHub", "Live"],
         featured: true,
-        event: null,
         image: "/projects/medicore.png",
         imageAlt: "MediCore healthcare landing page screenshot",
         color: "#BBACAF",
@@ -28,7 +26,6 @@ const projects = [
         tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "OTP", "Reports"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/evento.png",
         imageAlt: "EventO event booking platform landing page screenshot",
         color: "#977F6D",
@@ -42,7 +39,6 @@ const projects = [
         tags: ["JavaScript", "React", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Payments"],
         links: ["GitHub", "Live", "SIH 2025"],
         featured: false,
-        event: "Smart India Hackathon 2025",
         image: "/projects/mindsupport.png",
         imageAlt: "MindSupport mental wellness platform landing page screenshot",
         color: "#C2491D",
@@ -56,7 +52,6 @@ const projects = [
         tags: ["React", "Node.js", "Express.js", "MongoDB", "Cloudinary", "JWT"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/movix.png",
         imageAlt: "MoviX movie ticket booking platform landing page screenshot",
         color: "#6B8E23",
@@ -70,7 +65,6 @@ const projects = [
         tags: ["React", "Node.js", "Express.js", "MongoDB", "Search", "Marketplace"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/rentpe.png",
         imageAlt: "RentPE room rental marketplace landing page screenshot",
         color: "#4A6741",
@@ -84,7 +78,6 @@ const projects = [
         tags: ["React", "Express.js", "Socket.IO", "MongoDB", "PWA", "Android"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/temptalk.png",
         imageAlt: "TempTalk anonymous chat platform landing page screenshot",
         color: "#5B4E77",
@@ -98,7 +91,6 @@ const projects = [
         tags: ["React", "Node.js", "Express.js", "MongoDB", "Gemini AI", "PDF", "YouTube"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/studybuddy.png",
         imageAlt: "StudyBuddy AI study platform landing page screenshot",
         color: "#3D5A80",
@@ -112,7 +104,6 @@ const projects = [
         tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "Image Uploads"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/lost-and-found.png",
         imageAlt: "LostAndFound platform landing page screenshot",
         color: "#8B3A3A",
@@ -126,7 +117,6 @@ const projects = [
         tags: ["React", "Redux", "MUI", "Shadcn", "Socket.io", "Express"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/placeholder.svg",
         imageAlt: "CloudNest file system screenshot",
         color: "#1e293b",
@@ -140,7 +130,6 @@ const projects = [
         tags: ["React 18", "Vite", "Tailwind", "Framer Motion", "GSAP"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/placeholder.svg",
         imageAlt: "IntegrateKit directory screenshot",
         color: "#0f172a",
@@ -154,7 +143,6 @@ const projects = [
         tags: ["MERN", "Coming Soon"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/placeholder.svg",
         imageAlt: "HireInterns platform screenshot",
         color: "#334155",
@@ -168,7 +156,6 @@ const projects = [
         tags: ["React", "Coming Soon"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/placeholder.svg",
         imageAlt: "One in A million platform screenshot",
         color: "#020617",
@@ -182,7 +169,6 @@ const projects = [
         tags: ["React", "Node.js", "MongoDB"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/placeholder.svg",
         imageAlt: "CivicIssue platform screenshot",
         color: "#1e293b",
@@ -196,7 +182,6 @@ const projects = [
         tags: ["Next.js", "Tailwind"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/placeholder.svg",
         imageAlt: "Project Nexus screenshot",
         color: "#0f172a",
@@ -210,7 +195,6 @@ const projects = [
         tags: ["Frontend", "UI/UX", "Coming Soon"],
         links: ["GitHub", "Live"],
         featured: false,
-        event: null,
         image: "/projects/placeholder.svg",
         imageAlt: "Apex Fitness Club screenshot",
         color: "#334155",
@@ -219,7 +203,6 @@ const projects = [
     },
 ];
 
-// SVG Icons as React Components
 const GithubIcon = () => (
     <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
@@ -233,86 +216,66 @@ const LiveIcon = () => (
 );
 
 const Projects = () => {
+    const containerRef = useRef(null);
     const cardsRef = useRef([]);
 
     useEffect(() => {
-        // 1. Initialize Lenis for Butter Smooth Scroll — exactly like the HTML file
-        const lenis = new Lenis({
-            lerp: 0.03,
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            smoothTouch: false,
-            touchMultiplier: 1.5,
-            wheelMultiplier: 0.8,
-            infinite: false,
-        });
+        // No local Lenis! useSmoothScroll.jsx handles that globally.
+        // GSAP ScrollTrigger + Lenis sync already done in useSmoothScroll.jsx.
 
-        lenis.on('scroll', ScrollTrigger.update);
+        // Use timeout to ensure all cards are mounted
+        const timeout = setTimeout(() => {
+            const cards = cardsRef.current;
+            const triggers = [];
 
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
-        gsap.ticker.lagSmoothing(0);
+            cards.forEach((wrapper, i) => {
+                if (!wrapper) return;
+                if (i === cards.length - 1) return;
 
-        // 2. Setup GSAP ScrollTrigger for Layered Stack Effect — exactly like the HTML file
-        const cards = cardsRef.current;
+                const cardInner = wrapper.querySelector('.project-card');
+                if (!cardInner) return;
 
-        cards.forEach((wrapper, i) => {
-            if (!wrapper) return;
-            if (i === cards.length - 1) return; // Last card static rehta hai
-
-            const cardInner = wrapper.querySelector('.project-card');
-
-            gsap.to(cardInner, {
-                scale: 0.92,
-                ease: "none",
-                scrollTrigger: {
+                // Use GSAP pin instead of CSS sticky (sticky breaks with Lenis v1.3+)
+                const trigger = ScrollTrigger.create({
                     trigger: wrapper,
                     start: "top top",
                     end: "bottom top",
-                    scrub: 0.5,
-                    invalidateOnRefresh: true,
-                }
+                    pin: true,
+                    pinSpacing: false,
+                    anticipatePin: 1,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        const scale = 1 - progress * 0.08;
+                        gsap.set(cardInner, { scale });
+                    },
+                });
+                triggers.push(trigger);
             });
-        });
 
-        ScrollTrigger.refresh();
+            ScrollTrigger.refresh();
 
-        // 3. Add Lenis CSS to the document head (needed for proper Lenis functioning)
-        const styleId = 'lenis-styles-projects';
-        if (!document.getElementById(styleId)) {
-            const style = document.createElement('style');
-            style.id = styleId;
-            style.textContent = `
-                html.lenis, html.lenis body { height: auto; }
-                .lenis.lenis-smooth { scroll-behavior: auto !important; }
-                .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-                .lenis.lenis-stopped { overflow: hidden; }
-                .lenis.lenis-scrolling iframe { pointer-events: none; }
-            `;
-            document.head.appendChild(style);
-        }
+            // Store triggers on ref for cleanup
+            Projects._triggers = triggers;
+        }, 100);
 
-        // 4. Cleanup
         return () => {
-            lenis.destroy();
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-            const s = document.getElementById(styleId);
-            if (s) s.remove();
+            clearTimeout(timeout);
+            if (Projects._triggers) {
+                Projects._triggers.forEach(t => t.kill());
+                Projects._triggers = null;
+            }
+            ScrollTrigger.refresh();
         };
     }, []);
 
     return (
         <section id="projects" className="relative bg-slate-950 text-white">
 
-            {/* Scrollbar hide styles */}
             <style>{`
                 .hide-scrollbar::-webkit-scrollbar { display: none; }
                 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
             `}</style>
 
-            {/* Section Heading */}
             <div className="container mx-auto px-4 pt-20 sm:pt-24 pb-12">
                 <SectionHeading
                     eyebrow="Projects"
@@ -321,99 +284,89 @@ const Projects = () => {
                 />
             </div>
 
-            {/* Projects Container */}
-            <main className="relative pb-[10vh]">
-                {projects.map((proj, index) => {
-                    return (
+            <main ref={containerRef} className="relative">
+                {projects.map((proj, index) => (
+                    <div
+                        key={index}
+                        ref={(el) => (cardsRef.current[index] = el)}
+                        className="h-screen flex items-start justify-center px-4"
+                    >
                         <div
-                            key={index}
-                            ref={(el) => (cardsRef.current[index] = el)}
-                            className="h-screen flex items-start justify-center sticky px-4"
-                            style={{ top: `calc(12vh + ${index * 12}px)` }}
+                            className="project-card origin-top w-full max-w-[1200px] md:w-[90vw] h-[70vh] max-h-[500px] min-h-[400px] rounded-[28px] p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[0_-20px_50px_rgba(0,0,0,0.6)] border-t border-white/15 border-l border-white/5 border-r border-white/5 border-b border-black/50 will-change-transform"
+                            style={{
+                                backgroundColor: proj.color,
+                                transform: 'translateZ(0)',
+                                backfaceVisibility: 'hidden',
+                                WebkitFontSmoothing: 'antialiased'
+                            }}
                         >
-                            <div
-                                className="project-card origin-top w-full max-w-[1200px] md:w-[90vw] h-[70vh] max-h-[500px] min-h-[400px] rounded-[28px] p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[0_-20px_50px_rgba(0,0,0,0.6)] border-t border-white/15 border-l border-white/5 border-r border-white/5 border-b border-black/50 will-change-transform"
-                                style={{
-                                    backgroundColor: proj.color,
-                                    transform: 'translateZ(0)',
-                                    backfaceVisibility: 'hidden',
-                                    WebkitFontSmoothing: 'antialiased'
-                                }}
-                            >
-                                {/* Left Side: Content Wrapper */}
-                                <div className="flex-1 flex flex-col h-full">
-
-                                    {/* Text Content (Scrollable) */}
-                                    <div className="flex-1 overflow-y-auto pr-2 hide-scrollbar">
-                                        <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight leading-tight">
-                                            {proj.title}
-                                        </h2>
-                                        <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-medium opacity-90">
-                                            {proj.description}
-                                        </p>
-                                        <div className="flex flex-wrap gap-2 mb-2">
-                                            {proj.tags.map((tag, tIndex) => (
-                                                <span key={tIndex} className="bg-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Buttons Container (Pinned at Bottom) */}
-                                    <div className="pt-6 mt-2 border-t border-white/10 flex flex-wrap gap-3">
-                                        {proj.links.map((link, lIndex) => {
-                                            const label = link.toLowerCase();
-                                            if (label.includes("github")) {
-                                                return (
-                                                    <a key={lIndex} href={proj.ghLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white border border-gray-600 text-sm font-bold rounded-xl hover:bg-gray-800 transition-colors shadow-lg">
-                                                        <GithubIcon /> {link}
-                                                    </a>
-                                                );
-                                            } else if (label.includes("live") || label.includes("sih")) {
-                                                return (
-                                                    <a key={lIndex} href={proj.demoLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg">
-                                                        <LiveIcon /> {link}
-                                                    </a>
-                                                );
-                                            } else {
-                                                return (
-                                                    <span key={lIndex} className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl shadow-lg">
-                                                        {link}
-                                                    </span>
-                                                );
-                                            }
-                                        })}
-                                        {proj.featured && (
-                                            <span className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl shadow-lg">
-                                                ⭐ Featured
+                            <div className="flex-1 flex flex-col h-full">
+                                <div className="flex-1 overflow-y-auto pr-2 hide-scrollbar">
+                                    <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight leading-tight">
+                                        {proj.title}
+                                    </h2>
+                                    <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-medium opacity-90">
+                                        {proj.description}
+                                    </p>
+                                    <div className="flex flex-wrap gap-2 mb-2">
+                                        {proj.tags.map((tag, tIndex) => (
+                                            <span key={tIndex} className="bg-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide">
+                                                {tag}
                                             </span>
-                                        )}
+                                        ))}
                                     </div>
                                 </div>
 
-                                {/* Right Side: Image */}
-                                <div className="flex-1 rounded-2xl overflow-hidden bg-black/30 border border-white/5 min-h-[200px] md:min-h-0 hidden md:block">
-                                    <img
-                                        src={proj.image}
-                                        alt={proj.imageAlt}
-                                        loading="lazy"
-                                        decoding="async"
-                                        draggable="false"
-                                        className="w-full h-full object-cover select-none"
-                                        onError={(e) => {
-                                            const text = encodeURIComponent(proj.title.split(' -')[0].split(' (')[0]);
-                                            e.target.src = `https://via.placeholder.com/800x600/000000/ffffff?text=${text}`;
-                                        }}
-                                    />
+                                <div className="pt-6 mt-2 border-t border-white/10 flex flex-wrap gap-3">
+                                    {proj.links.map((link, lIndex) => {
+                                        const label = link.toLowerCase();
+                                        if (label.includes("github")) {
+                                            return (
+                                                <a key={lIndex} href={proj.ghLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white border border-gray-600 text-sm font-bold rounded-xl hover:bg-gray-800 transition-colors shadow-lg">
+                                                    <GithubIcon /> {link}
+                                                </a>
+                                            );
+                                        } else if (label.includes("live") || label.includes("sih")) {
+                                            return (
+                                                <a key={lIndex} href={proj.demoLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg">
+                                                    <LiveIcon /> {link}
+                                                </a>
+                                            );
+                                        } else {
+                                            return (
+                                                <span key={lIndex} className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl shadow-lg">
+                                                    {link}
+                                                </span>
+                                            );
+                                        }
+                                    })}
+                                    {proj.featured && (
+                                        <span className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl shadow-lg">
+                                            ⭐ Featured
+                                        </span>
+                                    )}
                                 </div>
                             </div>
+
+                            <div className="flex-1 rounded-2xl overflow-hidden bg-black/30 border border-white/5 min-h-[200px] md:min-h-0 hidden md:block">
+                                <img
+                                    src={proj.image}
+                                    alt={proj.imageAlt}
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable="false"
+                                    className="w-full h-full object-cover select-none"
+                                    onError={(e) => {
+                                        const text = encodeURIComponent(proj.title.split(' -')[0].split(' (')[0]);
+                                        e.target.src = `https://via.placeholder.com/800x600/000000/ffffff?text=${text}`;
+                                    }}
+                                />
+                            </div>
                         </div>
-                    );
-                })}
+                    </div>
+                ))}
             </main>
 
-            {/* End Spacer */}
             <div className="h-[40vh] flex flex-col items-center justify-center text-slate-500 text-xl gap-4">
                 <p className="font-bold text-3xl tracking-tight">End of Projects</p>
                 <p className="text-slate-600">That's all folks! ✨</p>
