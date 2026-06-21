@@ -1,0 +1,755 @@
+app.jsx import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; import { Provider } from "react-redux"; import { useEffect } from "react"; import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; import { Toaster as Sonner } from "@/components/ui/sonner"; import { Toaster } from "@/components/ui/toaster"; import { TooltipProvider } from "@/components/ui/tooltip"; import { ThemeProvider } from "@/hooks/useTheme"; import { useSmoothScroll } from "@/hooks/useSmoothScroll"; import { scrollToHash } from "@/lib/scrollToHash"; import { store } from "@/store/portfolioStore"; import Index from "./pages/Index.jsx"; import NotFound from "./pages/NotFound.jsx"; import Resume from "./components/portfolio/Resume.jsx"; import OakameLoader from "@/components/portfolio/OakameLoader";  const queryClient = new QueryClient();  const AppRoutes = () => {   const location = useLocation();    useSmoothScroll();    useEffect(() => {     if (!location.hash) return undefined;      let timeoutId;     let attempts = 0;      const tryScrollToHash = () => {       if (scrollToHash(location.hash, { updateHash: false })) {         return;       }        if (attempts < 20) {         attempts += 1;         timeoutId = window.setTimeout(tryScrollToHash, 50);       }     };      timeoutId = window.setTimeout(tryScrollToHash, 50);      return () => window.clearTimeout(timeoutId);   }, [location.hash, location.pathname]);    return (     <Routes>       <Route path="/" element={<Index />}/>       <Route path="/resume" element={<Resume />}/>       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}       <Route path="*" element={<NotFound />}/>     </Routes>   ); };  const App = () => {   return (<QueryClientProvider client={queryClient}>     <Provider store={store}>       <ThemeProvider>         <TooltipProvider>           <OakameLoader />           <Toaster />           <Sonner />           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>             <AppRoutes />           </BrowserRouter>         </TooltipProvider>       </ThemeProvider>     </Provider>   </QueryClientProvider>); }; export default App; and main.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />); in reactbits folder the magnaticbutton.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />);  scrollstack.css .scroll-stack-scroller {   position: relative;   width: 100%;   height: 100%;   overflow-y: auto;   overflow-x: visible;   overscroll-behavior: contain;   -webkit-overflow-scrolling: touch;   scroll-behavior: smooth;   -webkit-transform: translateZ(0);   transform: translateZ(0);   will-change: scroll-position; }  .scroll-stack-inner {   padding: 20vh 5rem 50rem;   min-height: 100vh; }  .scroll-stack-card {   transform-origin: top center;   will-change: transform, filter;   backface-visibility: hidden;   height: 20rem;   width: 100%;   margin: 30px 0;   padding: 3rem;   border-radius: 40px;   box-sizing: border-box;   -webkit-transform: translateZ(0);   transform: translateZ(0);   position: relative;   border: 2.5px solid #4A82E8;   background: linear-gradient(135deg, hsl(var(--background) / 0.58), hsl(var(--background) / 0.32));   backdrop-filter: blur(16px);   -webkit-backdrop-filter: blur(16px);   box-shadow: 0 8px 32px -12px hsl(217 96% 55% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.06); }  .dark .scroll-stack-card {   background: linear-gradient(135deg, hsl(222 47% 6% / 0.65), hsl(222 47% 4% / 0.8));   box-shadow: 0 8px 32px -12px hsl(0 0% 0% / 0.68), inset 0 1px 0 hsl(0 0% 100% / 0.08); }  .scroll-stack-end {   width: 100%;   height: 1px; } scrollstack.jsx app.jsx import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; import { Provider } from "react-redux"; import { useEffect } from "react"; import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; import { Toaster as Sonner } from "@/components/ui/sonner"; import { Toaster } from "@/components/ui/toaster"; import { TooltipProvider } from "@/components/ui/tooltip"; import { ThemeProvider } from "@/hooks/useTheme"; import { useSmoothScroll } from "@/hooks/useSmoothScroll"; import { scrollToHash } from "@/lib/scrollToHash"; import { store } from "@/store/portfolioStore"; import Index from "./pages/Index.jsx"; import NotFound from "./pages/NotFound.jsx"; import Resume from "./components/portfolio/Resume.jsx"; import OakameLoader from "@/components/portfolio/OakameLoader";  const queryClient = new QueryClient();  const AppRoutes = () => {   const location = useLocation();    useSmoothScroll();    useEffect(() => {     if (!location.hash) return undefined;      let timeoutId;     let attempts = 0;      const tryScrollToHash = () => {       if (scrollToHash(location.hash, { updateHash: false })) {         return;       }        if (attempts < 20) {         attempts += 1;         timeoutId = window.setTimeout(tryScrollToHash, 50);       }     };      timeoutId = window.setTimeout(tryScrollToHash, 50);      return () => window.clearTimeout(timeoutId);   }, [location.hash, location.pathname]);    return (     <Routes>       <Route path="/" element={<Index />}/>       <Route path="/resume" element={<Resume />}/>       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}       <Route path="*" element={<NotFound />}/>     </Routes>   ); };  const App = () => {   return (<QueryClientProvider client={queryClient}>     <Provider store={store}>       <ThemeProvider>         <TooltipProvider>           <OakameLoader />           <Toaster />           <Sonner />           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>             <AppRoutes />           </BrowserRouter>         </TooltipProvider>       </ThemeProvider>     </Provider>   </QueryClientProvider>); }; export default App; and main.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />); in reactbits folder the magnaticbutton.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />);  scrollstack.css .scroll-stack-scroller {   position: relative;   width: 100%;   height: 100%;   overflow-y: auto;   overflow-x: visible;   overscroll-behavior: contain;   -webkit-overflow-scrolling: touch;   scroll-behavior: smooth;   -webkit-transform: translateZ(0);   transform: translateZ(0);   will-change: scroll-position; }  .scroll-stack-inner {   padding: 20vh 5rem 50rem;   min-height: 100vh; }  .scroll-stack-card {   transform-origin: top center;   will-change: transform, filter;   backface-visibility: hidden;   height: 20rem;   width: 100%;   margin: 30px 0;   padding: 3rem;   border-radius: 40px;   box-sizing: border-box;   -webkit-transform: translateZ(0);   transform: translateZ(0);   position: relative;   border: 2.5px solid #4A82E8;   background: linear-gradient(135deg, hsl(var(--background) / 0.58), hsl(var(--background) / 0.32));   backdrop-filter: blur(16px);   -webkit-backdrop-filter: blur(16px);   box-shadow: 0 8px 32px -12px hsl(217 96% 55% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.06); }  .dark .scroll-stack-card {   background: linear-gradient(135deg, hsl(222 47% 6% / 0.65), hsl(222 47% 4% / 0.8));   box-shadow: 0 8px 32px -12px hsl(0 0% 0% / 0.68), inset 0 1px 0 hsl(0 0% 100% / 0.08); }  .scroll-stack-end {   width: 100%;   height: 1px; } scrollstack.jsx app.jsx import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; import { Provider } from "react-redux"; import { useEffect } from "react"; import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; import { Toaster as Sonner } from "@/components/ui/sonner"; import { Toaster } from "@/components/ui/toaster"; import { TooltipProvider } from "@/components/ui/tooltip"; import { ThemeProvider } from "@/hooks/useTheme"; import { useSmoothScroll } from "@/hooks/useSmoothScroll"; import { scrollToHash } from "@/lib/scrollToHash"; import { store } from "@/store/portfolioStore"; import Index from "./pages/Index.jsx"; import NotFound from "./pages/NotFound.jsx"; import Resume from "./components/portfolio/Resume.jsx"; import OakameLoader from "@/components/portfolio/OakameLoader";  const queryClient = new QueryClient();  const AppRoutes = () => {   const location = useLocation();    useSmoothScroll();    useEffect(() => {     if (!location.hash) return undefined;      let timeoutId;     let attempts = 0;      const tryScrollToHash = () => {       if (scrollToHash(location.hash, { updateHash: false })) {         return;       }        if (attempts < 20) {         attempts += 1;         timeoutId = window.setTimeout(tryScrollToHash, 50);       }     };      timeoutId = window.setTimeout(tryScrollToHash, 50);      return () => window.clearTimeout(timeoutId);   }, [location.hash, location.pathname]);    return (     <Routes>       <Route path="/" element={<Index />}/>       <Route path="/resume" element={<Resume />}/>       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}       <Route path="*" element={<NotFound />}/>     </Routes>   ); };  const App = () => {   return (<QueryClientProvider client={queryClient}>     <Provider store={store}>       <ThemeProvider>         <TooltipProvider>           <OakameLoader />           <Toaster />           <Sonner />           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>             <AppRoutes />           </BrowserRouter>         </TooltipProvider>       </ThemeProvider>     </Provider>   </QueryClientProvider>); }; export default App; and main.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />); in reactbits folder the magnaticbutton.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />);  scrollstack.css .scroll-stack-scroller {   position: relative;   width: 100%;   height: 100%;   overflow-y: auto;   overflow-x: visible;   overscroll-behavior: contain;   -webkit-overflow-scrolling: touch;   scroll-behavior: smooth;   -webkit-transform: translateZ(0);   transform: translateZ(0);   will-change: scroll-position; }  .scroll-stack-inner {   padding: 20vh 5rem 50rem;   min-height: 100vh; }  .scroll-stack-card {   transform-origin: top center;   will-change: transform, filter;   backface-visibility: hidden;   height: 20rem;   width: 100%;   margin: 30px 0;   padding: 3rem;   border-radius: 40px;   box-sizing: border-box;   -webkit-transform: translateZ(0);   transform: translateZ(0);   position: relative;   border: 2.5px solid #4A82E8;   background: linear-gradient(135deg, hsl(var(--background) / 0.58), hsl(var(--background) / 0.32));   backdrop-filter: blur(16px);   -webkit-backdrop-filter: blur(16px);   box-shadow: 0 8px 32px -12px hsl(217 96% 55% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.06); }  .dark .scroll-stack-card {   background: linear-gradient(135deg, hsl(222 47% 6% / 0.65), hsl(222 47% 4% / 0.8));   box-shadow: 0 8px 32px -12px hsl(0 0% 0% / 0.68), inset 0 1px 0 hsl(0 0% 100% / 0.08); }  .scroll-stack-end {   width: 100%;   height: 1px; } scrollstack.jsx app.jsx import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; import { Provider } from "react-redux"; import { useEffect } from "react"; import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; import { Toaster as Sonner } from "@/components/ui/sonner"; import { Toaster } from "@/components/ui/toaster"; import { TooltipProvider } from "@/components/ui/tooltip"; import { ThemeProvider } from "@/hooks/useTheme"; import { useSmoothScroll } from "@/hooks/useSmoothScroll"; import { scrollToHash } from "@/lib/scrollToHash"; import { store } from "@/store/portfolioStore"; import Index from "./pages/Index.jsx"; import NotFound from "./pages/NotFound.jsx"; import Resume from "./components/portfolio/Resume.jsx"; import OakameLoader from "@/components/portfolio/OakameLoader";  const queryClient = new QueryClient();  const AppRoutes = () => {   const location = useLocation();    useSmoothScroll();    useEffect(() => {     if (!location.hash) return undefined;      let timeoutId;     let attempts = 0;      const tryScrollToHash = () => {       if (scrollToHash(location.hash, { updateHash: false })) {         return;       }        if (attempts < 20) {         attempts += 1;         timeoutId = window.setTimeout(tryScrollToHash, 50);       }     };      timeoutId = window.setTimeout(tryScrollToHash, 50);      return () => window.clearTimeout(timeoutId);   }, [location.hash, location.pathname]);    return (     <Routes>       <Route path="/" element={<Index />}/>       <Route path="/resume" element={<Resume />}/>       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}       <Route path="*" element={<NotFound />}/>     </Routes>   ); };  const App = () => {   return (<QueryClientProvider client={queryClient}>     <Provider store={store}>       <ThemeProvider>         <TooltipProvider>           <OakameLoader />           <Toaster />           <Sonner />           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>             <AppRoutes />           </BrowserRouter>         </TooltipProvider>       </ThemeProvider>     </Provider>   </QueryClientProvider>); }; export default App; and main.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />); in reactbits folder the magnaticbutton.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />);  scrollstack.css .scroll-stack-scroller {   position: relative;   width: 100%;   height: 100%;   overflow-y: auto;   overflow-x: visible;   overscroll-behavior: contain;   -webkit-overflow-scrolling: touch;   scroll-behavior: smooth;   -webkit-transform: translateZ(0);   transform: translateZ(0);   will-change: scroll-position; }  .scroll-stack-inner {   padding: 20vh 5rem 50rem;   min-height: 100vh; }  .scroll-stack-card {   transform-origin: top center;   will-change: transform, filter;   backface-visibility: hidden;   height: 20rem;   width: 100%;   margin: 30px 0;   padding: 3rem;   border-radius: 40px;   box-sizing: border-box;   -webkit-transform: translateZ(0);   transform: translateZ(0);   position: relative;   border: 2.5px solid #4A82E8;   background: linear-gradient(135deg, hsl(var(--background) / 0.58), hsl(var(--background) / 0.32));   backdrop-filter: blur(16px);   -webkit-backdrop-filter: blur(16px);   box-shadow: 0 8px 32px -12px hsl(217 96% 55% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.06); }  .dark .scroll-stack-card {   background: linear-gradient(135deg, hsl(222 47% 6% / 0.65), hsl(222 47% 4% / 0.8));   box-shadow: 0 8px 32px -12px hsl(0 0% 0% / 0.68), inset 0 1px 0 hsl(0 0% 100% / 0.08); }  .scroll-stack-end {   width: 100%;   height: 1px; } scrollstack.jsx app.jsx import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; import { Provider } from "react-redux"; import { useEffect } from "react"; import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; import { Toaster as Sonner } from "@/components/ui/sonner"; import { Toaster } from "@/components/ui/toaster"; import { TooltipProvider } from "@/components/ui/tooltip"; import { ThemeProvider } from "@/hooks/useTheme"; import { useSmoothScroll } from "@/hooks/useSmoothScroll"; import { scrollToHash } from "@/lib/scrollToHash"; import { store } from "@/store/portfolioStore"; import Index from "./pages/Index.jsx"; import NotFound from "./pages/NotFound.jsx"; import Resume from "./components/portfolio/Resume.jsx"; import OakameLoader from "@/components/portfolio/OakameLoader";  const queryClient = new QueryClient();  const AppRoutes = () => {   const location = useLocation();    useSmoothScroll();    useEffect(() => {     if (!location.hash) return undefined;      let timeoutId;     let attempts = 0;      const tryScrollToHash = () => {       if (scrollToHash(location.hash, { updateHash: false })) {         return;       }        if (attempts < 20) {         attempts += 1;         timeoutId = window.setTimeout(tryScrollToHash, 50);       }     };      timeoutId = window.setTimeout(tryScrollToHash, 50);      return () => window.clearTimeout(timeoutId);   }, [location.hash, location.pathname]);    return (     <Routes>       <Route path="/" element={<Index />}/>       <Route path="/resume" element={<Resume />}/>       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}       <Route path="*" element={<NotFound />}/>     </Routes>   ); };  const App = () => {   return (<QueryClientProvider client={queryClient}>     <Provider store={store}>       <ThemeProvider>         <TooltipProvider>           <OakameLoader />           <Toaster />           <Sonner />           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>             <AppRoutes />           </BrowserRouter>         </TooltipProvider>       </ThemeProvider>     </Provider>   </QueryClientProvider>); }; export default App; and main.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />); in reactbits folder the magnaticbutton.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />);  scrollstack.css .scroll-stack-scroller {   position: relative;   width: 100%;   height: 100%;   overflow-y: auto;   overflow-x: visible;   overscroll-behavior: contain;   -webkit-overflow-scrolling: touch;   scroll-behavior: smooth;   -webkit-transform: translateZ(0);   transform: translateZ(0);   will-change: scroll-position; }  .scroll-stack-inner {   padding: 20vh 5rem 50rem;   min-height: 100vh; }  .scroll-stack-card {   transform-origin: top center;   will-change: transform, filter;   backface-visibility: hidden;   height: 20rem;   width: 100%;   margin: 30px 0;   padding: 3rem;   border-radius: 40px;   box-sizing: border-box;   -webkit-transform: translateZ(0);   transform: translateZ(0);   position: relative;   border: 2.5px solid #4A82E8;   background: linear-gradient(135deg, hsl(var(--background) / 0.58), hsl(var(--background) / 0.32));   backdrop-filter: blur(16px);   -webkit-backdrop-filter: blur(16px);   box-shadow: 0 8px 32px -12px hsl(217 96% 55% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.06); }  .dark .scroll-stack-card {   background: linear-gradient(135deg, hsl(222 47% 6% / 0.65), hsl(222 47% 4% / 0.8));   box-shadow: 0 8px 32px -12px hsl(0 0% 0% / 0.68), inset 0 1px 0 hsl(0 0% 100% / 0.08); }  .scroll-stack-end {   width: 100%;   height: 1px; } scrollstack.jsx app.jsx import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; import { Provider } from "react-redux"; import { useEffect } from "react"; import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"; import { Toaster as Sonner } from "@/components/ui/sonner"; import { Toaster } from "@/components/ui/toaster"; import { TooltipProvider } from "@/components/ui/tooltip"; import { ThemeProvider } from "@/hooks/useTheme"; import { useSmoothScroll } from "@/hooks/useSmoothScroll"; import { scrollToHash } from "@/lib/scrollToHash"; import { store } from "@/store/portfolioStore"; import Index from "./pages/Index.jsx"; import NotFound from "./pages/NotFound.jsx"; import Resume from "./components/portfolio/Resume.jsx"; import OakameLoader from "@/components/portfolio/OakameLoader";  const queryClient = new QueryClient();  const AppRoutes = () => {   const location = useLocation();    useSmoothScroll();    useEffect(() => {     if (!location.hash) return undefined;      let timeoutId;     let attempts = 0;      const tryScrollToHash = () => {       if (scrollToHash(location.hash, { updateHash: false })) {         return;       }        if (attempts < 20) {         attempts += 1;         timeoutId = window.setTimeout(tryScrollToHash, 50);       }     };      timeoutId = window.setTimeout(tryScrollToHash, 50);      return () => window.clearTimeout(timeoutId);   }, [location.hash, location.pathname]);    return (     <Routes>       <Route path="/" element={<Index />}/>       <Route path="/resume" element={<Resume />}/>       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}       <Route path="*" element={<NotFound />}/>     </Routes>   ); };  const App = () => {   return (<QueryClientProvider client={queryClient}>     <Provider store={store}>       <ThemeProvider>         <TooltipProvider>           <OakameLoader />           <Toaster />           <Sonner />           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>             <AppRoutes />           </BrowserRouter>         </TooltipProvider>       </ThemeProvider>     </Provider>   </QueryClientProvider>); }; export default App; and main.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />); in reactbits folder the magnaticbutton.jsx import { createRoot } from "react-dom/client"; import App from "./App.jsx"; import "./index.css"; createRoot(document.getElementById("root")).render(<App />);  scrollstack.css .scroll-stack-scroller {   position: relative;   width: 100%;   height: 100%;   overflow-y: auto;   overflow-x: visible;   overscroll-behavior: contain;   -webkit-overflow-scrolling: touch;   scroll-behavior: smooth;   -webkit-transform: translateZ(0);   transform: translateZ(0);   will-change: scroll-position; }  .scroll-stack-inner {   padding: 20vh 5rem 50rem;   min-height: 100vh; }  .scroll-stack-card {   transform-origin: top center;   will-change: transform, filter;   backface-visibility: hidden;   height: 20rem;   width: 100%;   margin: 30px 0;   padding: 3rem;   border-radius: 40px;   box-sizing: border-box;   -webkit-transform: translateZ(0);   transform: translateZ(0);   position: relative;   border: 2.5px solid #4A82E8;   background: linear-gradient(135deg, hsl(var(--background) / 0.58), hsl(var(--background) / 0.32));   backdrop-filter: blur(16px);   -webkit-backdrop-filter: blur(16px);   box-shadow: 0 8px 32px -12px hsl(217 96% 55% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.06); }  .dark .scroll-stack-card {   background: linear-gradient(135deg, hsl(222 47% 6% / 0.65), hsl(222 47% 4% / 0.8));   box-shadow: 0 8px 32px -12px hsl(0 0% 0% / 0.68), inset 0 1px 0 hsl(0 0% 100% / 0.08); }  .scroll-stack-end {   width: 100%;   height: 1px; } 
+scrollstack.jsx is import { useEffect, useRef, useState } from "react";
+
+const defaultBgs = [
+  "https://images.pexels.com/photos/6985136/pexels-photo-6985136.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/6985128/pexels-photo-6985128.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/2847648/pexels-photo-2847648.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1200",
+];
+
+const ScrollStack = ({
+  cards,
+  cardHeight = 420,
+  scrollPerCard = 300,
+  className = "",
+}) => {
+  const containerRef = useRef(null);
+  const stickyPanelRef = useRef(null);
+  const [scrolled, setScrolled] = useState(0);
+  const [vpH, setVpH] = useState(600);
+
+  const scrollParentRef = useRef(null);
+  const containerOffsetRef = useRef(0);
+
+  const list = cards.slice(0, 5);
+  const N = list.length;
+  const totalScrollZone = N * scrollPerCard;
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    let scrollParent = null;
+    let node = el.parentElement;
+    while (node) {
+      const s = window.getComputedStyle(node);
+      if (/auto|scroll/.test(s.overflow) || /auto|scroll/.test(s.overflowY)) {
+        scrollParent = node;
+        break;
+      }
+      node = node.parentElement;
+    }
+    scrollParentRef.current = scrollParent;
+
+    const measure = () => {
+      const sp = scrollParentRef.current;
+      const elRect = el.getBoundingClientRect();
+      if (sp) {
+        const spRect = sp.getBoundingClientRect();
+        containerOffsetRef.current = elRect.top - spRect.top + sp.scrollTop;
+        setVpH(sp.clientHeight);
+      } else {
+        containerOffsetRef.current = elRect.top + window.scrollY;
+        setVpH(window.innerHeight);
+      }
+    };
+
+    setTimeout(measure, 100);
+
+    let animId = null;
+    const update = () => {
+      if (animId) cancelAnimationFrame(animId);
+      animId = requestAnimationFrame(() => {
+        const sp = scrollParentRef.current;
+        const scrollTop = sp ? sp.scrollTop : window.scrollY;
+        const currentScrolled = Math.max(0, scrollTop - containerOffsetRef.current);
+
+        if (stickyPanelRef.current) {
+          const innerTop = Math.min(currentScrolled, totalScrollZone);
+          stickyPanelRef.current.style.transform = `translateY(${innerTop}px)`;
+        }
+
+        setScrolled(currentScrolled);
+      });
+    };
+
+    const targets = [window];
+    let n = el.parentElement;
+    while (n) {
+      const s = window.getComputedStyle(n);
+      if (/auto|scroll/.test(s.overflow) || /auto|scroll/.test(s.overflowY)) {
+        targets.push(n);
+      }
+      n = n.parentElement;
+    }
+
+    targets.forEach((t) => t.addEventListener("scroll", update, { passive: true }));
+    window.addEventListener("resize", () => { measure(); update(); }, { passive: true });
+    update();
+
+    return () => {
+      targets.forEach((t) => t.removeEventListener("scroll", update));
+      if (animId) cancelAnimationFrame(animId);
+    };
+  }, [totalScrollZone]);
+
+  const h = vpH || 600;
+
+  return (
+    <div
+      ref={containerRef}
+      className={`relative w-full ${className}`}
+      style={{ height: h + totalScrollZone }}
+    >
+      <div
+        ref={stickyPanelRef}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: h,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          willChange: "transform",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: "56rem",
+            margin: "0 auto",
+            padding: "0 1rem",
+            height: cardHeight,
+          }}
+        >
+          {list.map((card, index) => {
+            const bg = card.backgroundImage ?? defaultBgs[index % defaultBgs.length];
+            const revealAt = index * scrollPerCard;
+            const isVisible = scrolled >= revealAt;
+
+            const above = Math.max(
+              0,
+              Math.min(N - 1 - index, Math.floor((scrolled - revealAt) / scrollPerCard))
+            );
+
+            const entryProgress = isVisible ? Math.min(1, (scrolled - revealAt) / 80) : 0;
+            const entryY = (1 - entryProgress) * 80;
+            const pushY = above * 12;
+            const scale = 1 - above * 0.03;
+            const opacity = isVisible ? Math.max(0.6, 1 - above * 0.1) : 0;
+
+            return (
+              <div
+                key={index}
+                className="absolute inset-x-0 overflow-hidden rounded-2xl shadow-2xl"
+                style={{
+                  height: cardHeight,
+                  top: 0,
+                  zIndex: 10 + index,
+                  transform: `translateY(${entryY - pushY}px) scale(${scale})`,
+                  opacity,
+                  transition:
+                    "transform 0.55s cubic-bezier(0.22,1,0.36,1), opacity 0.45s ease",
+                  willChange: "transform, opacity",
+                  transformOrigin: "center top",
+                }}
+              >
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `url('${bg}')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+                {card.badge && (
+                  <div className="absolute top-5 right-5 z-10">
+                    <span className="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-sm font-medium border border-white/30">
+                      {card.badge}
+                    </span>
+                  </div>
+                )}
+
+                <div className="absolute inset-0 flex items-end p-6 sm:p-10 z-10">
+                  {card.content ?? (
+                    <div className="max-w-lg">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
+                        {card.title}
+                      </h3>
+                      {card.subtitle && (
+                        <p className="text-white/70 text-sm sm:text-base leading-relaxed line-clamp-3">
+                          {card.subtitle}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                <div className="absolute bottom-5 right-6 z-10 text-white/40 text-xs font-mono tracking-widest">
+                  {String(index + 1).padStart(2, "0")} / {String(N).padStart(2, "0")}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="absolute right-5 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 z-50">
+          {list.map((_, i) => {
+            const active = scrolled >= i * scrollPerCard;
+            return (
+              <div
+                key={i}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: active ? 8 : 5,
+                  height: active ? 8 : 5,
+                  background: active ? "rgba(255,255,255,0.9)" : "rgba(120,120,120,0.4)",
+                  boxShadow: active ? "0 0 6px rgba(255,255,255,0.5)" : "none",
+                }}
+              />
+            );
+          })}
+        </div>
+
+        {scrolled < 20 && (
+          <div className="absolute bottom-8 inset-x-0 flex justify-center z-50 pointer-events-none">
+            <p className="text-xs text-white/40 tracking-[0.2em] uppercase animate-bounce">
+              scroll to explore
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ScrollStack; 
+
+SlidingLogoMarquee.jsx is 
+import React, { useRef, useState, useMemo } from "react";
+import { cn } from "@/lib/utils";
+import { Pause, Play } from "lucide-react";
+
+export function SlidingLogoMarquee({
+  items,
+  speed = 1,
+  pauseOnHover = true,
+  enableBlur = true,
+  blurIntensity = 1,
+  height = "100px",
+  width = "100%",
+  gap = "2rem",
+  scale = 1,
+  direction = "horizontal",
+  autoPlay = true,
+  backgroundColor = "transparent",
+  showGridBackground = false,
+  className,
+  onItemClick,
+  enableSpillEffect = false,
+  animationSteps = 8,
+  showControls = true,
+}) {
+  const containerRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
+
+  const duplicatedItems = useMemo(() => [...items, ...items], [items]);
+
+  const handleItemClick = (item) => {
+    if (item.href) {
+      window.open(item.href, "_blank", "noopener,noreferrer");
+    }
+    onItemClick?.(item);
+  };
+
+  const togglePlayState = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const blurDivs = Array.from({ length: animationSteps }, (_, index) => (
+    <div key={index} style={{ "--index": index }} className="absolute inset-0 z-[var(--index)]" />
+  ));
+
+  const itemRenderer = (item, index, isDuplicate) => (
+    <li
+      key={`${item.id}-${index}-${isDuplicate ? "dup" : "orig"}`}
+      className={cn(
+        "sliding-marquee-item text-foreground",
+        "grid place-items-center cursor-pointer transition-transform duration-200 ease-in-out",
+        "hover:scale-[1.05] focus:scale-[1.05] focus:outline-none focus:ring-2 focus:ring-primary",
+        "backdrop-blur-sm",
+      )}
+      onClick={() => handleItemClick(item)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleItemClick(item);
+        }
+      }}
+    >
+      <div className="h-3/5 w-auto">{item.content}</div>
+      {item.name && (
+        <span className="text-xs font-semibold text-muted-foreground mt-1 text-center leading-tight">
+          {item.name}
+        </span>
+      )}
+    </li>
+  );
+
+  return (
+    <>
+      <style>
+        {`
+        .sliding-marquee-container {
+          --speed: ${speed};
+          --gap: ${gap};
+          --blur: ${blurIntensity};
+          --blurs: ${animationSteps};
+          --duration: calc(200s / var(--speed));
+        }
+
+        @keyframes marquee-horizontal {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+
+        @keyframes marquee-vertical {
+          from { transform: translateY(0); }
+          to { transform: translateY(-50%); }
+        }
+
+        .sliding-marquee-list {
+          display: flex;
+          flex-shrink: 0;
+          min-width: 200%;
+          gap: var(--gap);
+          height: 100%;
+          align-items: center;
+          list-style-type: none;
+          padding-inline: 0;
+          margin: 0;
+          pointer-events: auto;
+          animation: marquee-horizontal var(--duration) linear infinite paused;
+          transform: translateZ(0);
+          will-change: transform;
+        }
+
+        .sliding-marquee-resizable[data-direction="vertical"] .sliding-marquee-list {
+          flex-direction: column;
+          min-width: unset;
+          min-height: 200%;
+          width: 100%;
+          animation: marquee-vertical var(--duration) linear infinite paused;
+        }
+
+        .sliding-marquee-item {
+          min-width: clamp(100px, 15vw, 200px);
+          height: 98%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+          font-size: clamp(1rem, 1vw + 0.5rem, 2rem);
+        }
+
+        [data-play-state="running"] .sliding-marquee-list {
+          animation-play-state: running !important;
+        }
+        [data-play-state="paused"] .sliding-marquee-list {
+          animation-play-state: paused !important;
+        }
+
+        .sliding-marquee-resizable {
+          overflow: hidden;
+          scale: var(--scale);
+          width: 100%;
+          height: ${height};
+          position: relative;
+        }
+
+        .sliding-marquee-inner {
+          height: 100%;
+          width: 100%;
+          position: relative;
+          mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
+          display: flex;
+          pointer-events: none;
+        }
+
+        .sliding-marquee-blur {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 25%;
+          z-index: 2;
+          pointer-events: none;
+        }
+        .sliding-marquee-blur--right { right: 0; }
+        .sliding-marquee-blur--left { left: 0; rotate: 180deg; }
+        .sliding-marquee-blur div {
+          mask: linear-gradient(90deg,
+            transparent calc(var(--index) * calc((100 / var(--blurs)) * 1%)),
+            black calc((var(--index) + 1) * calc((100 / var(--blurs)) * 1%)),
+            black calc((var(--index) + 2) * calc((100 / var(--blurs)) * 1%)),
+            transparent calc((var(--index) + 3) * calc((100 / var(--blurs)) * 1%)));
+          backdrop-filter: blur(calc((var(--index, 0) * var(--blur, 0)) * 1px));
+        }
+        .sliding-marquee-resizable[data-spill="true"] { container-type: size; }
+        .sliding-marquee-resizable[data-spill="true"] .sliding-marquee-inner::after {
+          content: "";
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          width: calc(var(--scale) * 10000vw);
+          height: calc(var(--scale) * 10000vh);
+          pointer-events: none;
+          translate: -50% -50%;
+          mask:
+            linear-gradient(white, white) 50% 50% / 100% 100% no-repeat,
+            linear-gradient(white, white) 50% 50% / 100cqi 100cqh no-repeat;
+          mask-composite: exclude;
+        }
+        `}
+      </style>
+
+      <div
+        ref={containerRef}
+        className={cn("sliding-marquee-container relative", className)}
+        style={{ width, background: backgroundColor, scale: scale }}
+        onMouseEnter={() => pauseOnHover && setIsPlaying(false)}
+        onMouseLeave={() => pauseOnHover && setIsPlaying(true)}
+      >
+        {showGridBackground && (
+          <div className="absolute inset-0 pointer-events-none opacity-5">
+            <div className="h-full w-full bg-[radial-gradient(#4b5563_1px,transparent_1px)] [background-size:16px_16px]" />
+          </div>
+        )}
+
+        <div
+          className="sliding-marquee-resizable"
+          data-direction={direction}
+          data-blurring={enableBlur}
+          data-play-state={isPlaying ? "running" : "paused"}
+          data-spill={enableSpillEffect}
+        >
+          <div className="sliding-marquee-inner">
+            {enableBlur && (
+              <div className="sliding-marquee-blur sliding-marquee-blur--left">
+                {blurDivs}
+              </div>
+            )}
+
+            <ul className="sliding-marquee-list text-foreground" aria-hidden={false}>
+              {items.map((item, index) => itemRenderer(item, index, false))}
+              {items.map((item, index) => itemRenderer(item, index, true))}
+            </ul>
+
+            {enableBlur && (
+              <div className="sliding-marquee-blur sliding-marquee-blur--right">
+                {blurDivs}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {showControls && (
+          <button
+            onClick={togglePlayState}
+            className={cn(
+              "absolute top-1/2 right-2 transform -translate-y-1/2 z-10 p-2 text-xs",
+              "bg-gray-800/50 text-white",
+              "rounded-full hover:bg-gray-700/70 transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-primary"
+            )}
+            aria-label={isPlaying ? "Pause animation" : "Play animation"}
+          >
+            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+          </button>
+        )}
+      </div>
+    </>
+  );
+}
+
+export default SlidingLogoMarquee;
+
+import React, { useRef, useState, useMemo } from "react";
+import { cn } from "@/lib/utils";
+import { Pause, Play } from "lucide-react";
+
+export function SlidingLogoMarquee({
+  items,
+  speed = 1,
+  pauseOnHover = true,
+  enableBlur = true,
+  blurIntensity = 1,
+  height = "100px",
+  width = "100%",
+  gap = "2rem",
+  scale = 1,
+  direction = "horizontal",
+  autoPlay = true,
+  backgroundColor = "transparent",
+  showGridBackground = false,
+  className,
+  onItemClick,
+  enableSpillEffect = false,
+  animationSteps = 8,
+  showControls = true,
+}) {
+  const containerRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
+
+  const duplicatedItems = useMemo(() => [...items, ...items], [items]);
+
+  const handleItemClick = (item) => {
+    if (item.href) {
+      window.open(item.href, "_blank", "noopener,noreferrer");
+    }
+    onItemClick?.(item);
+  };
+
+  const togglePlayState = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const blurDivs = Array.from({ length: animationSteps }, (_, index) => (
+    <div key={index} style={{ "--index": index }} className="absolute inset-0 z-[var(--index)]" />
+  ));
+
+  const itemRenderer = (item, index, isDuplicate) => (
+    <li
+      key={`${item.id}-${index}-${isDuplicate ? "dup" : "orig"}`}
+      className={cn(
+        "sliding-marquee-item text-foreground",
+        "grid place-items-center cursor-pointer transition-transform duration-200 ease-in-out",
+        "hover:scale-[1.05] focus:scale-[1.05] focus:outline-none focus:ring-2 focus:ring-primary",
+        "backdrop-blur-sm",
+      )}
+      onClick={() => handleItemClick(item)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleItemClick(item);
+        }
+      }}
+    >
+      <div className="h-3/5 w-auto">{item.content}</div>
+      {item.name && (
+        <span className="text-xs font-semibold text-muted-foreground mt-1 text-center leading-tight">
+          {item.name}
+        </span>
+      )}
+    </li>
+  );
+
+  return (
+    <>
+      <style>
+        {`
+        .sliding-marquee-container {
+          --speed: ${speed};
+          --gap: ${gap};
+          --blur: ${blurIntensity};
+          --blurs: ${animationSteps};
+          --duration: calc(200s / var(--speed));
+        }
+
+        @keyframes marquee-horizontal {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+
+        @keyframes marquee-vertical {
+          from { transform: translateY(0); }
+          to { transform: translateY(-50%); }
+        }
+
+        .sliding-marquee-list {
+          display: flex;
+          flex-shrink: 0;
+          min-width: 200%;
+          gap: var(--gap);
+          height: 100%;
+          align-items: center;
+          list-style-type: none;
+          padding-inline: 0;
+          margin: 0;
+          pointer-events: auto;
+          animation: marquee-horizontal var(--duration) linear infinite paused;
+          transform: translateZ(0);
+          will-change: transform;
+        }
+
+        .sliding-marquee-resizable[data-direction="vertical"] .sliding-marquee-list {
+          flex-direction: column;
+          min-width: unset;
+          min-height: 200%;
+          width: 100%;
+          animation: marquee-vertical var(--duration) linear infinite paused;
+        }
+
+        .sliding-marquee-item {
+          min-width: clamp(100px, 15vw, 200px);
+          height: 98%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+          font-size: clamp(1rem, 1vw + 0.5rem, 2rem);
+        }
+
+        [data-play-state="running"] .sliding-marquee-list {
+          animation-play-state: running !important;
+        }
+        [data-play-state="paused"] .sliding-marquee-list {
+          animation-play-state: paused !important;
+        }
+
+        .sliding-marquee-resizable {
+          overflow: hidden;
+          scale: var(--scale);
+          width: 100%;
+          height: ${height};
+          position: relative;
+        }
+
+        .sliding-marquee-inner {
+          height: 100%;
+          width: 100%;
+          position: relative;
+          mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
+          display: flex;
+          pointer-events: none;
+        }
+
+        .sliding-marquee-blur {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 25%;
+          z-index: 2;
+          pointer-events: none;
+        }
+        .sliding-marquee-blur--right { right: 0; }
+        .sliding-marquee-blur--left { left: 0; rotate: 180deg; }
+        .sliding-marquee-blur div {
+          mask: linear-gradient(90deg,
+            transparent calc(var(--index) * calc((100 / var(--blurs)) * 1%)),
+            black calc((var(--index) + 1) * calc((100 / var(--blurs)) * 1%)),
+            black calc((var(--index) + 2) * calc((100 / var(--blurs)) * 1%)),
+            transparent calc((var(--index) + 3) * calc((100 / var(--blurs)) * 1%)));
+          backdrop-filter: blur(calc((var(--index, 0) * var(--blur, 0)) * 1px));
+        }
+        .sliding-marquee-resizable[data-spill="true"] { container-type: size; }
+        .sliding-marquee-resizable[data-spill="true"] .sliding-marquee-inner::after {
+          content: "";
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          width: calc(var(--scale) * 10000vw);
+          height: calc(var(--scale) * 10000vh);
+          pointer-events: none;
+          translate: -50% -50%;
+          mask:
+            linear-gradient(white, white) 50% 50% / 100% 100% no-repeat,
+            linear-gradient(white, white) 50% 50% / 100cqi 100cqh no-repeat;
+          mask-composite: exclude;
+        }
+        `}
+      </style>
+
+      <div
+        ref={containerRef}
+        className={cn("sliding-marquee-container relative", className)}
+        style={{ width, background: backgroundColor, scale: scale }}
+        onMouseEnter={() => pauseOnHover && setIsPlaying(false)}
+        onMouseLeave={() => pauseOnHover && setIsPlaying(true)}
+      >
+        {showGridBackground && (
+          <div className="absolute inset-0 pointer-events-none opacity-5">
+            <div className="h-full w-full bg-[radial-gradient(#4b5563_1px,transparent_1px)] [background-size:16px_16px]" />
+          </div>
+        )}
+
+        <div
+          className="sliding-marquee-resizable"
+          data-direction={direction}
+          data-blurring={enableBlur}
+          data-play-state={isPlaying ? "running" : "paused"}
+          data-spill={enableSpillEffect}
+        >
+          <div className="sliding-marquee-inner">
+            {enableBlur && (
+              <div className="sliding-marquee-blur sliding-marquee-blur--left">
+                {blurDivs}
+              </div>
+            )}
+
+            <ul className="sliding-marquee-list text-foreground" aria-hidden={false}>
+              {items.map((item, index) => itemRenderer(item, index, false))}
+              {items.map((item, index) => itemRenderer(item, index, true))}
+            </ul>
+
+            {enableBlur && (
+              <div className="sliding-marquee-blur sliding-marquee-blur--right">
+                {blurDivs}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {showControls && (
+          <button
+            onClick={togglePlayState}
+            className={cn(
+              "absolute top-1/2 right-2 transform -translate-y-1/2 z-10 p-2 text-xs",
+              "bg-gray-800/50 text-white",
+              "rounded-full hover:bg-gray-700/70 transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-primary"
+            )}
+            aria-label={isPlaying ? "Pause animation" : "Play animation"}
+          >
+            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+          </button>
+        )}
+      </div>
+    </>
+  );
+}
+
+export default SlidingLogoMarquee;
+
+and the SpotlightCard.jsx is  
+
+import { forwardRef } from "react";
+import { cn } from "@/lib/utils";
+
+const SpotlightCard = forwardRef(
+  ({ as: Component = "div", className, children, ...props }, ref) => {
+    return (
+      <Component
+        ref={ref}
+        className={cn("reactbits-spotlight", className)}
+        {...props}
+      >
+        {children}
+      </Component>
+    );
+  }
+);
+
+SpotlightCard.displayName = "SpotlightCard";
+
+export default SpotlightCard;
