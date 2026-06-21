@@ -96,9 +96,12 @@ const projects = [
     },
 ];
 
-const Card = ({ project, i, progress, range, targetScale, count }) => {
+const Card = ({ project, i, progress, range, targetScale }) => {
     const cardScale = useTransform(progress, range, [1, targetScale]);
-    
+
+    const imgSrc = project.image;
+    const imgAlt = project.imageAlt;
+
     return (
         <div
             className="h-screen w-full sticky top-0 flex items-center justify-center px-4"
@@ -111,7 +114,7 @@ const Card = ({ project, i, progress, range, targetScale, count }) => {
                 }}
                 className="w-full max-w-5xl h-[500px] rounded-[25px] overflow-hidden shadow-2xl will-change-transform"
             >
-                    {/* LEFT - Description */}
+                <div className="h-full w-full flex flex-col lg:flex-row">
                     <div className="flex-1 flex flex-col justify-center px-8 lg:px-12 py-8 text-white">
                         <h2 className="text-2xl lg:text-3xl font-bold mb-3">{project.title}</h2>
                         <p className="text-sm text-white/80 leading-relaxed mb-5 line-clamp-4">
@@ -144,25 +147,18 @@ const Card = ({ project, i, progress, range, targetScale, count }) => {
                         </div>
                     </div>
 
-                    {/* RIGHT - Image */}
                     <div className="flex-1 min-h-[200px] lg:min-h-0 relative overflow-hidden">
-                        <div className="h-full w-full overflow-hidden">
-                            <img 
-                                src={project.image} 
-                                alt={project.imageAlt} 
-                                loading="lazy" 
-                                decoding="async" 
-                                draggable="false" 
-                                className="h-full w-full object-cover select-none"
-                                onError={(e) => {
-                                    const text = encodeURIComponent(project.title.split(' -')[0].split(' (')[0]);
-                                    e.target.src = `https://via.placeholder.com/800x600/000000/ffffff?text=${text}`;
-                                }}
-                            />
-                        </div>
+                        <img
+                            src={imgSrc}
+                            alt={imgAlt}
+                            loading="lazy"
+                            decoding="async"
+                            draggable="false"
+                            className="h-full w-full object-cover select-none"
+                        />
                     </div>
-                </motion.div>
-            </div>
+                </div>
+            </motion.div>
         </div>
     );
 };
@@ -200,7 +196,6 @@ const Projects = () => {
                             progress={scrollYProgress}
                             range={range}
                             targetScale={targetScale}
-                            count={count}
                         />
                     );
                 })}
