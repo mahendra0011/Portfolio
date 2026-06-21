@@ -59,5 +59,7 @@
   transform: scale(1.12);
   filter: blur(30px);
   opacity: 0.5;
-  background: radial-gradient(circle at 30% 50%, var(--electric-light-color), transparent 70%), linear-gradient(-45deg, var(--electric-light-color), transparent, var(--electric-border-color));
+  background:
+    radial-gradient(circle at 30% 50%, var(--electric-light-color), transparent 70%),
+    linear-gradient(-45deg, var(--electric-light-color), transparent, var(--electric-border-color));
 }
