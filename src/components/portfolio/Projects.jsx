@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ExternalLink, Github, Star, Sparkles } from "lucide-react";
 import SectionHeading from "./SectionHeading";
@@ -96,27 +96,23 @@ const projects = [
     },
 ];
 
-const Card = ({ project, i, progress, range, targetScale }) => {
-    const container = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: container,
-        offset: ["start end", "start start"],
-    });
-
-    const imageScale = useTransform(scrollYProgress, [0, 1], [2, 1]);
+const Card = ({ project, i, progress, range, targetScale, count }) => {
     const cardScale = useTransform(progress, range, [1, targetScale]);
-
+    const y = useTransform(progress, range, [0, -30 * (count - i - 1)]);
+    
     return (
-        <div ref={container} className="h-screen w-full sticky top-0 flex items-center justify-center">
-            <motion.div
-                style={{
-                    scale: cardScale,
-                    backgroundColor: project.color,
-                    top: `calc(-5vh + ${i * 25}px)`,
-                }}
-                className="relative w-full max-w-5xl h-[500px] rounded-[25px] overflow-hidden mx-auto shadow-2xl will-change-transform"
-            >
-                <div className="h-full w-full flex flex-col lg:flex-row">
+        <motion.div
+            style={{
+                scale: cardScale,
+                backgroundColor: project.color,
+                y,
+                position: 'fixed',
+                top: '12vh',
+                left: '50%',
+                xPercent: -50,
+            }}
+            className="w-full max-w-5xl h-[500px] rounded-[25px] overflow-hidden shadow-2xl will-change-transform"
+        >
                     {/* LEFT - Description */}
                     <div className="flex-1 flex flex-col justify-center px-8 lg:px-12 py-8 text-white">
                         <h2 className="text-2xl lg:text-3xl font-bold mb-3">{project.title}</h2>
@@ -152,21 +148,23 @@ const Card = ({ project, i, progress, range, targetScale }) => {
 
                     {/* RIGHT - Image */}
                     <div className="flex-1 min-h-[200px] lg:min-h-0 relative overflow-hidden">
-                        <div className="imageContainer h-full w-full overflow-hidden">
-                            <motion.div style={{ scale: imageScale }} className="inner h-full w-full will-change-transform">
-                                {project.image ? (
-                                    <img src={project.image} alt={project.imageAlt} loading="lazy" decoding="async" draggable="false" className="h-full w-full object-cover select-none" />
-                                ) : (
-                                    <div className="h-full w-full bg-white/10 flex items-center justify-center">
-                                        <span className="text-white/30 text-6xl font-bold">{project.title[0]}</span>
-                                    </div>
-                                )}
-                            </motion.div>
+                        <div className="h-full w-full overflow-hidden">
+                            <img 
+                                src={project.image} 
+                                alt={project.imageAlt} 
+                                loading="lazy" 
+                                decoding="async" 
+                                draggable="false" 
+                                className="h-full w-full object-cover select-none"
+                                onError={(e) => {
+                                    const text = encodeURIComponent(project.title.split(' -')[0].split(' (')[0]);
+                                    e.target.src = `https://via.placeholder.com/800x600/000000/ffffff?text=${text}`;
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
             </motion.div>
-        </div>
     );
 };
 
@@ -189,10 +187,12 @@ const Projects = () => {
                 />
             </div>
 
-            <main ref={container} className="relative">
+            <main ref={container} className="relative" style={{ height: `${count * 100}vh` }}>
                 {projects.map((project, i) => {
                     const targetScale = 1 - (count - i) * 0.05;
-                    const range = [i / count, 1];
+                    const start = i / count;
+                    const end = (i + 1) / count;
+                    const range = [start, end];
                     return (
                         <Card
                             key={project.title}
@@ -201,6 +201,7 @@ const Projects = () => {
                             progress={scrollYProgress}
                             range={range}
                             targetScale={targetScale}
+                            count={count}
                         />
                     );
                 })}
