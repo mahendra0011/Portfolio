@@ -17,13 +17,19 @@ const FloatingProfileImage = () => {
     const aboutAnchor = document.getElementById("about-photo-anchor");
     const aboutSection = document.getElementById("about");
 
-    if (!frame || !heroAnchor || !aboutAnchor || !aboutSection) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if ((window.deviceMemory && window.deviceMemory <= 4) || window.matchMedia("(max-width: 899px)").matches) return;
+    if (!frame || !heroAnchor || !aboutAnchor || !aboutSection) {
+      console.log("[FloatingImage] Missing elements:", { frame: !!frame, hero: !!heroAnchor, about: !!aboutAnchor, section: !!aboutSection });
+      return;
+    }
+    if (window.deviceMemory && window.deviceMemory <= 4) {
+      console.log("[FloatingImage] Low-end device");
+      return;
+    }
 
     let startRect = null;
     let endRect = null;
     let rafId = 0;
+    let resizeTimer = 0;
 
     const captureRects = () => {
       const heroRect = heroAnchor.getBoundingClientRect();
@@ -43,6 +49,8 @@ const FloatingProfileImage = () => {
         width: aboutRect.width,
         height: aboutRect.height,
       };
+
+      return startRect.width > 0 && endRect.width > 0;
     };
 
     const placeAt = (rect) => {
@@ -54,8 +62,6 @@ const FloatingProfileImage = () => {
         width: rect.width,
         height: rect.height,
         opacity: 1,
-        x: 0,
-        y: 0,
       });
     };
 
@@ -79,23 +85,53 @@ const FloatingProfileImage = () => {
 
     const trigger = ScrollTrigger.create({
       trigger: aboutSection,
-      start: "top 76%",
+      start: "top bottom",
       end: "top top",
-      scrub: 0.02,
+      scrub: 1.2,
       invalidateOnRefresh: true,
       onUpdate: (self) => moveImage(self.progress),
-      onLeave: () => placeAt(endRect),
-      onLeaveBack: () => placeAt(startRect),
+      onLeave: () => {
+        captureRects();
+        placeAt(endRect);
+      },
+      onLeaveBack: () => {
+        captureRects();
+        placeAt(startRect);
+      },
       onRefresh: (self) => {
         captureRects();
         moveImage(self.progress);
       },
     });
 
-    let resizeTimer = 0;
+    const settleTrigger = ScrollTrigger.create({
+      trigger: aboutSection,
+      start: "top top",
+      end: "bottom top",
+      onEnter: () => {
+        captureRects();
+        placeAt(endRect);
+      },
+      onUpdate: () => {
+        if (endRect) {
+          gsap.set(frame, { top: endRect.top - window.scrollY });
+        }
+      },
+      onEnterBack: () => {
+        captureRects();
+        placeAt(endRect);
+      },
+      onLeave: () => gsap.set(frame, { opacity: 0 }),
+      onLeaveBack: () => {
+        captureRects();
+        placeAt(endRect);
+      },
+    });
+
+    let resizeTimerId = 0;
     const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
+      clearTimeout(resizeTimerId);
+      resizeTimerId = setTimeout(() => {
         captureRects();
         ScrollTrigger.refresh();
       }, 80);
@@ -113,12 +149,13 @@ const FloatingProfileImage = () => {
 
     return () => {
       cancelAnimationFrame(rafId);
-      clearTimeout(resizeTimer);
+      clearTimeout(resizeTimerId);
       window.removeEventListener("resize", handleResize);
       window.visualViewport?.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
       img?.removeEventListener("load", init);
       trigger.kill();
+      settleTrigger.kill();
     };
   }, []);
 
@@ -152,7 +189,7 @@ const FloatingProfileImage = () => {
           alt="Mahendra Prajapati portrait"
           loading="eager"
           decoding="async"
-          fetchPriority="high"
+          fetchpriority="high"
           draggable="false"
           className="h-full w-full select-none object-contain object-bottom drop-shadow-[0_34px_48px_rgba(15,23,42,0.42)]"
         />

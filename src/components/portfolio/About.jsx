@@ -14,14 +14,13 @@ const About = () => {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-12">
 
           {/* LEFT COLUMN — anchor for floating image to land here */}
-          <div className="about-photo-stage relative mx-auto flex w-full max-w-[430px] items-end justify-center lg:mx-0">
+          <div className="about-photo-stage relative mx-auto flex w-full max-w-[430px] items-start justify-center lg:mx-0">
             {/* FIXED: explicit size so getBoundingClientRect() returns usable rect */}
             <div
               id="about-photo-anchor"
               aria-hidden="true"
               className="floating-photo-anchor floating-photo-anchor--about
-                         w-full h-[320px] sm:h-[380px] lg:h-[440px]
-                         pointer-events-none select-none"
+                         w-full pointer-events-none select-none"
             />
           </div>
 
@@ -30,7 +29,7 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-260px 0px" }}
             transition={{ duration: 0.12 }}
-            className="space-y-6 text-muted-foreground leading-relaxed"
+            className="space-y-6 text-muted-foreground leading-relaxed -mt-32 lg:-mt-40"
           >
             <div className="space-y-5">
               <p>

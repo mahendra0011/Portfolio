@@ -190,7 +190,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="relative flex justify-center lg:h-full lg:self-end lg:items-end lg:justify-end">
+<motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:h-full lg:self-end lg:justify-end lg:items-end">
           <div className="hero-photo-stage relative w-full max-w-[470px]">
             <div className="absolute inset-y-0 left-0 right-2 opacity-60 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.18)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.13)_1px,transparent_1px)] [background-size:34px_34px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
             <div className="absolute left-8 top-[24%] h-44 w-48 opacity-45 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.76)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
@@ -198,10 +198,10 @@ const Hero = () => {
             <div
               id="hero-photo-anchor"
               aria-hidden="true"
-              className="floating-photo-anchor floating-photo-anchor--hero invisible relative mx-auto lg:absolute lg:bottom-0 lg:right-0"
+              className="floating-photo-anchor floating-photo-anchor--hero relative mx-auto lg:absolute lg:bottom-0 lg:right-0"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
