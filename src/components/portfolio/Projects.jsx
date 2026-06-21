@@ -98,21 +98,19 @@ const projects = [
 
 const Card = ({ project, i, progress, range, targetScale, count }) => {
     const cardScale = useTransform(progress, range, [1, targetScale]);
-    const y = useTransform(progress, range, [0, -30 * (count - i - 1)]);
     
     return (
-        <motion.div
-            style={{
-                scale: cardScale,
-                backgroundColor: project.color,
-                y,
-                position: 'fixed',
-                top: '12vh',
-                left: '50%',
-                xPercent: -50,
-            }}
-            className="w-full max-w-5xl h-[500px] rounded-[25px] overflow-hidden shadow-2xl will-change-transform"
+        <div
+            className="h-screen w-full sticky top-0 flex items-center justify-center px-4"
+            style={{ top: `calc(12vh + ${i * 12}px)` }}
         >
+            <motion.div
+                style={{
+                    scale: cardScale,
+                    backgroundColor: project.color,
+                }}
+                className="w-full max-w-5xl h-[500px] rounded-[25px] overflow-hidden shadow-2xl will-change-transform"
+            >
                     {/* LEFT - Description */}
                     <div className="flex-1 flex flex-col justify-center px-8 lg:px-12 py-8 text-white">
                         <h2 className="text-2xl lg:text-3xl font-bold mb-3">{project.title}</h2>
@@ -165,6 +163,7 @@ const Card = ({ project, i, progress, range, targetScale, count }) => {
                     </div>
                 </div>
             </motion.div>
+        </div>
     );
 };
 
