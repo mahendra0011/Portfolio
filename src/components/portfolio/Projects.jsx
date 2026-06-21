@@ -216,51 +216,42 @@ const LiveIcon = () => (
 );
 
 const Projects = () => {
-    const containerRef = useRef(null);
     const cardsRef = useRef([]);
 
     useEffect(() => {
-        // No local Lenis! useSmoothScroll.jsx handles that globally.
-        // GSAP ScrollTrigger + Lenis sync already done in useSmoothScroll.jsx.
+        // Match HTML file pattern EXACTLY:
+        // CSS sticky (NOT GSAP pin) + GSAP scale animation
+        const rafId = requestAnimationFrame(() => {
+            const cards = cardsRef.current;
 
-    const triggers = [];
+            cards.forEach((wrapper, i) => {
+                if (!wrapper) return;
+                if (i === cards.length - 1) return;
 
-    // Use requestAnimationFrame to ensure cards are mounted
-    const raf = requestAnimationFrame(() => {
-      const cards = cardsRef.current;
+                const card = wrapper.querySelector('.project-card');
+                if (!card) return;
 
-      cards.forEach((wrapper, i) => {
-        if (!wrapper) return;
-        if (i === cards.length - 1) return;
+                gsap.to(card, {
+                    scale: 0.92,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: wrapper,
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 0.5,
+                        invalidateOnRefresh: true,
+                    }
+                });
+            });
 
-        const cardInner = wrapper.querySelector('.project-card');
-        if (!cardInner) return;
-
-        // GSAP pin replaces CSS sticky (sticky breaks with Lenis scroll proxy)
-        const trigger = ScrollTrigger.create({
-          trigger: wrapper,
-          start: "top top",
-          end: "bottom top",
-          pin: true,
-          pinSpacing: false,
-          anticipatePin: 1,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            const scale = 1 - progress * 0.08;
-            gsap.set(cardInner, { scale });
-          },
+            ScrollTrigger.refresh();
         });
-        triggers.push(trigger);
-      });
 
-      ScrollTrigger.refresh();
-    });
-
-    return () => {
-      cancelAnimationFrame(raf);
-      triggers.forEach(t => t.kill());
-      ScrollTrigger.refresh();
-    };
+        return () => {
+            cancelAnimationFrame(rafId);
+            ScrollTrigger.getAll().forEach(t => t.kill());
+            ScrollTrigger.refresh();
+        };
     }, []);
 
     return (
@@ -279,12 +270,13 @@ const Projects = () => {
                 />
             </div>
 
-            <main ref={containerRef} className="relative">
+            <main className="relative pb-[10vh]">
                 {projects.map((proj, index) => (
                     <div
                         key={index}
                         ref={(el) => (cardsRef.current[index] = el)}
-                        className="h-screen flex items-start justify-center px-4"
+                        className="h-screen flex items-start justify-center sticky px-4"
+                        style={{ top: `calc(12vh + ${index * 12}px)` }}
                     >
                         <div
                             className="project-card origin-top w-full max-w-[1200px] md:w-[90vw] h-[70vh] max-h-[500px] min-h-[400px] rounded-[28px] p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[0_-20px_50px_rgba(0,0,0,0.6)] border-t border-white/15 border-l border-white/5 border-r border-white/5 border-b border-black/50 will-change-transform"
