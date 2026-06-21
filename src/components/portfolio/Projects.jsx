@@ -161,8 +161,8 @@ const Card = ({ project, i, progress, range, targetScale, count }) => {
                             />
                         </div>
                     </div>
-                </div>
-            </motion.div>
+                </motion.div>
+            </div>
         </div>
     );
 };
