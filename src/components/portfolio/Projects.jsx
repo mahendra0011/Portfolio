@@ -223,49 +223,44 @@ const Projects = () => {
         // No local Lenis! useSmoothScroll.jsx handles that globally.
         // GSAP ScrollTrigger + Lenis sync already done in useSmoothScroll.jsx.
 
-        // Use timeout to ensure all cards are mounted
-        const timeout = setTimeout(() => {
-            const cards = cardsRef.current;
-            const triggers = [];
+    const triggers = [];
 
-            cards.forEach((wrapper, i) => {
-                if (!wrapper) return;
-                if (i === cards.length - 1) return;
+    // Use requestAnimationFrame to ensure cards are mounted
+    const raf = requestAnimationFrame(() => {
+      const cards = cardsRef.current;
 
-                const cardInner = wrapper.querySelector('.project-card');
-                if (!cardInner) return;
+      cards.forEach((wrapper, i) => {
+        if (!wrapper) return;
+        if (i === cards.length - 1) return;
 
-                // Use GSAP pin instead of CSS sticky (sticky breaks with Lenis v1.3+)
-                const trigger = ScrollTrigger.create({
-                    trigger: wrapper,
-                    start: "top top",
-                    end: "bottom top",
-                    pin: true,
-                    pinSpacing: false,
-                    anticipatePin: 1,
-                    onUpdate: (self) => {
-                        const progress = self.progress;
-                        const scale = 1 - progress * 0.08;
-                        gsap.set(cardInner, { scale });
-                    },
-                });
-                triggers.push(trigger);
-            });
+        const cardInner = wrapper.querySelector('.project-card');
+        if (!cardInner) return;
 
-            ScrollTrigger.refresh();
+        // GSAP pin replaces CSS sticky (sticky breaks with Lenis scroll proxy)
+        const trigger = ScrollTrigger.create({
+          trigger: wrapper,
+          start: "top top",
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            const scale = 1 - progress * 0.08;
+            gsap.set(cardInner, { scale });
+          },
+        });
+        triggers.push(trigger);
+      });
 
-            // Store triggers on ref for cleanup
-            Projects._triggers = triggers;
-        }, 100);
+      ScrollTrigger.refresh();
+    });
 
-        return () => {
-            clearTimeout(timeout);
-            if (Projects._triggers) {
-                Projects._triggers.forEach(t => t.kill());
-                Projects._triggers = null;
-            }
-            ScrollTrigger.refresh();
-        };
+    return () => {
+      cancelAnimationFrame(raf);
+      triggers.forEach(t => t.kill());
+      ScrollTrigger.refresh();
+    };
     }, []);
 
     return (
