@@ -43,6 +43,7 @@ import {
   SiNodedotjs,
   SiPostgresql,
   SiPostman,
+  SiPython,
   SiRazorpay,
   SiReact,
   SiReactrouter,
@@ -105,6 +106,7 @@ const groups = [
       { name: "Kafka", Icon: SiApachekafka, color: "#231F20" },
       { name: "PDFKit", Icon: FileText, color: "currentColor" },
       { name: "Nodemailer", Icon: SiMinutemailer, color: "#FF6C37" },
+      { name: "Python", Icon: SiPython, color: "#3776AB" },
     ],
   },
   {
