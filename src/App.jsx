@@ -11,7 +11,7 @@ import { scrollToHash } from "@/lib/scrollToHash";
 import { store } from "@/store/portfolioStore";
 import Index from "./pages/Index.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import OakameLoader from "@/components/portfolio/OakameLoader";
+import Resume from "./components/portfolio/Resume.jsx";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +45,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Index />}/>
+      <Route path="/resume" element={<Resume />}/>
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />}/>
     </Routes>
@@ -56,7 +57,6 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider>
         <TooltipProvider>
-          <OakameLoader />
           <Toaster />
           <Sonner />
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>

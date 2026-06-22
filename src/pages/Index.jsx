@@ -8,16 +8,17 @@ import Projects from "@/components/portfolio/Projects";
 import Experience from "@/components/portfolio/Experience";
 import Education from "@/components/portfolio/Education";
 import Achievements from "@/components/portfolio/Achievements";
-import Resume from "@/components/portfolio/Resume";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
 import ThreeDBackground from "@/components/portfolio/ThreeDBackground";
+import OakameLoader from "@/components/portfolio/OakameLoader";
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 
 const Index = () => {
   useScrollAnimations();
 
   return (<div className="portfolio-page min-h-screen text-foreground">
+    <OakameLoader />
     <ThreeDBackground />
     <div className="portfolio-surface-overlay" aria-hidden="true" />
     <div className="portfolio-content">
@@ -32,7 +33,6 @@ const Index = () => {
         <Experience />
         <Education />
         <Achievements />
-        <Resume />
         <Contact />
       </main>
       <Footer />

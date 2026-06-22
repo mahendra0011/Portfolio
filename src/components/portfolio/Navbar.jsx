@@ -14,7 +14,7 @@ const links = [
     { name: "Education", href: "#education" },
     { name: "Achievements", href: "#achievements" },
     { name: "Contact", href: "#contact" },
-    { name: "Resume", href: "#resume", button: true },
+    { name: "Resume", href: "/resume", button: true },
 ];
 const Navbar = () => {
     const { theme, toggle } = useTheme();

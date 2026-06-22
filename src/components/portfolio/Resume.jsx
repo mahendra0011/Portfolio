@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
 
 const RESUME_URL = "/Mahendra_Resume.pdf";
@@ -62,8 +64,9 @@ const resumeLinks = [
 ];
 
 const Resume = () => (
-  <section id="resume" className="bg-background text-foreground py-20">
-    <main className="relative overflow-hidden">
+  <div className="min-h-screen bg-background text-foreground">
+    <Navbar />
+    <main className="relative overflow-hidden pt-24 pb-20">
       <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -144,7 +147,8 @@ const Resume = () => (
         </motion.div>
       </div>
     </main>
-  </section>
+    <Footer />
+  </div>
 );
 
 export default Resume;
