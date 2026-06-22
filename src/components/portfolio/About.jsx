@@ -10,17 +10,31 @@ const About = () => {
     >
       <div className="container">
         <SectionHeading eyebrow="About Me" title="Building Impactful Digital Products" />
-
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-12">
 
           {/* LEFT COLUMN — anchor for floating image to land here */}
           <div className="about-photo-stage relative mx-auto flex w-full max-w-[430px] items-start justify-center lg:mx-0">
-            {/* FIXED: explicit size so getBoundingClientRect() returns usable rect */}
+            {/*
+              ANDROID FIX — Mobile anchor height:
+              On mobile (single-column layout), this div sits ABOVE the text.
+              Without explicit height, getBoundingClientRect() returns h=0 and
+              the floating image doesn't know where to land.
+
+              `min-h-[260px] sm:min-h-[320px]` gives the anchor real space on
+              mobile so:
+                1. The image has a visible landing target
+                2. The text below doesn't start at y=0 (which caused overlap)
+
+              `lg:min-h-0` resets to 0 on desktop so your existing
+              `.floating-photo-anchor--about` CSS class controls the size
+              exactly as before — zero change to Windows/desktop layout.
+            */}
             <div
               id="about-photo-anchor"
               aria-hidden="true"
               className="floating-photo-anchor floating-photo-anchor--about
-                         w-full pointer-events-none select-none"
+                         w-full pointer-events-none select-none
+                         min-h-[260px] sm:min-h-[320px] lg:min-h-0"
             />
           </div>
 
@@ -29,7 +43,20 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-260px 0px" }}
             transition={{ duration: 0.12 }}
-            className="space-y-6 text-muted-foreground leading-relaxed -mt-32 lg:-mt-40"
+            /*
+              ANDROID FIX — Mobile margin:
+              Original: `-mt-32 lg:-mt-40`
+              Problem:  `-mt-32` = −128 px on mobile (single column) pulled the
+                        text UP by 128 px, directly overlapping the image anchor.
+                        On Android this made the text render ON TOP of the image.
+
+              Fix:      `mt-6` on mobile gives 24 px of breathing room below the
+                        image anchor before the text starts.
+              Desktop:  `lg:-mt-40` is unchanged — the 2-column layout on large
+                        screens still gets the same −160 px pull-up as before.
+                        Zero impact on Windows / desktop appearance.
+            */
+            className="space-y-6 text-muted-foreground leading-relaxed mt-6 lg:-mt-40"
           >
             <div className="space-y-5">
               <p>
@@ -58,7 +85,6 @@ const About = () => {
             </div>
           </motion.div>
         </div>
-
         <StatsSection />
       </div>
     </section>
