@@ -1,211 +1,343 @@
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ExternalLink, Github, Star, Sparkles } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { Download, Mail, FolderGit2 } from "lucide-react";
-import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
-import { Button } from "@/components/ui/button";
-import MagneticButton from "@/components/reactbits/MagneticButton";
-import { handleHashLinkClick } from "@/lib/scrollToHash";
-import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
+gsap.registerPlugin(ScrollTrigger);
 
-const roles = [
-  "React developer",
-  "Software Developer",
-  "Full Stack Developer",
-  "Electronics & Communication Student",
+const projects = [
+  {
+    title: "MediCore - Hospital System",
+    description: "Full-stack hospital management system with patient, doctor and admin portals, OTP auth, appointments, records, lab services, billing, emergency cases, reports, notifications and PDF documents.",
+    tech: ["Tailwind css", "Radix Ui", "reactbits", "framer motion", "React", "Redux", "Node.js", "Express.js", "MongoDB", , "Multer", "Cloudinary", "PDFKit"],
+    github: "https://github.com/mahendra0011/mediCore.git",
+    demo: "https://medicore-main-1.onrender.com",
+    featured: true,
+    image: "/projects/medicore.png",
+    color: "#1e293b",
+  },
+  {
+    title: "EventO - Event Platform",
+    description: "Event booking platform for public discovery, ticket booking with OTP verification, host dashboards, attendee messaging, support tickets, admin controls, reports and Render-ready deployment.",
+    tech: ["React", "Tailwind", "Express.js", "MongoDB", "OTP", "Reports"],
+    github: "https://github.com/mahendra0011/EventO",
+    demo: "http://evento-1645479696.us-east-2.elb.amazonaws.com/",
+    image: "/projects/evento.png",
+    color: "#0f172a",
+  },
+  {
+    title: "MindSupport - Mental Wellness",
+    description: "Smart India Hackathon 2025 mental wellness solution with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
+    tech: ["JavaScript", "React", "Node.js", "Socket.IO", "Payments"],
+    github: "https://github.com/mahendra0011/mindSupport",
+    demo: "https://mindsupport-1.onrender.com/",
+    event: "SIH 2025",
+    image: "/projects/mindsupport.png",
+    color: "#334155",
+  },
+  {
+    title: "MoviX - Movie Tickets",
+    description: "Full-stack movie ticket booking platform for browsing movies, coming-soon releases, seat selection, ticket booking, theater management and admin or owner workflows.",
+    tech: ["React", "Node.js", "MongoDB", "Cloudinary", "JWT"],
+    github: "https://github.com/mahendra0011/movix",
+    demo: "https://movix-p8ez.onrender.com",
+    image: "/projects/movix.png",
+    color: "#020617",
+  },
+  {
+    title: "RentPE - Room Rentals",
+    description: "Room rental marketplace for students, interns, job seekers and movers. Seekers compare PGs, hostels, flats and rooms while owners publish listings using city, area, landmark, title, amenities, rules and descriptions.",
+    tech: ["React", "Express.js", "MongoDB", "Marketplace"],
+    github: "https://github.com/mahendra0011/RentPE",
+    demo: "https://rentpe-j7bq.onrender.com",
+    image: "/projects/rentpe.png",
+    color: "#1e293b",
+  },
+  {
+    title: "TempTalk - Anonymous Chat",
+    description: "Privacy-focused anonymous chat platform with encrypted messaging, real-time Socket.IO rooms, media sharing, temporary chat rooms, PWA and Android support, deep links and QR invites.",
+    tech: ["React", "Socket.IO", "MongoDB", "PWA", "Android"],
+    github: "https://github.com/mahendra0011/TempTalk",
+    demo: "https://temptalk-1.onrender.com",
+    image: "/projects/temptalk.png",
+    color: "#0f172a",
+  },
+    {
+    title: "CloudNest - File System",
+    description: "Full-stack file upload system — Users register, login with Google, upload files, and every file is stored in the owner's Google Drive. Real-time status via Socket.io with Redux state management.",
+    tech: ["React", "Redux", "MUI", "Shadcn", "Socket.io", "Express"],
+    github: "https://github.com/mahendra0011/CloudNest.git",
+    demo: "https://cloudnest-pzwe.onrender.com",
+    image: "/projects/cloudNest.png",
+    color: "#1e293b",
+  },
+    {
+    title: "⚡ IntegrateKit",
+    description: "The definitive integration directory for MERN Stack developers — real code snippets, setup guides, and screenshots for integrating with 330+ services. Stop Googling, start building.",
+    tech: ["React 18", "Vite", "Tailwind", "Framer Motion", "GSAP"],
+    github: "#",
+    demo: "#",
+    featured: true,
+    image: "/projects/integrateKit",
+    color: "#0f172a",
+  },
+
+  {
+    title: "StudyBuddy - AI Platform",
+    description: "AI-powered study platform using Gemini AI to generate structured notes, summarize PDFs and YouTube lectures, manage study tasks and organize personalized content libraries with secure authentication.",
+    tech: ["React", "Gemini AI", "Node.js", "MongoDB", "PDF", "YouTube"],
+    github: "https://github.com/mahendra0011/StudyBuddy",
+    demo: "https://studybuddy-86s2.onrender.com",
+    image: "/projects/studybuddy.png",
+    color: "#334155",
+  },
+  {
+    title: "LostAndFound - Recovery",
+    description: "Full-stack MERN application for reporting, searching and recovering lost items with JWT authentication, image uploads, advanced search and filtering, item status management and responsive recovery workflows.",
+    tech: ["React", "MongoDB", "JWT", "Image Uploads"],
+    github: "https://github.com/mahendra0011/Lost-and-Found-Website.git",
+    demo: "https://lost-and-found-xlvq.onrender.com/",
+    image: "/projects/lost-and-found.png",
+    color: "#020617",
+  },
+
+
+  {
+    title: "CarrierBridge",
+    description: "A streamlined platform bridging the gap between innovative companies and talented interns looking for their next big opportunity. (Coming Soon)",
+    tech: ["MERN", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/mindsupport.png",
+    color: "#334155",
+  },
+  {
+    title: "One in A Million",
+    description: "An exclusive platform showcasing unique ideas, talents, and portfolios from extraordinary individuals worldwide. (Coming Soon)",
+    tech: ["React", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/movix.png",
+    color: "#020617",
+  },
+  {
+    title: "CivicIssue",
+    description: "A community-driven platform to report, track, and resolve local civic issues directly with local authorities. Photo evidence, geo-tagging, status tracking and public voting on priority issues.",
+    tech: ["React", "Node.js", "MongoDB"],
+    github: "#",
+    demo: "#",
+    image: "/projects/rentpe.png",
+    color: "#1e293b",
+  },
+  {
+    title: "Project Nexus",
+    description: "A robust internal tool for managing workflow and tracking sprint velocities in agile development teams. Kanban boards, burndown charts, team capacity planning and retrospective tools.",
+    tech: ["Next.js", "Tailwind", "PostgreSQL"],
+    github: "#",
+    demo: "#",
+    image: "/projects/studybuddy.png",
+    color: "#0f172a",
+  },
+  {
+    title: "Apex Fitness Club",
+    description: "A high-performance modern frontend for a premium fitness club featuring interactive class schedules and personal trainer portfolios. (Coming Soon)",
+    tech: ["Frontend", "UI/UX", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/temptalk.png",
+    color: "#334155",
+  }
 ];
 
-const socialLinks = [
-  { Icon: FaGithub, label: "GitHub", href: "https://github.com/mahendra0011" },
-  { Icon: FaLinkedin, label: "LinkedIn", ...socialAppLinks.linkedin },
-  { Icon: Mail, label: "Mail", href: "mailto:mahendrapra0077@gmail.com" },
-  { Icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/917724822660" },
-  { Icon: FaTelegram, label: "Telegram", href: "https://t.me/Mahi00776" },
-  { Icon: FaXTwitter, label: "X", href: "https://x.com/mahendra0011" },
-  { Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@Mahendraprajapati-bt1bd" },
-  { Icon: FaInstagram, label: "Instagram", ...socialAppLinks.instagram },
-];
-
-const Typewriter = () => {
-  const [text, setText] = useState("");
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [phase, setPhase] = useState("typing");
+const Projects = () => {
+  const sectionRef = useRef(null);
+  const wrapperRefs = useRef([]);
 
   useEffect(() => {
-    const current = roles[roleIndex];
-    const isTyping = phase === "typing";
-    const isDeleting = phase === "deleting";
-    const delay = isTyping ? 55 : isDeleting ? 28 : 900;
-
-    const timer = setTimeout(() => {
-      if (isTyping) {
-        if (text.length < current.length) {
-          setText(current.slice(0, text.length + 1));
-        } else {
-          setPhase("holding");
-        }
-        return;
-      }
-
-      if (isDeleting) {
-        if (text.length > 0) {
-          setText(current.slice(0, text.length - 1));
-        } else {
-          setRoleIndex((index) => (index + 1) % roles.length);
-          setPhase("typing");
-        }
-        return;
-      }
-
-      setPhase("deleting");
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [text, phase, roleIndex]);
-
-  return (
-    <span className="inline-block max-w-full align-baseline gradient-text">
-      <span className="break-words">{text}</span>
-      <span aria-hidden="true" className="inline-block h-[1em] w-[3px] bg-primary ml-1 align-middle animate-blink" />
-    </span>
-  );
-};
-
-const Hero = () => {
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const element = heroRef.current;
-    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
-
-    let fallbackId = 0;
     const ctx = gsap.context(() => {
-      const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const wrappers = wrapperRefs.current.filter(Boolean);
 
-      timeline
-        .fromTo(".hero-kicker", { y: 8 }, { y: 0, duration: 0.16 })
-        .fromTo(".hero-title-line", { y: 8 }, { y: 0, duration: 0.18, stagger: 0.015 }, "-=0.08")
-        .fromTo(".hero-copy", { y: 8 }, { y: 0, duration: 0.16 }, "-=0.08")
-        .fromTo(".hero-action", { y: 8, scale: 0.99 }, { y: 0, scale: 1, duration: 0.16, stagger: 0.012 }, "-=0.08")
-        .fromTo(".hero-social", { x: -8 }, { x: 0, duration: 0.12, stagger: 0.01 }, "-=0.08");
+      wrappers.forEach((wrapper, i) => {
+        const card = wrapper.querySelector(".project-card");
+        if (!card) return;
 
-      fallbackId = window.setTimeout(() => {
-        gsap.set(".hero-kicker, .hero-title-line, .hero-copy, .hero-action, .hero-social", {
-          clearProps: "transform,opacity,visibility",
-        });
-      }, 900);
-    }, element);
+        // Animate all cards except the very last one
+        if (i < wrappers.length - 1) {
+          gsap.to(card, {
+            scale: 0.92,
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              start: () => `top ${window.innerHeight * 0.12 + i * 12}px`,
+              end: () => `+=${window.innerHeight}`,
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          });
+        } else {
+          // Android Special Fix for Last Card: Ensures it settles properly without breaking layout
+          gsap.fromTo(card, 
+            { scale: 1 },
+            {
+              scale: 1, 
+              ease: "none",
+              scrollTrigger: {
+                trigger: wrapper,
+                start: () => `top ${window.innerHeight * 0.12 + i * 12}px`,
+                end: "bottom bottom",
+                scrub: true,
+                invalidateOnRefresh: true,
+              }
+            }
+          );
+        }
+      });
+
+      // Mobile address bar resizes handler
+      ScrollTrigger.addEventListener("refreshInit", () => {
+        // Prevent ScrollTrigger from resetting on mobile URL bar show/hide
+        if (gsap.utils.toArray(".project-card").length > 0) {
+          ScrollTrigger.refresh();
+        }
+      });
+
+      setTimeout(() => ScrollTrigger.refresh(), 200);
+    }, sectionRef);
 
     return () => {
-      window.clearTimeout(fallbackId);
       ctx.revert();
     };
   }, []);
 
   return (
-    <section ref={heroRef} id="home" className="relative flex min-h-[100svh] items-center overflow-hidden hero-bg pt-20 sm:pt-24 lg:min-h-screen">
-      <div className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
-        {socialLinks.map(({ Icon, label, href, appUrl }) => (
-          <MagneticButton key={label} strength={0.12}>
-            <a
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={label}
-              title={label}
-              onClick={(event) => openInstalledApp(event, appUrl, href)}
-              className="hero-social w-11 h-11 rounded-full glass flex items-center justify-center hover:text-primary transition-all shadow-elegant"
+    <section id="projects" ref={sectionRef} className="bg-slate-950 overflow-x-hidden">
+      
+      <div className="container mx-auto px-4 pt-20 sm:pt-24 pb-12">
+        <SectionHeading
+          eyebrow="Projects"
+          title="Things I've Built"
+          description="A selection of things I've built recently"
+        />
+      </div>
+
+      {/* Added bottom padding wrapper to prevent Android viewport bouncing issue */}
+      <div className="relative pb-[25vh] md:pb-[10vh]">
+        {projects.map((proj, index) => (
+          <div
+            key={proj.title}
+            ref={(el) => {
+              if (el) wrapperRefs.current[index] = el;
+            }}
+            // Replacing h-screen with dynamic svh/dvh fallback for modern mobile browsers
+            className="min-h-[90vh] sm:h-screen flex items-start justify-center px-4 will-change-transform"
+            style={{
+              position: "sticky",
+              top: `calc(12vh + ${index * 12}px)`,
+              // Ensures the last element has enough space to complete trigger scope
+              marginBottom: index === projects.length - 1 ? "0px" : "40px" 
+            }}
+          >
+            <div
+              className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 will-change-transform"
+              style={{
+                backgroundColor: proj.color,
+                height: "72vh",
+                maxHeight: "520px",
+                minHeight: "420px",
+                boxShadow: "0 -20px 50px rgba(0,0,0,0.6)",
+                borderTop: "1px solid rgba(255,255,255,0.15)",
+                borderLeft: "1px solid rgba(255,255,255,0.05)",
+                borderRight: "1px solid rgba(255,255,255,0.05)",
+                borderBottom: "1px solid rgba(0,0,0,0.5)",
+                transformOrigin: "top center",
+                transform: "translateZ(0)",
+                backfaceVisibility: "hidden",
+                WebkitFontSmoothing: "antialiased",
+              }}
             >
-              <Icon className="w-5 h-5" />
-            </a>
-          </MagneticButton>
+              <div className="flex-1 md:flex-[0.8] flex flex-col h-full overflow-hidden order-2 md:order-1">
+                <div
+                  className="flex-1 overflow-y-auto pr-2"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
+                  {(proj.featured || proj.event) && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {proj.featured && (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 text-white px-3 py-1 rounded-full">
+                          <Star className="w-3 h-3" /> Featured
+                        </span>
+                      )}
+                      {proj.event && (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 text-white px-3 py-1 rounded-full">
+                          <Sparkles className="w-3 h-3" /> {proj.event}
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  <h2 className="text-2xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-white">
+                    {proj.title}
+                  </h2>
+
+                  <p className="text-slate-300 text-xs md:text-base leading-relaxed mb-5 font-medium opacity-90">
+                    {proj.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {proj.tech.map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide text-white"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 md:pt-6 mt-2 border-t border-white/10 flex flex-wrap gap-3 shrink-0">
+                  {proj.github && proj.github !== "#" && (
+                    <a
+                      href={proj.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white border border-gray-600 text-sm font-bold rounded-xl hover:bg-gray-800 transition-colors shadow-lg"
+                    >
+                      <Github className="w-[18px] h-[18px]" /> GitHub
+                    </a>
+                  )}
+                  {proj.demo && proj.demo !== "#" && (
+                    <a
+                      href={proj.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg"
+                    >
+                      <ExternalLink className="w-[18px] h-[18px]" /> Live
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div className="w-full h-[140px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0">
+                <img
+                  src={proj.image}
+                  alt={proj.title}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-2xl drop-shadow-2xl select-none"
+                />
+              </div>
+
+            </div>
+          </div>
         ))}
       </div>
 
-      <div data-scroll-parallax="-6" data-scroll-trigger="#home" className="absolute top-20 -left-20 h-72 w-72 will-change-transform">
-        <div className="h-full w-full rounded-full bg-primary/30 blur-2xl animate-blob" />
-      </div>
-      <div data-scroll-parallax="6" data-scroll-trigger="#home" className="absolute bottom-10 -right-10 h-96 w-96 will-change-transform">
-        <div className="h-full w-full rounded-full bg-accent/30 blur-2xl animate-blob" style={{ animationDelay: "3s" }} />
-      </div>
-
-      <div className="container relative z-10 grid min-h-[calc(100svh-5rem)] items-center gap-8 py-8 sm:gap-10 sm:py-10 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 lg:gap-12 lg:pb-0 xl:pl-24">
-        <div className="mx-auto max-w-2xl space-y-4 text-center lg:mx-0 lg:max-w-none lg:self-start lg:pt-[5.5rem] lg:text-left xl:pt-[6.5rem]">
-          <div className="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            Available for opportunities
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]">
-            <span className="hero-title-line block">Hi, I'm <span className="block sm:inline gradient-text">Mahendra</span></span>
-            <span className="hero-title-line block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-semibold">
-              I'm a <Typewriter />
-            </span>
-          </h1>
-
-          <p className="hero-copy mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0">
-            I can build scalable, secure, and high-performance web applications. Turning ideas into
-            impactful, production-ready digital products with modern technologies.
-          </p>
-
-          <div className="flex flex-row flex-wrap justify-center gap-3 lg:justify-start">
-            <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
-              <Button size="lg" asChild className="group w-full px-4 gradient-bg shadow-glow transition-transform sm:w-auto sm:px-8">
-                <a href="#projects" onClick={(event) => handleHashLinkClick(event, "#projects")}>
-                  <FolderGit2 className="mr-2 h-4 w-4 transition-transform group-hover:-rotate-6" /> View Projects
-                </a>
-              </Button>
-            </MagneticButton>
-            <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
-              <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden px-4 transition-transform sm:w-auto sm:px-8">
-                <a href="#contact" onClick={(event) => handleHashLinkClick(event, "#contact")}>
-                  <Mail className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> Contact Me
-                </a>
-              </Button>
-            </MagneticButton>
-            <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
-              <Button size="lg" variant="secondary" asChild className="group w-full px-4 transition-transform sm:w-auto sm:px-8">
-                <a href="/Mahendra_Resume.pdf" download>
-                  <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" /> Resume
-                </a>
-              </Button>
-            </MagneticButton>
-          </div>
-
-          <div className="flex flex-nowrap items-center justify-center gap-1 pt-1.5 sm:gap-3 sm:pt-2 lg:justify-start lg:hidden">
-            {socialLinks.map(({ Icon, label, href, appUrl }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                onClick={(event) => openInstalledApp(event, appUrl, href)}
-                whileHover={{ y: -2, scale: 1.03 }}
-                className="h-8 w-8 shrink-0 rounded-full glass flex items-center justify-center hover:text-primary transition-colors sm:h-10 sm:w-10"
-              >
-                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative flex justify-center lg:h-full lg:self-end lg:items-end lg:justify-end">
-          <div className="hero-photo-stage relative w-full max-w-[470px]">
-            <div className="absolute inset-y-0 left-0 right-2 opacity-60 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.18)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.13)_1px,transparent_1px)] [background-size:34px_34px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
-            <div className="absolute left-8 top-[24%] h-44 w-48 opacity-45 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.76)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
-            <div className="absolute bottom-20 right-4 h-48 w-52 opacity-35 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.76)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />
-            <div
-              id="hero-photo-anchor"
-              aria-hidden="true"
-              className="floating-photo-anchor floating-photo-anchor--hero invisible relative mx-auto lg:absolute lg:bottom-0 lg:right-0"
-            />
-          </div>
-        </div>
-      </div>
     </section>
   );
 };
 
-export default Hero;
+export default Projects;
