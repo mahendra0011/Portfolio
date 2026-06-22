@@ -206,11 +206,10 @@ const Projects = () => {
               top: `calc(12vh + ${index * 12}px)`,
             }}
           >
-            {/* 🔥 Original Clean Layout without GPU-heavy elements */}
             <div
               className="project-card relative w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 overflow-hidden"
               style={{
-                backgroundColor: proj.color, // Pure solid color
+                backgroundColor: proj.color,
                 height: "70vh",
                 maxHeight: "500px",
                 minHeight: "400px",
@@ -292,7 +291,6 @@ const Projects = () => {
               </div>
 
               {/* === RIGHT SIDE (IMAGE SECTION) === */}
-              {/* 🔥 REMOVED bg-black/20 and matrix grid entirely */}
               <div className="w-full h-[180px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0 relative z-10">
                 <img
                   src={proj.image}
@@ -300,9 +298,8 @@ const Projects = () => {
                   loading="lazy"
                   decoding="async"
                   draggable="false"
-                  /* 🔥 MAGIC HERE: object-contain with max-w/max-h ensures the border perfectly hugs the image pixels. 
-                     0 0 40px ensures shadow hits all 4 sides uniformly. */
-                  className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.6)] select-none transition-transform duration-500 hover:scale-[1.03]"
+                  /* 🔥 REMOVED hover:scale-[1.03] and transition classes. Image is now completely fixed. */
+                  className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.6)] select-none"
                 />
               </div>
 
