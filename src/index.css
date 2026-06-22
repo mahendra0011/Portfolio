@@ -11,51 +11,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
     --background: 198 60% 97%;
     --foreground: 200 50% 10%;
-
     --card: 0 0% 100%;
     --card-foreground: 200 50% 10%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 200 50% 10%;
-
     --primary: 197 93% 61%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 197 100% 85%;
-
     --secondary: 200 50% 94%;
     --secondary-foreground: 200 50% 12%;
-
     --muted: 200 40% 92%;
     --muted-foreground: 0 0% 100%;
-
     --accent: 197 93% 61%;
     --accent-foreground: 0 0% 100%;
     --success: 158 72% 46%;
-
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 200 40% 86%;
     --input: 200 40% 86%;
     --ring: 197 93% 61%;
-
     --radius: 0.75rem;
-
     --gradient-primary: linear-gradient(135deg, hsl(217 90% 56%), hsl(199 89% 48%));
     --gradient-accent: linear-gradient(135deg, hsl(199 100% 72%), hsl(197 93% 61%));
     --gradient-hero: radial-gradient(ellipse at 22% 36%, hsl(197 93% 61% / 0.1), transparent 55%), radial-gradient(ellipse at 72% 24%, hsl(197 93% 61% / 0.08), transparent 50%), radial-gradient(ellipse at 80% 78%, hsl(199 100% 72% / 0.15), transparent 58%), linear-gradient(180deg, hsl(198 60% 99%), hsl(198 60% 95%));
     --shadow-glow: 0 12px 40px -14px hsl(197 93% 61% / 0.35);
     --shadow-elegant: 0 22px 54px -30px hsl(200 50% 10% / 0.15);
     --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -69,40 +54,30 @@ All colors MUST be HSL.
   .dark {
     --background: 222 47% 4%;
     --foreground: 0 0% 100%;
-
     --card: 222 47% 6%;
     --card-foreground: 0 0% 100%;
-
     --popover: 222 47% 6%;
     --popover-foreground: 0 0% 100%;
-
     --primary: 197 93% 61%;
     --primary-foreground: 222 47% 4%;
     --primary-glow: 197 100% 70%;
-
     --secondary: 215 40% 12%;
     --secondary-foreground: 0 0% 100%;
-
     --muted: 215 35% 9%;
     --muted-foreground: 0 0% 100%;
-
     --accent: 197 93% 61%;
     --accent-foreground: 222 47% 4%;
     --success: 158 72% 50%;
-
     --destructive: 0 63% 45%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 215 35% 14%;
     --input: 215 35% 14%;
     --ring: 197 93% 61%;
-
     --gradient-primary: linear-gradient(135deg, hsl(217 90% 56%), hsl(199 89% 48%));
     --gradient-accent: linear-gradient(135deg, hsl(199 89% 48%), hsl(217 90% 56%));
     --gradient-hero: radial-gradient(ellipse at 22% 24%, hsl(197 93% 61% / 0.2), transparent 58%), radial-gradient(ellipse at 76% 26%, hsl(197 93% 61% / 0.16), transparent 52%), radial-gradient(ellipse at 78% 84%, hsl(195 90% 72% / 0.14), transparent 58%);
     --shadow-glow: 0 8px 44px -8px hsl(197 93% 61% / 0.55);
     --shadow-elegant: 0 20px 50px -20px hsl(0 0% 0% / 0.6);
-
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 197 93% 61%;
@@ -144,17 +119,17 @@ All colors MUST be HSL.
     font-feature-settings: "ss01", "cv11";
     min-width: 320px;
     min-height: 100svh;
-    /* 🔥 FIX 1: overflow-x: hidden hata diya yahan se */
+    /* Removed overflow-x: hidden to prevent sticky issues */
     -webkit-tap-highlight-color: transparent;
   }
 
   html {
-    /* 🔥 FIX 2: overflow-x: hidden aur scroll-behavior: smooth dono hata diye */
+    /* Removed overflow-x: hidden and scroll-behavior: smooth */
     scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
   }
 
-  /* 🔥 FIX 3: #root ka overflow-x: clip hata diya taaki sticky block na ho */
+  /* Fixed #root to not clip sticky elements */
   #root {
     overflow: visible;
   }
@@ -309,10 +284,7 @@ All colors MUST be HSL.
     z-index: 2;
   }
 
-  .portfolio-content main > section:not(#home) {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 900px;
-  }
+  /* 🔥 CRITICAL FIX: Removed .portfolio-content main > section:not(#home) content-visibility to stop hanging */
 
   .hero-photo-stage {
      min-height: clamp(390px, 64svh, 540px);
@@ -447,7 +419,6 @@ All colors MUST be HSL.
   .dark .section-desc {
     color: hsl(0 0% 100%) !important;
   }
-  /* Card Setup and Liquid Marble Effect */
   .exact-match-card {
     width: 250px; 
     height: 250px; 
@@ -455,14 +426,11 @@ All colors MUST be HSL.
     border: 2.5px solid #4A82E8;
     background: linear-gradient(135deg, hsl(var(--background) / 0.58), hsl(var(--background) / 0.32));
     backdrop-filter: blur(24px);
-    backdrop-filter: blur(10px);
     transition: transform 0.12s ease;
   }
-
   .exact-match-card:hover {
     transform: scale(1.01);
   }
-
   .liquid-marble-fill {
      background-image: var(--gradient-accent);
      background-size: 18y 0% 180%;
@@ -472,17 +440,14 @@ All colors MUST be HSL.
     -webkit-text-fill-color: transparent;
     display: inline-block;
   }
-
   .page-background {
     background-color: #0b0c10;
     background: radial-gradient(circle at center, #161b22 0%, #0b0c10 70%);
     font-family: 'Inter', sans-serif;
   }
-
   .radial-glow-bg {
     background: radial-gradient(circle at 100% 100%, rgba(74, 130, 232, 0.08) 0%, transparent 60%);
   }
-
   .gradient-text {
     @apply bg-clip-text text-transparent;
     background-image: var(--gradient-accent);
@@ -581,11 +546,9 @@ All colors MUST be HSL.
      box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 20px 52px -24px hsl(0 0% 0% / 0.58);
      border: 2px solid #4A82E8;
    }
-
    .glass:hover {
      border-color: hsl(var(--primary) / 0.4);
    }
-
   .stat-card-glass {
     border-color: hsl(0 0% 100% / 0.12);
     background: linear-gradient(135deg, hsl(222 47% 6% / 0.65), hsl(222 47% 4% / 0.8));
@@ -607,7 +570,6 @@ All colors MUST be HSL.
   .shadow-elegant {
     box-shadow: var(--shadow-elegant);
   }
-  /* Button glow pulse animation on hover */
   .btn-glow:hover {
     animation: btn-glow-pulse 1.5s ease-in-out infinite;
   }
@@ -635,8 +597,6 @@ All colors MUST be HSL.
   .reactbits-magnetic > * {
     transform: translateZ(0);
   }
-  
-  /* === Split-Screen Loader === */
   .loader-wrapper {
     position: fixed;
     top: 0;
@@ -647,19 +607,15 @@ All colors MUST be HSL.
     display: flex;
     pointer-events: none;
   }
-
   .loader-panel {
     width: 50vw;
     height: 100vh;
     background-color: #0c0c0c;
-    /* Panels aaram se khulenge */
     transition: transform 1.2s cubic-bezier(0.87, 0, 0.13, 1);
     transition-delay: 0.2s; 
   }
-
   .panel-left { transform: translateX(0); }
   .panel-right { transform: translateX(0); }
-
   .loader-ui {
     position: absolute;
     top: 0;
@@ -673,18 +629,14 @@ All colors MUST be HSL.
     color: #4A82E8;
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
-
   .name-wrapper {
     display: flex;
     flex-direction: column;
     position: relative;
   }
-
   .name-wrapper.last-wrapper {
     margin-left: 15vw;
   }
-
-  /* === SUB-TEXT STYLES === */
   .sub-text {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(0.9rem, 1.5vw, 1.2rem);
@@ -692,34 +644,27 @@ All colors MUST be HSL.
     letter-spacing: 0.15em;
     opacity: 0;
     transform: translateY(10px);
-    /* Text smooth fade in */
     animation: fadeSlideUp 0.8s ease forwards; 
   }
-
   .sub-text.top-left {
     align-self: flex-start;
     margin-bottom: -5px; 
     margin-left: 5px;
     animation-delay: 0.4s;
   }
-
   .sub-text.bottom-right {
     align-self: flex-end;
     margin-top: -5px;
     margin-right: 5px;
     animation-delay: 0.6s;
   }
-
   @keyframes fadeSlideUp {
     to { opacity: 1; transform: translateY(0); }
   }
-
-  /* === TEXT MASK & NAMES === */
   .text-mask {
     overflow: hidden;
     padding: 5px 0;
   }
-
   .name {
     font-family: 'Syne', sans-serif;
     font-size: clamp(3rem, 8vw, 8rem);
@@ -732,17 +677,14 @@ All colors MUST be HSL.
     text-shadow: 0 0 20px rgba(74, 130, 232, 0.4), 0 0 40px rgba(14, 165, 233, 0.2);
     margin: 0;
   }
-
   .name.last {
     color: #4A82E8;
     text-shadow: 0 0 20px rgba(74, 130, 232, 0.3), 0 0 40px rgba(14, 165, 233, 0.15);
     animation-delay: 0.15s;
   }
-
   @keyframes slideUp {
     to { transform: translateY(0); }
   }
-
   .progress-container {
     margin-top: 50px;
     width: 300px;
@@ -753,23 +695,20 @@ All colors MUST be HSL.
     opacity: 0;
     animation: fadeIn 0.8s ease forwards 0.8s; 
   }
-
   .progress-line-bg {
     flex-grow: 1;
     height: 1px;
     background-color: rgba(74, 130, 232, 0.2);
     position: relative;
   }
-
   .progress-line-fill {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     background-color: #4A82E8;
-    transition: width 0.05s linear; /* Fast line fill */
+    transition: width 0.05s linear;
   }
-
   .counter {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1rem;
@@ -778,32 +717,24 @@ All colors MUST be HSL.
     text-align: right;
     color: #4A82E8;
   }
-
   @keyframes fadeIn {
     to { opacity: 1; }
   }
-
-  /* === LOADED STATE ANIMATIONS === */
   body.loaded .loader-ui {
     opacity: 0;
     transform: scale(0.95);
   }
-
   body.loaded .panel-left {
     transform: translateX(-100%);
   }
-
   body.loaded .panel-right {
     transform: translateX(100%);
   }
-
   @media (max-width: 640px) {
     .name-wrapper.last-wrapper {
       margin-left: 8vw;
     }
   }
-
-
   @keyframes education-dot-pulse {
     0% {
       opacity: 0.72;
