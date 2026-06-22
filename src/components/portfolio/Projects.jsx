@@ -15,7 +15,7 @@ const projects = [
     demo: "https://medicore-main-1.onrender.com",
     featured: true,
     image: "/projects/medicore.png",
-    color: "#1e293b", 
+    color: "#1e293b",
   },
   {
     title: "EventO - Event Platform",
@@ -24,7 +24,7 @@ const projects = [
     github: "https://github.com/mahendra0011/EventO",
     demo: "http://evento-1645479696.us-east-2.elb.amazonaws.com/",
     image: "/projects/evento.png",
-    color: "#0f172a", 
+    color: "#0f172a",
   },
   {
     title: "MindSupport - Mental Wellness",
@@ -34,7 +34,7 @@ const projects = [
     demo: "https://mindsupport-1.onrender.com/",
     event: "SIH 2025",
     image: "/projects/mindsupport.png",
-    color: "#334155", 
+    color: "#334155",
   },
   {
     title: "MoviX - Movie Tickets",
@@ -43,7 +43,7 @@ const projects = [
     github: "https://github.com/mahendra0011/movix",
     demo: "https://movix-p8ez.onrender.com",
     image: "/projects/movix.png",
-    color: "#020617", 
+    color: "#020617",
   },
   {
     title: "RentPE - Room Rentals",
@@ -163,9 +163,11 @@ const Projects = () => {
 
         gsap.to(card, {
           scale: 0.92,
+          // 🔥 HATA DIYA: opacity aur filter yahan se hata diye gaye hain
           ease: "none",
           scrollTrigger: {
             trigger: wrapper,
+            // Perfect timing sync wahi rahega taaki smooth lage
             start: () => `top ${window.innerHeight * 0.12 + i * 12}px`, 
             end: () => `+=${window.innerHeight}`, 
             scrub: true,
@@ -185,7 +187,7 @@ const Projects = () => {
   return (
     <section id="projects" ref={sectionRef} className="bg-slate-950">
       
-      <div className="container mx-auto px-4 pt-20 sm:pt-24 pb-12 relative z-10">
+      <div className="container mx-auto px-4 pt-20 sm:pt-24 pb-12">
         <SectionHeading
           eyebrow="Projects"
           title="Things I've Built"
@@ -207,7 +209,7 @@ const Projects = () => {
             }}
           >
             <div
-              className="project-card relative w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 overflow-hidden"
+              className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 will-change-transform"
               style={{
                 backgroundColor: proj.color,
                 height: "70vh",
@@ -224,33 +226,31 @@ const Projects = () => {
                 WebkitFontSmoothing: "antialiased",
               }}
             >
-              
-              {/* === LEFT SIDE (TEXT CONTENT) === */}
-              <div className="flex-1 md:flex-[0.8] flex flex-col h-full overflow-hidden order-2 md:order-1 relative z-10">
+              <div className="flex-1 md:flex-[0.8] flex flex-col h-full overflow-hidden order-2 md:order-1">
                 <div
-                  className="flex-1 overflow-y-auto pr-3 pb-4"
+                  className="flex-1 overflow-y-auto pr-2"
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
                   {(proj.featured || proj.event) && (
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2 mb-3">
                       {proj.featured && (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-full tracking-wide">
-                          <Star className="w-3.5 h-3.5" /> Featured
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 text-white px-3 py-1 rounded-full">
+                          <Star className="w-3 h-3" /> Featured
                         </span>
                       )}
                       {proj.event && (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-full tracking-wide">
-                          <Sparkles className="w-3.5 h-3.5" /> {proj.event}
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 text-white px-3 py-1 rounded-full">
+                          <Sparkles className="w-3 h-3" /> {proj.event}
                         </span>
                       )}
                     </div>
                   )}
 
-                  <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight leading-tight text-white">
+                  <h2 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-white">
                     {proj.title}
                   </h2>
 
-                  <p className="text-slate-300 text-sm md:text-[15px] leading-relaxed mb-6 font-medium">
+                  <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-5 font-medium opacity-90">
                     {proj.description}
                   </p>
 
@@ -258,7 +258,7 @@ const Projects = () => {
                     {proj.tech.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-white/10 border border-transparent px-3.5 py-1.5 rounded-full text-[11px] md:text-xs font-semibold tracking-wider text-white"
+                        className="bg-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide text-white"
                       >
                         {tag}
                       </span>
@@ -290,16 +290,14 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* === RIGHT SIDE (IMAGE SECTION) === */}
-              <div className="w-full h-[180px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0 relative z-10">
+              <div className="w-full h-[180px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0">
                 <img
                   src={proj.image}
                   alt={proj.title}
                   loading="lazy"
                   decoding="async"
                   draggable="false"
-                  /* 🔥 REMOVED hover:scale-[1.03] and transition classes. Image is now completely fixed. */
-                  className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.6)] select-none"
+                  className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-2xl drop-shadow-2xl select-none"
                 />
               </div>
 
