@@ -306,10 +306,6 @@ const Projects = () => {
         ))}
       </div>
 
-      <div className="h-[70vh] flex flex-col items-center justify-center text-slate-500 text-xl gap-4">
-        <p className="font-bold text-3xl text-slate-400">That's a wrap 🎬</p>
-        <p className="text-sm">More coming soon...</p>
-      </div>
     </section>
   );
 };
