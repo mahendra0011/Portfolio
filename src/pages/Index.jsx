@@ -8,6 +8,7 @@ import Projects from "@/components/portfolio/Projects";
 import Experience from "@/components/portfolio/Experience";
 import Education from "@/components/portfolio/Education";
 import Achievements from "@/components/portfolio/Achievements";
+import Resume from "@/components/portfolio/Resume";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
 import ThreeDBackground from "@/components/portfolio/ThreeDBackground";
@@ -31,6 +32,7 @@ const Index = () => {
         <Experience />
         <Education />
         <Achievements />
+        <Resume />
         <Contact />
       </main>
       <Footer />
