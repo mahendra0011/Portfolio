@@ -163,11 +163,13 @@ const Projects = () => {
 
         gsap.to(card, {
           scale: 0.92,
+          // 🔥 HATA DIYA: opacity aur filter yahan se hata diye gaye hain
           ease: "none",
           scrollTrigger: {
             trigger: wrapper,
-            start: "top top",
-            end: "bottom top",
+            // Perfect timing sync wahi rahega taaki smooth lage
+            start: () => `top ${window.innerHeight * 0.12 + i * 12}px`, 
+            end: () => `+=${window.innerHeight}`, 
             scrub: true,
             invalidateOnRefresh: true,
           },
@@ -210,7 +212,6 @@ const Projects = () => {
               className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 will-change-transform"
               style={{
                 backgroundColor: proj.color,
-                /* 🔥 Height wapas pehle jaisi (Perfect for desktop) */
                 height: "70vh",
                 maxHeight: "500px",
                 minHeight: "400px",
@@ -225,10 +226,7 @@ const Projects = () => {
                 WebkitFontSmoothing: "antialiased",
               }}
             >
-              {/* === LEFT SIDE (TEXT CONTENT) === */}
-              {/* 🔥 Content width thodi kam ki hai (md:flex-[0.8]) taaki image poori dikhe */}
               <div className="flex-1 md:flex-[0.8] flex flex-col h-full overflow-hidden order-2 md:order-1">
-                
                 <div
                   className="flex-1 overflow-y-auto pr-2"
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
@@ -268,7 +266,6 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* PINNED BUTTONS */}
                 <div className="pt-4 md:pt-6 mt-2 border-t border-white/10 flex flex-wrap gap-3 shrink-0">
                   {proj.github && proj.github !== "#" && (
                     <a
@@ -293,8 +290,6 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* === RIGHT SIDE (IMAGE SECTION) === */}
-              {/* 🔥 Width badha di (flex-[1.2]). Background color/box hata diya. */}
               <div className="w-full h-[180px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0">
                 <img
                   src={proj.image}
@@ -302,7 +297,6 @@ const Projects = () => {
                   loading="lazy"
                   decoding="async"
                   draggable="false"
-                  /* 🔥 Sirf image ke around thin border aayega. "max-w/max-h" ensure karta hai ki border sirf image pixels ko hug kare */
                   className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-2xl drop-shadow-2xl select-none"
                 />
               </div>
