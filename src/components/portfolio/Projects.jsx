@@ -96,73 +96,6 @@ const projects = [
     },
 ];
 
-const Card = ({ project, i, progress, range, targetScale }) => {
-    const cardScale = useTransform(progress, range, [1, targetScale]);
-
-    const imgSrc = project.image;
-    const imgAlt = project.imageAlt;
-
-    return (
-        <div
-            className="h-screen w-full sticky top-0 flex items-center justify-center px-4"
-            style={{ top: `calc(12vh + ${i * 12}px)` }}
-        >
-            <motion.div
-                style={{
-                    scale: cardScale,
-                    backgroundColor: project.color,
-                }}
-                className="w-full max-w-5xl h-[500px] rounded-[25px] overflow-hidden shadow-2xl will-change-transform"
-            >
-                <div className="h-full w-full flex flex-col lg:flex-row">
-                    <div className="flex-1 flex flex-col justify-center px-8 lg:px-12 py-8 text-white">
-                        <h2 className="text-2xl lg:text-3xl font-bold mb-3">{project.title}</h2>
-                        <p className="text-sm text-white/80 leading-relaxed mb-5 line-clamp-4">
-                            {project.description}
-                        </p>
-                        <div className="flex flex-wrap gap-2 mb-5">
-                            {project.tech.map((tech) => (
-                                <span key={tech} className="text-xs px-2.5 py-1 rounded-full bg-white/20 text-white font-medium">
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
-                        <div className="flex flex-wrap items-center gap-3">
-                            {project.github && (
-                                <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-sm text-white/80 hover:text-white transition-colors">
-                                    <Github className="w-4 h-4" /> Code
-                                </a>
-                            )}
-                            {project.demo && (
-                                <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-sm text-white/80 hover:text-white transition-colors">
-                                    <ExternalLink className="w-4 h-4" /> Live
-                                </a>
-                            )}
-                            {project.featured && (
-                                <span className="flex items-center gap-1 text-xs text-white/50"><Star className="w-3 h-3" /> Featured</span>
-                            )}
-                            {project.event && (
-                                <span className="flex items-center gap-1 text-xs text-white/50"><Sparkles className="w-3 h-3" /> {project.event}</span>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className="flex-1 min-h-[200px] lg:min-h-0 relative overflow-hidden">
-                        <img
-                            src={imgSrc}
-                            alt={imgAlt}
-                            loading="lazy"
-                            decoding="async"
-                            draggable="false"
-                            className="h-full w-full object-cover select-none"
-                        />
-                    </div>
-                </div>
-            </motion.div>
-        </div>
-    );
-};
-
 const Projects = () => {
     const container = useRef(null);
     const count = projects.length;
@@ -188,15 +121,74 @@ const Projects = () => {
                     const start = i / count;
                     const end = (i + 1) / count;
                     const range = [start, end];
+
+                    const cardScale = useTransform(scrollYProgress, range, [1, targetScale]);
+
                     return (
-                        <Card
+                        <div
                             key={project.title}
-                            i={i}
-                            project={project}
-                            progress={scrollYProgress}
-                            range={range}
-                            targetScale={targetScale}
-                        />
+                            className="h-screen w-full sticky top-0 flex items-center justify-center px-4"
+                        >
+                            <motion.div
+                                style={{
+                                    scale: cardScale,
+                                    backgroundColor: project.color,
+                                }}
+                                className="w-full max-w-[1200px] md:w-[90vw] h-[70vh] max-h-[500px] min-h-[400px] rounded-[28px] p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[0_-20px_50px_rgba(0,0,0,0.6)] border-t border-white/15 border-l border-white/5 border-r border-white/5 border-b border-black/50 will-change-transform origin-top"
+                            >
+                                <div className="flex-1 flex flex-col h-full">
+                                    <div className="flex-1 overflow-y-auto pr-2">
+                                        <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight leading-tight">
+                                            {project.title}
+                                        </h2>
+                                        <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-medium opacity-90">
+                                            {project.description}
+                                        </p>
+                                        <div className="flex flex-wrap gap-2 mb-2">
+                                            {project.tech.map((tech) => (
+                                                <span key={tech} className="bg-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide">
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="pt-6 mt-2 border-t border-white/10 flex flex-wrap gap-3">
+                                        {project.github && (
+                                            <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white border border-gray-600 text-sm font-bold rounded-xl hover:bg-gray-800 transition-colors shadow-lg">
+                                                <Github className="w-[18px] h-[18px]" /> Code
+                                            </a>
+                                        )}
+                                        {project.demo && (
+                                            <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg">
+                                                <ExternalLink className="w-[18px] h-[18px]" /> Live
+                                            </a>
+                                        )}
+                                        {project.featured && (
+                                            <span className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl shadow-lg">
+                                                <Star className="w-[18px] h-[18px]" /> Featured
+                                            </span>
+                                        )}
+                                        {project.event && (
+                                            <span className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl shadow-lg">
+                                                <Sparkles className="w-[18px] h-[18px]" /> {project.event}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="flex-1 rounded-2xl overflow-hidden bg-black/30 border border-white/5 min-h-[200px] md:min-h-0 hidden md:block">
+                                    <img
+                                        src={project.image}
+                                        alt={project.imageAlt}
+                                        loading="lazy"
+                                        decoding="async"
+                                        draggable="false"
+                                        className="w-full h-full object-cover select-none"
+                                    />
+                                </div>
+                            </motion.div>
+                        </div>
                     );
                 })}
             </main>
