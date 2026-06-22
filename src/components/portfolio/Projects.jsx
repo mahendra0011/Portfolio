@@ -163,11 +163,9 @@ const Projects = () => {
 
         gsap.to(card, {
           scale: 0.92,
-          // 🔥 HATA DIYA: opacity aur filter yahan se hata diye gaye hain
           ease: "none",
           scrollTrigger: {
             trigger: wrapper,
-            // Perfect timing sync wahi rahega taaki smooth lage
             start: () => `top ${window.innerHeight * 0.12 + i * 12}px`, 
             end: () => `+=${window.innerHeight}`, 
             scrub: true,
@@ -209,12 +207,14 @@ const Projects = () => {
             }}
           >
             <div
-              className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 will-change-transform"
+              className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 will-change-transform glass"
               style={{
-                backgroundColor: proj.color,
+                backgroundColor: proj.color + "cc",
                 height: "70vh",
                 maxHeight: "500px",
                 minHeight: "400px",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
                 boxShadow: "0 -20px 50px rgba(0,0,0,0.6)",
                 borderTop: "1px solid rgba(255,255,255,0.15)",
                 borderLeft: "1px solid rgba(255,255,255,0.05)",
