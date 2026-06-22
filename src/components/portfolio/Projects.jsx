@@ -152,10 +152,20 @@ const Projects = () => {
   const wrapperRefs = useRef([]);
 
   useEffect(() => {
+    const isAndroid = /Android/i.test(navigator.userAgent);
+
+    // Isolate configuration so it doesn't corrupt Hero/About section images
+    if (isAndroid) {
+      ScrollTrigger.config({ 
+        ignoreMobileResize: true // Dynamic URL bar updates ko block karega bina baki page ko tode
+      });
+    }
+
     const ctx = gsap.context(() => {
       const wrappers = wrapperRefs.current.filter(Boolean);
 
       wrappers.forEach((wrapper, i) => {
+        // Tumhara exact 100% original loop boundary condition Windows ke liye
         if (i === wrappers.length - 1) return;
 
         const card = wrapper.querySelector(".project-card");
@@ -163,11 +173,9 @@ const Projects = () => {
 
         gsap.to(card, {
           scale: 0.92,
-          // 🔥 HATA DIYA: opacity aur filter yahan se hata diye gaye hain
           ease: "none",
           scrollTrigger: {
             trigger: wrapper,
-            // Perfect timing sync wahi rahega taaki smooth lage
             start: () => `top ${window.innerHeight * 0.12 + i * 12}px`, 
             end: () => `+=${window.innerHeight}`, 
             scrub: true,
@@ -176,7 +184,10 @@ const Projects = () => {
         });
       });
 
-      setTimeout(() => ScrollTrigger.refresh(), 100);
+      // Timeout refreshed locally inside context scope only
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
     }, sectionRef);
 
     return () => {
