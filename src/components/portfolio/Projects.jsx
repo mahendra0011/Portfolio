@@ -7,216 +7,317 @@ import SectionHeading from "./SectionHeading";
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-    {
-        title: "MediCore - Hospital Management System",
-        description:
-            "Full-stack hospital management system with patient, doctor and admin portals, OTP auth, appointments, records, lab services, billing, emergency cases, reports, notifications and PDF documents.",
-        tech: ["React", "Node.js", "Express.js", "MongoDB", "JWT", "Multer", "Cloudinary", "PDFKit"],
-        github: "https://github.com/mahendra0011/mediCore.git",
-        demo: "https://medicore-main-1.onrender.com",
-        featured: true,
-        image: "/projects/medicore.png",
-        imageAlt: "MediCore healthcare landing page screenshot",
-        color: "#BBACAF",
-    },
-    {
-        title: "EventO - Event Booking Platform",
-        description:
-            "Event booking platform for public discovery, ticket booking with OTP verification, host dashboards, attendee messaging, support tickets, admin controls, reports and Render-ready deployment.",
-        tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "OTP", "Reports"],
-        github: "https://github.com/mahendra0011/EventO",
-        demo: "http://evento-1645479696.us-east-2.elb.amazonaws.com/",
-        image: "/projects/evento.png",
-        imageAlt: "EventO event booking platform landing page screenshot",
-        color: "#977F6D",
-    },
-    {
-        title: "MindSupport - Mental Wellness Platform",
-        description:
-            "Smart India Hackathon 2025 mental wellness solution with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
-        tech: ["JavaScript", "React", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Payments"],
-        github: "https://github.com/mahendra0011/mindSupport",
-        demo: "https://mindsupport-1.onrender.com/",
-        event: "Smart India Hackathon 2025",
-        image: "/projects/mindsupport.png",
-        imageAlt: "MindSupport mental wellness platform landing page screenshot",
-        color: "#C2491D",
-    },
-    {
-        title: "MoviX - Movie Ticket Booking Platform",
-        description:
-            "Full-stack movie ticket booking platform for browsing movies, coming-soon releases, seat selection, ticket booking, theater management and admin or owner workflows.",
-        tech: ["React", "Node.js", "Express.js", "MongoDB", "Cloudinary", "JWT"],
-        github: "https://github.com/mahendra0011/movix",
-        demo: "https://movix-p8ez.onrender.com",
-        image: "/projects/movix.png",
-        imageAlt: "MoviX movie ticket booking platform landing page screenshot",
-        color: "#6B8E23",
-    },
-    {
-        title: "RentPE - Room Rental Marketplace",
-        description:
-            "Room rental marketplace for students, interns, job seekers and movers. Seekers compare PGs, hostels, flats and rooms while owners publish listings using city, area, landmark, title, amenities, rules and descriptions.",
-        tech: ["React", "Node.js", "Express.js", "MongoDB", "Search", "Marketplace"],
-        github: "https://github.com/mahendra0011/RentPE",
-        demo: "https://rentpe-j7bq.onrender.com",
-        image: "/projects/rentpe.png",
-        imageAlt: "RentPE room rental marketplace landing page screenshot",
-        color: "#4A6741",
-    },
-    {
-        title: "TempTalk - Anonymous Chat Platform",
-        description:
-            "Privacy-focused anonymous chat platform with encrypted messaging, real-time Socket.IO rooms, media sharing, temporary chat rooms, PWA and Android support, deep links and QR invites.",
-        tech: ["React", "Express.js", "Socket.IO", "MongoDB", "PWA", "Android"],
-        github: "https://github.com/mahendra0011/TempTalk",
-        demo: "https://temptalk-1.onrender.com",
-        image: "/projects/temptalk.png",
-        imageAlt: "TempTalk anonymous chat platform landing page screenshot",
-        color: "#5B4E77",
-    },
-    {
-        title: "StudyBuddy - AI Study Platform",
-        description:
-            "AI-powered study platform using Gemini AI to generate structured notes, summarize PDFs and YouTube lectures, manage study tasks and organize personalized content libraries with secure authentication.",
-        tech: ["React", "Node.js", "Express.js", "MongoDB", "Gemini AI", "PDF", "YouTube"],
-        github: "https://github.com/mahendra0011/StudyBuddy",
-        demo: "https://studybuddy-86s2.onrender.com",
-        image: "/projects/studybuddy.png",
-        imageAlt: "StudyBuddy AI study platform landing page screenshot",
-        color: "#3D5A80",
-    },
-    {
-        title: "LostAndFound - Recovery Platform",
-        description:
-            "Full-stack MERN application for reporting, searching and recovering lost items with JWT authentication, image uploads, advanced search and filtering, item status management and responsive recovery workflows.",
-        tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "Image Uploads"],
-        github: "https://github.com/mahendra0011/Lost-and-Found-Website.git",
-        demo: "https://lost-and-found-xlvq.onrender.com/",
-        image: "/projects/lost-and-found.png",
-        imageAlt: "LostAndFound platform landing page screenshot",
-        color: "#8B3A3A",
-    },
+  {
+    title: "MediCore - Hospital System",
+    description: "Full-stack hospital management system with patient, doctor and admin portals, OTP auth, appointments, records, lab services, billing, emergency cases, reports, notifications and PDF documents.",
+    tech: ["React", "Node.js", "Express.js", "MongoDB", "JWT", "Multer", "Cloudinary", "PDFKit"],
+    github: "https://github.com/mahendra0011/mediCore.git",
+    demo: "https://medicore-main-1.onrender.com",
+    featured: true,
+    image: "/projects/medicore.png",
+    color: "#1e293b",
+  },
+  {
+    title: "EventO - Event Platform",
+    description: "Event booking platform for public discovery, ticket booking with OTP verification, host dashboards, attendee messaging, support tickets, admin controls, reports and Render-ready deployment.",
+    tech: ["React", "Tailwind", "Express.js", "MongoDB", "OTP", "Reports"],
+    github: "https://github.com/mahendra0011/EventO",
+    demo: "http://evento-1645479696.us-east-2.elb.amazonaws.com/",
+    image: "/projects/evento.png",
+    color: "#0f172a",
+  },
+  {
+    title: "MindSupport - Mental Wellness",
+    description: "Smart India Hackathon 2025 mental wellness solution with counsellor discovery, role dashboards, verification, scheduling, Google Meet support, secure chat, wellness tracking, payments, reviews and admin moderation.",
+    tech: ["JavaScript", "React", "Node.js", "Socket.IO", "Payments"],
+    github: "https://github.com/mahendra0011/mindSupport",
+    demo: "https://mindsupport-1.onrender.com/",
+    event: "SIH 2025",
+    image: "/projects/mindsupport.png",
+    color: "#334155",
+  },
+  {
+    title: "MoviX - Movie Tickets",
+    description: "Full-stack movie ticket booking platform for browsing movies, coming-soon releases, seat selection, ticket booking, theater management and admin or owner workflows.",
+    tech: ["React", "Node.js", "MongoDB", "Cloudinary", "JWT"],
+    github: "https://github.com/mahendra0011/movix",
+    demo: "https://movix-p8ez.onrender.com",
+    image: "/projects/movix.png",
+    color: "#020617",
+  },
+  {
+    title: "RentPE - Room Rentals",
+    description: "Room rental marketplace for students, interns, job seekers and movers. Seekers compare PGs, hostels, flats and rooms while owners publish listings using city, area, landmark, title, amenities, rules and descriptions.",
+    tech: ["React", "Express.js", "MongoDB", "Marketplace"],
+    github: "https://github.com/mahendra0011/RentPE",
+    demo: "https://rentpe-j7bq.onrender.com",
+    image: "/projects/rentpe.png",
+    color: "#1e293b",
+  },
+  {
+    title: "TempTalk - Anonymous Chat",
+    description: "Privacy-focused anonymous chat platform with encrypted messaging, real-time Socket.IO rooms, media sharing, temporary chat rooms, PWA and Android support, deep links and QR invites.",
+    tech: ["React", "Socket.IO", "MongoDB", "PWA", "Android"],
+    github: "https://github.com/mahendra0011/TempTalk",
+    demo: "https://temptalk-1.onrender.com",
+    image: "/projects/temptalk.png",
+    color: "#0f172a",
+  },
+  {
+    title: "StudyBuddy - AI Platform",
+    description: "AI-powered study platform using Gemini AI to generate structured notes, summarize PDFs and YouTube lectures, manage study tasks and organize personalized content libraries with secure authentication.",
+    tech: ["React", "Gemini AI", "Node.js", "MongoDB", "PDF", "YouTube"],
+    github: "https://github.com/mahendra0011/StudyBuddy",
+    demo: "https://studybuddy-86s2.onrender.com",
+    image: "/projects/studybuddy.png",
+    color: "#334155",
+  },
+  {
+    title: "LostAndFound - Recovery",
+    description: "Full-stack MERN application for reporting, searching and recovering lost items with JWT authentication, image uploads, advanced search and filtering, item status management and responsive recovery workflows.",
+    tech: ["React", "MongoDB", "JWT", "Image Uploads"],
+    github: "https://github.com/mahendra0011/Lost-and-Found-Website.git",
+    demo: "https://lost-and-found-xlvq.onrender.com/",
+    image: "/projects/lost-and-found.png",
+    color: "#020617",
+  },
+  {
+    title: "CloudNest - File System",
+    description: "Full-stack file upload system — Users register, login with Google, upload files, and every file is stored in the owner's Google Drive. Real-time status via Socket.io with Redux state management.",
+    tech: ["React", "Redux", "MUI", "Shadcn", "Socket.io", "Express"],
+    github: "#",
+    demo: "#",
+    image: "/projects/medicore.png",
+    color: "#1e293b",
+  },
+  {
+    title: "⚡ IntegrateKit",
+    description: "The definitive integration directory for MERN Stack developers — real code snippets, setup guides, and screenshots for integrating with 330+ services. Stop Googling, start building.",
+    tech: ["React 18", "Vite", "Tailwind", "Framer Motion", "GSAP"],
+    github: "#",
+    demo: "#",
+    featured: true,
+    image: "/projects/evento.png",
+    color: "#0f172a",
+  },
+  {
+    title: "HireInterns",
+    description: "A streamlined platform bridging the gap between innovative companies and talented interns looking for their next big opportunity. (Coming Soon)",
+    tech: ["MERN", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/mindsupport.png",
+    color: "#334155",
+  },
+  {
+    title: "One in A Million",
+    description: "An exclusive platform showcasing unique ideas, talents, and portfolios from extraordinary individuals worldwide. (Coming Soon)",
+    tech: ["React", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/movix.png",
+    color: "#020617",
+  },
+  {
+    title: "CivicIssue",
+    description: "A community-driven platform to report, track, and resolve local civic issues directly with local authorities. Photo evidence, geo-tagging, status tracking and public voting on priority issues.",
+    tech: ["React", "Node.js", "MongoDB"],
+    github: "#",
+    demo: "#",
+    image: "/projects/rentpe.png",
+    color: "#1e293b",
+  },
+  {
+    title: "Project Nexus",
+    description: "A robust internal tool for managing workflow and tracking sprint velocities in agile development teams. Kanban boards, burndown charts, team capacity planning and retrospective tools.",
+    tech: ["Next.js", "Tailwind", "PostgreSQL"],
+    github: "#",
+    demo: "#",
+    image: "/projects/studybuddy.png",
+    color: "#0f172a",
+  },
+  {
+    title: "Apex Fitness Club",
+    description: "A high-performance modern frontend for a premium fitness club featuring interactive class schedules and personal trainer portfolios. (Coming Soon)",
+    tech: ["Frontend", "UI/UX", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/temptalk.png",
+    color: "#334155",
+  }
 ];
 
 const Projects = () => {
-    const cardsRef = useRef([]);
+  const sectionRef = useRef(null);
+  const wrapperRefs = useRef([]);
 
-    useEffect(() => {
-        const wrapperElements = cardsRef.current;
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const wrappers = wrapperRefs.current.filter(Boolean);
 
-        wrapperElements.forEach((wrapper, i) => {
-            if (!wrapper) return;
-            if (i === wrapperElements.length - 1) return;
+      wrappers.forEach((wrapper, i) => {
+        if (i === wrappers.length - 1) return;
 
-            const card = wrapper.querySelector('.project-card');
-            if (!card) return;
+        const card = wrapper.querySelector(".project-card");
+        if (!card) return;
 
-            gsap.to(card, {
-                scale: 0.92,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: wrapper,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: 0.5,
-                    invalidateOnRefresh: true,
-                }
-            });
+        gsap.to(card, {
+          scale: 0.92,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
         });
+      });
 
-        ScrollTrigger.refresh();
+      setTimeout(() => ScrollTrigger.refresh(), 100);
+    }, sectionRef);
 
-        return () => {
-            ScrollTrigger.getAll().forEach(t => t.kill());
-        };
-    }, []);
+    return () => {
+      ctx.revert();
+    };
+  }, []);
 
-    return (
-        <section id="projects" className="bg-slate-950">
-            <div className="container mx-auto px-4 pt-20 sm:pt-24 pb-12">
-                <SectionHeading
-                    eyebrow="Projects"
-                    title="Things I've Built"
-                    description="A selection of things I've built recently"
-                />
-            </div>
+  return (
+    <section id="projects" ref={sectionRef} className="bg-slate-950">
+      
+      <div className="container mx-auto px-4 pt-20 sm:pt-24 pb-12">
+        <SectionHeading
+          eyebrow="Projects"
+          title="Things I've Built"
+          description="A selection of things I've built recently"
+        />
+      </div>
 
-            <main className="relative pb-[20vh]">
-                {projects.map((proj, index) => (
-                    <div key={proj.title} className="relative h-[200vh]">
-                        <div
-                            ref={(el) => (cardsRef.current[index] = el)}
-                            className="h-screen flex items-start justify-center sticky top-0 px-4"
-                            style={{ top: `calc(12vh + ${index * 12}px)` }}
-                        >
-                            <div
-                                className="project-card origin-top w-full max-w-[1200px] md:w-[90vw] h-[70vh] max-h-[500px] min-h-[400px] rounded-[28px] p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[0_-20px_50px_rgba(0,0,0,0.6)] border-t border-white/15 border-l border-white/5 border-r border-white/5 border-b border-black/50 will-change-transform"
-                                style={{
-                                    backgroundColor: proj.color,
-                                    transform: 'translateZ(0)',
-                                    backfaceVisibility: 'hidden',
-                                    WebkitFontSmoothing: 'antialiased'
-                                }}
-                            >
-                                <div className="flex-1 flex flex-col h-full">
-                                    <div className="flex-1 overflow-y-auto pr-2">
-                                        <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight leading-tight">
-                                            {proj.title}
-                                        </h2>
-                                        <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-medium opacity-90">
-                                            {proj.description}
-                                        </p>
-                                        <div className="flex flex-wrap gap-2 mb-2">
-                                            {proj.tech.map((tech) => (
-                                                <span key={tech} className="bg-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide">
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div className="pt-6 mt-2 border-t border-white/10 flex flex-wrap gap-3">
-                                        {proj.github && (
-                                            <a href={proj.github} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white border border-gray-600 text-sm font-bold rounded-xl hover:bg-gray-800 transition-colors shadow-lg">
-                                                <Github className="w-[18px] h-[18px]" /> Code
-                                            </a>
-                                        )}
-                                        {proj.demo && (
-                                            <a href={proj.demo} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg">
-                                                <ExternalLink className="w-[18px] h-[18px]" /> Live
-                                            </a>
-                                        )}
-                                        {proj.featured && (
-                                            <span className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl shadow-lg">
-                                                <Star className="w-[18px] h-[18px]" /> Featured
-                                            </span>
-                                        )}
-                                        {proj.event && (
-                                            <span className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl shadow-lg">
-                                                <Sparkles className="w-[18px] h-[18px]" /> {proj.event}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="flex-1 rounded-2xl overflow-hidden bg-black/30 border border-white/5 min-h-[200px] md:min-h-0 hidden md:block">
-                                    <img
-                                        src={proj.image}
-                                        alt={proj.imageAlt}
-                                        loading="lazy"
-                                        decoding="async"
-                                        draggable="false"
-                                        className="w-full h-full object-cover select-none"
-                                    />
-                                </div>
-                            </div>
-                        </div>
+      <div className="relative pb-[10vh]">
+        {projects.map((proj, index) => (
+          <div
+            key={proj.title}
+            ref={(el) => {
+              if (el) wrapperRefs.current[index] = el;
+            }}
+            className="h-screen flex items-start justify-center px-4"
+            style={{
+              position: "sticky",
+              top: `calc(12vh + ${index * 12}px)`,
+            }}
+          >
+            <div
+              className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 will-change-transform"
+              style={{
+                backgroundColor: proj.color,
+                /* 🔥 Height wapas pehle jaisi (Perfect for desktop) */
+                height: "70vh",
+                maxHeight: "500px",
+                minHeight: "400px",
+                boxShadow: "0 -20px 50px rgba(0,0,0,0.6)",
+                borderTop: "1px solid rgba(255,255,255,0.15)",
+                borderLeft: "1px solid rgba(255,255,255,0.05)",
+                borderRight: "1px solid rgba(255,255,255,0.05)",
+                borderBottom: "1px solid rgba(0,0,0,0.5)",
+                transformOrigin: "top center",
+                transform: "translateZ(0)",
+                backfaceVisibility: "hidden",
+                WebkitFontSmoothing: "antialiased",
+              }}
+            >
+              {/* === LEFT SIDE (TEXT CONTENT) === */}
+              {/* 🔥 Content width thodi kam ki hai (md:flex-[0.8]) taaki image poori dikhe */}
+              <div className="flex-1 md:flex-[0.8] flex flex-col h-full overflow-hidden order-2 md:order-1">
+                
+                <div
+                  className="flex-1 overflow-y-auto pr-2"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
+                  {(proj.featured || proj.event) && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {proj.featured && (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 text-white px-3 py-1 rounded-full">
+                          <Star className="w-3 h-3" /> Featured
+                        </span>
+                      )}
+                      {proj.event && (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 text-white px-3 py-1 rounded-full">
+                          <Sparkles className="w-3 h-3" /> {proj.event}
+                        </span>
+                      )}
                     </div>
-                ))}
-            </main>
-        </section>
-    );
+                  )}
+
+                  <h2 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-white">
+                    {proj.title}
+                  </h2>
+
+                  <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-5 font-medium opacity-90">
+                    {proj.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {proj.tech.map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide text-white"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* PINNED BUTTONS */}
+                <div className="pt-4 md:pt-6 mt-2 border-t border-white/10 flex flex-wrap gap-3 shrink-0">
+                  {proj.github && proj.github !== "#" && (
+                    <a
+                      href={proj.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white border border-gray-600 text-sm font-bold rounded-xl hover:bg-gray-800 transition-colors shadow-lg"
+                    >
+                      <Github className="w-[18px] h-[18px]" /> GitHub
+                    </a>
+                  )}
+                  {proj.demo && proj.demo !== "#" && (
+                    <a
+                      href={proj.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg"
+                    >
+                      <ExternalLink className="w-[18px] h-[18px]" /> Live
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* === RIGHT SIDE (IMAGE SECTION) === */}
+              {/* 🔥 Width badha di (flex-[1.2]). Background color/box hata diya. */}
+              <div className="w-full h-[180px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0">
+                <img
+                  src={proj.image}
+                  alt={proj.title}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  /* 🔥 Sirf image ke around thin border aayega. "max-w/max-h" ensure karta hai ki border sirf image pixels ko hug kare */
+                  className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-2xl drop-shadow-2xl select-none"
+                />
+              </div>
+
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="h-[70vh] flex flex-col items-center justify-center text-slate-500 text-xl gap-4">
+        <p className="font-bold text-3xl text-slate-400">That's a wrap 🎬</p>
+        <p className="text-sm">More coming soon...</p>
+      </div>
+    </section>
+  );
 };
 
 export default Projects;
