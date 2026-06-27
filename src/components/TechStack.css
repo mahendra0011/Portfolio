@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+.tech-stack-wrapper {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    --bg-color: #030712;
+    --card-bg: rgba(23, 23, 23, 0.4);
+    --card-border: rgba(38, 38, 38, 0.6);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --badge-bg: rgba(10, 10, 10, 0.6);
+    
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+    background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.tech-stack-wrapper * {
+    box-sizing: border-box;
+}
+
+.tech-stack-wrapper .glow-1 { position: fixed; top: 0; left: 25%; width: 500px; height: 500px; background: rgba(59,130,246,0.08); border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+.tech-stack-wrapper .glow-2 { position: fixed; top: 30%; right: 25%; width: 600px; height: 600px; background: rgba(16,185,129,0.05); border-radius: 50%; filter: blur(150px); pointer-events: none; z-index: 0; }
+
+.tech-stack-wrapper .container { max-width: 1300px; margin: 0 auto; padding: 6rem 1.5rem 4rem; position: relative; z-index: 10; }
+
+/* Header */
+.tech-stack-wrapper .header-glow { position: absolute; top: -40%; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(circle, rgba(74,130,232,0.15) 0%, rgba(74,130,232,0.05) 40%, transparent 70%); border-radius: 50%; filter: blur(60px); pointer-events: none; z-index: 0; }
+.tech-stack-wrapper .header { text-align: center; margin-bottom: 4rem; animation: fadeDown 0.9s ease-out forwards; opacity: 0; position: relative; z-index: 1; }
+.tech-stack-wrapper .header-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; color: #4A82E8; text-transform: uppercase; background: rgba(74,130,232,0.1); padding: 0.35rem 1rem; border-radius: 999px; border: 2px solid rgba(74,130,232,0.5); box-shadow: 0 0 12px rgba(74,130,232,0.25), inset 0 0 8px rgba(74,130,232,0.08); margin-bottom: 1rem; }
+.tech-stack-wrapper .header-title { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; color: #4A82E8; text-shadow: 0 0 30px rgba(74,130,232,0.4), 0 0 60px rgba(74,130,232,0.15); }
+.tech-stack-wrapper .text-gradient { background: linear-gradient(to right, #e5e5e5, #9ca3af, #525252); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(1.2rem, 3vw, 2rem); }
+
+/* Bento Grid */
+.tech-stack-wrapper .bento-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: stretch; }
+@media (min-width: 1024px) {
+    .tech-stack-wrapper .bento-grid { grid-template-columns: 1fr 1fr 1.3fr; }
+    .tech-stack-wrapper .col-span-2 { grid-column: span 2; }
+    .tech-stack-wrapper .row-span-2 { grid-row: span 2; }
+}
+
+/* Card */
+.tech-stack-wrapper .card {
+    background: var(--card-bg); border: 2px solid rgba(74,130,232,0.5); border-radius: 1.25rem;
+    box-shadow: inset 0 0 20px rgba(74,130,232,0.2), inset 0 0 40px rgba(74,130,232,0.05);
+    padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem;
+    backdrop-filter: blur(12px); position: relative; overflow: hidden;
+    height: 100%;
+    opacity: 0; animation: fadeUp 0.7s ease-out forwards;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.tech-stack-wrapper .card:hover { border-color: rgba(255,255,255,0.15); }
+.tech-stack-wrapper .card:nth-child(1) { animation-delay: 0.15s; }
+.tech-stack-wrapper .card:nth-child(2) { animation-delay: 0.3s; }
+.tech-stack-wrapper .card:nth-child(3) { animation-delay: 0.45s; }
+.tech-stack-wrapper .card:nth-child(4) { animation-delay: 0.6s; }
+
+/* Card Header */
+.tech-stack-wrapper .card-header { display: flex; align-items: center; gap: 0.75rem; }
+.tech-stack-wrapper .icon-box { border-radius: 0.65rem; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; flex-shrink: 0; }
+.tech-stack-wrapper .icon-box svg { width: 22px; height: 22px; }
+
+.tech-stack-wrapper .icon-box.blue   { background: rgba(59,130,246,0.1);  border: 1px solid rgba(59,130,246,0.2);  color: #60a5fa; }
+.tech-stack-wrapper .icon-box.green { background: rgba(16,185,129,0.1);  border: 1px solid rgba(16,185,129,0.2);  color: #34d399; }
+.tech-stack-wrapper .icon-box.purple{ background: rgba(168,85,247,0.1);  border: 1px solid rgba(168,85,247,0.2);  color: #c084fc; }
+.tech-stack-wrapper .icon-box.orange{ background: rgba(249,115,22,0.1);  border: 1px solid rgba(249,115,22,0.2);  color: #fb923c; }
+
+.tech-stack-wrapper .card-title { font-size: 1.1rem; font-weight: 600; color: #fff; }
+.tech-stack-wrapper .card-desc  { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+/* Badges */
+.tech-stack-wrapper .badges-container { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.tech-stack-wrapper .tech-badge {
+    display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.5rem 0.85rem;
+    background: var(--badge-bg); border: 2px solid rgba(74,130,232,0.5); border-radius: 0.65rem;
+    box-shadow: 0 0 12px rgba(74,130,232,0.25), inset 0 0 8px rgba(74,130,232,0.08);
+    cursor: default; transition: all 0.25s ease; white-space: nowrap;
+}
+.tech-stack-wrapper .tech-badge span { font-size: 0.85rem; color: #c4c4c8; font-weight: 500; letter-spacing: 0.01em; }
+ 
+/* Badge Icons - base size (animations handled by Framer Motion in TechBadge) */
+.tech-stack-wrapper .tech-badge img,
+.tech-stack-wrapper .tech-badge svg.badge-icon {
+    width: 22px; height: 22px; display: block; flex-shrink: 0;
+}
+
+@keyframes fadeDown { from { opacity:0; transform:translateY(-24px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeUp   { from { opacity:0; transform:translateY(32px);  } to { opacity:1; transform:translateY(0); } }
