@@ -23,9 +23,9 @@ import {
 import { CloudCog } from "lucide-react";
 
 const stats = [
-  { value: 15, suffix: "+", label: "Projects Built" },
-  { value: 1200, suffix: "+", label: "GitHub Commits" },
-  { value: 50, suffix: "+", label: "Technologies" },
+  { value: 20, suffix: "+", label: "Projects Built" },
+  { value: 1700, suffix: "+", label: "GitHub Commits" },
+  { value: 75, suffix: "+", label: "Technologies" },
   { value: 2.5, suffix: "+", label: "Years Experience", isFloat: true },
 ];
 

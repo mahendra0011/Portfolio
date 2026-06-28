@@ -1,10 +1,11 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Download, Mail } from "lucide-react";
+import { Download, Mail, FolderGit2 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/reactbits/MagneticButton";
+import { handleHashLinkClick } from "@/lib/scrollToHash";
 import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
 import ShinyText from "@/components/reactbits/ShinyText";
 
@@ -130,7 +131,7 @@ const Hero = () => {
       </div>
 
       <div className="container relative z-10 grid min-h-[calc(100svh-5rem)] items-center gap-8 py-8 sm:gap-10 sm:py-10 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 lg:gap-12 lg:pb-0 xl:pl-24">
-        <div className="mx-auto max-w-2xl space-y-4 text-center lg:mx-0 lg:max-w-none lg:self-start lg:pt-[5.5rem] lg:text-left xl:pt-[6.5rem]">
+        <div className="relative z-10 mx-auto max-w-2xl space-y-4 text-center lg:mx-0 lg:max-w-none lg:self-start lg:pt-[5.5rem] lg:text-left xl:pt-[6.5rem]">
           <div className="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             Available for opportunities
@@ -154,18 +155,25 @@ const Hero = () => {
 
           <div className="flex flex-row flex-wrap justify-center gap-3 lg:justify-start">
             <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
-              <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden px-4 text-white bg-gray-500 shadow-glow transition-transform sm:w-auto sm:px-8">
-                <a href="https://wa.me/917724822660" target="_blank" rel="noreferrer">
-                  <Mail className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> 
-                  <ShinyText text="Contact Me" speed={2} color="#ffffff" shineColor="#ffffff" />
+              <Button size="lg" asChild className="group w-full px-4 gradient-bg shadow-glow transition-transform sm:w-auto sm:px-8">
+                <a href="#projects" onClick={(event) => handleHashLinkClick(event, "#projects")}>
+                  <FolderGit2 className="mr-2 h-4 w-4 transition-transform group-hover:-rotate-6" /> View Projects
                 </a>
               </Button>
             </MagneticButton>
             <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
-              <Button size="lg" variant="secondary" asChild className="group w-full px-4 text-white transition-transform sm:w-auto sm:px-8">
-                <a href="/Mahendra_Resume.pdf" download>
+              <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden px-4 transition-transform sm:w-auto sm:px-8">
+                <a href="#contact" onClick={(event) => handleHashLinkClick(event, "#contact")} style={{ color: 'white' }}>
+                  <Mail className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> 
+                  <span>Contact Me</span>
+                </a>
+              </Button>
+            </MagneticButton>
+            <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
+              <Button size="lg" variant="secondary" asChild className="group w-full px-4 transition-transform sm:w-auto sm:px-8">
+                <a href="/Mahendra_Resume.pdf" download style={{ color: 'white' }}>
                   <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" /> 
-<ShinyText text="Resume" speed={2} color="#ffffff" shineColor="#ffffff" />
+                  <span>Resume</span>
                 </a>
               </Button>
             </MagneticButton>

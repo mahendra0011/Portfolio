@@ -1,24 +1,10 @@
 import { useEffect } from "react";
-import Lenis from "lenis";
+import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocation } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// Sync Lenis ↔ GSAP ScrollTrigger
-ScrollTrigger.defaults.scroller = window;
-
-const setupLenisProxy = (lenis) => {
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
-};
-
-const teardownLenisProxy = (lenis) => {
-  lenis.off("scroll", ScrollTrigger.update);
-  gsap.ticker.remove((time) => lenis.raf(time * 1000));
-};
 
 /**
  * 🔥 FIXES vs the original:
@@ -48,9 +34,11 @@ export const useSmoothScroll = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    // We removed the touch device skip so the butter smooth scroll applies on mobile too
 
-    const lenis = new Lenis({
+
+
+        const lenis = new Lenis({
       duration: 1.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       lerp: 0.1,
@@ -63,13 +51,21 @@ export const useSmoothScroll = () => {
 
     window.__portfolioLenis = lenis;
 
-    setupLenisProxy(lenis);
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const rafCb = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(rafCb);
+    // default lag smoothing kept (don't disable it) so long frames don't snap
 
     document.documentElement.classList.add("lenis", "lenis-smooth");
 
     return () => {
       document.documentElement.classList.remove("lenis", "lenis-smooth");
-      teardownLenisProxy(lenis);
+      lenis.off("scroll", ScrollTrigger.update);
+      gsap.ticker.remove(rafCb);
       window.__portfolioLenis = null;
       lenis.destroy();
     };

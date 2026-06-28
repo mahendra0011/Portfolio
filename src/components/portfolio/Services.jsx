@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { handleHashLinkClick } from "@/lib/scrollToHash";
 import SectionHeading from "./SectionHeading";
 import { useTheme } from "@/hooks/useTheme";
+import { useFloating, autoUpdate, offset, flip, shift, useHover, useFocus, useDismiss, useRole, useInteractions, FloatingPortal } from "@floating-ui/react";
+import { useState } from "react";
 
 const services = [
   {
@@ -52,6 +54,77 @@ const services = [
     highlights: ["SaaS", "Dashboards", "Marketplaces"],
   },
 ];
+
+const highlightDescriptions = {
+  "Modern apps": "Building SPAs, SSR, SSG with React, Next.js and modern tooling",
+  "Secure APIs": "RESTful & GraphQL APIs with JWT, OAuth and rate limiting",
+  "Cloud-ready": "Deploy on AWS, Docker, Vercel with CI/CD pipelines",
+  "Responsive UI": "Mobile-first, fluid layouts with Tailwind and CSS Grid",
+  Accessibility: "WCAG 2.1 AA/AAA, keyboard nav, screen reader support",
+  "Clean UX": "Intuitive interfaces with Framer Motion & micro-interactions",
+  "Auth systems": "Auth0, JWT, OAuth2, session management & RBAC",
+  "REST APIs": "Express, Fastify, NestJS with Swagger docs",
+  "Real-time": "WebSockets, Socket.IO, SSE, WebRTC for live features",
+  Validation: "Zod, Joi, Yup with type-safe error handling",
+  Caching: "Redis, CDN, in-memory cache, HTTP cache headers",
+  "DB tuning": "Indexing, query optimization, connection pooling",
+  Docker: "Multi-stage builds, compose, swarm, k8s ready",
+  "AWS/Nginx": "EC2, S3, CloudFront, reverse proxy, SSL termination",
+  "Vercel/Render": "Zero-config deploy, serverless functions, preview deploys",
+  SaaS: "Multi-tenant, subscription billing, usage tracking",
+  Dashboards: "Recharts, AG Grid, data viz, real-time analytics",
+  Marketplaces: "Stripe Connect, vendor management, search & filters",
+};
+
+const TooltipWrapper = ({ label, children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { refs, floatingStyles, context } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    placement: "top",
+    middleware: [offset(6), flip(), shift()],
+    whileElementsMounted: autoUpdate,
+  });
+
+  const hover = useHover(context, { move: false });
+  const focus = useFocus(context);
+  const dismiss = useDismiss(context);
+  const role = useRole(context, { role: "tooltip" });
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    hover,
+    focus,
+    dismiss,
+    role,
+  ]);
+
+  const desc = highlightDescriptions[label];
+
+  return (
+    <>
+      <span
+        ref={refs.setReference}
+        {...getReferenceProps()}
+        className="rounded-full bg-secondary/80 px-2.5 py-1 text-xs font-semibold text-secondary-foreground cursor-help"
+      >
+        {children}
+      </span>
+      {desc && isOpen && (
+        <FloatingPortal>
+          <div
+            ref={refs.setFloating}
+            style={floatingStyles}
+            {...getFloatingProps()}
+            className="z-50 max-w-[220px] rounded-lg bg-popover px-3 py-2 text-xs text-popover-foreground shadow-lg border border-border"
+          >
+            {desc}
+          </div>
+        </FloatingPortal>
+      )}
+    </>
+  );
+};
 
 const Services = () => {
   const { theme } = useTheme();
@@ -99,9 +172,9 @@ const Services = () => {
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
                   <div className="mt-auto pt-5 flex flex-wrap gap-2">
                     {highlights.map((highlight) => (
-                      <span key={highlight} className="rounded-full bg-secondary/80 px-2.5 py-1 text-xs font-semibold text-secondary-foreground">
+                      <TooltipWrapper key={highlight} label={highlight}>
                         {highlight}
-                      </span>
+                      </TooltipWrapper>
                     ))}
                   </div>
                 </SpotlightCard>

@@ -17,13 +17,13 @@ const items = [
   },
   {
     Icon: Code2,
-    title: "Built 10+ Projects",
-    description: "Built 10+ practical web projects across full-stack applications, dashboards, booking systems, marketplaces and real-world MERN solutions.",
+    title: "Built 20+ Projects",
+    description: "Built 20+ practical web projects across full-stack applications, dashboards, booking systems, marketplaces and real-world MERN solutions.",
   },
   {
     Icon: GitBranch,
-    title: "1000+ GitHub Commits",
-    description: "Consistently shipping code across personal and full-stack project repositories.",
+    title: "1700+ GitHub Commits",
+    description: "Consistently shipping code across personal and full-stack project repositories with 1700+ contributions.",
   },
 ];
 

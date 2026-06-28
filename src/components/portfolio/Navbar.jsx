@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Moon, Sun, Sparkles, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, Sparkles } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { Button } from "@/components/ui/button";
 import { handleHashLinkClick } from "@/lib/scrollToHash";
-
 const links = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
@@ -17,7 +16,6 @@ const links = [
   { name: "Contact", href: "#contact" },
   { name: "Resume", href: "/resume", button: true },
 ];
-
 const themeIcons = {
   dark: <Sun className="h-5 w-5" />,
   bento: <Sparkles className="h-5 w-5 text-slate-300" />,
@@ -56,7 +54,7 @@ const Navbar = () => {
   }, []);
   return (<motion.header initial={{ y: -80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.28 }} className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 transition-all duration-200 sm:top-4 sm:px-4">
     <nav className={`pointer-events-auto mx-auto flex h-14 w-full max-w-[calc(100vw-1.5rem)] items-center justify-between rounded-full px-4 glass sm:h-16 sm:max-w-6xl sm:px-6 ${scrolled ? "shadow-elegant" : ""}`}>
-      <a href={isHomePage ? "#home" : "/"} onClick={(event) => handleLinkClick(event, "#home")} className="text-base font-bold text-foreground sm:text-xl">{'<'}Mahendra /{'>'}</a>
+      <a href={isHomePage ? "#home" : "/"} onClick={(event) => handleLinkClick(event, "#home")} className="text-base font-bold text-foreground sm:text-xl">&lt;Mahendra /&gt;</a>
       <ul className="hidden items-center gap-4 xl:flex 2xl:gap-6">
         {links.map((l) => (<li key={l.name}>
           <a href={resolveHref(l.href)} onClick={(event) => handleLinkClick(event, l.href)} className={`text-sm font-medium transition-colors relative group ${l.button ? "rounded-md gradient-bg px-3 py-2 text-foreground shadow-glow hover:scale-105" : "text-muted-foreground hover:text-foreground"}`}>

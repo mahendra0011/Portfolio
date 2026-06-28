@@ -9,7 +9,7 @@ const SectionHeading = ({ eyebrow, title, description }) => (
     transition={{ duration: 0.12 }}
     className="mx-auto mb-10 max-w-2xl text-center sm:mb-16"
   >
-    <span className="inline-block px-4 py-1 rounded-full glass text-xs font-semibold gradient-text mb-4 uppercase tracking-wider">
+    <span className="section-eyebrow mb-4">
       {eyebrow}
     </span>
     <h2 className="section-title mb-4 text-3xl font-bold sm:text-4xl md:text-5xl">

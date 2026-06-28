@@ -1,8 +1,6 @@
 import React from 'react';
 import TechBadge from './TechBadge';
 import './TechStack.css';
-import { SiJavascript } from 'react-icons/si';
-import { VscVscode } from 'react-icons/vsc';
 
 const TechStack = () => {
   // Track mouse movement for Spotlight Effect CSS variables
@@ -52,7 +50,10 @@ const TechStack = () => {
                 </svg>
               </TechBadge>
               <TechBadge name="JavaScript (ES6+)">
-                <SiJavascript className="badge-icon" style={{ color: '#F7DF1E' }} />
+                <svg viewBox="0 0 128 128" className="badge-icon">
+                  <path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z" />
+                  <path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z" />
+                </svg>
               </TechBadge>
               <TechBadge name="React" iconUrl="https://cdn.simpleicons.org/react/61DAFB" />
               <TechBadge name="React Router" iconUrl="https://cdn.simpleicons.org/reactrouter/CA4245" />
@@ -149,9 +150,11 @@ const TechStack = () => {
                 </svg>
               </TechBadge>
               <TechBadge name="Floating UI">
-                <svg className="badge-icon" viewBox="0 0 24 24" fill="none" stroke="#FF1B6D" strokeWidth="2">
-                  <circle cx="12" cy="12" r="3" />
-                  <path d="M12 2v20M2 12h20" />
+                <svg className="badge-icon" viewBox="0 0 24 24" fill="none" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="8" height="8" rx="1" />
+                  <rect x="13" y="3" width="8" height="8" rx="1" />
+                  <rect x="3" y="13" width="8" height="8" rx="1" />
+                  <path d="M17 13v8M13 17h8" />
                 </svg>
               </TechBadge>
             </div>
@@ -270,6 +273,7 @@ const TechStack = () => {
             </div>
 
             <div className="badges-container">
+              <TechBadge name="Auth0" iconUrl="https://cdn.simpleicons.org/auth0/EB5424" />
               <TechBadge name="Firebase" iconUrl="https://cdn.simpleicons.org/firebase/FFCA28" />
               <TechBadge name="Supabase" iconUrl="https://cdn.simpleicons.org/supabase/3ECF8E" />
               <TechBadge name="Clerk">
@@ -291,16 +295,12 @@ const TechStack = () => {
                   <circle cx="14" cy="12" r="6" stroke="#0072FF" />
                 </svg>
               </TechBadge>
-              <TechBadge name="Auth0">
-                <svg className="badge-icon" viewBox="0 0 24 24" fill="none" stroke="#EB5424" strokeWidth="2">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-              </TechBadge>
               <TechBadge name="Cloudinary" iconUrl="https://cdn.simpleicons.org/cloudinary/3448C5" />
               <TechBadge name="FlexSearch">
-                <svg className="badge-icon" viewBox="0 0 24 24" fill="none" stroke="#FFD700" strokeWidth="2" strokeLinecap="round">
-                  <circle cx="11" cy="11" r="6" />
-                  <path d="M16 16l5 5M11 7l-3 4h5l-3 4" />
+                <svg className="badge-icon" viewBox="0 0 24 24" fill="none" stroke="#00D2FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="10" cy="10" r="7" />
+                  <path d="M15 15l6 6" />
+                  <path d="M10 7v6M7 10h6" />
                 </svg>
               </TechBadge>
               <TechBadge name="React Charts">
@@ -313,9 +313,7 @@ const TechStack = () => {
                   <path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6zm6-3v15m6-12v15" />
                 </svg>
               </TechBadge>
-              <TechBadge name="VS Code">
-                <VscVscode className="badge-icon" style={{ color: '#007ACC' }} />
-              </TechBadge>
+              <TechBadge name="VS Code" iconUrl="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" />
               <TechBadge name="Postman" iconUrl="https://cdn.simpleicons.org/postman/FF6C37" />
               <TechBadge name="Excel">
                 <svg className="badge-icon" viewBox="0 0 24 24" fill="#217346">
