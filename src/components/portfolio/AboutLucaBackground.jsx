@@ -7,14 +7,6 @@ const TERRAIN_SEGMENTS = 150;
 const STARS_COUNT = 2000;
 
 const BACKGROUND_THEME = {
-  light: {
-    clear: 0xf7fbff,
-    fog: 0xf7fbff,
-    terrain: 0x4057d8,
-    terrainOpacity: 0.58,
-    star: 0x7c5cff,
-    starOpacity: 0.34,
-  },
   dark: {
     clear: 0x111111,
     fog: 0x111111,
@@ -33,7 +25,7 @@ const AboutLucaBackground = () => {
     const canvas = canvasRef.current;
     if (!canvas) return undefined;
 
-    const palette = BACKGROUND_THEME[theme === "dark" ? "dark" : "light"];
+    const palette = BACKGROUND_THEME.dark;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(palette.fog, 0.015);

@@ -30,7 +30,7 @@
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   position: relative;
-  border: 2.5px solid #4A82E8;
+  border: 2.5px solid #64748B;
   background: linear-gradient(135deg, hsl(var(--background) / 0.58), hsl(var(--background) / 0.32));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);

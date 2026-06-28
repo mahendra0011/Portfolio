@@ -11,6 +11,7 @@ import { scrollToHash } from "@/lib/scrollToHash";
 import { store } from "@/store/portfolioStore";
 import Index from "./pages/Index.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import ProjectDetails from "./pages/ProjectDetails.jsx";
 import Resume from "./components/portfolio/Resume.jsx";
 
 const queryClient = new QueryClient();
@@ -46,7 +47,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />}/>
       <Route path="/resume" element={<Resume />}/>
-      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+      <Route path="/project/:id" element={<ProjectDetails />}/>
       <Route path="*" element={<NotFound />}/>
     </Routes>
   );

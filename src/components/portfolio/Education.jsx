@@ -5,6 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GraduationCap, School, Award } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import ElectricBorder from "../reactbits/ElectricBorder";
+import { useTheme } from "@/hooks/useTheme";
+
 const items = [
     {
         icon: GraduationCap,
@@ -33,6 +35,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Education = () => {
     const sectionRef = useRef(null);
+
+    const { theme } = useTheme();
+    const isBento = theme === "bento";
+    const isDark = theme === "dark";
+
+    let glowColor = "#64748B"; // default grey
+        if (isBento) glowColor = "#6B7280";
+    if (isDark) glowColor = "#4A82E8";
 
     useEffect(() => {
         if (!sectionRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
@@ -88,7 +98,7 @@ const Education = () => {
               key={item.title}
               initial={{ opacity: 0, x: i % 2 === 0 ? -10 : 10 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-260px 0px" }}
+              viewport={{ once: true, margin: "-50px 0px" }}
               transition={{ duration: 0.12 }}
               className={`relative mb-10 md:w-1/2 ${i % 2 === 0 ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"} pl-12 md:pl-0 overflow-visible`}
             >
@@ -97,7 +107,7 @@ const Education = () => {
                 <item.icon className="w-4 h-4 text-primary-foreground"/>
               </div>
               <ElectricBorder
-                color="#4A82E8"
+                color={glowColor}
                 speed={1}
                 chaos={0.12}
                 borderRadius={16}

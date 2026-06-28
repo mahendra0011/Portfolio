@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTheme } from "@/hooks/useTheme";
 import {
   BadgeIndianRupee,
   Braces,
@@ -10,10 +11,10 @@ import {
   FileSpreadsheet,
   FileText,
   MapPinned,
-  Monitor,
   Route,
   Server,
 } from "lucide-react";
+
 import {
   SiApachekafka,
   SiAxios,
@@ -60,7 +61,9 @@ import {
   SiTailwindcss,
   SiVercel,
   SiWebrtc,
-} from "react-icons/si";
+  SiAuth0,
+} from 'react-icons/si';
+import { VscVscode } from 'react-icons/vsc';
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import SectionHeading from "./SectionHeading";
 
@@ -84,6 +87,7 @@ const groups = [
       { name: "MUI", Icon: SiMui, color: "#007FFF" },
       { name: "shadcn/ui", Icon: SiShadcnui, color: "currentColor" },
       { name: "ReactBits", Icon: FileCode2, color: "#7C3AED" },
+      { name: "Floating UI", Icon: ({ className, style }) => <img src="https://floating-ui.com/favicon.ico" alt="Floating UI" className={`${className} object-contain`} style={style} />, color: "#FF1B6D" },
       {
         name: "Lightwind UI",
         Icon: ({ className, style }) => <img src="https://camo.githubusercontent.com/c824ce4a5883445f6823b066d241e5b64d28568ce78ec61c6e8351a24af9808c/68747470733a2f2f636f6465776974686d7568696c616e2e636f6d2f45787472612d4173736574732f6c6967687477696e642d6c6f676f2e706e67" alt="Lightwind UI" className={`${className} object-contain`} style={style} />,
@@ -122,6 +126,7 @@ const groups = [
       { name: "Razorpay", Icon: SiRazorpay, color: "#0C2451" },
       { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
       { name: "Cashfree", Icon: BadgeIndianRupee, color: "#00B386" },
+      { name: "Auth0", Icon: SiAuth0, color: "#EB5424" },
     ],
   },
   {
@@ -146,7 +151,7 @@ const groups = [
       { name: "Postman", Icon: SiPostman, color: "#FF6C37" },
       { name: "Excel", Icon: FileSpreadsheet, color: "#217346" },
       { name: "MapCN", Icon: MapPinned, color: "#10B981" },
-      { name: "VS Code", Icon: Monitor, color: "#007ACC" },
+      { name: "VS Code", Icon: VscVscode, color: "#007ACC" },
       { name: "C++", Icon: SiCplusplus, color: "#00599C" },
     ],
   },
@@ -156,7 +161,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Skills = () => {
   const sectionRef = useRef(null);
-
+  const { theme } = useTheme();
   useEffect(() => {
     if (!sectionRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
 
@@ -213,7 +218,7 @@ const Skills = () => {
                     >
                     <Icon
                       className="h-6 w-6 shrink-0 text-muted-foreground transition-transform group-hover:scale-110"
-                      style={{ color }}
+                      style={{ color: color }}
                     />
                     <span className="text-[15px] font-bold text-foreground">{name}</span>
                   </SpotlightCard>

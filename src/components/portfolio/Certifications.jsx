@@ -47,7 +47,7 @@ const Certifications = () => (
              rel="noreferrer"
              initial={{ opacity: 0, y: 10 }}
              whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true, margin: "-260px 0px" }}
+             viewport={{ once: true, margin: "-50px 0px" }}
              transition={{ duration: 0.12, delay: i * 0.015 }}
              whileHover={{ y: -3 }}
              className="glass rounded-2xl overflow-hidden hover:shadow-glow transition-all group flex flex-col"

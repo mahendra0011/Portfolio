@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Building2, Network, PhoneCall, RadioTower, Wrench } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import ElectricBorder from "../reactbits/ElectricBorder";
+import { useTheme } from "@/hooks/useTheme";
 
 const points = [
   {
@@ -22,7 +23,16 @@ const points = [
   },
 ];
 
-const Experience = () => (
+const Experience = () => {
+  const { theme } = useTheme();
+  const isBento = theme === "bento";
+  const isDark = theme === "dark";
+
+  let glowColor = "#64748B"; // default grey
+    if (isBento) glowColor = "#6B7280";
+  if (isDark) glowColor = "#4A82E8";
+
+  return (
   <section id="experience" className="section-grid section-grid-soft relative overflow-hidden bg-muted/30 py-20 sm:py-24">
     <div className="container relative z-10">
       <SectionHeading eyebrow="Experience" title="Professional Exposure" description="Hands-on learning from railway communication and telecom operations." />
@@ -34,13 +44,13 @@ const Experience = () => (
 <motion.div
            initial={{ opacity: 0, y: 10 }}
            whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-260px 0px" }}
+           viewport={{ once: true, margin: "-50px 0px" }}
            transition={{ duration: 0.12 }}
            className="overflow-visible"
          >
-          <ElectricBorder
-            color="#4A82E8"
-            speed={1}
+           <ElectricBorder
+             color={glowColor}
+             speed={1}
             chaos={0.12}
             borderRadius={16}
             borderOffset={20}
@@ -67,7 +77,7 @@ const Experience = () => (
                      key={text}
                      initial={{ opacity: 0, y: 8 }}
                      whileInView={{ opacity: 1, y: 0 }}
-                     viewport={{ once: true, margin: "-220px 0px" }}
+                     viewport={{ once: true, margin: "-50px 0px" }}
                      transition={{ duration: 0.12, delay: index * 0.01 }}
                      className="rounded-xl bg-background/70 border border-border/60 p-4 flex gap-3"
                  >
@@ -80,8 +90,9 @@ const Experience = () => (
           </ElectricBorder>
         </motion.div>
       </div>
-    </div>
-  </section>
-);
+      </div>
+    </section>
+  );
+};
 
 export default Experience;

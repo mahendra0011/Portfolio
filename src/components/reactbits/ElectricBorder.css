@@ -23,6 +23,7 @@
   position: relative;
   border-radius: inherit;
   z-index: 2;
+  height: 100%;
 }
 
 .eb-layers {

@@ -6,6 +6,7 @@ import ElectricBorder from "@/components/reactbits/ElectricBorder";
 import { Button } from "@/components/ui/button";
 import { handleHashLinkClick } from "@/lib/scrollToHash";
 import SectionHeading from "./SectionHeading";
+import { useTheme } from "@/hooks/useTheme";
 
 const services = [
   {
@@ -52,63 +53,76 @@ const services = [
   },
 ];
 
-const Services = () => (
-  <section id="services" className="section-grid section-grid-soft relative overflow-hidden bg-muted/30 py-20 sm:py-24">
-    <div className="container relative z-10">
-      <SectionHeading
-        eyebrow="Services"
-        title="Services I Provide"
-        description="Development support for modern web products, from interface design and backend systems to deployment, optimization and custom business platforms."
-      />
+const Services = () => {
+  const { theme } = useTheme();
+  const isBento = theme === "bento";
+  const isDark = theme === "dark";
 
-      <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map(({ Icon, title, description, highlights }, index) => (
-          <ElectricBorder
-            key={title}
-            color="#4A82E8"
-            speed={1}
-            chaos={0.12}
-            borderRadius={16}
-            borderOffset={20}
-          >
-            <SpotlightCard
-              as={motion.article}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-260px 0px" }}
-              transition={{ duration: 0.12, delay: index * 0.01 }}
-              whileHover={{ y: -3 }}
-              className="group flex h-full min-h-[360px] flex-col rounded-lg glass bg-background/70 p-5 shadow-elegant transition-all hover:bg-background hover:shadow-glow"
-            >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg gradient-bg shadow-glow transition-transform group-hover:scale-105">
-                <Icon className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-bold">{title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {highlights.map((highlight) => (
-                  <span key={highlight} className="rounded-full bg-secondary/80 px-2.5 py-1 text-xs font-semibold text-secondary-foreground">
-                    {highlight}
-                  </span>
-                ))}
-              </div>
-            </SpotlightCard>
-          </ElectricBorder>
-        ))}
-      </div>
+  let glowColor = "#6B7280";
+  if (isDark) glowColor = "#4A82E8";
 
-      <div className="mt-10 flex justify-center">
-        <MagneticButton>
-          <Button size="lg" asChild className="group gradient-bg shadow-glow">
-            <a href="#contact" onClick={(event) => handleHashLinkClick(event, "#contact")}>
-              Discuss a Project
-              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-          </Button>
-        </MagneticButton>
+  return (
+    <section id="services" className="section-grid section-grid-soft relative overflow-hidden bg-muted/30 py-20 sm:py-24">
+      <div className="container relative z-10">
+        <SectionHeading
+          eyebrow="Services"
+          title="Services I Provide"
+          description="Development support for modern web products, from interface design and backend systems to deployment, optimization and custom business platforms."
+        />
+
+        <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map(({ Icon, title, description, highlights }, index) => {
+            // Use ElectricBorder + SpotlightCard
+            return (
+              <ElectricBorder
+                key={title}
+                color={glowColor}
+                speed={1}
+                chaos={0.12}
+                borderRadius={16}
+                borderOffset={20}
+                className="h-full"
+              >
+                <SpotlightCard
+                  as={motion.article}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px 0px" }}
+                  transition={{ duration: 0.12, delay: index * 0.01 }}
+                  whileHover={{ y: -3 }}
+                  className="group flex h-full flex-col rounded-lg glass bg-background/70 p-5 shadow-elegant transition-all hover:bg-background hover:shadow-glow"
+                >
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg gradient-bg shadow-glow transition-transform group-hover:scale-105">
+                    <Icon className="h-6 w-6 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-lg font-bold">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
+                  <div className="mt-auto pt-5 flex flex-wrap gap-2">
+                    {highlights.map((highlight) => (
+                      <span key={highlight} className="rounded-full bg-secondary/80 px-2.5 py-1 text-xs font-semibold text-secondary-foreground">
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+                </SpotlightCard>
+              </ElectricBorder>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <MagneticButton>
+            <Button size="lg" asChild className="group gradient-bg shadow-glow">
+              <a href="#contact" onClick={(event) => handleHashLinkClick(event, "#contact")}>
+                Discuss a Project
+                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </Button>
+          </MagneticButton>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Services;

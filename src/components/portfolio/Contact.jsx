@@ -10,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useTheme } from "@/hooks/useTheme";
+
 const schema = z.object({
     name: z.string().trim().min(2, "Name is too short").max(100),
     email: z.string().trim().email("Invalid email").max(255),
@@ -25,6 +27,12 @@ const contactDetails = [
 ];
 
 const Contact = () => {
+    const { theme } = useTheme();
+    const isDark = theme === "dark";
+
+    let glowColor = "#6B7280";
+    if (isDark) glowColor = "#4A82E8";
+
     const [form, setForm] = useState({ name: "", email: "", message: "" });
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -53,18 +61,18 @@ const Contact = () => {
 <motion.div
              initial={{ opacity: 0, x: 12 }}
              whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true, margin: "-260px 0px" }}
+             viewport={{ once: true, margin: "-50px 0px" }}
              transition={{ duration: 0.12 }}
              className="overflow-visible"
            >
-            <ElectricBorder
-              color="#4A82E8"
-              speed={1}
-              chaos={0.12}
-              borderRadius={16}
-              borderOffset={20}
-            >
-              <div className="glass rounded-2xl p-6 md:p-8 transition-all hover:shadow-glow h-full overflow-visible">
+             <ElectricBorder
+               color={glowColor}
+               speed={1}
+               chaos={0.12}
+               borderRadius={16}
+               borderOffset={20}
+             >
+               <div className="glass rounded-2xl p-6 md:p-8 transition-all hover:shadow-glow h-full overflow-visible">
                 <div className="mb-7">
                   <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
                     Available for selected opportunities
@@ -81,7 +89,7 @@ const Contact = () => {
                        key={label}
                        initial={{ opacity: 0, y: 8 }}
                        whileInView={{ opacity: 1, y: 0 }}
-                       viewport={{ once: true, margin: "-220px 0px" }}
+                       viewport={{ once: true, margin: "-50px 0px" }}
                        transition={{ duration: 0.12, delay: index * 0.01 }}
                        className="flex gap-4 border-t border-border/60 pt-4 first:border-t-0 first:pt-0"
                      >
@@ -114,12 +122,12 @@ const Contact = () => {
              onSubmit={handleSubmit}
              initial={{ opacity: 0, x: 12 }}
              whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true, margin: "-260px 0px" }}
+             viewport={{ once: true, margin: "-50px 0px" }}
              transition={{ duration: 0.12 }}
              className="overflow-visible"
            >
             <ElectricBorder
-              color="#4A82E8"
+              color={glowColor}
               speed={1}
               chaos={0.12}
               borderRadius={16}

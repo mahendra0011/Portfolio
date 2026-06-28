@@ -3,6 +3,7 @@ import Hero from "@/components/portfolio/Hero";
 import About from "@/components/portfolio/About";
 import FloatingProfileImage from "@/components/portfolio/FloatingProfileImage";
 import Services from "@/components/portfolio/Services";
+import TechStack from "@/components/TechStack";
 import Skills from "@/components/portfolio/Skills";
 import Projects from "@/components/portfolio/Projects";
 import Experience from "@/components/portfolio/Experience";
@@ -20,6 +21,8 @@ const Index = () => {
   return (<div className="portfolio-page min-h-screen text-foreground">
     <OakameLoader />
     <ThreeDBackground />
+    <div className="glow-1" aria-hidden="true" />
+    <div className="glow-2" aria-hidden="true" />
     <div className="portfolio-surface-overlay" aria-hidden="true" />
     <div className="portfolio-content">
       <Navbar />
@@ -28,6 +31,7 @@ const Index = () => {
         <Hero />
         <About />
         <Services />
+        <TechStack />
         <Skills />
         <Projects />
         <Experience />

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocation } from "react-router-dom";
@@ -37,6 +37,8 @@ export const useSmoothScroll = () => {
     if (window.matchMedia("(pointer: coarse)").matches) return; // skip Lenis on touch devices
 
     const lenis = new Lenis({
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard easing for butter smooth feel
       lerp: 0.1,
       smoothWheel: true,
       smoothTouch: false,

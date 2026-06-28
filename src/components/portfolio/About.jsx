@@ -41,7 +41,7 @@ const About = () => {
           <motion.div
             initial={{ opacity: 0, x: 12 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-260px 0px" }}
+            viewport={{ once: true, margin: "-50px 0px" }}
             transition={{ duration: 0.12 }}
             /*
               ANDROID FIX — Mobile margin:

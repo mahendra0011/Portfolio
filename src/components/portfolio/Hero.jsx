@@ -1,12 +1,12 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Download, Mail, FolderGit2 } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/reactbits/MagneticButton";
-import { handleHashLinkClick } from "@/lib/scrollToHash";
 import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
+import ShinyText from "@/components/reactbits/ShinyText";
 
 const roles = [
   "React developer",
@@ -144,29 +144,28 @@ const Hero = () => {
           </h1>
 
           <p className="hero-copy mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0">
-            I can build scalable, secure, and high-performance web applications. Turning ideas into
-            impactful, production-ready digital products with modern technologies.
+            <ShinyText 
+              text="I can build scalable, secure, and high-performance web applications. Turning ideas into impactful, production-ready digital products with modern technologies." 
+              speed={3} 
+              color="#9ca3af" 
+              shineColor="#ffffff" 
+            />
           </p>
 
           <div className="flex flex-row flex-wrap justify-center gap-3 lg:justify-start">
             <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
-              <Button size="lg" asChild className="group w-full px-4 gradient-bg shadow-glow transition-transform sm:w-auto sm:px-8">
-                <a href="#projects" onClick={(event) => handleHashLinkClick(event, "#projects")}>
-                  <FolderGit2 className="mr-2 h-4 w-4 transition-transform group-hover:-rotate-6" /> View Projects
+              <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden px-4 text-white bg-gray-500 shadow-glow transition-transform sm:w-auto sm:px-8">
+                <a href="https://wa.me/917724822660" target="_blank" rel="noreferrer">
+                  <Mail className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> 
+                  <ShinyText text="Contact Me" speed={2} color="#ffffff" shineColor="#ffffff" />
                 </a>
               </Button>
             </MagneticButton>
             <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
-              <Button size="lg" variant="outline" asChild className="group w-full overflow-hidden px-4 transition-transform sm:w-auto sm:px-8">
-                <a href="#contact" onClick={(event) => handleHashLinkClick(event, "#contact")}>
-                  <Mail className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> Contact Me
-                </a>
-              </Button>
-            </MagneticButton>
-            <MagneticButton className="hero-action min-w-0 flex-1 basis-[8.75rem] sm:w-auto sm:flex-none sm:basis-auto">
-              <Button size="lg" variant="secondary" asChild className="group w-full px-4 transition-transform sm:w-auto sm:px-8">
+              <Button size="lg" variant="secondary" asChild className="group w-full px-4 text-white transition-transform sm:w-auto sm:px-8">
                 <a href="/Mahendra_Resume.pdf" download>
-                  <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" /> Resume
+                  <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" /> 
+<ShinyText text="Resume" speed={2} color="#ffffff" shineColor="#ffffff" />
                 </a>
               </Button>
             </MagneticButton>

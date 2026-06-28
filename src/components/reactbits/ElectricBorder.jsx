@@ -201,6 +201,14 @@ const ElectricBorder = forwardRef(
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
+      // Read resolved color from CSS variable if available
+      let resolvedStrokeColor = color;
+      if (container) {
+        const cs = getComputedStyle(container);
+        const cssColor = cs.getPropertyValue('--electric-stroke-color').trim();
+        if (cssColor) resolvedStrokeColor = cssColor;
+      }
+
       const octaves = 5;
       const lacunarity = 1.55;
       const gain = 0.68;
@@ -251,7 +259,15 @@ const ElectricBorder = forwardRef(
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        ctx.strokeStyle = color;
+        // Re-read CSS variable on each frame (theme could have changed)
+        let currentStrokeColor = color;
+        if (container) {
+          const cs = getComputedStyle(container);
+          const cssColor = cs.getPropertyValue('--electric-stroke-color').trim();
+          if (cssColor) currentStrokeColor = cssColor;
+        }
+
+        ctx.strokeStyle = currentStrokeColor;
         ctx.lineWidth = 2;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
