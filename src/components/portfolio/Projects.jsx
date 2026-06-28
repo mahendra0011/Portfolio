@@ -226,7 +226,7 @@ const Projects = () => {
         />
       </div>
 
-      <div className="relative pb-[10vh]">
+      <div className="bento-grid relative pb-[10vh]">
         {projects.map((proj, index) => (
           <div
             key={proj.title}
