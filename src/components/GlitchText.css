@@ -76,3 +76,13 @@
   95% { clip-path: inset(25% 0 35% 0); }
   100% { clip-path: inset(30% 0 40% 0); }
 }
+
+.glitch-grey {
+  color: #9ca3af;
+  font-size: clamp(3rem, 12vw, 12rem);
+}
+
+.glitch-grey::after,
+.glitch-grey::before {
+  color: #9ca3af;
+}
