@@ -3,6 +3,7 @@ import Hero from "@/components/portfolio/Hero";
 import About from "@/components/portfolio/About";
 import FloatingProfileImage from "@/components/portfolio/FloatingProfileImage";
 import Services from "@/components/portfolio/Services";
+import Focus from "@/components/portfolio/Focus";
 import TechStack from "@/components/TechStack";
 import Projects from "@/components/portfolio/Projects";
 import Experience from "@/components/portfolio/Experience";
@@ -30,6 +31,7 @@ const Index = () => {
         <Hero />
         <About />
         <Services />
+        <Focus />
         <TechStack />
         <Projects />
         <Experience />

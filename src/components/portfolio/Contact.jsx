@@ -63,7 +63,7 @@ const Contact = () => {
              whileInView={{ opacity: 1, x: 0 }}
              viewport={{ once: true, margin: "-50px 0px" }}
              transition={{ duration: 0.12 }}
-             className="overflow-visible"
+             className="overflow-visible h-full"
            >
              <ElectricBorder
                color={glowColor}
@@ -119,13 +119,13 @@ const Contact = () => {
           </motion.div>
 
 <motion.form
-             onSubmit={handleSubmit}
-             initial={{ opacity: 0, x: 12 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true, margin: "-50px 0px" }}
-             transition={{ duration: 0.12 }}
-             className="overflow-visible"
-           >
+              onSubmit={handleSubmit}
+              initial={{ opacity: 0, x: 12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px 0px" }}
+              transition={{ duration: 0.12 }}
+              className="overflow-visible h-full"
+            >
             <ElectricBorder
               color={glowColor}
               speed={1}

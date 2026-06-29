@@ -188,20 +188,18 @@ const Projects = () => {
         // Tumhara exact 100% original loop boundary condition Windows ke liye
         if (i === wrappers.length - 1) return;
 
-        // Only animate scaling on desktop (md screens and up)
-        if (window.innerWidth >= 768) {
-          gsap.to(card, {
-            scale: 0.92,
-            ease: "none",
-            scrollTrigger: {
-              trigger: wrapper,
-              start: () => `top ${window.innerHeight * 0.12 + i * 12}px`, 
-              end: () => `+=${window.innerHeight}`, 
-              scrub: true,
-              invalidateOnRefresh: true,
-            },
-          });
-        }
+        // Apply parallax scale animation on all screen sizes (mobile and desktop)
+        gsap.to(card, {
+          scale: 0.92,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapper,
+            start: () => `top ${window.innerHeight * 0.12 + i * 12}px`, 
+            end: () => `+=${window.innerHeight}`, 
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
       });
 
       // Timeout refreshed locally inside context scope only
@@ -235,9 +233,9 @@ const Projects = () => {
             }}
             className="flex items-start justify-center px-4 mb-8 md:mb-0"
             style={{
-              position: window.innerWidth >= 768 ? "sticky" : "relative",
-              top: window.innerWidth >= 768 ? `calc(12vh + ${index * 12}px)` : "auto",
-              height: window.innerWidth >= 768 ? "100svh" : "auto",
+              position: "sticky",
+              top: `calc(12vh + ${index * 12}px)`,
+              height: window.innerWidth >= 768 ? "100svh" : "110vh",
             }}
           >
             <div
@@ -252,7 +250,7 @@ const Projects = () => {
                 borderBottom: "1px solid rgba(0,0,0,0.5)",
                 transformOrigin: "top center",
                 WebkitFontSmoothing: "antialiased",
-                ...(window.innerWidth >= 768 ? { height: "70vh", maxHeight: "500px" } : {})
+                ...(window.innerWidth >= 768 ? { height: "70vh", maxHeight: "500px" } : { height: "80vh", maxHeight: "650px" })
               }}
             >
               <div className="flex-1 md:flex-[0.8] flex flex-col overflow-hidden order-2 md:order-1" style={{ minHeight: 0 }}>

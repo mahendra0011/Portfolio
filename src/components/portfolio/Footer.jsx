@@ -1,6 +1,6 @@
 import { FaGithub, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
-import GlitchText from "@/components/GlitchText";
+import "./Footer.css";
 
 const socialLinks = [
     { Icon: FaGithub, label: "GitHub", href: "https://github.com/mahendra0011" },
@@ -13,7 +13,7 @@ const socialLinks = [
 
 const Footer = () => (<footer className="portfolio-footer border-t border-border/50 py-8 bg-background">
     <div className="container flex flex-col items-center justify-center gap-6">
-      <GlitchText speed={0.6} enableShadows={false} enableOnHover={true} className="glitch-footer glitch-grey">Mahendra</GlitchText>
+      <span className="footer-shine-text">Mahendra</span>
       <div className="flex items-center gap-3">
         {socialLinks.map(({ Icon, label, href, appUrl }) => (<a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} title={label} onClick={(event) => openInstalledApp(event, appUrl, href)} className="w-9 h-9 rounded-full glass flex items-center justify-center hover:text-primary hover:scale-110 transition-all">
             <Icon className="w-4 h-4"/>
