@@ -10,10 +10,11 @@ import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
 import ShinyText from "@/components/reactbits/ShinyText";
 
 const roles = [
-  "Freelancer",
-  "Full Stack Developer",
+  "freelancer",
   "React developer",
   "Software Developer",
+  "Full Stack Developer",
+  "Electronics & Communication Student",
 ];
 
 const socialLinks = [
@@ -197,7 +198,8 @@ const Hero = () => {
           </div>
         </div>
 
-<motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center lg:h-full lg:self-end lg:justify-end lg:items-end">
+        {/* EXACTLY original but with pt-16 lg:pt-0 to push it below sidebar strictly on mobile */}
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative flex justify-center pt-16 lg:pt-0 lg:h-full lg:self-end lg:justify-end lg:items-end">
           <div className="hero-photo-stage relative w-full max-w-[470px]">
             <div className="absolute inset-y-0 left-0 right-2 opacity-60 [background-image:linear-gradient(58deg,hsl(var(--foreground)/0.18)_1px,transparent_1px),linear-gradient(148deg,hsl(var(--foreground)/0.13)_1px,transparent_1px)] [background-size:34px_34px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
             <div className="absolute left-8 top-[24%] h-44 w-48 opacity-45 [background-image:radial-gradient(circle,hsl(var(--foreground)/0.76)_1.4px,transparent_1.6px)] [background-size:18px_18px]" />

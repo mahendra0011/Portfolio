@@ -10,8 +10,11 @@ const About = () => {
     >
       <div className="container relative z-10">
         <SectionHeading eyebrow="About Me" title="Building Impactful Digital Products" />
-        <div id="about-content-grid" className="grid gap-4 sm:gap-6 lg:gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
-          {/* LEFT COLUMN — anchor for floating image */}
+        
+        {/* EXACT ORIGINAL GRID STRUCTURE. Bas mt-12 (spacing below heading) aur gap-14 (spacing before text) mobile k liye add kiya, desktop lg:mt-0 lg:gap-12 se waisa ka waisa h */}
+        <div id="about-content-grid" className="grid mt-12 lg:mt-0 gap-14 sm:gap-16 lg:gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+          
+          {/* LEFT COLUMN — anchor for floating image (SIZES BILKUL SAME HAIN) */}
           <div className="about-photo-stage relative mx-auto flex w-full max-w-[430px] items-start justify-center lg:mx-0">
             <div
               id="about-photo-anchor"
@@ -21,6 +24,8 @@ const About = () => {
                          min-h-[340px] sm:min-h-[420px] lg:min-h-0"
             />
           </div>
+          
+          {/* RIGHT COLUMN - Text (Original -mt-12 bhi wapas laga diya hai aapke code jaisa) */}
           <motion.div
             initial={{ opacity: 0, x: 12 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -55,6 +60,7 @@ const About = () => {
             </div>
           </motion.div>
         </div>
+        
         <StatsSection />
       </div>
     </section>

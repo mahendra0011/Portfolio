@@ -129,13 +129,14 @@
     @apply border-border;
   }
 
-  body {
+body {
     @apply bg-background text-foreground;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-feature-settings: "ss01", "cv11";
     min-width: 320px;
     min-height: 100svh;
     -webkit-tap-highlight-color: transparent;
+    -webkit-overflow-scrolling: touch;
   }
 
   html {
@@ -974,4 +975,11 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+/* Smooth scroll on touch devices - native momentum scroll */
+@media (pointer: coarse) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
 

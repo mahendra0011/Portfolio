@@ -197,6 +197,8 @@ const ElectricBorder = forwardRef(
       const canvas = canvasRef.current;
       const container = containerRef.current;
       if (!canvas || !container) return;
+      // Disable on touch devices to prevent scroll jank
+      if (window.matchMedia("(pointer: coarse)").matches) return;
 
       const ctx = canvas.getContext("2d");
       if (!ctx) return;

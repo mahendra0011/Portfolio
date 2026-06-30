@@ -10,41 +10,31 @@ const FloatingProfileImage = () => {
   const frameRef = useRef(null);
   const zoomTimer = useRef(null);
   const [zoomed, setZoomed] = useState(false);
-  const [frameZ, setFrameZ] = useState(20);
-  const frameZRef = useRef(20);
-
-  const safeSetZ = (z) => {
-    if (frameZRef.current !== z) {
-      frameZRef.current = z;
-      setFrameZ(z);
-    }
-  };
+  const [frameZ] = useState(5);
 
   useEffect(() => {
     const isMobile = window.innerWidth < 1024;
     const isAndroid = /Android/i.test(navigator.userAgent);
 
     const frame = frameRef.current;
-    const heroAnchor = document.getElementById("hero-photo-anchor");
-    const aboutAnchor = document.getElementById("about-photo-anchor");
+    const heroAnchor   = document.getElementById("hero-photo-anchor");
+    const aboutAnchor  = document.getElementById("about-photo-anchor");
     const aboutSection = document.getElementById("about");
 
     if (!frame || !heroAnchor || !aboutAnchor || !aboutSection) return;
 
-    const getScrollY = () => {
-      // Use visual viewport offset for mobile (handles Android address bar changes)
-      if (isAndroid && window.visualViewport) {
-        return window.scrollY + (window.visualViewport.offsetTop || 0);
-      }
-      return window.scrollY || 0;
-    };
+    const getScrollY = () => window.scrollY || 0;
 
-    // Page-absolute measurements — recalculated on every measureAll() call
-    let hero = { pageTop: 0, left: 0, w: 0, h: 0 };
+    let hero  = { pageTop: 0, left: 0, w: 0, h: 0 };
     let about = { pageTop: 0, left: 0, w: 0, h: 0 };
-    let aboutSecPageTop = 0;
-    let aboutSecPageBottom = 0; // actual bottom of #about section in page coords
-    let aboutGridPageBottom = 0;
+
+    const getParentOffset = () => {
+      if (!frame) return { top: 0, left: 0 };
+      const ost = frame.offsetParent;
+      if (!ost || ost === document.body || ost === document.documentElement) return { top: 0, left: 0 };
+      const rect = ost.getBoundingClientRect();
+      return { top: rect.top + getScrollY(), left: rect.left + window.scrollX };
+    };
 
     const measureAll = () => {
       const sy = getScrollY();
@@ -54,192 +44,144 @@ const FloatingProfileImage = () => {
 
       const ar = aboutAnchor.getBoundingClientRect();
       about = { pageTop: ar.top + sy, left: ar.left, w: ar.width, h: ar.height };
-
-      const sr = aboutSection.getBoundingClientRect();
-      aboutSecPageTop = sr.top + sy;
-      aboutSecPageBottom = sr.bottom + sy;
-
-      const grid = document.getElementById("about-content-grid");
-      if (grid) {
-        const gr = grid.getBoundingClientRect();
-        aboutGridPageBottom = gr.bottom + sy;
-      } else {
-        aboutGridPageBottom = aboutSecPageBottom;
-      }
     };
 
-    // ─────────────────────────────────────────────────────────────
-    //  MOBILE / ANDROID  →  rAF tick
-    // ─────────────────────────────────────────────────────────────
     if (isMobile || isAndroid) {
-      let rafId = 0;
-      let resizeTimer = 0;
-      let lockedAtAbout = false;
-
-      const tick = () => {
-        rafId = requestAnimationFrame(tick);
-
-        const sy = getScrollY();
-        const vph = window.innerHeight;
-
-        // viewport-space tops (recalculated every frame from page-absolute values)
-        const heroVT = hero.pageTop - sy;
-        const aboutVT = about.pageTop - sy;
-
-        // ── Phase boundaries ──────────────────────────────────────
-        const phase2Start = aboutSecPageTop - vph;
-        const phase3Start = aboutSecPageTop;
-
-        // Phase 1 — hero (scrolling naturally with page)
-        if (sy < phase2Start) {
-          lockedAtAbout = false;
-          frame.style.opacity = "1";
-          frame.style.left = hero.left + "px";
-          frame.style.top = hero.pageTop + "px"; // Page coordinate - scrolls naturally
-          frame.style.width = hero.w + "px";
-          frame.style.height = hero.h + "px";
-          safeSetZ(-1); // Push behind text and buttons
-          return;
-        }
-
-        // Phase 2 — lerp hero→about (scrolling naturally)
-        if (sy < phase3Start) {
-          lockedAtAbout = false;
-          const range = phase3Start - phase2Start;
-          const p = range <= 0 ? 1 : (sy - phase2Start) / range;
-          const left = hero.left + (about.left - hero.left) * p;
-          const top = hero.pageTop + (about.pageTop - hero.pageTop) * p; // Smooth scrolling with page
-          const w = hero.w + (about.w - hero.w) * p;
-          const h = hero.h + (about.h - hero.h) * p;
-          frame.style.opacity = "1";
-          frame.style.left = left + "px";
-          frame.style.top = top + "px";
-          frame.style.width = w + "px";
-          frame.style.height = h + "px";
-          safeSetZ(-1); // Push behind text and buttons
-          return;
-        }
-
-        // Phase 3 — locked to about anchor (scrolling naturally with page)
-        if (!lockedAtAbout) {
-          lockedAtAbout = true;
-          frame.style.left = about.left + "px";
-          frame.style.top = about.pageTop + "px"; // Page coordinate - scrolls naturally
-          frame.style.width = about.w + "px";
-          frame.style.height = about.h + "px";
-        }
-
-        // Phase 4 — hidden
-        // Hide only when the anchor is fully above the viewport
-        const aboutViewportTop = about.pageTop - sy;
-        if (aboutViewportTop + about.h <= 0) {
-          frame.style.opacity = "0";
-          return;
-        }
-
-        frame.style.opacity = "1";
-        safeSetZ(0);
-      };
-
-      const onResize = () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(measureAll, 150);
-      };
-
-      measureAll();
-      frame.style.position = "absolute";
-      frame.style.top = "0px";
-      rafId = requestAnimationFrame(tick);
-
-      window.addEventListener("resize", onResize, { passive: true });
-      window.visualViewport?.addEventListener("resize", onResize, { passive: true });
-      window.addEventListener("orientationchange", onResize, { passive: true });
-      // On Android, visual viewport scroll affects position calculations
-      window.visualViewport?.addEventListener("scroll", onResize, { passive: true });
-
-      const img = frame.querySelector("img");
-      img?.addEventListener("load", measureAll, { once: true });
-      document.fonts?.ready?.then(measureAll).catch(measureAll);
-      setTimeout(measureAll, 400);
-      setTimeout(measureAll, 1000);
-
-      return () => {
-        cancelAnimationFrame(rafId);
-        clearTimeout(resizeTimer);
-        window.removeEventListener("resize", onResize);
-        window.visualViewport?.removeEventListener("resize", onResize);
-        window.removeEventListener("orientationchange", onResize);
-        window.visualViewport?.removeEventListener("scroll", onResize);
-        img?.removeEventListener("load", measureAll);
-      };
+      ScrollTrigger.config({ ignoreMobileResize: true });
     }
 
-    // ─────────────────────────────────────────────────────────────
-    //  DESKTOP  →  GSAP ScrollTrigger
-    // ─────────────────────────────────────────────────────────────
     let resizeTimer = 0;
 
-    const heroVT = () => hero.pageTop - getScrollY();
-    const aboutVT = () => about.pageTop - getScrollY();
-
     const placeAtHero = () => {
+      if (isAndroid) {
+        const po = getParentOffset();
+        gsap.set(frame, {
+          position: "absolute",
+          left: hero.left - po.left,
+          top: hero.pageTop - po.top,
+          width: hero.w,
+          height: hero.h,
+          x: 0,
+          y: 0,
+          scale: 1,
+          opacity: 1,
+        });
+        return;
+      }
       gsap.set(frame, {
-        position: "fixed",
-        left: hero.left, top: heroVT(),
-        width: hero.w, height: hero.h,
+        position: "absolute",
+        left: hero.left, top: hero.pageTop,
+        width: hero.w,   height: hero.h,
+        x: 0, y: 0, scale: 1,
         opacity: 1,
       });
     };
 
     const placeAtAbout = () => {
-      const top = aboutVT();
-
-      const visible = (top + about.h) > 0;
+      const po = getParentOffset();
+      const visible = (about.pageTop - getScrollY() + about.h) > 0;
+      if (isAndroid) {
+        gsap.set(frame, {
+          position: "absolute",
+          left: about.left - po.left,
+          top: about.pageTop - po.top,
+          width: hero.w, // strictly lock size to original hero width
+          height: hero.h, // strictly lock size to original hero height
+          x: 0,
+          y: 0,
+          scale: 1,
+          opacity: visible ? 1 : 0,
+        });
+        return;
+      }
       gsap.set(frame, {
-        position: "fixed",
-        left: about.left, top,
-        width: about.w, height: about.h,
+        position: "absolute",
+        left: about.left, top: about.pageTop,
+        width: about.w,   height: about.h,
+        x: 0, y: 0, scale: 1,
         opacity: visible ? 1 : 0,
       });
     };
 
-    const lerp = (p) => {
+    let pendingProgress = null;
+    let rafId = 0;
+
+    const applyLerp = (p) => {
       p = gsap.utils.clamp(0, 1, p);
+
+      if (isAndroid) {
+        const sy = getScrollY();
+        
+        // Linear vertical interpolation in window view coordinates
+        const curX = hero.left;
+        const curY = (hero.pageTop + (about.pageTop - hero.pageTop) * p) - sy;
+
+        // Uses fixed container layout to bypass compositor delay on Android
+        gsap.set(frame, {
+          position: "fixed",
+          left: 0,
+          top: 0,
+          width: hero.w,
+          height: hero.h,
+          x: curX,
+          y: curY,
+          scale: 1,
+          force3D: true,
+          opacity: 1,
+        });
+        return;
+      }
+
+      // Windows/iOS path (Original responsive interpolation unchanged)
       gsap.set(frame, {
-        position: "fixed",
-        left: hero.left + (about.left - hero.left) * p,
-        top: heroVT() + (aboutVT() - heroVT()) * p,
-        width: hero.w + (about.w - hero.w) * p,
-        height: hero.h + (about.h - hero.h) * p,
+        position: "absolute",
+        left:   hero.left + (about.left - hero.left) * p,
+        top:    hero.pageTop + (about.pageTop - hero.pageTop) * p,
+        width:  hero.w    + (about.w    - hero.w)    * p,
+        height: hero.h    + (about.h    - hero.h)    * p,
+        x: 0, y: 0, scale: 1,
         opacity: 1,
+      });
+    };
+
+    const lerp = (p) => {
+      if (!isAndroid) {
+        applyLerp(p);
+        return;
+      }
+      pendingProgress = p;
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        if (pendingProgress !== null) {
+          applyLerp(pendingProgress);
+          pendingProgress = null;
+        }
       });
     };
 
     const init = () => { measureAll(); placeAtHero(); ScrollTrigger.refresh(); };
 
-    // Trigger 1: hero→about transition while about section enters from bottom
     const tTransition = ScrollTrigger.create({
       trigger: aboutSection,
       start: "top bottom",
-      end: "top top",
-      scrub: 1.0,
+      end:   "top top",
+      scrub: isAndroid ? 0.4 : 0.5,
       invalidateOnRefresh: true,
-      onUpdate: (self) => { measureAll(); lerp(self.progress); safeSetZ(20); },
-      onLeave: () => { measureAll(); placeAtAbout(); safeSetZ(10); },
-      onLeaveBack: () => { measureAll(); placeAtHero(); safeSetZ(20); },
-      onRefresh: (self) => { measureAll(); lerp(self.progress); },
+      onUpdate    : (self) => { lerp(self.progress); },
+      onLeave     : ()     => { placeAtAbout(); },
+      onLeaveBack : ()     => { placeAtHero(); },
+      onRefresh   : (self) => { measureAll(); lerp(self.progress); },
     });
 
-    // Trigger 2: image pinned to about-anchor while about section fills viewport
     const tSettle = ScrollTrigger.create({
       trigger: aboutSection,
       start: "top top",
-      end: "bottom top",
-      onEnter: () => { measureAll(); placeAtAbout(); safeSetZ(10); },
-      onEnterBack: () => { measureAll(); placeAtAbout(); safeSetZ(10); },
-      onLeave: () => { gsap.set(frame, { opacity: 0 }); safeSetZ(20); },
-      onLeaveBack: () => { measureAll(); lerp(tTransition.progress ?? 1); safeSetZ(20); },
-      onUpdate: () => { measureAll(); placeAtAbout(); },
+      end:   "bottom top",
+      onEnter     : () => { placeAtAbout(); },
+      onEnterBack : () => { placeAtAbout(); },
+      onLeave     : () => { gsap.set(frame, { opacity: 0 }); },
+      onLeaveBack : () => { lerp(tTransition.progress ?? 1); },
     });
 
     const onResize = () => {
@@ -253,10 +195,21 @@ const FloatingProfileImage = () => {
     document.fonts?.ready?.then(init).catch(init);
     requestAnimationFrame(init);
 
+    let roTimer = 0;
+    const ro = new ResizeObserver(() => {
+      clearTimeout(roTimer);
+      roTimer = setTimeout(() => { measureAll(); ScrollTrigger.refresh(); }, 50);
+    });
+    ro.observe(heroAnchor);
+    ro.observe(aboutAnchor);
+
     return () => {
       clearTimeout(resizeTimer);
+      clearTimeout(roTimer);
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener("resize", onResize);
       img?.removeEventListener("load", init);
+      ro.disconnect();
       tTransition.kill();
       tSettle.kill();
     };
@@ -273,7 +226,7 @@ const FloatingProfileImage = () => {
   return (
     <div
       ref={frameRef}
-      className="pointer-events-none fixed left-0 top-0 overflow-hidden floating-profile-frame"
+      className="pointer-events-none absolute left-0 top-0 overflow-hidden floating-profile-frame"
       style={{ opacity: 0, willChange: "transform", transform: "translateZ(0)", zIndex: frameZ }}
       aria-hidden="false"
     >

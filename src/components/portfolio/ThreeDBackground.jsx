@@ -8,6 +8,7 @@ const ThreeDBackground = () => {
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (window.matchMedia("(pointer: coarse)").matches) return undefined; // Disable 3D on mobile
     if (window.deviceMemory && window.deviceMemory <= 4) return undefined;
 
     const load = () => setSrc(`/3d-background.html?theme=${theme}`);
@@ -36,4 +37,4 @@ const ThreeDBackground = () => {
   );
 };
 
-export default ThreeDBackground;
+export default ThreeDBackground;``

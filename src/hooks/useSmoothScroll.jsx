@@ -34,16 +34,15 @@ export const useSmoothScroll = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // We removed the touch device skip so the butter smooth scroll applies on mobile too
-
+    // Skip Lenis on touch devices - native momentum scroll is smoother
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const lenis = new Lenis({
       duration: 1.8,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       lerp: 0.08,
       smoothWheel: true,
-      smoothTouch: true,
-      touchMultiplier: 1.5,
+      smoothTouch: false,
       wheelMultiplier: 1,
       infinite: false,
     });

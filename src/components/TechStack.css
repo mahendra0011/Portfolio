@@ -118,6 +118,13 @@
     z-index: 0;
 }
 
+@media (pointer: coarse) {
+    .tech-stack-wrapper .glow-1,
+    .tech-stack-wrapper .glow-2 {
+        display: none;
+    }
+}
+
 /* ---- Layout container ---- */
 .tech-stack-wrapper .container {
     max-width: 1300px;

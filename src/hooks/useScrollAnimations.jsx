@@ -13,6 +13,8 @@ export const useScrollAnimations = () => {
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    // Disable parallax on touch devices to prevent scroll jank
+    if (window.matchMedia("(pointer: coarse)").matches) return undefined;
 
     ScrollTrigger.config({ ignoreMobileResize: true });
 
