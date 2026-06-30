@@ -171,10 +171,10 @@ const Projects = () => {
   useEffect(() => {
     const isAndroid = /Android/i.test(navigator.userAgent);
 
-    // Isolate configuration so it doesn't corrupt Hero/About section images
+    // Android fix: ScrollTrigger config
     if (isAndroid) {
-      ScrollTrigger.config({ 
-        ignoreMobileResize: true // Dynamic URL bar updates ko block karega bina baki page ko tode
+      ScrollTrigger.config({
+        ignoreMobileResize: true
       });
     }
 
@@ -182,27 +182,29 @@ const Projects = () => {
       const wrappers = wrapperRefs.current.filter(Boolean);
 
       wrappers.forEach((wrapper, i) => {
+        // Original loop boundary condition
+        if (i === wrappers.length - 1) return;
+
         const card = wrapper.querySelector(".project-card");
         if (!card) return;
 
-        // Tumhara exact 100% original loop boundary condition Windows ke liye
-        if (i === wrappers.length - 1) return;
-
-        // Apply parallax scale animation on all screen sizes (mobile and desktop)
-        gsap.to(card, {
-          scale: 0.92,
-          ease: "none",
-          scrollTrigger: {
-            trigger: wrapper,
-            start: () => `top ${window.innerHeight * 0.12 + i * 12}px`, 
-            end: () => `+=${window.innerHeight}`, 
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        });
+        // Desktop parallax/scale effect
+        if (window.innerWidth >= 768) {
+          gsap.to(card, {
+            scale: 0.92,
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              start: () => `top ${window.innerHeight * 0.12 + i * 12}px`,
+              end: () => `+=${window.innerHeight}`,
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          });
+        }
       });
 
-      // Timeout refreshed locally inside context scope only
+      // Refresh
       setTimeout(() => {
         ScrollTrigger.refresh();
       }, 100);
@@ -214,8 +216,8 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="section-grid section-grid-soft">
-      
+    <section id="projects" ref={sectionRef} className="section-grid bg-slate-950">
+
       <div className="container mx-auto px-4 pt-20 sm:pt-24 pb-12">
         <SectionHeading
           eyebrow="Projects"
@@ -233,13 +235,13 @@ const Projects = () => {
             }}
             className="flex items-start justify-center px-4 mb-8 md:mb-0"
             style={{
-              position: "sticky",
-              top: `calc(12vh + ${index * 12}px)`,
-              height: window.innerWidth >= 768 ? "100svh" : "110vh",
+              position: window.innerWidth >= 768 ? "sticky" : "relative",
+              top: window.innerWidth >= 768 ? `calc(12vh + ${index * 12}px)` : "auto",
+              height: window.innerWidth >= 768 ? "100svh" : "auto",
             }}
           >
             <div
-              className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10"
+              className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10 will-change-transform"
               style={{
                 backgroundColor: proj.color,
                 minHeight: "340px",
@@ -249,14 +251,16 @@ const Projects = () => {
                 borderRight: "1px solid rgba(255,255,255,0.05)",
                 borderBottom: "1px solid rgba(0,0,0,0.5)",
                 transformOrigin: "top center",
+                transform: "translateZ(0)",
+                backfaceVisibility: "hidden",
                 WebkitFontSmoothing: "antialiased",
-                ...(window.innerWidth >= 768 ? { height: "70vh", maxHeight: "500px" } : { height: "80vh", maxHeight: "650px" })
+                ...(window.innerWidth >= 768 ? { height: "70vh", maxHeight: "500px" } : {})
               }}
             >
-              <div className="flex-1 md:flex-[0.8] flex flex-col overflow-hidden order-2 md:order-1" style={{ minHeight: 0 }}>
+              <div className="flex-1 md:flex-[0.8] flex flex-col h-full overflow-hidden order-2 md:order-1">
                 <div
                   className="flex-1 overflow-y-auto pr-2"
-                  style={{ scrollbarWidth: "none", msOverflowStyle: "none", minHeight: 0 }}
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
                   {(proj.featured || proj.event) && (
                     <div className="flex flex-wrap gap-2 mb-3">
@@ -273,11 +277,11 @@ const Projects = () => {
                     </div>
                   )}
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-white break-words">
+                  <h2 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-white">
                     {proj.title}
                   </h2>
 
-                  <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed mb-4 font-medium opacity-90 break-words">
+                  <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-5 font-medium opacity-90">
                     {proj.description}
                   </p>
 
@@ -285,7 +289,7 @@ const Projects = () => {
                     {proj.tech.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-white/10 px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium tracking-wide text-white"
+                        className="bg-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide text-white"
                       >
                         {tag}
                       </span>
@@ -316,14 +320,14 @@ const Projects = () => {
                   )}
                   <button
                     onClick={() => navigate(`/project/${proj.id}`)}
-                    className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-500/20 text-gray-400 border border-gray-500/40 text-sm font-bold rounded-xl hover:bg-gray-500/30 transition-colors shadow-lg"
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-500/30 text-gray-200 border border-gray-500/50 text-sm font-bold rounded-xl hover:bg-gray-500/50 transition-colors shadow-lg"
                   >
                     View Details <ArrowRight className="w-[18px] h-[18px]" />
                   </button>
                 </div>
               </div>
 
-              <div className="w-full h-[140px] sm:h-[180px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0">
+              <div className="w-full h-[180px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0">
                 <img
                   src={proj.image}
                   alt={proj.title}
