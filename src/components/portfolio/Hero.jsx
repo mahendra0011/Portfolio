@@ -10,10 +10,10 @@ import { openInstalledApp, socialAppLinks } from "@/lib/socialAppLinks";
 import ShinyText from "@/components/reactbits/ShinyText";
 
 const roles = [
+  "Freelancer",
+  "Full Stack Developer",
   "React developer",
   "Software Developer",
-  "Full Stack Developer",
-  "Electronics & Communication Student",
 ];
 
 const socialLinks = [
