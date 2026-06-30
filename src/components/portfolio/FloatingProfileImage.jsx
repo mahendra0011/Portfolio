@@ -10,15 +10,7 @@ const FloatingProfileImage = () => {
   const frameRef = useRef(null);
   const zoomTimer = useRef(null);
   const [zoomed, setZoomed] = useState(false);
-  const [frameZ, setFrameZ] = useState(20);
-  const frameZRef = useRef(20);
-
-  const safeSetZ = (z) => {
-    if (frameZRef.current !== z) {
-      frameZRef.current = z;
-      setFrameZ(z);
-    }
-  };
+  const [frameZ] = useState(5);
 
   useEffect(() => {
     const isMobile = window.innerWidth < 1024;
@@ -63,126 +55,29 @@ const FloatingProfileImage = () => {
     };
 
     // ─────────────────────────────────────────────────────────────
-    //  MOBILE / ANDROID  →  rAF tick
+    //  ALL DEVICES  →  GSAP ScrollTrigger
     // ─────────────────────────────────────────────────────────────
     if (isMobile || isAndroid) {
-      let rafId = 0;
-      let resizeTimer = 0;
-
-      const tick = () => {
-        rafId = requestAnimationFrame(tick);
-
-        const sy  = getScrollY();
-        const vph = window.innerHeight;
-
-        // viewport-space tops (recalculated every frame from page-absolute values)
-        const heroVT  = hero.pageTop  - sy;
-        const aboutVT = about.pageTop - sy;
-
-        // ── Phase boundaries ──────────────────────────────────────
-        const phase2Start  = aboutSecPageTop  - vph;
-        const phase3Start  = aboutSecPageTop;
-
-        // Phase 1 — hero
-        if (sy < phase2Start) {
-          frame.style.opacity = "1";
-          frame.style.left    = hero.left   + "px";
-          frame.style.top     = heroVT      + "px";
-          frame.style.width   = hero.w      + "px";
-          frame.style.height  = hero.h      + "px";
-          safeSetZ(5);
-          return;
-        }
-
-        // Phase 2 — lerp hero→about
-        if (sy < phase3Start) {
-          const range = phase3Start - phase2Start;
-          const p     = range <= 0 ? 1 : (sy - phase2Start) / range;
-          const left   = hero.left + (about.left - hero.left) * p;
-          const top    = heroVT    + (aboutVT    - heroVT)    * p;
-          const w      = hero.w    + (about.w    - hero.w)    * p;
-          const h      = hero.h    + (about.h    - hero.h)    * p;
-          frame.style.opacity = "1";
-          frame.style.left    = left + "px";
-          frame.style.top     = top  + "px";
-          frame.style.width   = w    + "px";
-          frame.style.height  = h    + "px";
-          safeSetZ(5);
-          return;
-        }
-
-        // Phase 3 — locked to about anchor (No sticky behavior, scrolls naturally)
-        const top = aboutVT;
-
-        // Phase 4 — hidden
-        // Hide only when the anchor is fully above the viewport
-        if (top + about.h <= 0) {
-          frame.style.opacity = "0";
-          return;
-        }
-
-        frame.style.opacity = "1";
-        frame.style.left    = about.left    + "px";
-        frame.style.top     = top           + "px";
-        frame.style.width   = about.w       + "px";
-        frame.style.height  = about.h       + "px";
-        // z-index 0 → stays strictly behind navbar (50) and text (10)
-        safeSetZ(0);
-      };
-
-      const onResize = () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(measureAll, 150);
-      };
-
-      measureAll();
-      frame.style.position = "fixed";
-      rafId = requestAnimationFrame(tick);
-
-      window.addEventListener("resize", onResize, { passive: true });
-      window.visualViewport?.addEventListener("resize", onResize, { passive: true });
-      window.addEventListener("orientationchange", onResize, { passive: true });
-
-      const img = frame.querySelector("img");
-      img?.addEventListener("load", measureAll, { once: true });
-      document.fonts?.ready?.then(measureAll).catch(measureAll);
-      setTimeout(measureAll, 400);
-      setTimeout(measureAll, 1000);
-
-      return () => {
-        cancelAnimationFrame(rafId);
-        clearTimeout(resizeTimer);
-        window.removeEventListener("resize", onResize);
-        window.visualViewport?.removeEventListener("resize", onResize);
-        window.removeEventListener("orientationchange", onResize);
-        img?.removeEventListener("load", measureAll);
-      };
+      ScrollTrigger.config({ ignoreMobileResize: true });
     }
 
-    // ─────────────────────────────────────────────────────────────
-    //  DESKTOP  →  GSAP ScrollTrigger
-    // ─────────────────────────────────────────────────────────────
     let resizeTimer = 0;
-
-    const heroVT  = () => hero.pageTop  - getScrollY();
-    const aboutVT = () => about.pageTop - getScrollY();
 
     const placeAtHero = () => {
       gsap.set(frame, {
-        position: "fixed",
-        left: hero.left, top: heroVT(),
+        position: "absolute",
+        left: hero.left, top: hero.pageTop,
         width: hero.w,   height: hero.h,
         opacity: 1,
       });
     };
 
     const placeAtAbout = () => {
-      const top = aboutVT();
-      
-      const visible = (top + about.h) > 0;
+      // It stays visible if it's anywhere in the document, but we want it to hide if it scrolls completely off top
+      const visible = (about.pageTop - getScrollY() + about.h) > 0;
       gsap.set(frame, {
-        position: "fixed",
-        left: about.left, top,
+        position: "absolute",
+        left: about.left, top: about.pageTop,
         width: about.w,   height: about.h,
         opacity: visible ? 1 : 0,
       });
@@ -191,9 +86,9 @@ const FloatingProfileImage = () => {
     const lerp = (p) => {
       p = gsap.utils.clamp(0, 1, p);
       gsap.set(frame, {
-        position: "fixed",
+        position: "absolute",
         left:   hero.left + (about.left - hero.left) * p,
-        top:    heroVT()  + (aboutVT()  - heroVT())  * p,
+        top:    hero.pageTop + (about.pageTop - hero.pageTop) * p,
         width:  hero.w    + (about.w    - hero.w)    * p,
         height: hero.h    + (about.h    - hero.h)    * p,
         opacity: 1,
@@ -209,9 +104,9 @@ const FloatingProfileImage = () => {
       end:   "top top",
       scrub: 1.0,
       invalidateOnRefresh: true,
-      onUpdate    : (self) => { measureAll(); lerp(self.progress); safeSetZ(5);  },
-      onLeave     : ()     => { measureAll(); placeAtAbout();      safeSetZ(10); },
-      onLeaveBack : ()     => { measureAll(); placeAtHero();       safeSetZ(20); },
+      onUpdate    : (self) => { measureAll(); lerp(self.progress); gsap.set(frame, { zIndex: 5 }); },
+      onLeave     : ()     => { measureAll(); placeAtAbout();      gsap.set(frame, { zIndex: 0 }); },
+      onLeaveBack : ()     => { measureAll(); placeAtHero();       gsap.set(frame, { zIndex: 5 }); },
       onRefresh   : (self) => { measureAll(); lerp(self.progress); },
     });
 
@@ -220,11 +115,10 @@ const FloatingProfileImage = () => {
       trigger: aboutSection,
       start: "top top",
       end:   "bottom top",
-      onEnter     : () => { measureAll(); placeAtAbout(); safeSetZ(10); },
-      onEnterBack : () => { measureAll(); placeAtAbout(); safeSetZ(10); },
-      onLeave     : () => { gsap.set(frame, { opacity: 0 }); safeSetZ(20); },
-      onLeaveBack : () => { measureAll(); lerp(tTransition.progress ?? 1); safeSetZ(5); },
-      onUpdate    : () => { measureAll(); placeAtAbout(); },
+      onEnter     : () => { measureAll(); placeAtAbout(); gsap.set(frame, { zIndex: 0 }); },
+      onEnterBack : () => { measureAll(); placeAtAbout(); gsap.set(frame, { zIndex: 0 }); },
+      onLeave     : () => { gsap.set(frame, { opacity: 0 }); },
+      onLeaveBack : () => { measureAll(); lerp(tTransition.progress ?? 1); gsap.set(frame, { zIndex: 5 }); },
     });
 
     const onResize = () => {
@@ -258,7 +152,7 @@ const FloatingProfileImage = () => {
   return (
     <div
       ref={frameRef}
-      className="pointer-events-none fixed left-0 top-0 overflow-hidden floating-profile-frame"
+      className="pointer-events-none absolute left-0 top-0 overflow-hidden floating-profile-frame"
       style={{ opacity: 0, willChange: "transform", transform: "translateZ(0)", zIndex: frameZ }}
       aria-hidden="false"
     >

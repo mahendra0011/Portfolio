@@ -130,7 +130,7 @@ const Hero = () => {
         <div className="h-full w-full rounded-full bg-accent/30 blur-2xl animate-blob" style={{ animationDelay: "3s" }} />
       </div>
 
-      <div className="container relative z-10 grid min-h-[calc(100svh-5rem)] items-center gap-8 py-8 sm:gap-10 sm:py-10 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 lg:gap-12 lg:pb-0 xl:pl-24">
+      <div className="container relative grid min-h-[calc(100svh-5rem)] items-center gap-8 py-8 sm:gap-10 sm:py-10 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2 lg:gap-12 lg:pb-0 xl:pl-24">
         <div className="relative z-10 mx-auto max-w-2xl space-y-4 text-center lg:mx-0 lg:max-w-none lg:self-start lg:pt-[5.5rem] lg:text-left xl:pt-[6.5rem]">
           <div className="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
