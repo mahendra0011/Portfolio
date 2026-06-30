@@ -311,14 +311,14 @@ const Projects = () => {
                       href={proj.demo}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-white text-sm font-bold rounded-xl hover:bg-gray-200 hover:text-black transition-colors shadow-lg"
                     >
                       <ExternalLink className="w-[18px] h-[18px]" /> Live
                     </a>
                   )}
                   <button
                     onClick={() => navigate(`/project/${proj.id}`)}
-                    className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-500/20 text-gray-400 border border-gray-500/40 text-sm font-bold rounded-xl hover:bg-gray-500/30 transition-colors shadow-lg"
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-500/20 text-white border border-gray-500/40 text-sm font-bold rounded-xl hover:bg-gray-500/30 transition-colors shadow-lg"
                   >
                     View Details <ArrowRight className="w-[18px] h-[18px]" />
                   </button>

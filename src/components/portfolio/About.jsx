@@ -26,7 +26,7 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px 0px" }}
             transition={{ duration: 0.12 }}
-            className="relative z-10 space-y-6 text-muted-foreground leading-relaxed -mt-8 sm:-mt-12"
+            className="relative z-10 space-y-6 text-muted-foreground leading-relaxed mt-4 sm:mt-8 lg:mt-0"
           >
             <div className="space-y-4">
               <p>

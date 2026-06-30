@@ -102,11 +102,11 @@ const FloatingProfileImage = () => {
       trigger: aboutSection,
       start: "top bottom",
       end:   "top top",
-      scrub: 1.0,
+      scrub: 0.5,
       invalidateOnRefresh: true,
-      onUpdate    : (self) => { measureAll(); lerp(self.progress); gsap.set(frame, { zIndex: 5 }); },
-      onLeave     : ()     => { measureAll(); placeAtAbout();      gsap.set(frame, { zIndex: 0 }); },
-      onLeaveBack : ()     => { measureAll(); placeAtHero();       gsap.set(frame, { zIndex: 5 }); },
+      onUpdate    : (self) => { lerp(self.progress); gsap.set(frame, { zIndex: 5 }); },
+      onLeave     : ()     => { placeAtAbout();      gsap.set(frame, { zIndex: 0 }); },
+      onLeaveBack : ()     => { placeAtHero();       gsap.set(frame, { zIndex: 5 }); },
       onRefresh   : (self) => { measureAll(); lerp(self.progress); },
     });
 
@@ -115,10 +115,10 @@ const FloatingProfileImage = () => {
       trigger: aboutSection,
       start: "top top",
       end:   "bottom top",
-      onEnter     : () => { measureAll(); placeAtAbout(); gsap.set(frame, { zIndex: 5 }); },
-      onEnterBack : () => { measureAll(); placeAtAbout(); gsap.set(frame, { zIndex: 5 }); },
+      onEnter     : () => { placeAtAbout(); gsap.set(frame, { zIndex: 5 }); },
+      onEnterBack : () => { placeAtAbout(); gsap.set(frame, { zIndex: 5 }); },
       onLeave     : () => { gsap.set(frame, { opacity: 0 }); },
-      onLeaveBack : () => { measureAll(); lerp(tTransition.progress ?? 1); gsap.set(frame, { zIndex: 5 }); },
+      onLeaveBack : () => { lerp(tTransition.progress ?? 1); gsap.set(frame, { zIndex: 5 }); },
     });
 
     const onResize = () => {
@@ -132,10 +132,21 @@ const FloatingProfileImage = () => {
     document.fonts?.ready?.then(init).catch(init);
     requestAnimationFrame(init);
 
+    // Watch for dynamic height changes (e.g. Typewriter effect)
+    let roTimer = 0;
+    const ro = new ResizeObserver(() => {
+      clearTimeout(roTimer);
+      roTimer = setTimeout(() => { measureAll(); ScrollTrigger.refresh(); }, 50);
+    });
+    ro.observe(heroAnchor);
+    ro.observe(aboutAnchor);
+
     return () => {
       clearTimeout(resizeTimer);
+      clearTimeout(roTimer);
       window.removeEventListener("resize", onResize);
       img?.removeEventListener("load", init);
+      ro.disconnect();
       tTransition.kill();
       tSettle.kill();
     };
