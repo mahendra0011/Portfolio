@@ -115,8 +115,8 @@ const FloatingProfileImage = () => {
       trigger: aboutSection,
       start: "top top",
       end:   "bottom top",
-      onEnter     : () => { measureAll(); placeAtAbout(); gsap.set(frame, { zIndex: 0 }); },
-      onEnterBack : () => { measureAll(); placeAtAbout(); gsap.set(frame, { zIndex: 0 }); },
+      onEnter     : () => { measureAll(); placeAtAbout(); gsap.set(frame, { zIndex: 5 }); },
+      onEnterBack : () => { measureAll(); placeAtAbout(); gsap.set(frame, { zIndex: 5 }); },
       onLeave     : () => { gsap.set(frame, { opacity: 0 }); },
       onLeaveBack : () => { measureAll(); lerp(tTransition.progress ?? 1); gsap.set(frame, { zIndex: 5 }); },
     });

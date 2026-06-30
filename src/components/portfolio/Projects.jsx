@@ -345,4 +345,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;s
+export default Projects;

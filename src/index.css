@@ -514,7 +514,7 @@
   }
 
   .section-grid {
-    isolation: isolate;
+    /* isolation removed to allow floating image to slide between background and content */
   }
 
   .section-grid::before {
