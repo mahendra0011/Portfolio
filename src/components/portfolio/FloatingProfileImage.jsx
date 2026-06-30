@@ -66,9 +66,10 @@ const FloatingProfileImage = () => {
     const placeAtHero = () => {
       gsap.set(frame, {
         position: "absolute",
-        left: hero.left, top: hero.pageTop,
+        x: hero.left, y: hero.pageTop,
         width: hero.w,   height: hero.h,
         opacity: 1,
+        force3D: true,
       });
     };
 
@@ -77,9 +78,10 @@ const FloatingProfileImage = () => {
       const visible = (about.pageTop - getScrollY() + about.h) > 0;
       gsap.set(frame, {
         position: "absolute",
-        left: about.left, top: about.pageTop,
+        x: about.left, y: about.pageTop,
         width: about.w,   height: about.h,
         opacity: visible ? 1 : 0,
+        force3D: true,
       });
     };
 
@@ -87,11 +89,12 @@ const FloatingProfileImage = () => {
       p = gsap.utils.clamp(0, 1, p);
       gsap.set(frame, {
         position: "absolute",
-        left:   hero.left + (about.left - hero.left) * p,
-        top:    hero.pageTop + (about.pageTop - hero.pageTop) * p,
+        x:   hero.left + (about.left - hero.left) * p,
+        y:    hero.pageTop + (about.pageTop - hero.pageTop) * p,
         width:  hero.w    + (about.w    - hero.w)    * p,
         height: hero.h    + (about.h    - hero.h)    * p,
         opacity: 1,
+        force3D: true,
       });
     };
 
