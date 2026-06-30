@@ -65,21 +65,22 @@ const FloatingProfileImage = () => {
 
     const placeAtHero = () => {
       gsap.set(frame, {
-        position: "absolute",
-        x: hero.left, y: hero.pageTop,
-        width: hero.w,   height: hero.h,
+        position: "fixed",
+        x: hero.left, 
+        y: hero.pageTop, // fixed viewport coordinate
+        width: hero.w, height: hero.h,
         opacity: 1,
         force3D: true,
       });
     };
 
     const placeAtAbout = () => {
-      // It stays visible if it's anywhere in the document, but we want it to hide if it scrolls completely off top
       const visible = (about.pageTop - getScrollY() + about.h) > 0;
       gsap.set(frame, {
         position: "absolute",
-        x: about.left, y: about.pageTop,
-        width: about.w,   height: about.h,
+        x: about.left, 
+        y: about.pageTop, // absolute page coordinate
+        width: about.w, height: about.h,
         opacity: visible ? 1 : 0,
         force3D: true,
       });
@@ -87,12 +88,15 @@ const FloatingProfileImage = () => {
 
     const lerp = (p) => {
       p = gsap.utils.clamp(0, 1, p);
+      const sy = getScrollY();
+      const aboutVT = about.pageTop - sy; // Current viewport top of About anchor
+      
       gsap.set(frame, {
-        position: "absolute",
-        x:   hero.left + (about.left - hero.left) * p,
-        y:    hero.pageTop + (about.pageTop - hero.pageTop) * p,
-        width:  hero.w    + (about.w    - hero.w)    * p,
-        height: hero.h    + (about.h    - hero.h)    * p,
+        position: "fixed",
+        x: hero.left + (about.left - hero.left) * p,
+        y: hero.pageTop + (aboutVT - hero.pageTop) * p,
+        width: hero.w + (about.w - hero.w) * p,
+        height: hero.h + (about.h - hero.h) * p,
         opacity: 1,
         force3D: true,
       });
