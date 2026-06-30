@@ -11,17 +11,8 @@ const Focus = () => {
     { link: '#', text: 'Performance', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80' },
   ];
 
-  const handleMouseMove = (e) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-  };
-
   return (
-    <div className="tech-stack-wrapper" id="focus">
-      <div className="glow-1"></div>
-      <div className="glow-2"></div>
+    <div className="tech-stack-wrapper" id="focus" style={{ backgroundImage: 'none', backgroundColor: 'transparent' }}>
       <section className="container relative z-10 py-20 px-4">
         <SectionHeading
           eyebrow="Focus On"
@@ -29,7 +20,7 @@ const Focus = () => {
           description="I Focus on results that matter, turning ideas into experiences - building fast, secure, and high-quality products and work that clients keep coming back for"
         />
         <div className="max-w-6xl mx-auto mt-8">
-          <div className="card w-full" style={{ height: '500px', padding: 0 }} onMouseMove={handleMouseMove}>
+          <div className="card w-full" style={{ height: '500px', padding: 0 }}>
             <div className="w-full h-full relative rounded-2xl overflow-hidden">
               <FlowingMenu items={menuItems} bgColor="transparent" />
             </div>
