@@ -25,8 +25,8 @@ const Focus = () => {
       <section className="container relative z-10 py-20 px-4">
         <SectionHeading
           eyebrow="Focus On"
-          title="I focus on"
-          description="I focus on results that matter, turning ideas into experiences - building fast, secure, and high-quality products and work that clients keep coming back for"
+          title="I Focus on"
+          description="I Focus on results that matter, turning ideas into experiences - building fast, secure, and high-quality products and work that clients keep coming back for"
         />
         <div className="max-w-6xl mx-auto mt-8">
           <div className="card w-full" style={{ height: '500px', padding: 0 }} onMouseMove={handleMouseMove}>

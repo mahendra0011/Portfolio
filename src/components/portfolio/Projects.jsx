@@ -49,6 +49,117 @@ export const projects = [
     demo: "https://movix-p8ez.onrender.com",
     image: "/projects/movix.png",
     color: "#2D2D35",
+  },
+  {
+    id: "rentpe-room-rentals",
+    title: "RentPE - Room Rentals",
+    description: "Room rental marketplace for students, interns, job seekers and movers. Seekers compare PGs, hostels, flats and rooms while owners publish listings using city, area, landmark, title, amenities, rules and descriptions.",
+    tech: ["React", "Express.js", "MongoDB", "Marketplace"],
+    github: "https://github.com/mahendra0011/RentPE",
+    demo: "https://rentpe-j7bq.onrender.com",
+    image: "/projects/rentpe.png",
+    color: "#2D2D35",
+  },
+  {
+    id: "temptalk-anonymous-chat",
+    title: "TempTalk - Anonymous Chat",
+    description: "Privacy-focused anonymous chat platform with encrypted messaging, real-time Socket.IO rooms, media sharing, temporary chat rooms, PWA and Android support, deep links and QR invites.",
+    tech: ["React", "Socket.IO", "MongoDB", "PWA", "Android"],
+    github: "https://github.com/mahendra0011/TempTalk",
+    demo: "https://temptalk-1.onrender.com",
+    image: "/projects/temptalk.png",
+    color: "#393941",
+  },
+  {
+    id: "studybuddy-ai-platform",
+    title: "StudyBuddy - AI Platform",
+    description: "AI-powered study platform using Gemini AI to generate structured notes, summarize PDFs and YouTube lectures, manage study tasks and organize personalized content libraries with secure authentication.",
+    tech: ["React", "Gemini AI", "Node.js", "MongoDB", "PDF", "YouTube"],
+    github: "https://github.com/mahendra0011/StudyBuddy",
+    demo: "https://studybuddy-86s2.onrender.com",
+    image: "/projects/studybuddy.png",
+    color: "#6B7280",
+  },
+  {
+    id: "lostandfound-recovery",
+    title: "LostAndFound - Recovery",
+    description: "Full-stack MERN application for reporting, searching and recovering lost items with JWT authentication, image uploads, advanced search and filtering, item status management and responsive recovery workflows.",
+    tech: ["React", "MongoDB", "JWT", "Image Uploads"],
+    github: "https://github.com/mahendra0011/Lost-and-Found-Website.git",
+    demo: "https://lost-and-found-xlvq.onrender.com/",
+    image: "/projects/lost-and-found.png",
+    color: "#2D2D35",
+  },
+  {
+    id: "cloudnest-file-system",
+    title: "CloudNest - File System",
+    description: "Full-stack file upload system — Users register, login with Google, upload files, and every file is stored in the owner's Google Drive. Real-time status via Socket.io with Redux state management.",
+    tech: ["React", "Redux", "MUI", "Shadcn", "Socket.io", "Express"],
+    github: "#",
+    demo: "#",
+    image: "/projects/medicore.png",
+    color: "#2D2D35",
+  },
+  {
+    id: "integratekit",
+    title: "⚡ IntegrateKit",
+    description: "The definitive integration directory for MERN Stack developers — real code snippets, setup guides, and screenshots for integrating with 330+ services. Stop Googling, start building.",
+    tech: ["React 18", "Vite", "Tailwind", "Framer Motion", "GSAP"],
+    github: "#",
+    demo: "#",
+    featured: true,
+    image: "/projects/evento.png",
+    color: "#393941",
+  },
+  {
+    id: "hireinterns",
+    title: "HireInterns",
+    description: "A streamlined platform bridging the gap between innovative companies and talented interns looking for their next big opportunity. (Coming Soon)",
+    tech: ["MERN", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/mindsupport.png",
+    color: "#6B7280",
+  },
+  {
+    id: "one-in-a-million",
+    title: "One in A Million",
+    description: "An exclusive platform showcasing unique ideas, talents, and portfolios from extraordinary individuals worldwide. (Coming Soon)",
+    tech: ["React", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/movix.png",
+    color: "#2D2D35",
+  },
+  {
+    id: "civicissue",
+    title: "CivicIssue",
+    description: "A community-driven platform to report, track, and resolve local civic issues directly with local authorities. Photo evidence, geo-tagging, status tracking and public voting on priority issues.",
+    tech: ["React", "Node.js", "MongoDB"],
+    github: "#",
+    demo: "#",
+    image: "/projects/rentpe.png",
+    color: "#2D2D35",
+  },
+  {
+    id: "project-nexus",
+    title: "Project Nexus",
+    description: "A robust internal tool for managing workflow and tracking sprint velocities in agile development teams. Kanban boards, burndown charts, team capacity planning and retrospective tools.",
+    tech: ["Next.js", "Tailwind", "PostgreSQL"],
+    github: "#",
+    demo: "#",
+    image: "/projects/studybuddy.png",
+    color: "#393941",
+  },
+  {
+    id: "apex-fitness-club",
+    title: "Apex Fitness Club",
+    description: "A high-performance modern frontend for a premium fitness club featuring interactive class schedules and personal trainer portfolios. (Coming Soon)",
+    tech: ["Frontend", "UI/UX", "Coming Soon"],
+    github: "#",
+    demo: "#",
+    image: "/projects/temptalk.png",
+    color: "#6B7280",
   }
 ];
 
@@ -58,50 +169,55 @@ const Projects = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const wrapper = wrapperRefs.current;
-      
-      gsap.fromTo(".project-card", 
-        { y: 100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: "#projects",
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
+    const isAndroid = /Android/i.test(navigator.userAgent);
 
-      const cards = document.querySelectorAll(".project-card");
-      cards.forEach((card, i) => {
-        if (i === cards.length - 1) return;
-        
-        gsap.to(card, {
-          scale: 0.92,
-          ease: "none",
-          scrollTrigger: {
-            trigger: card,
-            start: `top ${window.innerHeight * 0.12}`,
-            end: () => `+=${window.innerHeight}`,
-            scrub: true
-          }
-        });
+    // Isolate configuration so it doesn't corrupt Hero/About section images
+    if (isAndroid) {
+      ScrollTrigger.config({ 
+        ignoreMobileResize: true // Dynamic URL bar updates ko block karega bina baki page ko tode
+      });
+    }
+
+    const ctx = gsap.context(() => {
+      const wrappers = wrapperRefs.current.filter(Boolean);
+
+      wrappers.forEach((wrapper, i) => {
+        const card = wrapper.querySelector(".project-card");
+        if (!card) return;
+
+        // Tumhara exact 100% original loop boundary condition Windows ke liye
+        if (i === wrappers.length - 1) return;
+
+        // Only animate scaling on desktop (md screens and up)
+        if (window.innerWidth >= 768) {
+          gsap.to(card, {
+            scale: 0.92,
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              start: () => `top ${window.innerHeight * 0.12 + i * 12}px`, 
+              end: () => `+=${window.innerHeight}`, 
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          });
+        }
       });
 
-      ScrollTrigger.refresh();
+      // Timeout refreshed locally inside context scope only
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="projects-section">
+    <section id="projects" ref={sectionRef} className="section-grid section-grid-soft">
+      
       <div className="container mx-auto px-4 pt-20 sm:pt-24 pb-12">
         <SectionHeading
           eyebrow="Projects"
@@ -110,83 +226,123 @@ const Projects = () => {
         />
       </div>
 
-      <div className="relative pb-20">
-        <div className="bento-grid">
-          {projects.map((proj, index) => (
-            <div 
-              key={proj.id || index}
-              ref={el => {
-                if (el) wrapperRefs.current[index] = el;
+      <div className="relative pb-[10vh]">
+        {projects.map((proj, index) => (
+          <div
+            key={proj.title}
+            ref={(el) => {
+              if (el) wrapperRefs.current[index] = el;
+            }}
+            className="flex items-start justify-center px-4 mb-8 md:mb-0"
+            style={{
+              position: window.innerWidth >= 768 ? "sticky" : "relative",
+              top: window.innerWidth >= 768 ? `calc(12vh + ${index * 12}px)` : "auto",
+              height: window.innerWidth >= 768 ? "100svh" : "auto",
+            }}
+          >
+            <div
+              className="project-card w-full max-w-[1200px] md:w-[90vw] rounded-[28px] p-5 md:p-8 lg:p-10 flex flex-col md:flex-row gap-5 md:gap-10"
+              style={{
+                backgroundColor: proj.color,
+                minHeight: "340px",
+                boxShadow: "0 -20px 50px rgba(0,0,0,0.5)",
+                borderTop: "1px solid rgba(255,255,255,0.15)",
+                borderLeft: "1px solid rgba(255,255,255,0.05)",
+                borderRight: "1px solid rgba(255,255,255,0.05)",
+                borderBottom: "1px solid rgba(0,0,0,0.5)",
+                transformOrigin: "top center",
+                WebkitFontSmoothing: "antialiased",
+                ...(window.innerWidth >= 768 ? { height: "70vh", maxHeight: "500px" } : {})
               }}
-              className={`project-card-wrapper ${index === 0 ? 'col-span-1 md:col-span-2' : ''}`}
             >
-              <div className="project-card">
-                <div className="project-content">
-                  <div className="project-info">
-                    {(proj.featured || proj.event) && (
-                      <div className="flex gap-2 mb-4">
-                        {proj.featured && (
-                          <span className="badge badge-featured">
-                            <Star className="w-3 h-3" />
-                            Featured
-                          </span>
-                        )}
-                        {proj.event && (
-                          <span className="badge badge-event">
-                            <Sparkles className="w-3 h-3" />
-                            {proj.event}
-                          </span>
-                        )}
-                      </div>
-                    )}
-
-                    <h3 className="project-title">{proj.title}</h3>
-                    <p className="project-desc">{proj.description}</p>
-
-                    <div className="tech-stack">
-                      {proj.tech.map((tech, i) => (
-                        <span key={i} className="tech-tag">{tech}</span>
-                      ))}
+              <div className="flex-1 md:flex-[0.8] flex flex-col overflow-hidden order-2 md:order-1" style={{ minHeight: 0 }}>
+                <div
+                  className="flex-1 overflow-y-auto pr-2"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none", minHeight: 0 }}
+                >
+                  {(proj.featured || proj.event) && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {proj.featured && (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 text-white px-3 py-1 rounded-full">
+                          <Star className="w-3 h-3" /> Featured
+                        </span>
+                      )}
+                      {proj.event && (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 text-white px-3 py-1 rounded-full">
+                          <Sparkles className="w-3 h-3" /> {proj.event}
+                        </span>
+                      )}
                     </div>
+                  )}
 
-                    <div className="project-actions">
-                      {proj.github && proj.github !== "#" && (
-                        <a href={proj.github} target="_blank" rel="noreferrer" className="btn btn-github">
-                          <Github className="w-4 h-4" />
-                          Code
-                        </a>
-                      )}
-                      {proj.demo && proj.demo !== "#" && (
-                        <a href={proj.demo} target="_blank" rel="noreferrer" className="btn btn-live">
-                          <ExternalLink className="w-4 h-4" />
-                          Live Demo
-                        </a>
-                      )}
-                      <button 
-                        onClick={() => navigate(`/project/${proj.id}`)}
-                        className="btn btn-details"
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-white break-words">
+                    {proj.title}
+                  </h2>
+
+                  <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed mb-4 font-medium opacity-90 break-words">
+                    {proj.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {proj.tech.map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-white/10 px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium tracking-wide text-white"
                       >
-                        Details
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="project-image">
-                    <img 
-                      src={proj.image} 
-                      alt={proj.title}
-                      loading="lazy"
-                    />
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
+
+                <div className="pt-4 md:pt-6 mt-2 border-t border-white/10 flex flex-wrap gap-3 shrink-0">
+                  {proj.github && proj.github !== "#" && (
+                    <a
+                      href={proj.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white border border-gray-600 text-sm font-bold rounded-xl hover:bg-gray-800 transition-colors shadow-lg"
+                    >
+                      <Github className="w-[18px] h-[18px]" /> GitHub
+                    </a>
+                  )}
+                  {proj.demo && proj.demo !== "#" && (
+                    <a
+                      href={proj.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg"
+                    >
+                      <ExternalLink className="w-[18px] h-[18px]" /> Live
+                    </a>
+                  )}
+                  <button
+                    onClick={() => navigate(`/project/${proj.id}`)}
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-500/20 text-gray-400 border border-gray-500/40 text-sm font-bold rounded-xl hover:bg-gray-500/30 transition-colors shadow-lg"
+                  >
+                    View Details <ArrowRight className="w-[18px] h-[18px]" />
+                  </button>
+                </div>
               </div>
+
+              <div className="w-full h-[140px] sm:h-[180px] md:h-full md:flex-[1.2] flex items-center justify-center order-1 md:order-2 shrink-0">
+                <img
+                  src={proj.image}
+                  alt={proj.title}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-2xl drop-shadow-2xl select-none"
+                />
+              </div>
+
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+
     </section>
   );
 };
 
-export default Projects;
+export default Projects;s
