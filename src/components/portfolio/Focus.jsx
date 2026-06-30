@@ -5,10 +5,10 @@ import '../TechStack.css';
 
 const Focus = () => {
   const menuItems = [
-    { link: '#', text: 'Affordability', image: 'https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?w=600&q=80' },
-    { link: '#', text: 'Quality', image: 'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=600&q=80' },
-    { link: '#', text: 'Security', image: 'https://images.unsplash.com/photo-1614064641936-3b9e8e8f1471?w=600&q=80' },
-    { link: '#', text: 'Performance', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80' },
+    { link: '#', text: 'Affordability', image: 'https://earnup.com/wp-content/uploads/2024/02/Navigating-the-Housing-Affordability-Challenge-in-the-US.png' },
+    { link: '#', text: 'Quality', image: 'https://www.shutterstock.com/image-vector/quality-control-survey-business-products-260nw-275279660.jpg' },
+    { link: '#', text: 'Security', image: 'https://plus.unsplash.com/premium_photo-1674506653774-6f51d6ebe799?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8d2Vic2l0ZSUyMHNlY3VyaXR5fGVufDB8fDB8fHww' },
+    { link: '#', text: 'Performance', image: 'https://img.magnific.com/free-vector/digital-credit-score-scale-gauge-finance-report_1017-53369.jpg?semt=ais_hybrid&w=740&q=80' },
   ];
 
   return (
