@@ -96,36 +96,3 @@
   background-size: cover;
   background-position: 50% 50%;
 }
-<<<<<<< HEAD
-=======
-
-.nav-dots {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10;
-}
-
-.nav-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid #94A3B8;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-}
-
-.nav-dot:hover {
-  background: rgba(148, 163, 184, 0.5);
-}
-
-.nav-dot.active {
-  background: #94A3B8;
-  transform: scale(1.2);
-}
->>>>>>> 315384edde54a07fec28dcb09853bf6924a44f83
